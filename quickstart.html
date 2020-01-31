@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>SIL QuickStart</title>
         <link rel="stylesheet" type="text/css" href="./css/default.css" />
+        <link rel="stylesheet" type="text/css" href="./css/syntax.css" />
     </head>
     <body>
         <div id="header">
@@ -23,16 +24,16 @@
 
             <ol type="1">
 <li><p>Clone the compiler’s repository and change directory to it:</p>
-<pre><code>$ git clone https://github.com/sfultong/stand-in-language.git
-$ cd stand-in-language</code></pre></li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1">$ <span class="fu">git</span> clone https://github.com/sfultong/stand-in-language.git</a>
+<a class="sourceLine" id="cb1-2" title="2">$ <span class="bu">cd</span> stand-in-language</a></code></pre></div></li>
 <li><p><a href="https://nixos.org/nix/download.html">Install Nix</a>:</p>
-<pre><code>$ curl https://nixos.org/nix/install | sh</code></pre></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1">$ <span class="ex">curl</span> https://nixos.org/nix/install <span class="kw">|</span> <span class="fu">sh</span></a></code></pre></div></li>
 <li><p>Enter a Nix shell. This will setup an enviroment where all external dependancies will be available (such as <code>cabal</code> for building):</p>
-<pre><code>$ nix-shell shell.nix</code></pre></li>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1">$ <span class="ex">nix-shell</span> shell.nix</a></code></pre></div></li>
 <li><p>Build the proyect:</p>
-<pre><code>$ cabal v2-build</code></pre></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1">$ <span class="ex">cabal</span> v2-build</a></code></pre></div></li>
 <li><p>Run the tictactoe example and start playing with a friend:</p>
-<pre><code>$ cabal v2-run sil-exe</code></pre></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1">$ <span class="ex">cabal</span> v2-run sil-exe</a></code></pre></div></li>
 </ol>
 <h2 id="running-your-own-sil-code">Running your own SIL code</h2>
 <ol type="1">
@@ -40,10 +41,10 @@ $ cd stand-in-language</code></pre></li>
 <li><p>Modify the last uncommented line to reference your file.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1">Strict.readFile <span class="st">&quot;&lt;your-sil-code-file&gt;.sil&quot;</span> <span class="fu">&gt;&gt;=</span> runMain</a></code></pre></div></li>
 <li><p>Run:</p>
-<pre><code>$ cd &lt;your/local/proyect/location&gt;/stand-in-language
-$ nix-shell shell.nix
-$ cabal v2-build
-$ cabal v2-run sil-exe</code></pre></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1">$ <span class="bu">cd</span> <span class="op">&lt;</span>your/local/proyect/location<span class="op">&gt;</span>/stand-in-language</a>
+<a class="sourceLine" id="cb7-2" title="2">$ <span class="ex">nix-shell</span> shell.nix</a>
+<a class="sourceLine" id="cb7-3" title="3">$ <span class="ex">cabal</span> v2-build</a>
+<a class="sourceLine" id="cb7-4" title="4">$ <span class="ex">cabal</span> v2-run sil-exe</a></code></pre></div></li>
 </ol>
         </div>
         <div id="footer">
