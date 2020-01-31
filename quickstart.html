@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>SIL QuickStart</title>
+        <link rel="stylesheet" type="text/css" href="./css/default.css" />
+    </head>
+    <body>
+        <div id="header">
+            <div id="logo">
+                <a href="./">Stand-In-Language</a>
+            </div>
+            <div id="navigation">
+                <a href="./quickstart.html">QuickStart</a>
+                <a href="./documentation.html">Documentation</a>
+                <a href="./archive.html">Archive</a>
+            </div>
+        </div>
+
+        <div id="content">
+            <h1>QuickStart</h1>
+
+            <ol type="1">
+<li><p>Clone the compiler’s repository and change directory to it:</p>
+<pre><code>$ git clone https://github.com/sfultong/stand-in-language.git
+$ cd stand-in-language</code></pre></li>
+<li><p><a href="https://nixos.org/nix/download.html">Install Nix</a>:</p>
+<pre><code>$ curl https://nixos.org/nix/install | sh</code></pre></li>
+<li><p>Enter a Nix shell. This will setup an enviroment where all external dependancies will be available (such as <code>cabal</code> for building):</p>
+<pre><code>$ nix-shell shell.nix</code></pre></li>
+<li><p>Build the proyect:</p>
+<pre><code>$ cabal v2-build</code></pre></li>
+<li><p>Run the tictactoe example and start playing with a friend:</p>
+<pre><code>$ cabal v2-run sil-exe</code></pre></li>
+</ol>
+<h2 id="running-your-own-sil-code">Running your own SIL code</h2>
+<ol type="1">
+<li>Create your own file with the sil code</li>
+<li><p>Modify the last uncommented line to reference your file.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1">Strict.readFile <span class="st">&quot;&lt;your-sil-code-file&gt;.sil&quot;</span> <span class="fu">&gt;&gt;=</span> runMain</a></code></pre></div></li>
+<li><p>Run:</p>
+<pre><code>$ cd &lt;your/local/proyect/location&gt;/stand-in-language
+$ nix-shell shell.nix
+$ cabal v2-build
+$ cabal v2-run sil-exe</code></pre></li>
+</ol>
+        </div>
+        <div id="footer">
+          Got changes to contribute to the site?
+          <a href="https://github.com/Stand-In-Language/stand-in-language.github.io">Fork or comment on Github</a>
+        </div>
+    </body>
+</html>
