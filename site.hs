@@ -3,7 +3,6 @@
 import           Data.Monoid (mappend)
 import           Hakyll
 
-
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
@@ -16,6 +15,10 @@ main = hakyll $ do
         compile copyFileCompiler
 
     match "docs/haddock/*" $ do
+        route   idRoute
+        compile copyFileCompiler
+
+    match "docs/haddock/src/*" $ do
         route   idRoute
         compile copyFileCompiler
 
@@ -50,7 +53,6 @@ main = hakyll $ do
                 >>= loadAndApplyTemplate "templates/default.html" archiveCtx
                 >>= relativizeUrls
 
-
     match "index.html" $ do
         route idRoute
         compile $ do
@@ -68,7 +70,6 @@ main = hakyll $ do
                 >>= relativizeUrls
 
     match "templates/*" $ compile templateCompiler
-
 
 --------------------------------------------------------------------------------
 postCtx :: Context String
