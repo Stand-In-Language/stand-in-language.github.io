@@ -8,4 +8,5 @@ If you need help, please email me at hhefesto at rdataa dot com, and I might be 
 
 Currently available documentation:
 
+- [Haddock Documentation](/docs/haddock/index.html)
 - [Specification of the Stand-in Language](/docs/sil-specification.pdf)
