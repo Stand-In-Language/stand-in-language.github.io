@@ -3,14 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>SIL QuickStart</title>
+        <title>Telomare QuickStart</title>
         <link rel="stylesheet" type="text/css" href="./css/default.css" />
         <link rel="stylesheet" type="text/css" href="./css/syntax.css" />
     </head>
     <body>
         <div id="header">
             <div id="logo">
-                <a href="./">Stand-In-Language</a>
+                <a href="./">Telomare</a>
             </div>
             <div id="navigation">
                 <a href="./quickstart.html">QuickStart</a>
@@ -23,28 +23,43 @@
             <h1>QuickStart</h1>
 
             <ol type="1">
-<li><p>Clone the compiler’s repository and change directory to it:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" title="1">$ <span class="fu">git</span> clone https://github.com/sfultong/stand-in-language.git</a>
-<a class="sourceLine" id="cb1-2" title="2">$ <span class="bu">cd</span> stand-in-language</a></code></pre></div></li>
+<li><p>Clone this repository and change directory to it:</p>
+<pre><code>$ git clone https://github.com/Stand-In-Language/stand-in-language.git
+$ cd stand-in-language</code></pre></li>
 <li><p><a href="https://nixos.org/nix/download.html">Install Nix</a>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" title="1">$ <span class="ex">curl</span> https://nixos.org/nix/install <span class="kw">|</span> <span class="fu">sh</span></a></code></pre></div></li>
-<li><p>Enter a Nix shell. This will setup an enviroment where all external dependancies will be available (such as <code>cabal</code> for building):</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" title="1">$ <span class="ex">nix-shell</span> shell.nix</a></code></pre></div></li>
-<li><p>Build the proyect:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" title="1">$ <span class="ex">cabal</span> v2-build</a></code></pre></div></li>
+<pre><code>$ curl https://nixos.org/nix/install | sh</code></pre></li>
+<li><p>Optional (reduces build time by using telomare’s cache):</p>
+<pre><code># Install cachix with nix-env or adding `cachix` to your `/etc/nixos/configuration.nix`'s' `environment.systemPackages` if in NixOS.
+$ nix-env -iA cachix -f https://cachix.org/api/v1/install
+$ cachix use telomare</code></pre></li>
+<li><p>Enter a Nix shell. This will setup an environment where all external dependencies will be available (such as <code>cabal</code> for building):</p>
+<pre><code>$ nix-shell shell.nix</code></pre></li>
+<li><p>Build the project:</p>
+<pre><code>$ cabal new-build</code></pre></li>
 <li><p>Run the tictactoe example and start playing with a friend:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" title="1">$ <span class="ex">cabal</span> v2-run sil-exe</a></code></pre></div></li>
+<pre><code>$ cabal new-run telomare-exe</code></pre>
+<h2 id="running-cabal-new-repl">Running <code>cabal new-repl</code></h2></li>
 </ol>
-<h2 id="running-your-own-sil-code">Running your own SIL code</h2>
+<p>There is a known issue (#7) for getting a repl.</p>
+<p>To get around it, you should copy <code>libgc.so.1</code> (provided by the <code>bohem</code> garbage collector) into your repository (telomare/lib is a good choice) and rename it to <code>libgc.so</code>. You will also need to reference it on <code>telomare.cabal</code> under the <code>library</code> stanza. Be sure to use the complete path for <code>libgc.so</code> on <code>telomare.cabal</code> (a commented version on <code>telomare.cabal</code> is provided as an example).</p>
+<h2 id="running-your-own-telomare-code">Running your own Telomare code</h2>
+<h3 id="your-own-telomare-file">Your own Telomare file</h3>
 <ol type="1">
-<li>Create your own file with the sil code</li>
+<li>Create your own file with the telomare code</li>
 <li><p>Modify the last uncommented line to reference your file.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" title="1">Strict.readFile <span class="st">&quot;&lt;your-sil-code-file&gt;.sil&quot;</span> <span class="fu">&gt;&gt;=</span> runMain</a></code></pre></div></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" title="1">Strict.readFile <span class="st">&quot;&lt;your-telomare-code-file&gt;.tel&quot;</span> <span class="fu">&gt;&gt;=</span> runMain</a></code></pre></div></li>
 <li><p>Run:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" title="1">$ <span class="bu">cd</span> <span class="op">&lt;</span>your/local/proyect/location<span class="op">&gt;</span>/stand-in-language</a>
-<a class="sourceLine" id="cb7-2" title="2">$ <span class="ex">nix-shell</span> shell.nix</a>
-<a class="sourceLine" id="cb7-3" title="3">$ <span class="ex">cabal</span> v2-build</a>
-<a class="sourceLine" id="cb7-4" title="4">$ <span class="ex">cabal</span> v2-run sil-exe</a></code></pre></div></li>
+<pre><code>$ cd &lt;your/local/proyect/location&gt;/stand-in-language
+$ nix-shell shell.nix
+$ cabal new-build
+$ cabal new-run telomare-exe</code></pre></li>
+<li>Profit! ### REPL</li>
+<li><p>Run:</p>
+<pre><code>$ cd &lt;your/local/proyect/location&gt;/stand-in-language
+$ nix-shell shell.nix
+$ cabal new-build
+$ cabal new-run telomare-mini-repl -- --haskell</code></pre></li>
+<li><p>Profit!</p></li>
 </ol>
         </div>
         <div id="footer">
