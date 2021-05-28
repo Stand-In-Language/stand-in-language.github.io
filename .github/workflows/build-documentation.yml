@@ -18,11 +18,13 @@ jobs:
     - name: Checkout telomare repository
       uses: actions/checkout@v2
       with:
+        fetch-depth: 0
         repository: hhefesto/stand-in-language
         path: ./telomare
     - name: Checkout telomare site repository
       uses: actions/checkout@v2
       with:
+        fetch-depth: 0
         repository: hhefesto/stand-in-language.github.io
         path: ./stand-in-language.github.io
     - uses: cachix/install-nix-action@v12
@@ -35,9 +37,4 @@ jobs:
         name: telomare
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: |
-        cachix use iohk
         nix run github:hhefesto/telomare-make-haddock-script
-    # - run: nix build .#telomare:exe:telomare-exe
-    # - run: nix run .#telomare:test:telomare-test
-    # - run: nix run .#telomare:test:telomare-parser-test
-    # - run: nix run .#telomare:test:telomare-serializer-test
