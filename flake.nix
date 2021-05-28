@@ -9,7 +9,7 @@
   inputs.nixpkgs.follows = "haskellNix/nixpkgs-unstable";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  inputs.telomare.url = "github:Stand-In-Language/stand-in-language";
+  # inputs.telomare.url = "github:Stand-In-Language/stand-in-language";
 
   outputs = { self, nixpkgs, flake-utils, haskellNix, flake-compat }:
     flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
@@ -20,10 +20,14 @@
               src = ./.;
               compiler-nix-name = "ghc884";
           };
-          build-telomare-documentation = pkgs.runCommand "generateHaddock" { src = ./.; } ''
-            echo "hello"
-            echo "hello2"
-
+          zlib = prev.zlib;
+          # build-telomare-documentation = final.runCommand "generateHaddock" { src = ./.; } ''
+          #   echo "hello"
+          #   echo "hello2"
+          # '';
+          helloWorld1 = final.writeScriptBin "helloWorld1" ''
+            echo Hello1
+            echo hello2
           '';
 
           # telomare = final.telomare;
@@ -36,14 +40,15 @@
       # flake = pkgs.telomare.flake {};
     in flake // {
       # Built by `nix build .`
-      defaultPackage = flake.packages."telomare:exe:telomare-exe";
+      defaultPackage = flake.packages."stand-in-language-github-io:exe:stand-in-language-github-io";
 
       # This is used by `nix develop .` to open a shell for use with
       # `cabal`, `hlint` and `haskell-language-server`
-      devShell = pkgs.telomare.shellFor {
+      devShell = pkgs.telomare-documentation.shellFor {
         tools = {
-          cabal = "latest";
-          hlint = "latest";
+          # cabal = "latest";
+          # stack = "latest";
+          # hlint = "latest";
           haskell-language-server = "latest";
           ghcid = "latest";
         };

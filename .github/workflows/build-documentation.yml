@@ -17,12 +17,15 @@ jobs:
     - name: Checkout telomare repository
       uses: actions/checkout@v2
       with:
-        repository: Stand-In-Language/stand-in-language
-        path: stand-in-language
+        repository: hhefesto/stand-in-language
+        path: ./telomare
+    - name: Checkout telomare site repository
+      uses: actions/checkout@v2
+      with:
+        repository: hhefesto/stand-in-language.github.io
+        path: ./stand-in-language.github.io
     - uses: cachix/install-nix-action@v12
       with:
-        # nix_path: nixpkgs=channel:nixos-unstable
-        # skip_adding_nixpkgs_channel: true
         install_url: https://github.com/numtide/nix-flakes-installer/releases/download/nix-2.4pre20201221_9fab14a/install
         extra_nix_config: |
           experimental-features = nix-command flakes
@@ -30,12 +33,9 @@ jobs:
       with:
         name: telomare
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
-        # Only needed for private caches
-        #authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    # This might be overkill: telomare cache could be enough.
     - run: |
         cachix use iohk
-        tree
+        nix run github:hhefesto/telomare-make-haddock-script
     # - run: nix build .#telomare:exe:telomare-exe
     # - run: nix run .#telomare:test:telomare-test
     # - run: nix run .#telomare:test:telomare-parser-test
