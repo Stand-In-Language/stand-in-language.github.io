@@ -3,6 +3,7 @@ name: "Telomare Documentation CI"
 #   pull_request:
 #   push:
 on:
+  push:
   repository_dispatch:
     types: [sample_push]
 jobs:
