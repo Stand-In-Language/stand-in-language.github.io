@@ -37,6 +37,5 @@ jobs:
         name: telomare
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: |
-        cachix use iohk
         ls
         nix run github:hhefesto/telomare-make-haddock-script
