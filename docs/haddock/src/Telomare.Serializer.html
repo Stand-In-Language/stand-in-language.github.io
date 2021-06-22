@@ -16,15 +16,15 @@
 </span><span id="line-16"></span><span>
 </span><span id="line-17"></span><span class="annot"><a href="Telomare.Serializer.html#serialize"><span class="hs-identifier hs-type">serialize</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Vector</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word8</span></span><span>
 </span><span id="line-18"></span><span id="serialize"><span class="annot"><span class="annottext">serialize :: IExpr -&gt; Vector Word8
-</span><a href="Telomare.Serializer.html#serialize"><span class="hs-identifier hs-var hs-var">serialize</span></a></span></span><span> </span><span id="local-6989586621679440228"><span class="annot"><span class="annottext">iexpr :: IExpr
-</span><a href="#local-6989586621679440228"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(forall s. ST s (MVector s Word8)) -&gt; Vector Word8
+</span><a href="Telomare.Serializer.html#serialize"><span class="hs-identifier hs-var hs-var">serialize</span></a></span></span><span> </span><span id="local-6989586621679440464"><span class="annot"><span class="annottext">iexpr :: IExpr
+</span><a href="#local-6989586621679440464"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(forall s. ST s (MVector s Word8)) -&gt; Vector Word8
 forall a. Storable a =&gt; (forall s. ST s (MVector s a)) -&gt; Vector a
 </span><span class="hs-identifier hs-var">S.create</span></span><span> </span><span class="annot"><span class="annottext">((forall s. ST s (MVector s Word8)) -&gt; Vector Word8)
 -&gt; (forall s. ST s (MVector s Word8)) -&gt; Vector Word8
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-keyword">do</span><span> </span><span>
-</span><span id="line-19"></span><span>    </span><span id="local-6989586621679440226"><span class="annot"><span class="annottext">MVector s Word8
-</span><a href="#local-6989586621679440226"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; ST s (MVector s Word8)
+</span><span id="line-19"></span><span>    </span><span id="local-6989586621679440462"><span class="annot"><span class="annottext">MVector s Word8
+</span><a href="#local-6989586621679440462"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; ST s (MVector s Word8)
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 Int -&gt; m (MVector (PrimState m) a)
@@ -32,345 +32,345 @@ Int -&gt; m (MVector (PrimState m) a)
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize"><span class="hs-identifier hs-var">telomareSize</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440228"><span class="hs-identifier hs-var">iexpr</span></a></span><span>
+</span><a href="#local-6989586621679440464"><span class="hs-identifier hs-var">iexpr</span></a></span><span>
 </span><span id="line-20"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState (ST s)) Word8 -&gt; IExpr -&gt; ST s Int
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a, Num a) =&gt;
 Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="annot"><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">MVector s Word8
 MVector (PrimState (ST s)) Word8
-</span><a href="#local-6989586621679440226"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440228"><span class="hs-identifier hs-var">iexpr</span></a></span><span>
+</span><a href="#local-6989586621679440462"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440464"><span class="hs-identifier hs-var">iexpr</span></a></span><span>
 </span><span id="line-21"></span><span>    </span><span class="annot"><span class="annottext">MVector s Word8 -&gt; ST s (MVector s Word8)
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">MVector s Word8
-</span><a href="#local-6989586621679440226"><span class="hs-identifier hs-var">vec</span></a></span><span>
+</span><a href="#local-6989586621679440462"><span class="hs-identifier hs-var">vec</span></a></span><span>
 </span><span id="line-22"></span><span>
 </span><span id="line-23"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize"><span class="hs-identifier hs-type">telomareSize</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
 </span><span id="line-24"></span><span id="telomareSize"><span class="annot"><span class="annottext">telomareSize :: IExpr -&gt; Int
-</span><a href="Telomare.Serializer.html#telomareSize"><span class="hs-identifier hs-var hs-var">telomareSize</span></a></span></span><span> </span><span id="local-6989586621679440222"><span class="annot"><span class="annottext">iexpr :: IExpr
-</span><a href="#local-6989586621679440222"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><a href="Telomare.Serializer.html#telomareSize"><span class="hs-identifier hs-var hs-var">telomareSize</span></a></span></span><span> </span><span id="local-6989586621679440458"><span class="annot"><span class="annottext">iexpr :: IExpr
+</span><a href="#local-6989586621679440458"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440222"><span class="hs-identifier hs-var">iexpr</span></a></span><span> </span><span class="annot"><span class="hs-number">0</span></span><span>
+</span><a href="#local-6989586621679440458"><span class="hs-identifier hs-var">iexpr</span></a></span><span> </span><span class="annot"><span class="hs-number">0</span></span><span>
 </span><span id="line-25"></span><span>
 </span><span id="line-26"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-type">telomareSize'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
 </span><span id="line-27"></span><span id="telomareSize%27"><span class="annot"><span class="annottext">telomareSize' :: IExpr -&gt; Int -&gt; Int
-</span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var hs-var">telomareSize'</span></a></span></span><span> </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span>         </span><span id="local-6989586621679440219"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440219"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440219"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var hs-var">telomareSize'</span></a></span></span><span> </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span>         </span><span id="local-6989586621679440455"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440455"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440455"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span>
-</span><span id="line-28"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679440216"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440216"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440215"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440215"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679440214"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440214"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><span id="line-28"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679440452"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440452"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440451"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440451"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679440450"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440450"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440216"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440452"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440215"><span class="hs-identifier hs-var">e2</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440214"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440451"><span class="hs-identifier hs-var">e2</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440450"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span>
-</span><span id="line-29"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><a href="Telomare.html#Env"><span class="hs-identifier hs-type">Env</span></a></span><span>          </span><span id="local-6989586621679440212"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440212"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440212"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><span id="line-29"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><a href="Telomare.html#Env"><span class="hs-identifier hs-type">Env</span></a></span><span>          </span><span id="local-6989586621679440448"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440448"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440448"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span>
-</span><span id="line-30"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-type">SetEnv</span></a></span><span>  </span><span id="local-6989586621679440210"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440210"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440209"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440209"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><span id="line-30"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-type">SetEnv</span></a></span><span>  </span><span id="local-6989586621679440446"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440446"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440445"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440445"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440210"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440209"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440446"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440445"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span>
-</span><span id="line-31"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span>   </span><span id="local-6989586621679440207"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440207"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440206"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440206"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><span id="line-31"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span>   </span><span id="local-6989586621679440443"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440443"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440442"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440442"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440207"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440206"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440443"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440442"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span>
-</span><span id="line-32"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Gate"><span class="hs-identifier hs-type">Gate</span></a></span><span> </span><span id="local-6989586621679440204"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440204"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440203"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440203"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679440202"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440202"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><span id="line-32"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Gate"><span class="hs-identifier hs-type">Gate</span></a></span><span> </span><span id="local-6989586621679440440"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440440"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440439"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440439"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679440438"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440438"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440204"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440440"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440203"><span class="hs-identifier hs-var">e2</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440202"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440439"><span class="hs-identifier hs-var">e2</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440438"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-33"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span>   </span><span id="local-6989586621679440200"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440200"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440199"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440199"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><span id="line-33"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span>   </span><span id="local-6989586621679440436"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440436"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440435"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440435"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440200"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440199"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440436"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440435"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span>
-</span><span id="line-34"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span>  </span><span id="local-6989586621679440197"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440197"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440196"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440196"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
+</span><span id="line-34"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span>  </span><span id="local-6989586621679440433"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440433"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span id="local-6989586621679440432"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440432"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Int -&gt; Int
 </span><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440197"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440196"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440433"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440432"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span>
-</span><span id="line-35"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><a href="Telomare.html#Trace"><span class="hs-identifier hs-type">Trace</span></a></span><span>        </span><span id="local-6989586621679440194"><span class="annot"><span class="annottext">acc :: Int
-</span><a href="#local-6989586621679440194"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440194"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><span id="line-35"></span><span class="annot"><a href="Telomare.Serializer.html#telomareSize%27"><span class="hs-identifier hs-var">telomareSize'</span></a></span><span> </span><span class="annot"><a href="Telomare.html#Trace"><span class="hs-identifier hs-type">Trace</span></a></span><span>        </span><span id="local-6989586621679440430"><span class="annot"><span class="annottext">acc :: Int
+</span><a href="#local-6989586621679440430"><span class="hs-identifier hs-var">acc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440430"><span class="hs-identifier hs-var">acc</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span>
 </span><span id="line-36"></span><span>
 </span><span id="line-37"></span><span>
 </span><span id="line-38"></span><span id="serialize_loop"><span class="annot"><span class="annottext">serialize_loop :: Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
-</span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var hs-var">serialize_loop</span></a></span></span><span> </span><span id="local-6989586621679440193"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440193"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440192"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440192"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440191"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440191"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="annot"><span class="annottext">IExpr
+</span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var hs-var">serialize_loop</span></a></span></span><span> </span><span id="local-6989586621679440429"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440429"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440428"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440428"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440427"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440427"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440192"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440193"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440428"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440429"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440191"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
+</span><a href="#local-6989586621679440427"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; m Int
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440193"><span class="hs-identifier hs-var">ix</span></a></span><span>
-</span><span id="line-39"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440188"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440188"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440187"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440187"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440186"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440186"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679440185"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440185"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440184"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440184"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><a href="#local-6989586621679440429"><span class="hs-identifier hs-var">ix</span></a></span><span>
+</span><span id="line-39"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440424"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440424"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440423"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440423"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440422"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440422"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679440421"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440421"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440420"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440420"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-40"></span><span>    </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440187"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440188"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440423"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440424"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440186"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-41"></span><span>    </span><span id="local-6989586621679440183"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440183"><span class="hs-identifier hs-var">end_ix</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
+</span><a href="#local-6989586621679440422"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span>    </span><span id="local-6989586621679440419"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440419"><span class="hs-identifier hs-var">end_ix</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440188"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440424"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440187"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440185"><span class="hs-identifier hs-var">e1</span></a></span><span>
+</span><a href="#local-6989586621679440423"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440421"><span class="hs-identifier hs-var">e1</span></a></span><span>
 </span><span id="line-42"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440183"><span class="hs-identifier hs-var">end_ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440419"><span class="hs-identifier hs-var">end_ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440187"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440184"><span class="hs-identifier hs-var">e2</span></a></span><span>
-</span><span id="line-43"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440182"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440182"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440181"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440181"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440180"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440180"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440423"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440420"><span class="hs-identifier hs-var">e2</span></a></span><span>
+</span><span id="line-43"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440418"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440418"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440417"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440417"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440416"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440416"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440181"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440182"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440417"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440418"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440180"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
+</span><a href="#local-6989586621679440416"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; m Int
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440182"><span class="hs-identifier hs-var">ix</span></a></span><span>
-</span><span id="line-44"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440179"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440179"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440178"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440178"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440177"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440177"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-type">SetEnv</span></a></span><span> </span><span id="local-6989586621679440176"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440176"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
+</span><a href="#local-6989586621679440418"><span class="hs-identifier hs-var">ix</span></a></span><span>
+</span><span id="line-44"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440415"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440415"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440414"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440414"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440413"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440413"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-type">SetEnv</span></a></span><span> </span><span id="local-6989586621679440412"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440412"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440178"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440179"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440414"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440415"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440177"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
+</span><a href="#local-6989586621679440413"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440179"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440415"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440178"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440176"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-45"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440175"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440175"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440174"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440174"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440173"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440173"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span> </span><span id="local-6989586621679440172"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440172"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
+</span><a href="#local-6989586621679440414"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440412"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-45"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440411"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440411"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440410"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440410"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440409"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440409"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span> </span><span id="local-6989586621679440408"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440408"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440174"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440175"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440410"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440411"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440173"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
+</span><a href="#local-6989586621679440409"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440175"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440411"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440174"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440172"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-46"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440171"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440171"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440170"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440170"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440169"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440169"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Gate"><span class="hs-identifier hs-type">Gate</span></a></span><span> </span><span id="local-6989586621679440168"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440168"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440167"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440167"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><a href="#local-6989586621679440410"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440408"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-46"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440407"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440407"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440406"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440406"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440405"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440405"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Gate"><span class="hs-identifier hs-type">Gate</span></a></span><span> </span><span id="local-6989586621679440404"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440404"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span id="local-6989586621679440403"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440403"><span class="hs-identifier hs-var">e2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-47"></span><span>    </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440170"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440171"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440406"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440407"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440169"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-48"></span><span>    </span><span id="local-6989586621679440166"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440166"><span class="hs-identifier hs-var">end_ix</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
+</span><a href="#local-6989586621679440405"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-48"></span><span>    </span><span id="local-6989586621679440402"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440402"><span class="hs-identifier hs-var">end_ix</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440171"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440407"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440170"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440168"><span class="hs-identifier hs-var">e1</span></a></span><span>
+</span><a href="#local-6989586621679440406"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440404"><span class="hs-identifier hs-var">e1</span></a></span><span>
 </span><span id="line-49"></span><span>    </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440166"><span class="hs-identifier hs-var">end_ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440402"><span class="hs-identifier hs-var">end_ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440170"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440167"><span class="hs-identifier hs-var">e2</span></a></span><span>
-</span><span id="line-50"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440165"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440165"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440164"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440164"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440163"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440163"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span id="local-6989586621679440162"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440162"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
+</span><a href="#local-6989586621679440406"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440403"><span class="hs-identifier hs-var">e2</span></a></span><span>
+</span><span id="line-50"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440401"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440401"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440400"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440400"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440399"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440399"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span id="local-6989586621679440398"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440398"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440164"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440165"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440400"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440401"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440163"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
+</span><a href="#local-6989586621679440399"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440165"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440401"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440164"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440162"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-51"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440161"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440161"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440160"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440160"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440159"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440159"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span> </span><span id="local-6989586621679440158"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440158"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
+</span><a href="#local-6989586621679440400"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440398"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-51"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440397"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440397"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440396"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440396"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440395"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440395"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span> </span><span id="local-6989586621679440394"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440394"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440160"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440161"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440396"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440397"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440159"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
+</span><a href="#local-6989586621679440395"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; MVector (PrimState m) a -&gt; IExpr -&gt; m Int
 </span><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440161"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679440397"><span class="hs-identifier hs-var">ix</span></a></span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span class="annot"><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440160"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440158"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-52"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440157"><span class="annot"><span class="annottext">ix :: Int
-</span><a href="#local-6989586621679440157"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440156"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
-</span><a href="#local-6989586621679440156"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440155"><span class="annot"><span class="annottext">ie :: IExpr
-</span><a href="#local-6989586621679440155"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440396"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440394"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-52"></span><span class="annot"><a href="Telomare.Serializer.html#serialize_loop"><span class="hs-identifier hs-var">serialize_loop</span></a></span><span> </span><span id="local-6989586621679440393"><span class="annot"><span class="annottext">ix :: Int
+</span><a href="#local-6989586621679440393"><span class="hs-identifier hs-var">ix</span></a></span></span><span> </span><span id="local-6989586621679440392"><span class="annot"><span class="annottext">vec :: MVector (PrimState m) a
+</span><a href="#local-6989586621679440392"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span id="local-6989586621679440391"><span class="annot"><span class="annottext">ie :: IExpr
+</span><a href="#local-6989586621679440391"><span class="hs-identifier hs-var">ie</span></a></span></span><span class="hs-glyph">@</span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Trace"><span class="hs-identifier hs-var">Trace</span></a></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 forall (m :: * -&gt; *) a.
 (PrimMonad m, Storable a) =&gt;
 MVector (PrimState m) a -&gt; Int -&gt; a -&gt; m ()
 </span><span class="hs-identifier hs-var">SM.write</span></span><span> </span><span class="annot"><span class="annottext">MVector (PrimState m) a
-</span><a href="#local-6989586621679440156"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440157"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
+</span><a href="#local-6989586621679440392"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679440393"><span class="hs-identifier hs-var">ix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CTypeId -&gt; a
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">(CTypeId -&gt; a) -&gt; CTypeId -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440155"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
+</span><a href="#local-6989586621679440391"><span class="hs-identifier hs-var">ie</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">m () -&gt; m Int -&gt; m Int
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; m Int
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679440157"><span class="hs-identifier hs-var">ix</span></a></span><span>
+</span><a href="#local-6989586621679440393"><span class="hs-identifier hs-var">ix</span></a></span><span>
 </span><span id="line-53"></span><span>
 </span><span id="line-54"></span><span>
 </span><span id="line-55"></span><span class="hs-comment">-- | Safe deserialization. Will return Nothing for bad input arguments.</span><span>
 </span><span id="line-56"></span><span class="annot"><a href="Telomare.Serializer.html#deserialize"><span class="hs-identifier hs-type">deserialize</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Vector</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word8</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span>
 </span><span id="line-57"></span><span id="deserialize"><span class="annot"><span class="annottext">deserialize :: Vector Word8 -&gt; Maybe IExpr
-</span><a href="Telomare.Serializer.html#deserialize"><span class="hs-identifier hs-var hs-var">deserialize</span></a></span></span><span> </span><span id="local-6989586621679440154"><span class="annot"><span class="annottext">vec :: Vector Word8
-</span><a href="#local-6989586621679440154"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Vector Word8 -&gt; Int
+</span><a href="Telomare.Serializer.html#deserialize"><span class="hs-identifier hs-var hs-var">deserialize</span></a></span></span><span> </span><span id="local-6989586621679440390"><span class="annot"><span class="annottext">vec :: Vector Word8
+</span><a href="#local-6989586621679440390"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Vector Word8 -&gt; Int
 forall a. Storable a =&gt; Vector a -&gt; Int
 </span><span class="hs-identifier hs-var">S.length</span></span><span> </span><span class="annot"><span class="annottext">Vector Word8
-</span><a href="#local-6989586621679440154"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679440390"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="hs-number">0</span></span><span>
 </span><span id="line-58"></span><span>    </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">Maybe IExpr
@@ -385,18 +385,18 @@ forall a. Integral a =&gt; FunStack -&gt; a -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 forall a. a -&gt; a
 </span><span class="hs-identifier hs-var">id</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Vector Word8
-</span><a href="#local-6989586621679440154"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-60"></span><span>        </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440148"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440148"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Maybe IExpr
+</span><a href="#local-6989586621679440390"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-60"></span><span>        </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440384"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440384"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Maybe IExpr
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; Maybe IExpr) -&gt; IExpr -&gt; Maybe IExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440148"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440384"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 forall a. HasCallStack =&gt; a
 </span><span class="hs-identifier hs-var">undefined</span></span><span>
-</span><span id="line-61"></span><span>        </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440145"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440145"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe IExpr
+</span><span id="line-61"></span><span>        </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440381"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440381"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe IExpr
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span>
 </span><span id="line-62"></span><span>
@@ -404,8 +404,8 @@ forall a. Maybe a
 </span><span id="line-64"></span><span class="annot"><a href="Telomare.Serializer.html#unsafeDeserialize"><span class="hs-identifier hs-type">unsafeDeserialize</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Vector</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word8</span></span><span> </span><span>
 </span><span id="line-65"></span><span>                  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span>
 </span><span id="line-66"></span><span id="unsafeDeserialize"><span class="annot"><span class="annottext">unsafeDeserialize :: Vector Word8 -&gt; IExpr
-</span><a href="Telomare.Serializer.html#unsafeDeserialize"><span class="hs-identifier hs-var hs-var">unsafeDeserialize</span></a></span></span><span> </span><span id="local-6989586621679440144"><span class="annot"><span class="annottext">vec :: Vector Word8
-</span><a href="#local-6989586621679440144"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">(FunStack -&gt; Word8 -&gt; FunStack)
+</span><a href="Telomare.Serializer.html#unsafeDeserialize"><span class="hs-identifier hs-var hs-var">unsafeDeserialize</span></a></span></span><span> </span><span id="local-6989586621679440380"><span class="annot"><span class="annottext">vec :: Vector Word8
+</span><a href="#local-6989586621679440380"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">(FunStack -&gt; Word8 -&gt; FunStack)
 -&gt; FunStack -&gt; Vector Word8 -&gt; FunStack
 forall b a. Storable b =&gt; (a -&gt; b -&gt; a) -&gt; a -&gt; Vector b -&gt; a
 </span><span class="hs-identifier hs-var">S.foldl'</span></span><span> </span><span class="annot"><span class="annottext">FunStack -&gt; Word8 -&gt; FunStack
@@ -414,14 +414,14 @@ forall a. Integral a =&gt; FunStack -&gt; a -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 forall a. a -&gt; a
 </span><span class="hs-identifier hs-var">id</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Vector Word8
-</span><a href="#local-6989586621679440144"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-67"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440143"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440143"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440143"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; IExpr
+</span><a href="#local-6989586621679440380"><span class="hs-identifier hs-var">vec</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-67"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440379"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440379"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440379"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; IExpr
 forall a. HasCallStack =&gt; [Char] -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="hs-string">&quot;Telomare.Serializer.unsafeDeserialize: I'm being evaluated. That means I was called on an empty vector.&quot;</span></span><span class="hs-special">)</span><span>
-</span><span id="line-68"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440141"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440141"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; IExpr
+</span><span id="line-68"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440377"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440377"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; IExpr
 forall a. HasCallStack =&gt; [Char] -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="hs-string">&quot;Telomare.Serializer.unsafeDeserialize: Could not reduce the CPS stack. Possibly wrong input arguments.&quot;</span></span><span>
 </span><span id="line-69"></span><span>
@@ -430,256 +430,256 @@ forall a. HasCallStack =&gt; [Char] -&gt; a
 </span><span id="line-72"></span><span>              </span><span class="hs-glyph">|</span><span> </span><span id="CallN"><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.Serializer.html#FunStack"><span class="hs-identifier hs-type">FunStack</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-73"></span><span>
 </span><span id="line-74"></span><span id="deserializer_inside"><span class="annot"><span class="annottext">deserializer_inside :: FunStack -&gt; a -&gt; FunStack
-</span><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var hs-var">deserializer_inside</span></a></span></span><span> </span><span id="local-6989586621679440140"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440140"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440139"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440139"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var hs-var">deserializer_inside</span></a></span></span><span> </span><span id="local-6989586621679440376"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440376"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440375"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440375"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440139"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440375"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#zero_type"><span class="hs-identifier hs-var">zero_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440140"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-75"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440137"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440137"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="#local-6989586621679440376"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-75"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440373"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440373"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; IExpr) -&gt; FunStack) -&gt; (IExpr -&gt; IExpr) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440137"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440373"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>
-</span><span id="line-76"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440136"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440136"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440136"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><span id="line-76"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440372"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440372"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440372"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span> </span><span>
-</span><span id="line-77"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440135"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440135"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440134"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440134"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><span id="line-77"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440371"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440371"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440370"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440370"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440134"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440370"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#pair_type"><span class="hs-identifier hs-var">pair_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440135"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-78"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440132"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440132"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440371"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-78"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440368"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440368"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440131"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440131"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
-</span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440130"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440130"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440132"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440367"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440367"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440366"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440366"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440368"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Pair"><span class="hs-identifier hs-var">Pair</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440131"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440130"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-79"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440129"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440129"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440367"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440366"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-79"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440365"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440365"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440128"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440128"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
-</span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440127"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440127"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440129"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440364"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440364"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440363"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440363"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440365"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Pair"><span class="hs-identifier hs-var">Pair</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440128"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440127"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-80"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440126"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440126"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440125"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440125"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><a href="#local-6989586621679440364"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440363"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-80"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440362"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440362"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440361"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440361"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440125"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440361"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#env_type"><span class="hs-identifier hs-var">env_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440126"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-81"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440123"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440123"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="#local-6989586621679440362"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-81"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440359"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440359"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; IExpr) -&gt; FunStack) -&gt; (IExpr -&gt; IExpr) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440123"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440359"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span>
-</span><span id="line-82"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440122"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440122"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440122"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><span id="line-82"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440358"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440358"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440358"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span>
-</span><span id="line-83"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440121"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440121"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440120"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440120"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><span id="line-83"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440357"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440357"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440356"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440356"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440120"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440356"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#setenv_type"><span class="hs-identifier hs-var">setenv_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440121"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-84"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440118"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440118"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="#local-6989586621679440357"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-84"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440354"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440354"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; IExpr) -&gt; FunStack) -&gt; (IExpr -&gt; IExpr) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440117"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440117"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440118"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440353"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440353"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440354"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-var">SetEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440117"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
-</span><span id="line-85"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440116"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440116"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440353"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
+</span><span id="line-85"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440352"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440352"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440115"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440115"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440116"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440351"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440351"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440352"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-var">SetEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440115"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-86"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440114"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440114"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440113"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440113"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><a href="#local-6989586621679440351"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-86"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440350"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440350"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440349"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440349"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440113"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440349"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#defer_type"><span class="hs-identifier hs-var">defer_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440114"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-87"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440111"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440111"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="#local-6989586621679440350"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-87"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440347"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440347"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; IExpr) -&gt; FunStack) -&gt; (IExpr -&gt; IExpr) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440110"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440110"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440111"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440346"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440346"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440347"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#Defer"><span class="hs-identifier hs-var">Defer</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440110"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
-</span><span id="line-88"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440109"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440109"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440346"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
+</span><span id="line-88"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440345"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440345"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440108"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440108"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440109"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440344"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440344"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440345"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#Defer"><span class="hs-identifier hs-var">Defer</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440108"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-89"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440107"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440107"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440106"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440106"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><a href="#local-6989586621679440344"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-89"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440343"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440343"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440342"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440342"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440106"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440342"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#gate_type"><span class="hs-identifier hs-var">gate_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440107"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-90"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440104"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440104"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440343"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-90"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440340"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440340"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440103"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440103"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
-</span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440102"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440102"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440104"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440339"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440339"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440338"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440338"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440340"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Gate"><span class="hs-identifier hs-var">Gate</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440103"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440102"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-91"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440101"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440101"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440339"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440338"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-91"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440337"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440337"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440100"><span class="annot"><span class="annottext">e1 :: IExpr
-</span><a href="#local-6989586621679440100"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
-</span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440099"><span class="annot"><span class="annottext">e2 :: IExpr
-</span><a href="#local-6989586621679440099"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440101"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440336"><span class="annot"><span class="annottext">e1 :: IExpr
+</span><a href="#local-6989586621679440336"><span class="hs-identifier hs-var">e1</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679440335"><span class="annot"><span class="annottext">e2 :: IExpr
+</span><a href="#local-6989586621679440335"><span class="hs-identifier hs-var">e2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440337"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Gate"><span class="hs-identifier hs-var">Gate</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440100"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440099"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-92"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440098"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440098"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440097"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440097"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><a href="#local-6989586621679440336"><span class="hs-identifier hs-var">e1</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440335"><span class="hs-identifier hs-var">e2</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-92"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440334"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440334"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440333"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440333"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440097"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440333"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#pleft_type"><span class="hs-identifier hs-var">pleft_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440098"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-93"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440095"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440095"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="#local-6989586621679440334"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-93"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440331"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440331"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; IExpr) -&gt; FunStack) -&gt; (IExpr -&gt; IExpr) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440094"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440094"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440095"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440330"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440330"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440331"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PLeft"><span class="hs-identifier hs-var">PLeft</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440094"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
-</span><span id="line-94"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440093"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440093"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440330"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
+</span><span id="line-94"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440329"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440329"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440092"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440092"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440093"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440328"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440328"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440329"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PLeft"><span class="hs-identifier hs-var">PLeft</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440092"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-95"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440091"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440091"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440090"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440090"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><a href="#local-6989586621679440328"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-95"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440327"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440327"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440326"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440326"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440090"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440326"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#pright_type"><span class="hs-identifier hs-var">pright_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440091"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-96"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440088"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440088"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="#local-6989586621679440327"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-96"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440324"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440324"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; IExpr) -&gt; FunStack) -&gt; (IExpr -&gt; IExpr) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440087"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440087"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440088"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440323"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440323"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440324"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PRight"><span class="hs-identifier hs-var">PRight</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440087"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
-</span><span id="line-97"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440086"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440086"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
+</span><a href="#local-6989586621679440323"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span>
+</span><span id="line-97"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440322"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440322"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; FunStack) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-var">CallN</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; FunStack) -&gt; FunStack)
 -&gt; (IExpr -&gt; FunStack) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440085"><span class="annot"><span class="annottext">e :: IExpr
-</span><a href="#local-6989586621679440085"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440086"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679440321"><span class="annot"><span class="annottext">e :: IExpr
+</span><a href="#local-6989586621679440321"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440322"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PRight"><span class="hs-identifier hs-var">PRight</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679440085"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-98"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440084"><span class="annot"><span class="annottext">cont :: FunStack
-</span><a href="#local-6989586621679440084"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440083"><span class="annot"><span class="annottext">i :: a
-</span><a href="#local-6989586621679440083"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
+</span><a href="#local-6989586621679440321"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-98"></span><span class="annot"><a href="Telomare.Serializer.html#deserializer_inside"><span class="hs-identifier hs-var">deserializer_inside</span></a></span><span> </span><span id="local-6989586621679440320"><span class="annot"><span class="annottext">cont :: FunStack
+</span><a href="#local-6989586621679440320"><span class="hs-identifier hs-var">cont</span></a></span></span><span> </span><span id="local-6989586621679440319"><span class="annot"><span class="annottext">i :: a
+</span><a href="#local-6989586621679440319"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">a -&gt; CTypeId
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
 </span><span class="hs-identifier hs-var">fromIntegral</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679440083"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
+</span><a href="#local-6989586621679440319"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId -&gt; CTypeId -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#trace_type"><span class="hs-identifier hs-var">trace_type</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">FunStack
-</span><a href="#local-6989586621679440084"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-99"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440081"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440081"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
+</span><a href="#local-6989586621679440320"><span class="hs-identifier hs-var">cont</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-99"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-type">Call1</span></a></span><span> </span><span id="local-6989586621679440317"><span class="annot"><span class="annottext">c :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679440317"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; FunStack
 </span><a href="Telomare.Serializer.html#Call1"><span class="hs-identifier hs-var">Call1</span></a></span><span> </span><span class="annot"><span class="annottext">((IExpr -&gt; IExpr) -&gt; FunStack) -&gt; (IExpr -&gt; IExpr) -&gt; FunStack
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679440081"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679440317"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Trace"><span class="hs-identifier hs-var">Trace</span></a></span><span>
-</span><span id="line-100"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440080"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440080"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
-</span><a href="#local-6989586621679440080"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><span id="line-100"></span><span>    </span><span class="annot"><a href="Telomare.Serializer.html#CallN"><span class="hs-identifier hs-type">CallN</span></a></span><span> </span><span id="local-6989586621679440316"><span class="annot"><span class="annottext">c :: IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440316"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; FunStack
+</span><a href="#local-6989586621679440316"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Trace"><span class="hs-identifier hs-var">Trace</span></a></span><span>
 </span><span id="line-101"></span><span>
 </span><span id="line-102"></span><span>

@@ -26,14 +26,14 @@
 </span><span id="line-26"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="LeftP"><span class="annot"><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-var">LeftP</span></a></span></span><span> </span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span>
 </span><span id="line-27"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="RightP"><span class="annot"><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-var">RightP</span></a></span></span><span> </span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span>
 </span><span id="line-28"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="TraceP"><span class="annot"><a href="Telomare.Eval.html#TraceP"><span class="hs-identifier hs-var">TraceP</span></a></span></span><span>
-</span><span id="line-29"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442127"><span id="local-6989586621679442129"><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; Bool
+</span><span id="line-29"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442363"><span id="local-6989586621679442365"><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; Bool
 (ExpP -&gt; ExpP -&gt; Bool) -&gt; (ExpP -&gt; ExpP -&gt; Bool) -&gt; Eq ExpP
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 /= :: ExpP -&gt; ExpP -&gt; Bool
 $c/= :: ExpP -&gt; ExpP -&gt; Bool
 == :: ExpP -&gt; ExpP -&gt; Bool
 $c== :: ExpP -&gt; ExpP -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442120"><span id="local-6989586621679442122"><span id="local-6989586621679442124"><span class="annot"><span class="annottext">Int -&gt; ExpP -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442356"><span id="local-6989586621679442358"><span id="local-6989586621679442360"><span class="annot"><span class="annottext">Int -&gt; ExpP -&gt; ShowS
 [ExpP] -&gt; ShowS
 ExpP -&gt; String
 (Int -&gt; ExpP -&gt; ShowS)
@@ -46,7 +46,7 @@ show :: ExpP -&gt; String
 $cshow :: ExpP -&gt; String
 showsPrec :: Int -&gt; ExpP -&gt; ShowS
 $cshowsPrec :: Int -&gt; ExpP -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442104"><span id="local-6989586621679442106"><span id="local-6989586621679442108"><span id="local-6989586621679442110"><span id="local-6989586621679442112"><span id="local-6989586621679442114"><span id="local-6989586621679442116"><span class="annot"><span class="annottext">Eq ExpP
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442340"><span id="local-6989586621679442342"><span id="local-6989586621679442344"><span id="local-6989586621679442346"><span id="local-6989586621679442348"><span id="local-6989586621679442350"><span id="local-6989586621679442352"><span class="annot"><span class="annottext">Eq ExpP
 Eq ExpP =&gt;
 (ExpP -&gt; ExpP -&gt; Ordering)
 -&gt; (ExpP -&gt; ExpP -&gt; Bool)
@@ -87,78 +87,78 @@ $cp1Ord :: Eq ExpP
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-30"></span><span>
 </span><span id="line-31"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Plated</span></span><span> </span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-32"></span><span>  </span><span id="local-6989586621679442100"><span class="annot"><span class="annottext">plate :: (ExpP -&gt; f ExpP) -&gt; ExpP -&gt; f ExpP
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">plate</span></span></span><span> </span><span id="local-6989586621679442098"><span class="annot"><span class="annottext">f :: ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-33"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-type">PairP</span></a></span><span> </span><span id="local-6989586621679442097"><span class="annot"><span class="annottext">a :: ExpP
-</span><a href="#local-6989586621679442097"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442096"><span class="annot"><span class="annottext">b :: ExpP
-</span><a href="#local-6989586621679442096"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
+</span><span id="line-32"></span><span>  </span><span id="local-6989586621679442336"><span class="annot"><span class="annottext">plate :: (ExpP -&gt; f ExpP) -&gt; ExpP -&gt; f ExpP
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">plate</span></span></span><span> </span><span id="local-6989586621679442334"><span class="annot"><span class="annottext">f :: ExpP -&gt; f ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-33"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-type">PairP</span></a></span><span> </span><span id="local-6989586621679442333"><span class="annot"><span class="annottext">a :: ExpP
+</span><a href="#local-6989586621679442333"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442332"><span class="annot"><span class="annottext">b :: ExpP
+</span><a href="#local-6989586621679442332"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f (ExpP -&gt; ExpP)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442097"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">f (ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442333"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">f (ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442096"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-34"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-type">SetEnvP</span></a></span><span> </span><span id="local-6989586621679442094"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442094"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679442093"><span class="annot"><span class="annottext">b :: Bool
-</span><a href="#local-6989586621679442093"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; Bool -&gt; ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442332"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-34"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-type">SetEnvP</span></a></span><span> </span><span id="local-6989586621679442330"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442330"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679442329"><span class="annot"><span class="annottext">b :: Bool
+</span><a href="#local-6989586621679442329"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; Bool -&gt; ExpP
 </span><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-var">SetEnvP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; Bool -&gt; ExpP) -&gt; f ExpP -&gt; f (Bool -&gt; ExpP)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442094"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">f (Bool -&gt; ExpP) -&gt; f Bool -&gt; f ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442330"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">f (Bool -&gt; ExpP) -&gt; f Bool -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; f Bool
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679442093"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-35"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-type">DeferP</span></a></span><span> </span><span id="local-6989586621679442092"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442092"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442329"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-35"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-type">DeferP</span></a></span><span> </span><span id="local-6989586621679442328"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442328"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-var">DeferP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442092"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-36"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-type">GateP</span></a></span><span> </span><span id="local-6989586621679442091"><span class="annot"><span class="annottext">l :: ExpP
-</span><a href="#local-6989586621679442091"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679442090"><span class="annot"><span class="annottext">r :: ExpP
-</span><a href="#local-6989586621679442090"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442328"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-36"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-type">GateP</span></a></span><span> </span><span id="local-6989586621679442327"><span class="annot"><span class="annottext">l :: ExpP
+</span><a href="#local-6989586621679442327"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679442326"><span class="annot"><span class="annottext">r :: ExpP
+</span><a href="#local-6989586621679442326"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-var">GateP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f (ExpP -&gt; ExpP)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442091"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">f (ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442327"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">f (ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442090"><span class="hs-identifier hs-var">r</span></a></span><span>
-</span><span id="line-37"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-type">LeftP</span></a></span><span> </span><span id="local-6989586621679442089"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442089"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442326"><span class="hs-identifier hs-var">r</span></a></span><span>
+</span><span id="line-37"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-type">LeftP</span></a></span><span> </span><span id="local-6989586621679442325"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442325"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-var">LeftP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442089"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-38"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-type">RightP</span></a></span><span> </span><span id="local-6989586621679442088"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442088"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442325"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-38"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-type">RightP</span></a></span><span> </span><span id="local-6989586621679442324"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442324"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-var">RightP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
-</span><a href="#local-6989586621679442098"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442088"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-39"></span><span>    </span><span id="local-6989586621679442087"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442087"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
+</span><a href="#local-6989586621679442334"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442324"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-39"></span><span>    </span><span id="local-6989586621679442323"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442323"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442087"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679442323"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-40"></span><span>
 </span><span id="line-41"></span><span class="hs-keyword">data</span><span> </span><span id="EvalError"><span class="annot"><a href="Telomare.Eval.html#EvalError"><span class="hs-identifier hs-var">EvalError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="RTE"><span class="annot"><a href="Telomare.Eval.html#RTE"><span class="hs-identifier hs-var">RTE</span></a></span></span><span> </span><span class="annot"><a href="Telomare.html#RunTimeError"><span class="hs-identifier hs-type">RunTimeError</span></a></span><span>
 </span><span id="line-42"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="TCE"><span class="annot"><a href="Telomare.Eval.html#TCE"><span class="hs-identifier hs-var">TCE</span></a></span></span><span> </span><span class="annot"><a href="Telomare.TypeChecker.html#TypeCheckError"><span class="hs-identifier hs-type">TypeCheckError</span></a></span><span>
 </span><span id="line-43"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="StaticCheckError"><span class="annot"><a href="Telomare.Eval.html#StaticCheckError"><span class="hs-identifier hs-var">StaticCheckError</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-44"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="CompileConversionError"><span class="annot"><a href="Telomare.Eval.html#CompileConversionError"><span class="hs-identifier hs-var">CompileConversionError</span></a></span></span><span>
-</span><span id="line-45"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442078"><span id="local-6989586621679442080"><span class="annot"><span class="annottext">EvalError -&gt; EvalError -&gt; Bool
+</span><span id="line-45"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442314"><span id="local-6989586621679442316"><span class="annot"><span class="annottext">EvalError -&gt; EvalError -&gt; Bool
 (EvalError -&gt; EvalError -&gt; Bool)
 -&gt; (EvalError -&gt; EvalError -&gt; Bool) -&gt; Eq EvalError
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -166,7 +166,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: EvalError -&gt; EvalError -&gt; Bool
 == :: EvalError -&gt; EvalError -&gt; Bool
 $c== :: EvalError -&gt; EvalError -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442063"><span id="local-6989586621679442065"><span id="local-6989586621679442067"><span id="local-6989586621679442069"><span id="local-6989586621679442071"><span id="local-6989586621679442073"><span id="local-6989586621679442075"><span class="annot"><span class="annottext">Eq EvalError
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442299"><span id="local-6989586621679442301"><span id="local-6989586621679442303"><span id="local-6989586621679442305"><span id="local-6989586621679442307"><span id="local-6989586621679442309"><span id="local-6989586621679442311"><span class="annot"><span class="annottext">Eq EvalError
 Eq EvalError =&gt;
 (EvalError -&gt; EvalError -&gt; Ordering)
 -&gt; (EvalError -&gt; EvalError -&gt; Bool)
@@ -204,7 +204,7 @@ $c&lt; :: EvalError -&gt; EvalError -&gt; Bool
 compare :: EvalError -&gt; EvalError -&gt; Ordering
 $ccompare :: EvalError -&gt; EvalError -&gt; Ordering
 $cp1Ord :: Eq EvalError
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442057"><span id="local-6989586621679442059"><span id="local-6989586621679442061"><span class="annot"><span class="annottext">Int -&gt; EvalError -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442293"><span id="local-6989586621679442295"><span id="local-6989586621679442297"><span class="annot"><span class="annottext">Int -&gt; EvalError -&gt; ShowS
 [EvalError] -&gt; ShowS
 EvalError -&gt; String
 (Int -&gt; EvalError -&gt; ShowS)
@@ -228,167 +228,167 @@ $cshowsPrec :: Int -&gt; EvalError -&gt; ShowS
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var hs-var">annotateEnv</span></a></span></span><span> </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP
 </span><a href="Telomare.Eval.html#ZeroP"><span class="hs-identifier hs-var">ZeroP</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-51"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679442051"><span class="annot"><span class="annottext">a :: IExpr
-</span><a href="#local-6989586621679442051"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442050"><span class="annot"><span class="annottext">b :: IExpr
-</span><a href="#local-6989586621679442050"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-52"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442049"><span class="annot"><span class="annottext">at :: Bool
-</span><a href="#local-6989586621679442049"><span class="hs-identifier hs-var">at</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442048"><span class="annot"><span class="annottext">na :: ExpP
-</span><a href="#local-6989586621679442048"><span class="hs-identifier hs-var">na</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
+</span><span id="line-51"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679442287"><span class="annot"><span class="annottext">a :: IExpr
+</span><a href="#local-6989586621679442287"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442286"><span class="annot"><span class="annottext">b :: IExpr
+</span><a href="#local-6989586621679442286"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-52"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442285"><span class="annot"><span class="annottext">at :: Bool
+</span><a href="#local-6989586621679442285"><span class="hs-identifier hs-var">at</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442284"><span class="annot"><span class="annottext">na :: ExpP
+</span><a href="#local-6989586621679442284"><span class="hs-identifier hs-var">na</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442051"><span class="hs-identifier hs-var">a</span></a></span><span>
-</span><span id="line-53"></span><span>      </span><span class="hs-special">(</span><span id="local-6989586621679442047"><span class="annot"><span class="annottext">bt :: Bool
-</span><a href="#local-6989586621679442047"><span class="hs-identifier hs-var">bt</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442046"><span class="annot"><span class="annottext">nb :: ExpP
-</span><a href="#local-6989586621679442046"><span class="hs-identifier hs-var">nb</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
+</span><a href="#local-6989586621679442287"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><span id="line-53"></span><span>      </span><span class="hs-special">(</span><span id="local-6989586621679442283"><span class="annot"><span class="annottext">bt :: Bool
+</span><a href="#local-6989586621679442283"><span class="hs-identifier hs-var">bt</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442282"><span class="annot"><span class="annottext">nb :: ExpP
+</span><a href="#local-6989586621679442282"><span class="hs-identifier hs-var">nb</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442050"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><a href="#local-6989586621679442286"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-54"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679442049"><span class="hs-identifier hs-var">at</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
+</span><a href="#local-6989586621679442285"><span class="hs-identifier hs-var">at</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">&amp;&amp;</span></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679442047"><span class="hs-identifier hs-var">bt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442283"><span class="hs-identifier hs-var">bt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442048"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442046"><span class="hs-identifier hs-var">nb</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679442284"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442282"><span class="hs-identifier hs-var">nb</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-55"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><a href="Telomare.html#Env"><span class="hs-identifier hs-type">Env</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP
 </span><a href="Telomare.Eval.html#VarP"><span class="hs-identifier hs-var">VarP</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-56"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-type">SetEnv</span></a></span><span> </span><span id="local-6989586621679442042"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679442042"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442041"><span class="annot"><span class="annottext">xt :: Bool
-</span><a href="#local-6989586621679442041"><span class="hs-identifier hs-var">xt</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442040"><span class="annot"><span class="annottext">nx :: ExpP
-</span><a href="#local-6989586621679442040"><span class="hs-identifier hs-var">nx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
+</span><span id="line-56"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-type">SetEnv</span></a></span><span> </span><span id="local-6989586621679442278"><span class="annot"><span class="annottext">x :: IExpr
+</span><a href="#local-6989586621679442278"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442277"><span class="annot"><span class="annottext">xt :: Bool
+</span><a href="#local-6989586621679442277"><span class="hs-identifier hs-var">xt</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442276"><span class="annot"><span class="annottext">nx :: ExpP
+</span><a href="#local-6989586621679442276"><span class="hs-identifier hs-var">nx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442042"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679442041"><span class="hs-identifier hs-var">xt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; Bool -&gt; ExpP
+</span><a href="#local-6989586621679442278"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679442277"><span class="hs-identifier hs-var">xt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; Bool -&gt; ExpP
 </span><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-var">SetEnvP</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442040"><span class="hs-identifier hs-var">nx</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679442041"><span class="hs-identifier hs-var">xt</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-57"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span> </span><span id="local-6989586621679442038"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679442038"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span class="hs-identifier">_</span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442037"><span class="annot"><span class="annottext">nx :: ExpP
-</span><a href="#local-6989586621679442037"><span class="hs-identifier hs-var">nx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
+</span><a href="#local-6989586621679442276"><span class="hs-identifier hs-var">nx</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679442277"><span class="hs-identifier hs-var">xt</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-57"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span> </span><span id="local-6989586621679442274"><span class="annot"><span class="annottext">x :: IExpr
+</span><a href="#local-6989586621679442274"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span class="hs-identifier">_</span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442273"><span class="annot"><span class="annottext">nx :: ExpP
+</span><a href="#local-6989586621679442273"><span class="hs-identifier hs-var">nx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442038"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679442274"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-var">DeferP</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442037"><span class="hs-identifier hs-var">nx</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-58"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Gate"><span class="hs-identifier hs-type">Gate</span></a></span><span> </span><span id="local-6989586621679442035"><span class="annot"><span class="annottext">a :: IExpr
-</span><a href="#local-6989586621679442035"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442034"><span class="annot"><span class="annottext">b :: IExpr
-</span><a href="#local-6989586621679442034"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-59"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442033"><span class="annot"><span class="annottext">at :: Bool
-</span><a href="#local-6989586621679442033"><span class="hs-identifier hs-var">at</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442032"><span class="annot"><span class="annottext">na :: ExpP
-</span><a href="#local-6989586621679442032"><span class="hs-identifier hs-var">na</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
+</span><a href="#local-6989586621679442273"><span class="hs-identifier hs-var">nx</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-58"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Gate"><span class="hs-identifier hs-type">Gate</span></a></span><span> </span><span id="local-6989586621679442271"><span class="annot"><span class="annottext">a :: IExpr
+</span><a href="#local-6989586621679442271"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442270"><span class="annot"><span class="annottext">b :: IExpr
+</span><a href="#local-6989586621679442270"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-59"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679442269"><span class="annot"><span class="annottext">at :: Bool
+</span><a href="#local-6989586621679442269"><span class="hs-identifier hs-var">at</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442268"><span class="annot"><span class="annottext">na :: ExpP
+</span><a href="#local-6989586621679442268"><span class="hs-identifier hs-var">na</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442035"><span class="hs-identifier hs-var">a</span></a></span><span>
-</span><span id="line-60"></span><span>      </span><span class="hs-special">(</span><span id="local-6989586621679442031"><span class="annot"><span class="annottext">bt :: Bool
-</span><a href="#local-6989586621679442031"><span class="hs-identifier hs-var">bt</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442030"><span class="annot"><span class="annottext">nb :: ExpP
-</span><a href="#local-6989586621679442030"><span class="hs-identifier hs-var">nb</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
+</span><a href="#local-6989586621679442271"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><span id="line-60"></span><span>      </span><span class="hs-special">(</span><span id="local-6989586621679442267"><span class="annot"><span class="annottext">bt :: Bool
+</span><a href="#local-6989586621679442267"><span class="hs-identifier hs-var">bt</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442266"><span class="annot"><span class="annottext">nb :: ExpP
+</span><a href="#local-6989586621679442266"><span class="hs-identifier hs-var">nb</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442034"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><a href="#local-6989586621679442270"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-61"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679442033"><span class="hs-identifier hs-var">at</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
+</span><a href="#local-6989586621679442269"><span class="hs-identifier hs-var">at</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">&amp;&amp;</span></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679442031"><span class="hs-identifier hs-var">bt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442267"><span class="hs-identifier hs-var">bt</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-var">GateP</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442032"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442030"><span class="hs-identifier hs-var">nb</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-62"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span id="local-6989586621679442028"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679442028"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442268"><span class="hs-identifier hs-var">na</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442266"><span class="hs-identifier hs-var">nb</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-62"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span id="local-6989586621679442264"><span class="annot"><span class="annottext">x :: IExpr
+</span><a href="#local-6989586621679442264"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-var">LeftP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; (Bool, ExpP) -&gt; (Bool, ExpP)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442028"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-63"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span> </span><span id="local-6989586621679442026"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679442026"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442264"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-63"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span> </span><span id="local-6989586621679442262"><span class="annot"><span class="annottext">x :: IExpr
+</span><a href="#local-6989586621679442262"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-var">RightP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; (Bool, ExpP) -&gt; (Bool, ExpP)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679442026"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679442262"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-64"></span><span class="annot"><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span> </span><span class="annot"><a href="Telomare.html#Trace"><span class="hs-identifier hs-type">Trace</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpP
 </span><a href="Telomare.Eval.html#TraceP"><span class="hs-identifier hs-var">TraceP</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-65"></span><span>
-</span><span id="line-66"></span><span id="local-6989586621679442187"><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-type">fromFullEnv</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Applicative</span></span><span> </span><span class="annot"><a href="#local-6989586621679442187"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679442187"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679442187"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span></span><span>
+</span><span id="line-66"></span><span id="local-6989586621679442423"><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-type">fromFullEnv</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Applicative</span></span><span> </span><span class="annot"><a href="#local-6989586621679442423"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679442423"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679442423"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span></span><span>
 </span><span id="line-67"></span><span id="fromFullEnv"><span class="annot"><span class="annottext">fromFullEnv :: (ExpP -&gt; a IExpr) -&gt; ExpP -&gt; a IExpr
 </span><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var hs-var">fromFullEnv</span></a></span></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="annot"><a href="Telomare.Eval.html#ZeroP"><span class="hs-identifier hs-type">ZeroP</span></a></span><span>         </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>
-</span><span id="line-68"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442023"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442023"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-type">PairP</span></a></span><span> </span><span id="local-6989586621679442022"><span class="annot"><span class="annottext">a :: ExpP
-</span><a href="#local-6989586621679442022"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442021"><span class="annot"><span class="annottext">b :: ExpP
-</span><a href="#local-6989586621679442021"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
+</span><span id="line-68"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442259"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
+</span><a href="#local-6989586621679442259"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-type">PairP</span></a></span><span> </span><span id="local-6989586621679442258"><span class="annot"><span class="annottext">a :: ExpP
+</span><a href="#local-6989586621679442258"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442257"><span class="annot"><span class="annottext">b :: ExpP
+</span><a href="#local-6989586621679442257"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Pair"><span class="hs-identifier hs-var">Pair</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a (IExpr -&gt; IExpr)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442023"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442022"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">a (IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
+</span><a href="#local-6989586621679442259"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442258"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">a (IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442023"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442021"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><a href="#local-6989586621679442259"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442257"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-69"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="annot"><a href="Telomare.Eval.html#VarP"><span class="hs-identifier hs-type">VarP</span></a></span><span>          </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span>
-</span><span id="line-70"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442020"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442020"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-type">SetEnvP</span></a></span><span> </span><span id="local-6989586621679442019"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442019"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-identifier">_</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><span id="line-70"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442256"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
+</span><a href="#local-6989586621679442256"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-type">SetEnvP</span></a></span><span> </span><span id="local-6989586621679442255"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442255"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-identifier">_</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#SetEnv"><span class="hs-identifier hs-var">SetEnv</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442020"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442019"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-71"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442018"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442018"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-type">DeferP</span></a></span><span> </span><span id="local-6989586621679442017"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442017"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679442256"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442255"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-71"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442254"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
+</span><a href="#local-6989586621679442254"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-type">DeferP</span></a></span><span> </span><span id="local-6989586621679442253"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442253"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#Defer"><span class="hs-identifier hs-var">Defer</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442018"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442017"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-72"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442016"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442016"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-type">GateP</span></a></span><span> </span><span id="local-6989586621679442015"><span class="annot"><span class="annottext">a :: ExpP
-</span><a href="#local-6989586621679442015"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442014"><span class="annot"><span class="annottext">b :: ExpP
-</span><a href="#local-6989586621679442014"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
+</span><a href="#local-6989586621679442254"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442253"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-72"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442252"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
+</span><a href="#local-6989586621679442252"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-type">GateP</span></a></span><span> </span><span id="local-6989586621679442251"><span class="annot"><span class="annottext">a :: ExpP
+</span><a href="#local-6989586621679442251"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442250"><span class="annot"><span class="annottext">b :: ExpP
+</span><a href="#local-6989586621679442250"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Gate"><span class="hs-identifier hs-var">Gate</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a (IExpr -&gt; IExpr)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442016"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442015"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">a (IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
+</span><a href="#local-6989586621679442252"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442251"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">a (IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442016"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442014"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-73"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442013"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442013"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-type">LeftP</span></a></span><span> </span><span id="local-6989586621679442012"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442012"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679442252"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442250"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-73"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442249"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
+</span><a href="#local-6989586621679442249"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-type">LeftP</span></a></span><span> </span><span id="local-6989586621679442248"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442248"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PLeft"><span class="hs-identifier hs-var">PLeft</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442013"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442012"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-74"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442011"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442011"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-type">RightP</span></a></span><span> </span><span id="local-6989586621679442010"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442010"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679442249"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442248"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-74"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span id="local-6989586621679442247"><span class="annot"><span class="annottext">f :: ExpP -&gt; a IExpr
+</span><a href="#local-6989586621679442247"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-type">RightP</span></a></span><span> </span><span id="local-6989586621679442246"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442246"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PRight"><span class="hs-identifier hs-var">PRight</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; a IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; a IExpr
-</span><a href="#local-6989586621679442011"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679442010"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679442247"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
+</span><a href="#local-6989586621679442246"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-75"></span><span class="annot"><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="annot"><a href="Telomare.Eval.html#TraceP"><span class="hs-identifier hs-type">TraceP</span></a></span><span>        </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; a IExpr
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Trace"><span class="hs-identifier hs-var">Trace</span></a></span><span>
 </span><span id="line-76"></span><span>
 </span><span id="line-77"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Telomare.html#TelomareLike"><span class="hs-identifier hs-type">TelomareLike</span></a></span><span> </span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-78"></span><span>  </span><span id="local-6989586621679442006"><span class="annot"><span class="annottext">fromTelomare :: IExpr -&gt; ExpP
+</span><span id="line-78"></span><span>  </span><span id="local-6989586621679442242"><span class="annot"><span class="annottext">fromTelomare :: IExpr -&gt; ExpP
 </span><a href="Telomare.html#fromTelomare"><span class="hs-identifier hs-var hs-var hs-var hs-var">fromTelomare</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Bool, ExpP) -&gt; ExpP
 forall a b. (a, b) -&gt; b
 </span><span class="hs-identifier hs-var">snd</span></span><span> </span><span class="annot"><span class="annottext">((Bool, ExpP) -&gt; ExpP) -&gt; (IExpr -&gt; (Bool, ExpP)) -&gt; IExpr -&gt; ExpP
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; (Bool, ExpP)
 </span><a href="Telomare.Eval.html#annotateEnv"><span class="hs-identifier hs-var">annotateEnv</span></a></span><span>
-</span><span id="line-79"></span><span>  </span><span id="local-6989586621679442003"><span class="annot"><span class="annottext">toTelomare :: ExpP -&gt; Maybe IExpr
+</span><span id="line-79"></span><span>  </span><span id="local-6989586621679442239"><span class="annot"><span class="annottext">toTelomare :: ExpP -&gt; Maybe IExpr
 </span><a href="Telomare.html#toTelomare"><span class="hs-identifier hs-var hs-var hs-var hs-var">toTelomare</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((ExpP -&gt; Maybe IExpr) -&gt; ExpP -&gt; Maybe IExpr)
 -&gt; ExpP -&gt; Maybe IExpr
 forall a. (a -&gt; a) -&gt; a
@@ -400,8 +400,8 @@ Applicative a =&gt;
 </span><span id="line-80"></span><span>
 </span><span id="line-81"></span><span class="annot"><a href="Telomare.Eval.html#partiallyEvaluate"><span class="hs-identifier hs-type">partiallyEvaluate</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.html#ExpP"><span class="hs-identifier hs-type">ExpP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.html#RunTimeError"><span class="hs-identifier hs-type">RunTimeError</span></a></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span>
 </span><span id="line-82"></span><span id="partiallyEvaluate"><span class="annot"><span class="annottext">partiallyEvaluate :: ExpP -&gt; Either RunTimeError IExpr
-</span><a href="Telomare.Eval.html#partiallyEvaluate"><span class="hs-identifier hs-var hs-var">partiallyEvaluate</span></a></span></span><span> </span><span id="local-6989586621679441999"><span class="annot"><span class="annottext">se :: ExpP
-</span><a href="#local-6989586621679441999"><span class="hs-identifier hs-var">se</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-type">SetEnvP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="annot"><span class="hs-identifier hs-type">True</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="Telomare.Eval.html#partiallyEvaluate"><span class="hs-identifier hs-var hs-var">partiallyEvaluate</span></a></span></span><span> </span><span id="local-6989586621679442235"><span class="annot"><span class="annottext">se :: ExpP
+</span><a href="#local-6989586621679442235"><span class="hs-identifier hs-var">se</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#SetEnvP"><span class="hs-identifier hs-type">SetEnvP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="annot"><span class="hs-identifier hs-type">True</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#Defer"><span class="hs-identifier hs-var">Defer</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr)
 -&gt; Either RunTimeError IExpr -&gt; Either RunTimeError IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
@@ -415,7 +415,7 @@ forall (a :: * -&gt; *).
 Applicative a =&gt;
 (ExpP -&gt; a IExpr) -&gt; ExpP -&gt; a IExpr
 </span><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679441999"><span class="hs-identifier hs-var">se</span></a></span><span> </span><span class="annot"><span class="annottext">Either RunTimeError IExpr
+</span><a href="#local-6989586621679442235"><span class="hs-identifier hs-var">se</span></a></span><span> </span><span class="annot"><span class="annottext">Either RunTimeError IExpr
 -&gt; (IExpr -&gt; Either RunTimeError IExpr)
 -&gt; Either RunTimeError IExpr
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
@@ -425,15 +425,15 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.Optimizer.html#optimize"><span class="hs-identifier hs-var">optimize</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-83"></span><span class="annot"><a href="Telomare.Eval.html#partiallyEvaluate"><span class="hs-identifier hs-var">partiallyEvaluate</span></a></span><span> </span><span id="local-6989586621679441996"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679441996"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; Either RunTimeError IExpr)
+</span><span id="line-83"></span><span class="annot"><a href="Telomare.Eval.html#partiallyEvaluate"><span class="hs-identifier hs-var">partiallyEvaluate</span></a></span><span> </span><span id="local-6989586621679442232"><span class="annot"><span class="annottext">x :: ExpP
+</span><a href="#local-6989586621679442232"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; Either RunTimeError IExpr)
 -&gt; ExpP -&gt; Either RunTimeError IExpr
 forall (a :: * -&gt; *).
 Applicative a =&gt;
 (ExpP -&gt; a IExpr) -&gt; ExpP -&gt; a IExpr
 </span><a href="Telomare.Eval.html#fromFullEnv"><span class="hs-identifier hs-var">fromFullEnv</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; Either RunTimeError IExpr
 </span><a href="Telomare.Eval.html#partiallyEvaluate"><span class="hs-identifier hs-var">partiallyEvaluate</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
-</span><a href="#local-6989586621679441996"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679442232"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-84"></span><span>
 </span><span id="line-85"></span><span class="annot"><a href="Telomare.Eval.html#eval%27"><span class="hs-identifier hs-type">eval'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span>
 </span><span id="line-86"></span><span id="eval%27"><span class="annot"><span class="annottext">eval' :: IExpr -&gt; Either String IExpr
@@ -459,31 +459,31 @@ findChurchSize term =
 </span><span id="line-101"></span><span class="hs-comment">-- we should probably redo the types so that this is also a type conversion</span><span>
 </span><span id="line-102"></span><span class="annot"><a href="Telomare.Eval.html#removeChecks"><span class="hs-identifier hs-type">removeChecks</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#Term4"><span class="hs-identifier hs-type">Term4</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.html#Term4"><span class="hs-identifier hs-type">Term4</span></a></span><span>
 </span><span id="line-103"></span><span id="removeChecks"><span class="annot"><span class="annottext">removeChecks :: Term4 -&gt; Term4
-</span><a href="Telomare.Eval.html#removeChecks"><span class="hs-identifier hs-var hs-var">removeChecks</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Term4"><span class="hs-identifier hs-type">Term4</span></a></span><span> </span><span id="local-6989586621679441990"><span class="annot"><span class="annottext">m :: Map FragIndex (FragExpr Void)
-</span><a href="#local-6989586621679441990"><span class="hs-identifier hs-var">m</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-104"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441989"><span class="annot"><span class="annottext">f :: FragExpr a -&gt; FragExpr a
-</span><a href="#local-6989586621679441989"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="Telomare.Eval.html#removeChecks"><span class="hs-identifier hs-var hs-var">removeChecks</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Term4"><span class="hs-identifier hs-type">Term4</span></a></span><span> </span><span id="local-6989586621679442226"><span class="annot"><span class="annottext">m :: Map FragIndex (FragExpr Void)
+</span><a href="#local-6989586621679442226"><span class="hs-identifier hs-var">m</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-104"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679442225"><span class="annot"><span class="annottext">f :: FragExpr a -&gt; FragExpr a
+</span><a href="#local-6989586621679442225"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-105"></span><span>        </span><span class="annot"><a href="Telomare.html#AbortFrag"><span class="hs-identifier hs-type">AbortFrag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragIndex -&gt; FragExpr a
 forall a. FragIndex -&gt; FragExpr a
 </span><a href="Telomare.html#DeferFrag"><span class="hs-identifier hs-var">DeferFrag</span></a></span><span> </span><span class="annot"><span class="annottext">FragIndex
-</span><a href="#local-6989586621679441986"><span class="hs-identifier hs-var">ind</span></a></span><span>
-</span><span id="line-106"></span><span>        </span><span id="local-6989586621679441985"><span class="annot"><span class="annottext">x :: FragExpr a
-</span><a href="#local-6989586621679441985"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
-</span><a href="#local-6989586621679441985"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-107"></span><span>      </span><span class="hs-special">(</span><span id="local-6989586621679441986"><span class="annot"><span class="annottext">ind :: FragIndex
-</span><a href="#local-6989586621679441986"><span class="hs-identifier hs-var">ind</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679441984"><span class="annot"><span class="annottext">newM :: Map FragIndex (FragExpr Void)
-</span><a href="#local-6989586621679441984"><span class="hs-identifier hs-var">newM</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">State (Map FragIndex (FragExpr Void)) FragIndex
+</span><a href="#local-6989586621679442222"><span class="hs-identifier hs-var">ind</span></a></span><span>
+</span><span id="line-106"></span><span>        </span><span id="local-6989586621679442221"><span class="annot"><span class="annottext">x :: FragExpr a
+</span><a href="#local-6989586621679442221"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
+</span><a href="#local-6989586621679442221"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-107"></span><span>      </span><span class="hs-special">(</span><span id="local-6989586621679442222"><span class="annot"><span class="annottext">ind :: FragIndex
+</span><a href="#local-6989586621679442222"><span class="hs-identifier hs-var">ind</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442220"><span class="annot"><span class="annottext">newM :: Map FragIndex (FragExpr Void)
+</span><a href="#local-6989586621679442220"><span class="hs-identifier hs-var">newM</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">State (Map FragIndex (FragExpr Void)) FragIndex
 -&gt; Map FragIndex (FragExpr Void)
 -&gt; (FragIndex, Map FragIndex (FragExpr Void))
 forall s a. State s a -&gt; s -&gt; (a, s)
 </span><span class="hs-identifier hs-var">State.runState</span></span><span> </span><span class="annot"><span class="annottext">State (Map FragIndex (FragExpr Void)) FragIndex
 forall a. StateT (Map FragIndex (FragExpr a)) Identity FragIndex
-</span><a href="#local-6989586621679441982"><span class="hs-identifier hs-var">builder</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void)
-</span><a href="#local-6989586621679441990"><span class="hs-identifier hs-var">m</span></a></span><span>
-</span><span id="line-108"></span><span>      </span><span id="local-6989586621679441982"><span class="annot"><span class="annottext">builder :: StateT (Map FragIndex (FragExpr a)) Identity FragIndex
-</span><a href="#local-6989586621679441982"><span class="hs-identifier hs-var hs-var">builder</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-109"></span><span>        </span><span id="local-6989586621679441981"><span class="annot"><span class="annottext">FragIndex
-</span><a href="#local-6989586621679441981"><span class="hs-identifier hs-var">envDefer</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FragExpr a
+</span><a href="#local-6989586621679442218"><span class="hs-identifier hs-var">builder</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void)
+</span><a href="#local-6989586621679442226"><span class="hs-identifier hs-var">m</span></a></span><span>
+</span><span id="line-108"></span><span>      </span><span id="local-6989586621679442218"><span class="annot"><span class="annottext">builder :: StateT (Map FragIndex (FragExpr a)) Identity FragIndex
+</span><a href="#local-6989586621679442218"><span class="hs-identifier hs-var hs-var">builder</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-109"></span><span>        </span><span id="local-6989586621679442217"><span class="annot"><span class="annottext">FragIndex
+</span><a href="#local-6989586621679442217"><span class="hs-identifier hs-var">envDefer</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">FragExpr a
 -&gt; StateT (Map FragIndex (FragExpr a)) Identity FragIndex
 forall e a. (Ord e, Enum e) =&gt; a -&gt; State (Map e a) e
 </span><a href="Telomare.html#insertAndGetKey"><span class="hs-identifier hs-var">insertAndGetKey</span></a></span><span> </span><span class="annot"><span class="annottext">FragExpr a
@@ -500,7 +500,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">FragIndex -&gt; FragExpr a
 forall a. FragIndex -&gt; FragExpr a
 </span><a href="Telomare.html#DeferFrag"><span class="hs-identifier hs-var">DeferFrag</span></a></span><span> </span><span class="annot"><span class="annottext">FragIndex
-</span><a href="#local-6989586621679441981"><span class="hs-identifier hs-var">envDefer</span></a></span><span>
+</span><a href="#local-6989586621679442217"><span class="hs-identifier hs-var">envDefer</span></a></span><span>
 </span><span id="line-111"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void) -&gt; Term4
 </span><a href="Telomare.html#Term4"><span class="hs-identifier hs-var">Term4</span></a></span><span> </span><span class="annot"><span class="annottext">(Map FragIndex (FragExpr Void) -&gt; Term4)
 -&gt; Map FragIndex (FragExpr Void) -&gt; Term4
@@ -512,13 +512,13 @@ forall a b k. (a -&gt; b) -&gt; Map k a -&gt; Map k b
 forall a. Plated a =&gt; (a -&gt; a) -&gt; a -&gt; a
 </span><span class="hs-identifier hs-var">transform</span></span><span> </span><span class="annot"><span class="annottext">FragExpr Void -&gt; FragExpr Void
 forall a. FragExpr a -&gt; FragExpr a
-</span><a href="#local-6989586621679441989"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void)
-</span><a href="#local-6989586621679441984"><span class="hs-identifier hs-var">newM</span></a></span><span>
+</span><a href="#local-6989586621679442225"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void)
+</span><a href="#local-6989586621679442220"><span class="hs-identifier hs-var">newM</span></a></span><span>
 </span><span id="line-112"></span><span>
 </span><span id="line-113"></span><span class="annot"><a href="Telomare.Eval.html#runStaticChecks"><span class="hs-identifier hs-type">runStaticChecks</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#Term4"><span class="hs-identifier hs-type">Term4</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-114"></span><span id="runStaticChecks"><span class="annot"><span class="annottext">runStaticChecks :: Term4 -&gt; Maybe String
-</span><a href="Telomare.Eval.html#runStaticChecks"><span class="hs-identifier hs-var hs-var">runStaticChecks</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Term4"><span class="hs-identifier hs-type">Term4</span></a></span><span> </span><span id="local-6989586621679441975"><span class="annot"><span class="annottext">termMap :: Map FragIndex (FragExpr Void)
-</span><a href="#local-6989586621679441975"><span class="hs-identifier hs-var">termMap</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">(FragIndex -&gt; FragExpr Void)
+</span><a href="Telomare.Eval.html#runStaticChecks"><span class="hs-identifier hs-var hs-var">runStaticChecks</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Term4"><span class="hs-identifier hs-type">Term4</span></a></span><span> </span><span id="local-6989586621679442211"><span class="annot"><span class="annottext">termMap :: Map FragIndex (FragExpr Void)
+</span><a href="#local-6989586621679442211"><span class="hs-identifier hs-var">termMap</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">(FragIndex -&gt; FragExpr Void)
 -&gt; ((PossibleExpr Void Void
      -&gt; FragExpr Void -&gt; Either String (PossibleExpr Void Void))
     -&gt; PossibleExpr Void Void
@@ -540,7 +540,7 @@ forall a b (m :: * -&gt; *).
 -&gt; FragExpr b
 -&gt; m (PossibleExpr a b)
 </span><a href="Telomare.Possible.html#toPossible"><span class="hs-identifier hs-var">toPossible</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void)
-</span><a href="#local-6989586621679441975"><span class="hs-identifier hs-var">termMap</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void) -&gt; FragIndex -&gt; FragExpr Void
+</span><a href="#local-6989586621679442211"><span class="hs-identifier hs-var">termMap</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void) -&gt; FragIndex -&gt; FragExpr Void
 forall k a. Ord k =&gt; Map k a -&gt; k -&gt; a
 </span><span class="hs-operator hs-var">Map.!</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(PossibleExpr Void Void
  -&gt; FragExpr Void -&gt; Either String (PossibleExpr Void Void))
@@ -561,51 +561,51 @@ forall a b. PossibleExpr a b
 </span><a href="Telomare.Possible.html#AnyX"><span class="hs-identifier hs-var">AnyX</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void) -&gt; FragExpr Void
 forall a. Map FragIndex a -&gt; a
 </span><a href="Telomare.html#rootFrag"><span class="hs-identifier hs-var">rootFrag</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex (FragExpr Void)
-</span><a href="#local-6989586621679441975"><span class="hs-identifier hs-var">termMap</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#PossibleExpr"><span class="hs-identifier hs-type">PossibleExpr</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Void</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Void</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-115"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679441969"><span class="annot"><span class="annottext">s :: String
-</span><a href="#local-6989586621679441969"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Maybe String
+</span><a href="#local-6989586621679442211"><span class="hs-identifier hs-var">termMap</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#PossibleExpr"><span class="hs-identifier hs-type">PossibleExpr</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Void</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Void</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-115"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679442205"><span class="annot"><span class="annottext">s :: String
+</span><a href="#local-6989586621679442205"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Maybe String
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441969"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><a href="#local-6989586621679442205"><span class="hs-identifier hs-var">s</span></a></span><span>
 </span><span id="line-116"></span><span>  </span><span class="hs-identifier">_</span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe String
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-117"></span><span>
 </span><span id="line-118"></span><span class="annot"><a href="Telomare.Eval.html#compile"><span class="hs-identifier hs-type">compile</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.Eval.html#EvalError"><span class="hs-identifier hs-type">EvalError</span></a></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span>
 </span><span id="line-119"></span><span id="compile"><span class="annot"><span class="annottext">compile :: Term3 -&gt; Either EvalError IExpr
-</span><a href="Telomare.Eval.html#compile"><span class="hs-identifier hs-var hs-var">compile</span></a></span></span><span> </span><span id="local-6989586621679441967"><span class="annot"><span class="annottext">t :: Term3
-</span><a href="#local-6989586621679441967"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441966"><span class="annot"><span class="annottext">sized :: Term4
-</span><a href="#local-6989586621679441966"><span class="hs-identifier hs-var hs-var">sized</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term4
+</span><a href="Telomare.Eval.html#compile"><span class="hs-identifier hs-var hs-var">compile</span></a></span></span><span> </span><span id="local-6989586621679442203"><span class="annot"><span class="annottext">t :: Term3
+</span><a href="#local-6989586621679442203"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679442202"><span class="annot"><span class="annottext">sized :: Term4
+</span><a href="#local-6989586621679442202"><span class="hs-identifier hs-var hs-var">sized</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term4
 </span><a href="Telomare.Eval.html#findChurchSize"><span class="hs-identifier hs-var">findChurchSize</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679441967"><span class="hs-identifier hs-var">t</span></a></span><span>
+</span><a href="#local-6989586621679442203"><span class="hs-identifier hs-var">t</span></a></span><span>
 </span><span id="line-120"></span><span>            </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Term4 -&gt; Maybe String
 </span><a href="Telomare.Eval.html#runStaticChecks"><span class="hs-identifier hs-var">runStaticChecks</span></a></span><span> </span><span class="annot"><span class="annottext">Term4
-</span><a href="#local-6989586621679441966"><span class="hs-identifier hs-var">sized</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679442202"><span class="hs-identifier hs-var">sized</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-121"></span><span>                 </span><span class="annot"><span class="hs-identifier hs-type">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Term4 -&gt; Maybe IExpr
 forall a. TelomareLike a =&gt; a -&gt; Maybe IExpr
 </span><a href="Telomare.html#toTelomare"><span class="hs-identifier hs-var">toTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">(Term4 -&gt; Maybe IExpr) -&gt; Term4 -&gt; Maybe IExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term4 -&gt; Term4
 </span><a href="Telomare.Eval.html#removeChecks"><span class="hs-identifier hs-var">removeChecks</span></a></span><span> </span><span class="annot"><span class="annottext">Term4
-</span><a href="#local-6989586621679441966"><span class="hs-identifier hs-var">sized</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-122"></span><span>                   </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679441965"><span class="annot"><span class="annottext">i :: IExpr
-</span><a href="#local-6989586621679441965"><span class="hs-identifier hs-var">i</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Either EvalError IExpr
+</span><a href="#local-6989586621679442202"><span class="hs-identifier hs-var">sized</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-122"></span><span>                   </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679442201"><span class="annot"><span class="annottext">i :: IExpr
+</span><a href="#local-6989586621679442201"><span class="hs-identifier hs-var">i</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Either EvalError IExpr
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441965"><span class="hs-identifier hs-var">i</span></a></span><span>
+</span><a href="#local-6989586621679442201"><span class="hs-identifier hs-var">i</span></a></span><span>
 </span><span id="line-123"></span><span>                   </span><span class="annot"><span class="hs-identifier hs-type">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EvalError -&gt; Either EvalError IExpr
 forall a b. a -&gt; Either a b
 </span><span class="hs-identifier hs-var">Left</span></span><span> </span><span class="annot"><span class="annottext">EvalError
 </span><a href="Telomare.Eval.html#CompileConversionError"><span class="hs-identifier hs-var">CompileConversionError</span></a></span><span>
-</span><span id="line-124"></span><span>                 </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679441964"><span class="annot"><span class="annottext">s :: String
-</span><a href="#local-6989586621679441964"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EvalError -&gt; Either EvalError IExpr
+</span><span id="line-124"></span><span>                 </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679442200"><span class="annot"><span class="annottext">s :: String
+</span><a href="#local-6989586621679442200"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EvalError -&gt; Either EvalError IExpr
 forall a b. a -&gt; Either a b
 </span><span class="hs-identifier hs-var">Left</span></span><span> </span><span class="annot"><span class="annottext">(EvalError -&gt; Either EvalError IExpr)
 -&gt; EvalError -&gt; Either EvalError IExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; EvalError
 </span><a href="Telomare.Eval.html#StaticCheckError"><span class="hs-identifier hs-var">StaticCheckError</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441964"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><a href="#local-6989586621679442200"><span class="hs-identifier hs-var">s</span></a></span><span>
 </span><span id="line-125"></span><span class="hs-comment">{-
 findAllSizes :: Term2 -&gt; (Bool, Term3)
 findAllSizes = let doChild (True, x) = TTransformedGrammar $ findChurchSize x
@@ -631,12 +631,12 @@ findAllSizes = let doChild (True, x) = TTransformedGrammar $ findChurchSize x
 </span><span id="line-147"></span><span>
 </span><span id="line-148"></span><span class="annot"><a href="Telomare.Eval.html#evalLoop"><span class="hs-identifier hs-type">evalLoop</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-149"></span><span id="evalLoop"><span class="annot"><span class="annottext">evalLoop :: IExpr -&gt; IO ()
-</span><a href="Telomare.Eval.html#evalLoop"><span class="hs-identifier hs-var hs-var">evalLoop</span></a></span></span><span> </span><span id="local-6989586621679441962"><span class="annot"><span class="annottext">iexpr :: IExpr
-</span><a href="#local-6989586621679441962"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Either String IExpr
+</span><a href="Telomare.Eval.html#evalLoop"><span class="hs-identifier hs-var hs-var">evalLoop</span></a></span></span><span> </span><span id="local-6989586621679442198"><span class="annot"><span class="annottext">iexpr :: IExpr
+</span><a href="#local-6989586621679442198"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Either String IExpr
 </span><a href="Telomare.Eval.html#eval%27"><span class="hs-identifier hs-var">eval'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441962"><span class="hs-identifier hs-var">iexpr</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-150"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679441961"><span class="annot"><span class="annottext">err :: String
-</span><a href="#local-6989586621679441961"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ()
+</span><a href="#local-6989586621679442198"><span class="hs-identifier hs-var">iexpr</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-150"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679442197"><span class="annot"><span class="annottext">err :: String
+</span><a href="#local-6989586621679442197"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ()
 </span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO ()) -&gt; ([String] -&gt; String) -&gt; [String] -&gt; IO ()
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
@@ -646,26 +646,26 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-string">&quot;Failed compiling main, &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ShowS
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441961"><span class="hs-identifier hs-var">err</span></a></span><span class="hs-special">]</span><span>
-</span><span id="line-151"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679441957"><span class="annot"><span class="annottext">peExp :: IExpr
-</span><a href="#local-6989586621679441957"><span class="hs-identifier hs-var">peExp</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-152"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441956"><span class="annot"><span class="annottext">mainLoop :: IExpr -&gt; IO ()
-</span><a href="#local-6989586621679441956"><span class="hs-identifier hs-var hs-var">mainLoop</span></a></span></span><span> </span><span id="local-6989586621679441955"><span class="annot"><span class="annottext">s :: IExpr
-</span><a href="#local-6989586621679441955"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><a href="#local-6989586621679442197"><span class="hs-identifier hs-var">err</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-151"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679442193"><span class="annot"><span class="annottext">peExp :: IExpr
+</span><a href="#local-6989586621679442193"><span class="hs-identifier hs-var">peExp</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-152"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679442192"><span class="annot"><span class="annottext">mainLoop :: IExpr -&gt; IO ()
+</span><a href="#local-6989586621679442192"><span class="hs-identifier hs-var hs-var">mainLoop</span></a></span></span><span> </span><span id="local-6989586621679442191"><span class="annot"><span class="annottext">s :: IExpr
+</span><a href="#local-6989586621679442191"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-153"></span><span>          </span><span class="hs-comment">-- result &lt;- optimizedEval (app peExp s)</span><span>
-</span><span id="line-154"></span><span>          </span><span id="local-6989586621679441954"><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441954"><span class="hs-identifier hs-var">result</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IO IExpr
+</span><span id="line-154"></span><span>          </span><span id="local-6989586621679442190"><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442190"><span class="hs-identifier hs-var">result</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IO IExpr
 </span><a href="Telomare.RunTime.html#simpleEval"><span class="hs-identifier hs-var">simpleEval</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#app"><span class="hs-identifier hs-var">app</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441957"><span class="hs-identifier hs-var">peExp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441955"><span class="hs-identifier hs-var">s</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679442193"><span class="hs-identifier hs-var">peExp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442191"><span class="hs-identifier hs-var">s</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-155"></span><span>          </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441954"><span class="hs-identifier hs-var">result</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679442190"><span class="hs-identifier hs-var">result</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-156"></span><span>            </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ()
 </span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="hs-string">&quot;aborted&quot;</span></span><span>
-</span><span id="line-157"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679441951"><span class="annot"><span class="annottext">disp :: IExpr
-</span><a href="#local-6989586621679441951"><span class="hs-identifier hs-var">disp</span></a></span></span><span> </span><span id="local-6989586621679441950"><span class="annot"><span class="annottext">newState :: IExpr
-</span><a href="#local-6989586621679441950"><span class="hs-identifier hs-var">newState</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-157"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679442187"><span class="annot"><span class="annottext">disp :: IExpr
+</span><a href="#local-6989586621679442187"><span class="hs-identifier hs-var">disp</span></a></span></span><span> </span><span id="local-6989586621679442186"><span class="annot"><span class="annottext">newState :: IExpr
+</span><a href="#local-6989586621679442186"><span class="hs-identifier hs-var">newState</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-158"></span><span>              </span><span class="annot"><span class="annottext">String -&gt; IO ()
 </span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO ()) -&gt; (IExpr -&gt; String) -&gt; IExpr -&gt; IO ()
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
@@ -673,27 +673,27 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><a href="Telomare.html#g2s"><span class="hs-identifier hs-var">g2s</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IO ()) -&gt; IExpr -&gt; IO ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441951"><span class="hs-identifier hs-var">disp</span></a></span><span>
+</span><a href="#local-6989586621679442187"><span class="hs-identifier hs-var">disp</span></a></span><span>
 </span><span id="line-159"></span><span>              </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441950"><span class="hs-identifier hs-var">newState</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679442186"><span class="hs-identifier hs-var">newState</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-160"></span><span>                </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ()
 </span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="hs-string">&quot;done&quot;</span></span><span>
 </span><span id="line-161"></span><span>                </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-162"></span><span>                  </span><span id="local-6989586621679441948"><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441948"><span class="hs-identifier hs-var">inp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; IExpr
+</span><span id="line-162"></span><span>                  </span><span id="local-6989586621679442184"><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442184"><span class="hs-identifier hs-var">inp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; IExpr
 </span><a href="Telomare.html#s2g"><span class="hs-identifier hs-var">s2g</span></a></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IExpr) -&gt; IO String -&gt; IO IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">IO String
 </span><span class="hs-identifier hs-var">getLine</span></span><span>
 </span><span id="line-163"></span><span>                  </span><span class="annot"><span class="annottext">IExpr -&gt; IO ()
-</span><a href="#local-6989586621679441956"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IO ()) -&gt; IExpr -&gt; IO ()
+</span><a href="#local-6989586621679442192"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IO ()) -&gt; IExpr -&gt; IO ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Pair"><span class="hs-identifier hs-var">Pair</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441948"><span class="hs-identifier hs-var">inp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441950"><span class="hs-identifier hs-var">newState</span></a></span><span>
-</span><span id="line-164"></span><span>            </span><span id="local-6989586621679441945"><span class="annot"><span class="annottext">r :: IExpr
-</span><a href="#local-6989586621679441945"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ()
+</span><a href="#local-6989586621679442184"><span class="hs-identifier hs-var">inp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442186"><span class="hs-identifier hs-var">newState</span></a></span><span>
+</span><span id="line-164"></span><span>            </span><span id="local-6989586621679442181"><span class="annot"><span class="annottext">r :: IExpr
+</span><a href="#local-6989586621679442181"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO ()
 </span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO ()) -&gt; String -&gt; IO ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
@@ -701,20 +701,20 @@ forall (t :: * -&gt; *) a. Foldable t =&gt; t [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">concat</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-string">&quot;runtime error, dumped &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441945"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679442181"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-165"></span><span>    </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IO ()
-</span><a href="#local-6989586621679441956"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442192"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>
 </span><span id="line-166"></span><span>
 </span><span id="line-167"></span><span class="hs-comment">-- |Same as `evalLoop`, but keeping what was displayed.</span><span>
 </span><span id="line-168"></span><span class="annot"><a href="Telomare.Eval.html#evalLoop_"><span class="hs-identifier hs-type">evalLoop_</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-169"></span><span id="evalLoop_"><span class="annot"><span class="annottext">evalLoop_ :: IExpr -&gt; IO String
-</span><a href="Telomare.Eval.html#evalLoop_"><span class="hs-identifier hs-var hs-var">evalLoop_</span></a></span></span><span> </span><span id="local-6989586621679441943"><span class="annot"><span class="annottext">iexpr :: IExpr
-</span><a href="#local-6989586621679441943"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Either String IExpr
+</span><a href="Telomare.Eval.html#evalLoop_"><span class="hs-identifier hs-var hs-var">evalLoop_</span></a></span></span><span> </span><span id="local-6989586621679442179"><span class="annot"><span class="annottext">iexpr :: IExpr
+</span><a href="#local-6989586621679442179"><span class="hs-identifier hs-var">iexpr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Either String IExpr
 </span><a href="Telomare.Eval.html#eval%27"><span class="hs-identifier hs-var">eval'</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441943"><span class="hs-identifier hs-var">iexpr</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-170"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679441942"><span class="annot"><span class="annottext">err :: String
-</span><a href="#local-6989586621679441942"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
+</span><a href="#local-6989586621679442179"><span class="hs-identifier hs-var">iexpr</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-170"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679442178"><span class="annot"><span class="annottext">err :: String
+</span><a href="#local-6989586621679442178"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO String)
 -&gt; ([String] -&gt; String) -&gt; [String] -&gt; IO String
@@ -726,78 +726,78 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-string">&quot;Failed compiling main, &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ShowS
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441942"><span class="hs-identifier hs-var">err</span></a></span><span class="hs-special">]</span><span>
-</span><span id="line-171"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679441941"><span class="annot"><span class="annottext">peExp :: IExpr
-</span><a href="#local-6989586621679441941"><span class="hs-identifier hs-var">peExp</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-172"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441940"><span class="annot"><span class="annottext">mainLoop :: String -&gt; IExpr -&gt; IO String
-</span><a href="#local-6989586621679441940"><span class="hs-identifier hs-var hs-var">mainLoop</span></a></span></span><span> </span><span id="local-6989586621679441939"><span class="annot"><span class="annottext">prev :: String
-</span><a href="#local-6989586621679441939"><span class="hs-identifier hs-var">prev</span></a></span></span><span> </span><span id="local-6989586621679441938"><span class="annot"><span class="annottext">s :: IExpr
-</span><a href="#local-6989586621679441938"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><a href="#local-6989586621679442178"><span class="hs-identifier hs-var">err</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-171"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679442177"><span class="annot"><span class="annottext">peExp :: IExpr
+</span><a href="#local-6989586621679442177"><span class="hs-identifier hs-var">peExp</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-172"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679442176"><span class="annot"><span class="annottext">mainLoop :: String -&gt; IExpr -&gt; IO String
+</span><a href="#local-6989586621679442176"><span class="hs-identifier hs-var hs-var">mainLoop</span></a></span></span><span> </span><span id="local-6989586621679442175"><span class="annot"><span class="annottext">prev :: String
+</span><a href="#local-6989586621679442175"><span class="hs-identifier hs-var">prev</span></a></span></span><span> </span><span id="local-6989586621679442174"><span class="annot"><span class="annottext">s :: IExpr
+</span><a href="#local-6989586621679442174"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-173"></span><span>          </span><span class="hs-comment">-- result &lt;- optimizedEval (app peExp s)</span><span>
-</span><span id="line-174"></span><span>          </span><span id="local-6989586621679441937"><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441937"><span class="hs-identifier hs-var">result</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IO IExpr
+</span><span id="line-174"></span><span>          </span><span id="local-6989586621679442173"><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442173"><span class="hs-identifier hs-var">result</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IO IExpr
 </span><a href="Telomare.RunTime.html#simpleEval"><span class="hs-identifier hs-var">simpleEval</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#app"><span class="hs-identifier hs-var">app</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441941"><span class="hs-identifier hs-var">peExp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441938"><span class="hs-identifier hs-var">s</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679442177"><span class="hs-identifier hs-var">peExp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442174"><span class="hs-identifier hs-var">s</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-175"></span><span>          </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441937"><span class="hs-identifier hs-var">result</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679442173"><span class="hs-identifier hs-var">result</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-176"></span><span>            </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO String) -&gt; String -&gt; IO String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441939"><span class="hs-identifier hs-var">prev</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679442175"><span class="hs-identifier hs-var">prev</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="hs-string">&quot;aborted&quot;</span></span><span>
-</span><span id="line-177"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679441936"><span class="annot"><span class="annottext">disp :: IExpr
-</span><a href="#local-6989586621679441936"><span class="hs-identifier hs-var">disp</span></a></span></span><span> </span><span id="local-6989586621679441935"><span class="annot"><span class="annottext">newState :: IExpr
-</span><a href="#local-6989586621679441935"><span class="hs-identifier hs-var">newState</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-178"></span><span>              </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441934"><span class="annot"><span class="annottext">d :: String
-</span><a href="#local-6989586621679441934"><span class="hs-identifier hs-var hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; String
+</span><span id="line-177"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679442172"><span class="annot"><span class="annottext">disp :: IExpr
+</span><a href="#local-6989586621679442172"><span class="hs-identifier hs-var">disp</span></a></span></span><span> </span><span id="local-6989586621679442171"><span class="annot"><span class="annottext">newState :: IExpr
+</span><a href="#local-6989586621679442171"><span class="hs-identifier hs-var">newState</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-178"></span><span>              </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679442170"><span class="annot"><span class="annottext">d :: String
+</span><a href="#local-6989586621679442170"><span class="hs-identifier hs-var hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; String
 </span><a href="Telomare.html#g2s"><span class="hs-identifier hs-var">g2s</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; String) -&gt; IExpr -&gt; String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441936"><span class="hs-identifier hs-var">disp</span></a></span><span>
+</span><a href="#local-6989586621679442172"><span class="hs-identifier hs-var">disp</span></a></span><span>
 </span><span id="line-179"></span><span>              </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441935"><span class="hs-identifier hs-var">newState</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679442171"><span class="hs-identifier hs-var">newState</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-180"></span><span>                </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO String) -&gt; String -&gt; IO String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441939"><span class="hs-identifier hs-var">prev</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679442175"><span class="hs-identifier hs-var">prev</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441934"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679442170"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="hs-string">&quot;\ndone&quot;</span></span><span>
 </span><span id="line-181"></span><span>                </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-182"></span><span>                  </span><span id="local-6989586621679441933"><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441933"><span class="hs-identifier hs-var">inp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; IExpr
+</span><span id="line-182"></span><span>                  </span><span id="local-6989586621679442169"><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442169"><span class="hs-identifier hs-var">inp</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">String -&gt; IExpr
 </span><a href="Telomare.html#s2g"><span class="hs-identifier hs-var">s2g</span></a></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IExpr) -&gt; IO String -&gt; IO IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">IO String
 </span><span class="hs-identifier hs-var">getLine</span></span><span>
 </span><span id="line-183"></span><span>                  </span><span class="annot"><span class="annottext">String -&gt; IExpr -&gt; IO String
-</span><a href="#local-6989586621679441940"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441939"><span class="hs-identifier hs-var">prev</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679442176"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679442175"><span class="hs-identifier hs-var">prev</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679441934"><span class="hs-identifier hs-var">d</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IO String) -&gt; IExpr -&gt; IO String
+</span><a href="#local-6989586621679442170"><span class="hs-identifier hs-var">d</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IO String) -&gt; IExpr -&gt; IO String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr -&gt; IExpr
 </span><a href="Telomare.html#Pair"><span class="hs-identifier hs-var">Pair</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441933"><span class="hs-identifier hs-var">inp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441935"><span class="hs-identifier hs-var">newState</span></a></span><span>
-</span><span id="line-184"></span><span>            </span><span id="local-6989586621679441932"><span class="annot"><span class="annottext">r :: IExpr
-</span><a href="#local-6989586621679441932"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
+</span><a href="#local-6989586621679442169"><span class="hs-identifier hs-var">inp</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442171"><span class="hs-identifier hs-var">newState</span></a></span><span>
+</span><span id="line-184"></span><span>            </span><span id="local-6989586621679442168"><span class="annot"><span class="annottext">r :: IExpr
+</span><a href="#local-6989586621679442168"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO String
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO String) -&gt; String -&gt; IO String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -806,8 +806,8 @@ forall (t :: * -&gt; *) a. Foldable t =&gt; t [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">concat</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-string">&quot;runtime error, dumped &quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679441932"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679442168"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-185"></span><span>    </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">String -&gt; IExpr -&gt; IO String
-</span><a href="#local-6989586621679441940"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="annot"><span class="hs-string">&quot;&quot;</span></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679442176"><span class="hs-identifier hs-var">mainLoop</span></a></span><span> </span><span class="annot"><span class="hs-string">&quot;&quot;</span></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>
 </span><span id="line-186"></span></pre></body></html>
