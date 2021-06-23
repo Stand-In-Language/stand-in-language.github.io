@@ -4,7 +4,7 @@ title: QuickStart
 
 1. Clone the compiler's repository and change directory to it:
    ```bash
-   $ git clone https://github.com/sfultong/stand-in-language.git
+   $ git clone https://github.com/Stand-In-Language/stand-in-language.git
    $ cd stand-in-language
    ```
 2. [Install Nix](https://nixos.org/nix/download.html):
@@ -40,7 +40,7 @@ To get around it, you should copy `libgc.so.1` (provided by the `bohem` garbage 
 ## Telomare REPL
 1. Run:
    ```
-   $ cd <your/local/proyect/location>/telomare
+   $ cd <your/local/clone/location>/stand-in-language
    $ nix-shell shell.nix
    $ cabal new-build
    $ cabal new-run telomare-mini-repl -- --haskell
