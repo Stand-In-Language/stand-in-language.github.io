@@ -24,7 +24,7 @@
 
             <ol type="1">
 <li><p>Clone the compiler’s repository and change directory to it:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git clone https://github.com/sfultong/stand-in-language.git</span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> git clone https://github.com/Stand-In-Language/stand-in-language.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd stand-in-language</span></code></pre></div></li>
 <li><p><a href="https://nixos.org/nix/download.html">Install Nix</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> curl https://nixos.org/nix/install <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div></li>
@@ -46,7 +46,7 @@ $ cachix use telomare</code></pre></li>
 <h2 id="telomare-repl">Telomare REPL</h2>
 <ol type="1">
 <li><p>Run:</p>
-<pre><code>$ cd &lt;your/local/proyect/location&gt;/telomare
+<pre><code>$ cd &lt;your/local/clone/location&gt;/stand-in-language
 $ nix-shell shell.nix
 $ cabal new-build
 $ cabal new-run telomare-mini-repl -- --haskell</code></pre></li>
