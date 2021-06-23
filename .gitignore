@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io/api/haskell
 
 ### Haskell ###
+dist-newstyle
 dist
 cabal-dev
 *.o
