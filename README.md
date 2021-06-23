@@ -1,6 +1,6 @@
 # stand-in-language-github-io
 
-## How to build manually (github actions does this automatically):
+## How to build manually (github actions will do this automatically):
 1. Install `nix`
 2. checkout `git`'s `develop` branch
 3. do changes
