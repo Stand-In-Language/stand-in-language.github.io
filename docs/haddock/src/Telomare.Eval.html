@@ -92,7 +92,7 @@ $cp1Ord :: Eq ExpP
 </span><a href="#local-6989586621679442194"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-33"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-type">PairP</span></a></span><span> </span><span id="local-6989586621679442193"><span class="annot"><span class="annottext">a :: ExpP
 </span><a href="#local-6989586621679442193"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679442192"><span class="annot"><span class="annottext">b :: ExpP
-</span><a href="#local-6989586621679442192"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442192"><span class="hs-identifier hs-var">b</span></a></span></span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f (ExpP -&gt; ExpP)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
@@ -116,7 +116,7 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="#local-6989586621679442189"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-35"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-type">DeferP</span></a></span><span> </span><span id="local-6989586621679442188"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442188"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442188"><span class="hs-identifier hs-var">x</span></a></span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#DeferP"><span class="hs-identifier hs-var">DeferP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
@@ -124,7 +124,7 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="#local-6989586621679442188"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-36"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-type">GateP</span></a></span><span> </span><span id="local-6989586621679442187"><span class="annot"><span class="annottext">l :: ExpP
 </span><a href="#local-6989586621679442187"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679442186"><span class="annot"><span class="annottext">r :: ExpP
-</span><a href="#local-6989586621679442186"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442186"><span class="hs-identifier hs-var">r</span></a></span></span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#GateP"><span class="hs-identifier hs-var">GateP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f (ExpP -&gt; ExpP)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
@@ -135,21 +135,21 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
 </span><a href="#local-6989586621679442194"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
 </span><a href="#local-6989586621679442186"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-37"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-type">LeftP</span></a></span><span> </span><span id="local-6989586621679442185"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442185"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442185"><span class="hs-identifier hs-var">x</span></a></span></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#LeftP"><span class="hs-identifier hs-var">LeftP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
 </span><a href="#local-6989586621679442194"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
 </span><a href="#local-6989586621679442185"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-38"></span><span>    </span><span class="annot"><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-type">RightP</span></a></span><span> </span><span id="local-6989586621679442184"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442184"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
+</span><a href="#local-6989586621679442184"><span class="hs-identifier hs-var">x</span></a></span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; ExpP
 </span><a href="Telomare.Eval.html#RightP"><span class="hs-identifier hs-var">RightP</span></a></span><span> </span><span class="annot"><span class="annottext">(ExpP -&gt; ExpP) -&gt; f ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
 </span><a href="#local-6989586621679442194"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">ExpP
 </span><a href="#local-6989586621679442184"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-39"></span><span>    </span><span id="local-6989586621679442183"><span class="annot"><span class="annottext">x :: ExpP
-</span><a href="#local-6989586621679442183"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
+</span><a href="#local-6989586621679442183"><span class="hs-identifier hs-var">x</span></a></span></span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpP -&gt; f ExpP
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">ExpP
 </span><a href="#local-6989586621679442183"><span class="hs-identifier hs-var">x</span></a></span><span>
@@ -468,7 +468,7 @@ forall a. FragIndex -&gt; FragExpr a
 </span><a href="Telomare.html#DeferFrag"><span class="hs-identifier hs-var">DeferFrag</span></a></span><span> </span><span class="annot"><span class="annottext">FragIndex
 </span><a href="#local-6989586621679442082"><span class="hs-identifier hs-var">ind</span></a></span><span>
 </span><span id="line-106"></span><span>        </span><span id="local-6989586621679442081"><span class="annot"><span class="annottext">x :: FragExpr a
-</span><a href="#local-6989586621679442081"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
+</span><a href="#local-6989586621679442081"><span class="hs-identifier hs-var">x</span></a></span></span><span>         </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
 </span><a href="#local-6989586621679442081"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-107"></span><span>      </span><span class="hs-special">(</span><span id="local-6989586621679442082"><span class="annot"><span class="annottext">ind :: FragIndex
 </span><a href="#local-6989586621679442082"><span class="hs-identifier hs-var">ind</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679442080"><span class="annot"><span class="annottext">newM :: Map FragIndex (FragExpr Void)

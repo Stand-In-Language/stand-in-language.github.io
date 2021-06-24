@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-#LANGUAGE ForeignFunctionInterface #-}</span><span>
-</span><span id="line-2"></span><span class="hs-pragma">{-#LANGUAGE DeriveGeneric  #-}</span><span>
-</span><span id="line-3"></span><span class="hs-pragma">{-#LANGUAGE DeriveAnyClass #-}</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE DeriveAnyClass           #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE DeriveGeneric            #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE ForeignFunctionInterface #-}</span><span>
 </span><span id="line-4"></span><span class="hs-comment">--{-# OPTIONS_GHC -fplugin=Foreign.Storable.Generic.Plugin #-}</span><span>
-</span><span id="line-5"></span><span class="hs-comment">--{-# OPTIONS_GHC -fplugin-opt=Foreign.Storable.Generic.Plugin:-v0 #-} </span><span>
+</span><span id="line-5"></span><span class="hs-comment">--{-# OPTIONS_GHC -fplugin-opt=Foreign.Storable.Generic.Plugin:-v0 #-}</span><span>
 </span><span id="line-6"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.Serializer.C</span><span> </span><span class="hs-special">(</span><span>
 </span><span id="line-7"></span><span>    </span><span class="hs-comment">-- Types</span><span>
 </span><span id="line-8"></span><span>      </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier">CTypeId</span></a></span><span>
@@ -41,20 +41,20 @@
 </span><span id="line-41"></span><span>    </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#telomare_free"><span class="hs-identifier">telomare_free</span></a></span><span>
 </span><span id="line-42"></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-43"></span><span>
-</span><span id="line-44"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier">IExpr</span></a></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-44"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>                 </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier">IExpr</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-45"></span><span>
-</span><span id="line-46"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Word</span></span><span>
-</span><span id="line-47"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Vector.Storable</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Vector</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">fromList</span></span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">!</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-48"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Vector.Storable</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">S</span></span><span>
+</span><span id="line-46"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Vector.Storable</span></span><span>     </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Vector</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">fromList</span></span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">!</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-47"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Vector.Storable</span></span><span>     </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">S</span></span><span>
+</span><span id="line-48"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Word</span></span><span>
 </span><span id="line-49"></span><span>
-</span><span id="line-50"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.ForeignPtr</span></span><span>
-</span><span id="line-51"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.Ptr</span></span><span>
-</span><span id="line-52"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.C.Types</span></span><span>
-</span><span id="line-53"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.Marshal.Alloc</span></span><span>
-</span><span id="line-54"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.Marshal.Array</span></span><span>
-</span><span id="line-55"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.Storable.Generic</span></span><span>
+</span><span id="line-50"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Foreign.C.Types</span></span><span>
+</span><span id="line-51"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Foreign.ForeignPtr</span></span><span>
+</span><span id="line-52"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Foreign.Marshal.Alloc</span></span><span>
+</span><span id="line-53"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Foreign.Marshal.Array</span></span><span>
+</span><span id="line-54"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Foreign.Ptr</span></span><span>
+</span><span id="line-55"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Foreign.Storable.Generic</span></span><span>
 </span><span id="line-56"></span><span>
-</span><span id="line-57"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Generic</span></span><span class="hs-special">)</span><span>
+</span><span id="line-57"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span>             </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Generic</span></span><span class="hs-special">)</span><span>
 </span><span id="line-58"></span><span>
 </span><span id="line-59"></span><span class="hs-comment">-- | Type alias for expression tag for C</span><span>
 </span><span id="line-60"></span><span class="hs-keyword">type</span><span> </span><span id="CTypeId"><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-var">CTypeId</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">CUChar</span></span><span>
@@ -100,7 +100,7 @@
 </span><span id="line-82"></span><span class="annot"><a href="Telomare.Serializer.C.html#typeId"><span class="hs-identifier hs-var">typeId</span></a></span><span>  </span><span class="annot"><a href="Telomare.html#Trace"><span class="hs-identifier hs-type">Trace</span></a></span><span>      </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="Telomare.Serializer.C.html#trace_type"><span class="hs-identifier hs-var">trace_type</span></a></span><span>
 </span><span id="line-83"></span><span>
-</span><span id="line-84"></span><span class="hs-keyword">data</span><span> </span><span id="CRep"><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-var">CRep</span></a></span></span><span> </span><span>
+</span><span id="line-84"></span><span class="hs-keyword">data</span><span> </span><span id="CRep"><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-var">CRep</span></a></span></span><span>
 </span><span id="line-85"></span><span>
 </span><span id="line-86"></span><span class="hs-comment">-- | Root node, contains the whole tree.</span><span>
 </span><span id="line-87"></span><span id="local-6989586621679440030"><span id="local-6989586621679440031"></span></span><span class="hs-keyword">data</span><span> </span><span id="CRoot"><span class="annot"><a href="Telomare.Serializer.C.html#CRoot"><span class="hs-identifier hs-var">CRoot</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="CRoot"><span class="annot"><a href="Telomare.Serializer.C.html#CRoot"><span class="hs-identifier hs-var">CRoot</span></a></span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-type">CRep</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span class="hs-special">(</span><span id="local-6989586621679440023"><span id="local-6989586621679440025"><span id="local-6989586621679440027"><span class="annot"><span class="annottext">Int -&gt; CRoot -&gt; ShowS
@@ -146,7 +146,7 @@ galignment :: CRoot -&gt; Int
 $cgalignment :: CRoot -&gt; Int
 gsizeOf :: CRoot -&gt; Int
 $cgsizeOf :: CRoot -&gt; Int
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></span></span></span></span></span><span class="hs-special">)</span><span> </span><span>
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-88"></span><span>
 </span><span id="line-89"></span><span class="hs-comment">-- Telomare nodes. Correspond to C structs from Telomare.h files.</span><span>
 </span><span id="line-90"></span><span class="hs-comment">-- General philosophy is: Contain the tag and pointer to next node in the tree. If the node is a leaf, set pointer to null.</span><span>
@@ -172,8 +172,8 @@ forall a.
 (forall x. a -&gt; Rep a x) -&gt; (forall x. Rep a x -&gt; a) -&gt; Generic a
 $cto :: forall x. Rep CZero x -&gt; CZero
 $cfrom :: forall x. CZero -&gt; Rep CZero x
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">)</span><span> </span><span>
-</span><span id="line-93"></span><span id="local-6989586621679439997"><span id="local-6989586621679439998"></span></span><span class="hs-keyword">data</span><span> </span><span id="CPair"><span class="annot"><a href="Telomare.Serializer.C.html#CPair"><span class="hs-identifier hs-var">CPair</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="CPair"><span class="annot"><a href="Telomare.Serializer.C.html#CPair"><span class="hs-identifier hs-var">CPair</span></a></span></span><span>  </span><span>
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">)</span><span>
+</span><span id="line-93"></span><span id="local-6989586621679439997"><span id="local-6989586621679439998"></span></span><span class="hs-keyword">data</span><span> </span><span id="CPair"><span class="annot"><a href="Telomare.Serializer.C.html#CPair"><span class="hs-identifier hs-var">CPair</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="CPair"><span class="annot"><a href="Telomare.Serializer.C.html#CPair"><span class="hs-identifier hs-var">CPair</span></a></span></span><span>
 </span><span id="line-94"></span><span>    </span><span class="hs-special">{</span><span> </span><span id="left_type"><span class="annot"><span class="annottext">CPair -&gt; CTypeId
 </span><a href="Telomare.Serializer.C.html#left_type"><span class="hs-identifier hs-var hs-var">left_type</span></a></span></span><span>   </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span>
 </span><span id="line-95"></span><span>    </span><span class="hs-special">,</span><span> </span><span id="right_type"><span class="annot"><span class="annottext">CPair -&gt; CTypeId
@@ -300,7 +300,7 @@ forall a.
 (forall x. a -&gt; Rep a x) -&gt; (forall x. Rep a x -&gt; a) -&gt; Generic a
 $cto :: forall x. Rep CEnv x -&gt; CEnv
 $cfrom :: forall x. CEnv -&gt; Rep CEnv x
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">)</span><span> </span><span>
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">Generic</span></span><span class="hs-special">)</span><span>
 </span><span id="line-106"></span><span id="local-6989586621679439940"><span id="local-6989586621679439941"></span></span><span class="hs-keyword">data</span><span> </span><span id="CSetEnv"><span class="annot"><a href="Telomare.Serializer.C.html#CSetEnv"><span class="hs-identifier hs-var">CSetEnv</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="CSetEnv"><span class="annot"><a href="Telomare.Serializer.C.html#CSetEnv"><span class="hs-identifier hs-var">CSetEnv</span></a></span></span><span>  </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-type">CRep</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span class="hs-special">(</span><span id="local-6989586621679439933"><span id="local-6989586621679439935"><span id="local-6989586621679439937"><span class="annot"><span class="annottext">Int -&gt; CSetEnv -&gt; ShowS
 [CSetEnv] -&gt; ShowS
 CSetEnv -&gt; String
@@ -344,7 +344,7 @@ galignment :: CSetEnv -&gt; Int
 $cgalignment :: CSetEnv -&gt; Int
 gsizeOf :: CSetEnv -&gt; Int
 $cgsizeOf :: CSetEnv -&gt; Int
-</span><a href="#local-6989586621679439923"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span> </span><span>
+</span><a href="#local-6989586621679439923"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-107"></span><span id="local-6989586621679439921"><span id="local-6989586621679439922"></span></span><span class="hs-keyword">data</span><span> </span><span id="CDefer"><span class="annot"><a href="Telomare.Serializer.C.html#CDefer"><span class="hs-identifier hs-var">CDefer</span></a></span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span id="CDefer"><span class="annot"><a href="Telomare.Serializer.C.html#CDefer"><span class="hs-identifier hs-var">CDefer</span></a></span></span><span>   </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-type">CRep</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span class="hs-special">(</span><span id="local-6989586621679439914"><span id="local-6989586621679439916"><span id="local-6989586621679439918"><span class="annot"><span class="annottext">Int -&gt; CDefer -&gt; ShowS
 [CDefer] -&gt; ShowS
 CDefer -&gt; String
@@ -388,7 +388,7 @@ galignment :: CDefer -&gt; Int
 $cgalignment :: CDefer -&gt; Int
 gsizeOf :: CDefer -&gt; Int
 $cgsizeOf :: CDefer -&gt; Int
-</span><a href="#local-6989586621679439904"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span> </span><span>
+</span><a href="#local-6989586621679439904"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-108"></span><span id="local-6989586621679439902"><span id="local-6989586621679439903"></span></span><span class="hs-keyword">data</span><span> </span><span id="CPLeft"><span class="annot"><a href="Telomare.Serializer.C.html#CPLeft"><span class="hs-identifier hs-var">CPLeft</span></a></span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span id="CPLeft"><span class="annot"><a href="Telomare.Serializer.C.html#CPLeft"><span class="hs-identifier hs-var">CPLeft</span></a></span></span><span>   </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-type">CRep</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span class="hs-special">(</span><span id="local-6989586621679439895"><span id="local-6989586621679439897"><span id="local-6989586621679439899"><span class="annot"><span class="annottext">Int -&gt; CPLeft -&gt; ShowS
 [CPLeft] -&gt; ShowS
 CPLeft -&gt; String
@@ -432,7 +432,7 @@ galignment :: CPLeft -&gt; Int
 $cgalignment :: CPLeft -&gt; Int
 gsizeOf :: CPLeft -&gt; Int
 $cgsizeOf :: CPLeft -&gt; Int
-</span><a href="#local-6989586621679439885"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span> </span><span>
+</span><a href="#local-6989586621679439885"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-109"></span><span id="local-6989586621679439883"><span id="local-6989586621679439884"></span></span><span class="hs-keyword">data</span><span> </span><span id="CPRight"><span class="annot"><a href="Telomare.Serializer.C.html#CPRight"><span class="hs-identifier hs-var">CPRight</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="CPRight"><span class="annot"><a href="Telomare.Serializer.C.html#CPRight"><span class="hs-identifier hs-var">CPRight</span></a></span></span><span>  </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-type">CRep</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span class="hs-special">(</span><span id="local-6989586621679439876"><span id="local-6989586621679439878"><span id="local-6989586621679439880"><span class="annot"><span class="annottext">Int -&gt; CPRight -&gt; ShowS
 [CPRight] -&gt; ShowS
 CPRight -&gt; String
@@ -476,7 +476,7 @@ galignment :: CPRight -&gt; Int
 $cgalignment :: CPRight -&gt; Int
 gsizeOf :: CPRight -&gt; Int
 $cgsizeOf :: CPRight -&gt; Int
-</span><a href="#local-6989586621679439866"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span> </span><span>
+</span><a href="#local-6989586621679439866"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-110"></span><span id="local-6989586621679439864"><span id="local-6989586621679439865"></span></span><span class="hs-keyword">data</span><span> </span><span id="CTrace"><span class="annot"><a href="Telomare.Serializer.C.html#CTrace"><span class="hs-identifier hs-var">CTrace</span></a></span></span><span>   </span><span class="hs-glyph">=</span><span> </span><span id="CTrace"><span class="annot"><a href="Telomare.Serializer.C.html#CTrace"><span class="hs-identifier hs-var">CTrace</span></a></span></span><span>   </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-type">CRep</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span class="hs-special">(</span><span id="local-6989586621679439857"><span id="local-6989586621679439859"><span id="local-6989586621679439861"><span class="annot"><span class="annottext">Int -&gt; CTrace -&gt; ShowS
 [CTrace] -&gt; ShowS
 CTrace -&gt; String
@@ -520,7 +520,7 @@ galignment :: CTrace -&gt; Int
 $cgalignment :: CTrace -&gt; Int
 gsizeOf :: CTrace -&gt; Int
 $cgsizeOf :: CTrace -&gt; Int
-</span><a href="#local-6989586621679439847"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span> </span><span>
+</span><a href="#local-6989586621679439847"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">GStorable</span></a></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-111"></span><span>
 </span><span id="line-112"></span><span>
 </span><span id="line-113"></span><span class="hs-comment">-- | Obtains (hopefully valid) IExpr from C representation.</span><span>
@@ -538,7 +538,7 @@ forall a. Storable a =&gt; Ptr a -&gt; IO a
 </span><a href="Telomare.Serializer.C.html#fromC%27"><span class="hs-identifier hs-var">fromC'</span></a></span><span> </span><span class="annot"><span class="annottext">CTypeId
 </span><a href="#local-6989586621679439845"><span class="hs-identifier hs-var">t</span></a></span><span> </span><span class="annot"><span class="annottext">Ptr CRep
 </span><a href="#local-6989586621679439844"><span class="hs-identifier hs-var">v</span></a></span><span>
-</span><span id="line-118"></span><span>    </span><span>
+</span><span id="line-118"></span><span>
 </span><span id="line-119"></span><span class="annot"><a href="Telomare.Serializer.C.html#fromC%27"><span class="hs-identifier hs-type">fromC'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CTypeId"><span class="hs-identifier hs-type">CTypeId</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRep"><span class="hs-identifier hs-type">CRep</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span>
 </span><span id="line-120"></span><span id="fromC%27"><span class="annot"><span class="annottext">fromC' :: CTypeId -&gt; Ptr CRep -&gt; IO IExpr
 </span><a href="Telomare.Serializer.C.html#fromC%27"><span class="hs-identifier hs-var hs-var">fromC'</span></a></span></span><span> </span><span id="local-6989586621679439841"><span class="annot"><span class="annottext">type_id :: CTypeId
@@ -728,8 +728,8 @@ forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><a href="#local-6989586621679439812"><span class="hs-identifier hs-var">otherwise</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO IExpr
 forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="hs-string">&quot;Telomare.Serializer.fromC': Invalid type id - possibly corrupted data.&quot;</span></span><span>
-</span><span id="line-143"></span><span>    </span><span>
-</span><span id="line-144"></span><span>    </span><span>
+</span><span id="line-143"></span><span>
+</span><span id="line-144"></span><span>
 </span><span id="line-145"></span><span>
 </span><span id="line-146"></span><span class="hs-comment">-- | Saves the IExpr as a C representation.</span><span>
 </span><span id="line-147"></span><span class="annot"><a href="Telomare.Serializer.C.html#toC"><span class="hs-identifier hs-type">toC</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRoot"><span class="hs-identifier hs-type">CRoot</span></a></span><span class="hs-special">)</span><span>
@@ -822,7 +822,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Ptr CPair
 </span><a href="#local-6989586621679439793"><span class="hs-identifier hs-var">value</span></a></span><span> </span><span class="annot"><span class="annottext">Ptr CPair -&gt; Int -&gt; Ptr Any
 forall a b. Ptr a -&gt; Int -&gt; Ptr b
-</span><span class="hs-operator hs-var">`plusPtr`</span></span><span>        </span><span class="annot"><span class="hs-number">1</span></span><span> </span><span>
+</span><span class="hs-operator hs-var">`plusPtr`</span></span><span>        </span><span class="annot"><span class="hs-number">1</span></span><span>
 </span><span id="line-169"></span><span>        </span><span id="local-6989586621679439789"><span class="annot"><span class="annottext">ptr_left_value :: Ptr b
 </span><a href="#local-6989586621679439789"><span class="hs-identifier hs-var hs-var">ptr_left_value</span></a></span></span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Ptr Any -&gt; Ptr b
 forall a b. Ptr a -&gt; Ptr b
@@ -1183,14 +1183,14 @@ forall b. Ptr b
 </span><span class="hs-identifier hs-var">nullPtr</span></span><span>
 </span><span id="line-220"></span><span>
 </span><span id="line-221"></span><span class="hs-comment">-- | Tag for CSerialized structs</span><span>
-</span><span id="line-222"></span><span class="hs-keyword">data</span><span> </span><span id="CSerialized"><span class="annot"><a href="Telomare.Serializer.C.html#CSerialized"><span class="hs-identifier hs-var">CSerialized</span></a></span></span><span> </span><span>
+</span><span id="line-222"></span><span class="hs-keyword">data</span><span> </span><span id="CSerialized"><span class="annot"><a href="Telomare.Serializer.C.html#CSerialized"><span class="hs-identifier hs-var">CSerialized</span></a></span></span><span>
 </span><span id="line-223"></span><span>
-</span><span id="line-224"></span><span class="hs-comment">-- | Convert serialized version to Telomare_Serialized </span><span>
+</span><span id="line-224"></span><span class="hs-comment">-- | Convert serialized version to Telomare_Serialized</span><span>
 </span><span id="line-225"></span><span class="hs-comment">-- Copies the memory underneath.</span><span>
 </span><span id="line-226"></span><span class="annot"><a href="Telomare.Serializer.C.html#serializedToC"><span class="hs-identifier hs-type">serializedToC</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Vector</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Word8</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CSerialized"><span class="hs-identifier hs-type">CSerialized</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-227"></span><span id="serializedToC"><span class="annot"><span class="annottext">serializedToC :: Vector Word8 -&gt; IO (Ptr CSerialized)
 </span><a href="Telomare.Serializer.C.html#serializedToC"><span class="hs-identifier hs-var hs-var">serializedToC</span></a></span></span><span> </span><span id="local-6989586621679439744"><span class="annot"><span class="annottext">vec :: Vector Word8
-</span><a href="#local-6989586621679439744"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span> </span><span>
+</span><a href="#local-6989586621679439744"><span class="hs-identifier hs-var">vec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-228"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679439743"><span class="annot"><span class="annottext">len :: Int
 </span><a href="#local-6989586621679439743"><span class="hs-identifier hs-var hs-var">len</span></a></span></span><span>       </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Vector Word8 -&gt; Int
 forall a. Storable a =&gt; Vector a -&gt; Int
@@ -1242,7 +1242,7 @@ forall a b. Ptr a -&gt; Int -&gt; Ptr b
 </span><span class="hs-operator hs-var">`plusPtr`</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><a href="#local-6989586621679439741"><span class="hs-identifier hs-var">max_align</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Ptr Word8
 </span><a href="#local-6989586621679439734"><span class="hs-identifier hs-var">ptr_vec</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679439743"><span class="hs-identifier hs-var">len</span></a></span><span class="hs-special">)</span><span> </span><span>
+</span><a href="#local-6989586621679439743"><span class="hs-identifier hs-var">len</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-234"></span><span>    </span><span class="annot"><span class="annottext">Ptr CSerialized -&gt; IO (Ptr CSerialized)
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">(Ptr CSerialized -&gt; IO (Ptr CSerialized))
@@ -1267,7 +1267,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Ptr CSerialized -&gt; Ptr CULong
 forall a b. Ptr a -&gt; Ptr b
 </span><span class="hs-identifier hs-var">castPtr</span></span><span> </span><span class="annot"><span class="annottext">Ptr CSerialized
-</span><a href="#local-6989586621679439732"><span class="hs-identifier hs-var">ptr</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CULong</span></span><span> </span><span>
+</span><a href="#local-6989586621679439732"><span class="hs-identifier hs-var">ptr</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CULong</span></span><span>
 </span><span id="line-241"></span><span>   </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679439730"><span class="annot"><span class="annottext">len :: Int
 </span><a href="#local-6989586621679439730"><span class="hs-identifier hs-var hs-var">len</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CULong -&gt; Int
 forall a b. (Integral a, Num b) =&gt; a -&gt; b
@@ -1315,11 +1315,11 @@ forall a. Storable a =&gt; ForeignPtr a -&gt; Int -&gt; Vector a
 </span><a href="#local-6989586621679439730"><span class="hs-identifier hs-var">len</span></a></span><span>
 </span><span id="line-246"></span><span>
 </span><span id="line-247"></span><span class="hs-comment">-- Foreign calls from C code</span><span>
-</span><span id="line-248"></span><span> </span><span>
+</span><span id="line-248"></span><span>
 </span><span id="line-249"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span id="telomare_serialize"><span class="annot"><a href="Telomare.Serializer.C.html#telomare_serialize"><span class="hs-identifier hs-var">telomare_serialize</span></a></span></span><span>   </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRoot"><span class="hs-identifier hs-type">CRoot</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CSerialized"><span class="hs-identifier hs-type">CSerialized</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-250"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span id="telomare_deserialize"><span class="annot"><a href="Telomare.Serializer.C.html#telomare_deserialize"><span class="hs-identifier hs-var">telomare_deserialize</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CSerialized"><span class="hs-identifier hs-type">CSerialized</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRoot"><span class="hs-identifier hs-type">CRoot</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-251"></span><span class="hs-comment">-- | Free the memory reserved for C dynamic representation</span><span>
-</span><span id="line-252"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span id="telomare_free"><span class="annot"><a href="Telomare.Serializer.C.html#telomare_free"><span class="hs-identifier hs-var">telomare_free</span></a></span></span><span>        </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRoot"><span class="hs-identifier hs-type">CRoot</span></a></span><span>       </span><span>
+</span><span id="line-252"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span id="telomare_free"><span class="annot"><a href="Telomare.Serializer.C.html#telomare_free"><span class="hs-identifier hs-var">telomare_free</span></a></span></span><span>        </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Ptr</span></span><span> </span><span class="annot"><a href="Telomare.Serializer.C.html#CRoot"><span class="hs-identifier hs-type">CRoot</span></a></span><span>
 </span><span id="line-253"></span><span>                                     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
 </span><span id="line-254"></span><span>
 </span><span id="line-255"></span></pre></body></html>

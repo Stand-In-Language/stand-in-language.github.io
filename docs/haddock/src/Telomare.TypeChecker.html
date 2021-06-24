@@ -4,7 +4,7 @@
 </span><span id="line-4"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.TypeChecker</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-5"></span><span>
 </span><span id="line-6"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Applicative</span></span><span>
-</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Lens.Plated</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">transform</span></span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Lens.Plated</span></span><span>  </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">transform</span></span><span class="hs-special">)</span><span>
 </span><span id="line-8"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad.Except</span></span><span>
 </span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad.State</span></span><span>  </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">State</span></span><span class="hs-special">)</span><span>
 </span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State</span></span><span>  </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">State</span></span><span>
@@ -504,7 +504,7 @@ forall a. a -&gt; DList a
 </span><a href="#local-6989586621679440528"><span class="hs-identifier hs-var">i</span></a></span><span>
 </span><span id="line-75"></span><span>        </span><span class="annot"><a href="Telomare.html#ArrTypeP"><span class="hs-identifier hs-type">ArrTypeP</span></a></span><span> </span><span id="local-6989586621679440527"><span class="annot"><span class="annottext">a :: PartialType
 </span><a href="#local-6989586621679440527"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679440526"><span class="annot"><span class="annottext">b :: PartialType
-</span><a href="#local-6989586621679440526"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartialType -&gt; DList Int
+</span><a href="#local-6989586621679440526"><span class="hs-identifier hs-var">b</span></a></span></span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartialType -&gt; DList Int
 </span><a href="#local-6989586621679440529"><span class="hs-identifier hs-var">getKeys</span></a></span><span> </span><span class="annot"><span class="annottext">PartialType
 </span><a href="#local-6989586621679440527"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">DList Int -&gt; DList Int -&gt; DList Int
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
@@ -513,14 +513,14 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><a href="#local-6989586621679440526"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-76"></span><span>        </span><span class="annot"><a href="Telomare.html#PairTypeP"><span class="hs-identifier hs-type">PairTypeP</span></a></span><span> </span><span id="local-6989586621679440525"><span class="annot"><span class="annottext">a :: PartialType
 </span><a href="#local-6989586621679440525"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679440524"><span class="annot"><span class="annottext">b :: PartialType
-</span><a href="#local-6989586621679440524"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartialType -&gt; DList Int
+</span><a href="#local-6989586621679440524"><span class="hs-identifier hs-var">b</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartialType -&gt; DList Int
 </span><a href="#local-6989586621679440529"><span class="hs-identifier hs-var">getKeys</span></a></span><span> </span><span class="annot"><span class="annottext">PartialType
 </span><a href="#local-6989586621679440525"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">DList Int -&gt; DList Int -&gt; DList Int
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">PartialType -&gt; DList Int
 </span><a href="#local-6989586621679440529"><span class="hs-identifier hs-var">getKeys</span></a></span><span> </span><span class="annot"><span class="annottext">PartialType
 </span><a href="#local-6989586621679440524"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-77"></span><span>        </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DList Int
+</span><span id="line-77"></span><span>        </span><span class="hs-identifier">_</span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DList Int
 forall a. Monoid a =&gt; a
 </span><span class="hs-identifier hs-var">mempty</span></span><span>
 </span><span id="line-78"></span><span>      </span><span id="local-6989586621679440523"><span class="annot"><span class="annottext">isRecursiveType :: Set Int -&gt; Int -&gt; Maybe Int
@@ -1502,7 +1502,7 @@ forall a. Show a =&gt; a -&gt; String
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679440375"><span class="hs-identifier hs-var">er</span></a></span><span>
-</span><span id="line-202"></span><span>    </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe a
+</span><span id="line-202"></span><span>    </span><span class="hs-identifier">_</span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe a
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-203"></span></pre></body></html>

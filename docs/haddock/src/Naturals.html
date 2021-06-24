@@ -1,30 +1,30 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="%24con2tag_EQtSg62UMeSDHut7CYcwAO"><span id="%24con2tag_9zLbaBaN3OBEoMr7zisM1o"><span id="%24con2tag_4yjfPuJR9Q6C99TtgyB9MX"></span></span></span><span class="hs-pragma">{-#LANGUAGE DeriveGeneric#-}</span><span>
-</span><span id="line-2"></span><span class="hs-pragma">{-#LANGUAGE DeriveAnyClass#-}</span><span>
-</span><span id="line-3"></span><span class="hs-pragma">{-#LANGUAGE GeneralizedNewtypeDeriving#-}</span><span>
-</span><span id="line-4"></span><span class="hs-pragma">{-#LANGUAGE PatternSynonyms#-}</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="%24con2tag_EQtSg62UMeSDHut7CYcwAO"><span id="%24con2tag_9zLbaBaN3OBEoMr7zisM1o"><span id="%24con2tag_4yjfPuJR9Q6C99TtgyB9MX"></span></span></span><span class="hs-pragma">{-# LANGUAGE DeriveAnyClass             #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE DeriveGeneric              #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE GeneralizedNewtypeDeriving #-}</span><span>
+</span><span id="line-4"></span><span class="hs-pragma">{-# LANGUAGE PatternSynonyms            #-}</span><span>
 </span><span id="line-5"></span><span class="hs-comment">-- {-# LANGUAGE GADTs #-}</span><span>
 </span><span id="line-6"></span><span class="hs-comment">-- {-# LANGUAGE EmptyDataDecls #-}</span><span>
 </span><span id="line-7"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Naturals</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-8"></span><span>
-</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Applicative</span></span><span>
-</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Fix</span></span><span>
-</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Identity</span></span><span>
-</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State.Lazy</span></span><span>
-</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Binary</span></span><span>
-</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Functor</span></span><span>
-</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Int</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Int64</span></span><span class="hs-special">)</span><span>
-</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Map</span></span><span class="hs-special">)</span><span>
-</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Monoid</span></span><span>
-</span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Set</span></span><span class="hs-special">)</span><span>
-</span><span id="line-19"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Debug.Trace</span></span><span>
-</span><span id="line-20"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.DeepSeq</span></span><span>
-</span><span id="line-21"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Applicative</span></span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.DeepSeq</span></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad.Fix</span></span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad.Identity</span></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad.State.Lazy</span></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Binary</span></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Functor</span></span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Int</span></span><span>                 </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Int64</span></span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span>                 </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Map</span></span><span class="hs-special">)</span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Monoid</span></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span>                 </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Set</span></span><span class="hs-special">)</span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Debug.Trace</span></span><span>
+</span><span id="line-21"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span>
 </span><span id="line-22"></span><span>
 </span><span id="line-23"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State.Lazy</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">State</span></span><span>
-</span><span id="line-24"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
-</span><span id="line-25"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
+</span><span id="line-24"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span>                 </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
+</span><span id="line-25"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span>                 </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
 </span><span id="line-26"></span><span>
-</span><span id="line-27"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
+</span><span id="line-27"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
 </span><span id="line-28"></span><span>
 </span><span id="line-29"></span><span class="annot"><a href="Naturals.html#debug"><span class="hs-identifier hs-type">debug</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
 </span><span id="line-30"></span><span id="debug"><span class="annot"><span class="annottext">debug :: Bool
@@ -563,7 +563,7 @@ forall k a. Map k a -&gt; Maybe (a, Map k a)
 </span><a href="#local-6989586621679438018"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="hs-identifier">_</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; String
 </span><a href="#local-6989586621679438040"><span class="hs-identifier hs-var">showInner</span></a></span><span> </span><span class="annot"><span class="annottext">NExpr
 </span><a href="#local-6989586621679438018"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-129"></span><span>      </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-string">&quot;ERROR no root to NExprs tree&quot;</span></span><span>
+</span><span id="line-129"></span><span>      </span><span class="hs-identifier">_</span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-string">&quot;ERROR no root to NExprs tree&quot;</span></span><span>
 </span><span id="line-130"></span><span>
 </span><span id="line-131"></span><span class="hs-keyword">type</span><span> </span><span id="FragState"><span class="annot"><a href="Naturals.html#FragState"><span class="hs-identifier hs-var">FragState</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#FragIndex"><span class="hs-identifier hs-type">FragIndex</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Map</span></span><span> </span><span class="annot"><a href="Telomare.html#FragIndex"><span class="hs-identifier hs-type">FragIndex</span></a></span><span> </span><span class="annot"><a href="Naturals.html#ExprFrag"><span class="hs-identifier hs-type">ExprFrag</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-132"></span><span>
@@ -754,7 +754,7 @@ forall k a. Ord k =&gt; k -&gt; Map k a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Map.lookup</span></span><span> </span><span class="annot"><span class="annottext">FragIndex
 </span><a href="#local-6989586621679437974"><span class="hs-identifier hs-var">fi</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex ExprFrag
 </span><a href="#local-6989586621679437980"><span class="hs-identifier hs-var">fragMap</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-161"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IExpr
+</span><span id="line-161"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Nothing</span></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IExpr
 forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-string">&quot;fromFrag bad index &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. [a] -&gt; [a] -&gt; [a]
@@ -815,7 +815,7 @@ forall k a. Ord k =&gt; k -&gt; Map k a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Map.lookup</span></span><span> </span><span class="annot"><span class="annottext">FragIndex
 </span><a href="#local-6989586621679437962"><span class="hs-identifier hs-var">ind</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex ExprFrag
 </span><a href="#local-6989586621679437965"><span class="hs-identifier hs-var">fragMap</span></a></span><span>
-</span><span id="line-172"></span><span>      </span><span class="annot"><a href="#local-6989586621679437963"><span class="hs-identifier hs-var">lam</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
+</span><span id="line-172"></span><span>      </span><span class="annot"><a href="#local-6989586621679437963"><span class="hs-identifier hs-var">lam</span></a></span><span> </span><span class="hs-identifier">_</span><span>                         </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-173"></span><span>      </span><span id="local-6989586621679437961"><span class="annot"><span class="annottext">def :: ExprFrag -&gt; Maybe ExprFrag
@@ -825,21 +825,21 @@ forall k a. Ord k =&gt; k -&gt; Map k a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Map.lookup</span></span><span> </span><span class="annot"><span class="annottext">FragIndex
 </span><a href="#local-6989586621679437960"><span class="hs-identifier hs-var">ind</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex ExprFrag
 </span><a href="#local-6989586621679437965"><span class="hs-identifier hs-var">fragMap</span></a></span><span>
-</span><span id="line-174"></span><span>      </span><span class="annot"><a href="#local-6989586621679437961"><span class="hs-identifier hs-var">def</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
+</span><span id="line-174"></span><span>      </span><span class="annot"><a href="#local-6989586621679437961"><span class="hs-identifier hs-var">def</span></a></span><span> </span><span class="hs-identifier">_</span><span>            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-175"></span><span>      </span><span id="local-6989586621679437959"><span class="annot"><span class="annottext">firstArg :: ExprFrag -&gt; Maybe ()
 </span><a href="#local-6989586621679437959"><span class="hs-identifier hs-var hs-var">firstArg</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FLeft"><span class="hs-identifier hs-type">FLeft</span></a></span><span> </span><span class="annot"><a href="Naturals.html#FEnv"><span class="hs-identifier hs-type">FEnv</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">() -&gt; Maybe ()
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-176"></span><span>      </span><span class="annot"><a href="#local-6989586621679437959"><span class="hs-identifier hs-var">firstArg</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ()
+</span><span id="line-176"></span><span>      </span><span class="annot"><a href="#local-6989586621679437959"><span class="hs-identifier hs-var">firstArg</span></a></span><span> </span><span class="hs-identifier">_</span><span>            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ()
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-177"></span><span>      </span><span id="local-6989586621679437958"><span class="annot"><span class="annottext">secondArg :: ExprFrag -&gt; Maybe ()
 </span><a href="#local-6989586621679437958"><span class="hs-identifier hs-var hs-var">secondArg</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FLeft"><span class="hs-identifier hs-type">FLeft</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FRight"><span class="hs-identifier hs-type">FRight</span></a></span><span> </span><span class="annot"><a href="Naturals.html#FEnv"><span class="hs-identifier hs-type">FEnv</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">() -&gt; Maybe ()
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-178"></span><span>      </span><span class="annot"><a href="#local-6989586621679437958"><span class="hs-identifier hs-var">secondArg</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ()
+</span><span id="line-178"></span><span>      </span><span class="annot"><a href="#local-6989586621679437958"><span class="hs-identifier hs-var">secondArg</span></a></span><span> </span><span class="hs-identifier">_</span><span>                     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ()
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-179"></span><span>      </span><span id="local-6989586621679437957"><span class="annot"><span class="annottext">app :: ExprFrag -&gt; Maybe (ExprFrag, ExprFrag)
@@ -924,7 +924,7 @@ forall k a. Ord k =&gt; k -&gt; Map k a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Map.lookup</span></span><span> </span><span class="annot"><span class="annottext">FragIndex
 </span><a href="#local-6989586621679437943"><span class="hs-identifier hs-var">ind</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex ExprFrag
 </span><a href="#local-6989586621679437946"><span class="hs-identifier hs-var">fragMap</span></a></span><span>
-</span><span id="line-188"></span><span>      </span><span class="annot"><a href="#local-6989586621679437944"><span class="hs-identifier hs-var">lam</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
+</span><span id="line-188"></span><span>      </span><span class="annot"><a href="#local-6989586621679437944"><span class="hs-identifier hs-var">lam</span></a></span><span> </span><span class="hs-identifier">_</span><span>                         </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-189"></span><span>      </span><span id="local-6989586621679437942"><span class="annot"><span class="annottext">def :: ExprFrag -&gt; Maybe ExprFrag
@@ -934,14 +934,14 @@ forall k a. Ord k =&gt; k -&gt; Map k a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Map.lookup</span></span><span> </span><span class="annot"><span class="annottext">FragIndex
 </span><a href="#local-6989586621679437941"><span class="hs-identifier hs-var">ind</span></a></span><span> </span><span class="annot"><span class="annottext">Map FragIndex ExprFrag
 </span><a href="#local-6989586621679437946"><span class="hs-identifier hs-var">fragMap</span></a></span><span>
-</span><span id="line-190"></span><span>      </span><span class="annot"><a href="#local-6989586621679437942"><span class="hs-identifier hs-var">def</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
+</span><span id="line-190"></span><span>      </span><span class="annot"><a href="#local-6989586621679437942"><span class="hs-identifier hs-var">def</span></a></span><span> </span><span class="hs-identifier">_</span><span>            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ExprFrag
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-191"></span><span>      </span><span id="local-6989586621679437940"><span class="annot"><span class="annottext">firstArg :: ExprFrag -&gt; Maybe ()
 </span><a href="#local-6989586621679437940"><span class="hs-identifier hs-var hs-var">firstArg</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FLeft"><span class="hs-identifier hs-type">FLeft</span></a></span><span> </span><span class="annot"><a href="Naturals.html#FEnv"><span class="hs-identifier hs-type">FEnv</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">() -&gt; Maybe ()
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-192"></span><span>      </span><span class="annot"><a href="#local-6989586621679437940"><span class="hs-identifier hs-var">firstArg</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ()
+</span><span id="line-192"></span><span>      </span><span class="annot"><a href="#local-6989586621679437940"><span class="hs-identifier hs-var">firstArg</span></a></span><span> </span><span class="hs-identifier">_</span><span>            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe ()
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-193"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">ExprFrag -&gt; Maybe ExprFrag
@@ -991,7 +991,7 @@ forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437935"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437934"><span class="hs-identifier hs-var">i</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-197"></span><span class="annot"><a href="Naturals.html#matchApp"><span class="hs-identifier hs-var">matchApp</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe (ExprFrag, ExprFrag)
+</span><span id="line-197"></span><span class="annot"><a href="Naturals.html#matchApp"><span class="hs-identifier hs-var">matchApp</span></a></span><span> </span><span class="hs-identifier">_</span><span>          </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Maybe (ExprFrag, ExprFrag)
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-198"></span><span>
@@ -1034,20 +1034,20 @@ forall k a. Ord k =&gt; k -&gt; a -&gt; Map k a -&gt; Map k a
 </span><a href="#local-6989586621679437924"><span class="hs-identifier hs-var">fragMap</span></a></span><span>
 </span><span id="line-208"></span><span>        </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437923"><span class="hs-identifier hs-var">frag</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-209"></span><span>            </span><span class="annot"><a href="Naturals.html#FZero"><span class="hs-identifier hs-type">FZero</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
+</span><span id="line-209"></span><span>            </span><span class="annot"><a href="Naturals.html#FZero"><span class="hs-identifier hs-type">FZero</span></a></span><span>        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
 </span><a href="Naturals.html#NZero"><span class="hs-identifier hs-var">NZero</span></a></span><span>
-</span><span id="line-210"></span><span>            </span><span class="annot"><a href="Naturals.html#FEnv"><span class="hs-identifier hs-type">FEnv</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
+</span><span id="line-210"></span><span>            </span><span class="annot"><a href="Naturals.html#FEnv"><span class="hs-identifier hs-type">FEnv</span></a></span><span>         </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
 </span><a href="Naturals.html#NEnv"><span class="hs-identifier hs-var">NEnv</span></a></span><span>
 </span><span id="line-211"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FPair"><span class="hs-identifier hs-type">FPair</span></a></span><span> </span><span id="local-6989586621679437921"><span class="annot"><span class="annottext">a :: ExprFrag
 </span><a href="#local-6989586621679437921"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679437920"><span class="annot"><span class="annottext">b :: ExprFrag
-</span><a href="#local-6989586621679437920"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
+</span><a href="#local-6989586621679437920"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
 </span><a href="Naturals.html#NPair"><span class="hs-identifier hs-var">NPair</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
 </span><a href="#local-6989586621679437922"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437921"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
 </span><a href="#local-6989586621679437922"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437920"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-212"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FSetEnv"><span class="hs-identifier hs-type">FSetEnv</span></a></span><span> </span><span id="local-6989586621679437919"><span class="annot"><span class="annottext">x :: ExprFrag
-</span><a href="#local-6989586621679437919"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr
+</span><a href="#local-6989586621679437919"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr
 </span><a href="Naturals.html#NSetEnv"><span class="hs-identifier hs-var">NSetEnv</span></a></span><span> </span><span class="annot"><span class="annottext">(NExpr -&gt; NExpr) -&gt; NExpr -&gt; NExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
@@ -1055,34 +1055,34 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="#local-6989586621679437919"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-213"></span><span>            </span><span class="annot"><a href="Naturals.html#FGate"><span class="hs-identifier hs-type">FGate</span></a></span><span> </span><span id="local-6989586621679437918"><span class="annot"><span class="annottext">l :: ExprFrag
 </span><a href="#local-6989586621679437918"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679437917"><span class="annot"><span class="annottext">r :: ExprFrag
-</span><a href="#local-6989586621679437917"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
+</span><a href="#local-6989586621679437917"><span class="hs-identifier hs-var">r</span></a></span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
 </span><a href="Naturals.html#NGate"><span class="hs-identifier hs-var">NGate</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
 </span><a href="#local-6989586621679437922"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437918"><span class="hs-identifier hs-var">l</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
 </span><a href="#local-6989586621679437922"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437917"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-214"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FLeft"><span class="hs-identifier hs-type">FLeft</span></a></span><span> </span><span id="local-6989586621679437916"><span class="annot"><span class="annottext">x :: ExprFrag
-</span><a href="#local-6989586621679437916"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr
+</span><a href="#local-6989586621679437916"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr
 </span><a href="Naturals.html#NLeft"><span class="hs-identifier hs-var">NLeft</span></a></span><span> </span><span class="annot"><span class="annottext">(NExpr -&gt; NExpr) -&gt; NExpr -&gt; NExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
 </span><a href="#local-6989586621679437922"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437916"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-215"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FRight"><span class="hs-identifier hs-type">FRight</span></a></span><span> </span><span id="local-6989586621679437915"><span class="annot"><span class="annottext">x :: ExprFrag
-</span><a href="#local-6989586621679437915"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr
+</span><a href="#local-6989586621679437915"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr
 </span><a href="Naturals.html#NRight"><span class="hs-identifier hs-var">NRight</span></a></span><span> </span><span class="annot"><span class="annottext">(NExpr -&gt; NExpr) -&gt; NExpr -&gt; NExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
 </span><a href="#local-6989586621679437922"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437915"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-216"></span><span>            </span><span class="annot"><a href="Naturals.html#FTrace"><span class="hs-identifier hs-type">FTrace</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
+</span><span id="line-216"></span><span>            </span><span class="annot"><a href="Naturals.html#FTrace"><span class="hs-identifier hs-type">FTrace</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
 </span><a href="Naturals.html#NTrace"><span class="hs-identifier hs-var">NTrace</span></a></span><span>
 </span><span id="line-217"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FDefer"><span class="hs-identifier hs-type">FDefer</span></a></span><span> </span><span id="local-6989586621679437914"><span class="annot"><span class="annottext">ind :: FragIndex
 </span><a href="#local-6989586621679437914"><span class="hs-identifier hs-var">ind</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragIndex -&gt; NExpr
 </span><a href="Naturals.html#NDefer"><span class="hs-identifier hs-var">NDefer</span></a></span><span> </span><span class="annot"><span class="annottext">FragIndex
 </span><a href="#local-6989586621679437914"><span class="hs-identifier hs-var">ind</span></a></span><span>
 </span><span id="line-218"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FNum"><span class="hs-identifier hs-type">FNum</span></a></span><span> </span><span id="local-6989586621679437913"><span class="annot"><span class="annottext">x :: Int64
-</span><a href="#local-6989586621679437913"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
+</span><a href="#local-6989586621679437913"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
 </span><a href="Naturals.html#NPair"><span class="hs-identifier hs-var">NPair</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NExpr -&gt; NExpr
 </span><a href="Naturals.html#NOldDefer"><span class="hs-identifier hs-var">NOldDefer</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
 </span><a href="Naturals.html#NPair"><span class="hs-identifier hs-var">NPair</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int64 -&gt; NExpr
@@ -1090,11 +1090,11 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="#local-6989586621679437913"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">NExpr
 </span><a href="Naturals.html#NEnv"><span class="hs-identifier hs-var">NEnv</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">NExpr
 </span><a href="Naturals.html#NEnv"><span class="hs-identifier hs-var">NEnv</span></a></span><span>
-</span><span id="line-219"></span><span>            </span><span class="annot"><a href="Naturals.html#FToNum"><span class="hs-identifier hs-type">FToNum</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
+</span><span id="line-219"></span><span>            </span><span class="annot"><a href="Naturals.html#FToNum"><span class="hs-identifier hs-type">FToNum</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr
 </span><a href="Naturals.html#NToNum"><span class="hs-identifier hs-var">NToNum</span></a></span><span>
 </span><span id="line-220"></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="Naturals.html#FApp"><span class="hs-identifier hs-type">FApp</span></a></span><span> </span><span id="local-6989586621679437912"><span class="annot"><span class="annottext">c :: ExprFrag
 </span><a href="#local-6989586621679437912"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span id="local-6989586621679437911"><span class="annot"><span class="annottext">i :: ExprFrag
-</span><a href="#local-6989586621679437911"><span class="hs-identifier hs-var">i</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
+</span><a href="#local-6989586621679437911"><span class="hs-identifier hs-var">i</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">NExpr -&gt; NExpr -&gt; NExpr
 </span><a href="Naturals.html#NApp"><span class="hs-identifier hs-var">NApp</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr
 </span><a href="#local-6989586621679437922"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">ExprFrag
 </span><a href="#local-6989586621679437912"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ExprFrag -&gt; NExpr

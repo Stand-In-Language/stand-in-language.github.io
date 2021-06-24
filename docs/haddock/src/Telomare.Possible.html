@@ -229,11 +229,11 @@ PossibleExpr a b -&gt; PossibleExpr a b -&gt; PossibleExpr a b
 </span><span id="line-35"></span><span id="local-6989586621679439335"><span id="local-6989586621679439336"><span class="annot"><a href="Telomare.Possible.html#booleanPossibilities"><span class="hs-identifier hs-type">booleanPossibilities</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Possible.html#PossibleExpr"><span class="hs-identifier hs-type">PossibleExpr</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679439336"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679439335"><span class="hs-identifier hs-type">b</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">DList.DList</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span></span></span><span>
 </span><span id="line-36"></span><span id="booleanPossibilities"><span class="annot"><span class="annottext">booleanPossibilities :: PossibleExpr a b -&gt; DList Bool
 </span><a href="Telomare.Possible.html#booleanPossibilities"><span class="hs-identifier hs-var hs-var">booleanPossibilities</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-37"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; DList Bool
+</span><span id="line-37"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; DList Bool
 forall a. a -&gt; DList a
 </span><span class="hs-identifier hs-var">DList.singleton</span></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-38"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#PairX"><span class="hs-identifier hs-type">PairX</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; DList Bool
+</span><span id="line-38"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#PairX"><span class="hs-identifier hs-type">PairX</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; DList Bool
 forall a. a -&gt; DList a
 </span><span class="hs-identifier hs-var">DList.singleton</span></span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
@@ -248,14 +248,14 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a b. PossibleExpr a b -&gt; DList Bool
 </span><a href="Telomare.Possible.html#booleanPossibilities"><span class="hs-identifier hs-var">booleanPossibilities</span></a></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b
 </span><a href="#local-6989586621679439206"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-40"></span><span>  </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DList Bool
+</span><span id="line-40"></span><span>  </span><span class="hs-identifier">_</span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DList Bool
 forall a. DList a
 </span><span class="hs-identifier hs-var">DList.empty</span></span><span>
 </span><span id="line-41"></span><span>
 </span><span id="line-42"></span><span id="local-6989586621679439327"><span id="local-6989586621679439328"><span class="annot"><a href="Telomare.Possible.html#getFirstNonZero"><span class="hs-identifier hs-type">getFirstNonZero</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Possible.html#PossibleExpr"><span class="hs-identifier hs-type">PossibleExpr</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679439328"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679439327"><span class="hs-identifier hs-type">b</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#PossibleExpr"><span class="hs-identifier hs-type">PossibleExpr</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679439328"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679439327"><span class="hs-identifier hs-type">b</span></a></span><span class="hs-special">)</span></span></span><span>
 </span><span id="line-43"></span><span id="getFirstNonZero"><span class="annot"><span class="annottext">getFirstNonZero :: PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
 </span><a href="Telomare.Possible.html#getFirstNonZero"><span class="hs-identifier hs-var hs-var">getFirstNonZero</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-44"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (PossibleExpr a b)
+</span><span id="line-44"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span>         </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (PossibleExpr a b)
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-45"></span><span>  </span><span id="local-6989586621679439203"><span class="annot"><span class="annottext">p :: PossibleExpr a b
@@ -265,7 +265,7 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><a href="#local-6989586621679439203"><span class="hs-identifier hs-var">p</span></a></span><span>
 </span><span id="line-46"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#EitherX"><span class="hs-identifier hs-type">EitherX</span></a></span><span> </span><span id="local-6989586621679439202"><span class="annot"><span class="annottext">a :: PossibleExpr a b
 </span><a href="#local-6989586621679439202"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679439201"><span class="annot"><span class="annottext">b :: PossibleExpr a b
-</span><a href="#local-6989586621679439201"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
+</span><a href="#local-6989586621679439201"><span class="hs-identifier hs-var">b</span></a></span></span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
 forall a b. PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
 </span><a href="Telomare.Possible.html#getFirstNonZero"><span class="hs-identifier hs-var">getFirstNonZero</span></a></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b
 </span><a href="#local-6989586621679439202"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe (PossibleExpr a b)
@@ -280,10 +280,10 @@ forall a b. PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
 forall a b. PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
 </span><a href="Telomare.Possible.html#getFirstNonZero"><span class="hs-identifier hs-var">getFirstNonZero</span></a></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b
 </span><a href="#local-6989586621679439199"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-48"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#FunctionX"><span class="hs-identifier hs-type">FunctionX</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (PossibleExpr a b)
+</span><span id="line-48"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#FunctionX"><span class="hs-identifier hs-type">FunctionX</span></a></span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (PossibleExpr a b)
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-49"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#AnyX"><span class="hs-identifier hs-type">AnyX</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
+</span><span id="line-49"></span><span>  </span><span class="annot"><a href="Telomare.Possible.html#AnyX"><span class="hs-identifier hs-type">AnyX</span></a></span><span>          </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; Maybe (PossibleExpr a b)
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b
 forall a b. PossibleExpr a b
@@ -294,7 +294,7 @@ forall a b. PossibleExpr a b
 </span><a href="Telomare.Possible.html#possibleString"><span class="hs-identifier hs-var hs-var">possibleString</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-53"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679439197"><span class="annot"><span class="annottext">p2i :: PossibleExpr a b -&gt; Maybe Int
 </span><a href="#local-6989586621679439197"><span class="hs-identifier hs-var hs-var">p2i</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-54"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Maybe Int
+</span><span id="line-54"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Maybe Int
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="hs-number">0</span></span><span>
 </span><span id="line-55"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#PairX"><span class="hs-identifier hs-type">PairX</span></a></span><span> </span><span id="local-6989586621679439196"><span class="annot"><span class="annottext">a :: PossibleExpr a b
@@ -317,12 +317,12 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; Maybe Int
 </span><a href="#local-6989586621679439197"><span class="hs-identifier hs-var">p2i</span></a></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b
 </span><a href="#local-6989586621679439195"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-56"></span><span>        </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe Int
+</span><span id="line-56"></span><span>        </span><span class="hs-identifier">_</span><span>         </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe Int
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-57"></span><span>      </span><span id="local-6989586621679439190"><span class="annot"><span class="annottext">p2is :: PossibleExpr a b -&gt; Maybe [Int]
 </span><a href="#local-6989586621679439190"><span class="hs-identifier hs-var hs-var">p2is</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-58"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Maybe [Int]
+</span><span id="line-58"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#ZeroX"><span class="hs-identifier hs-type">ZeroX</span></a></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Maybe [Int]
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
 </span><span id="line-59"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#PairX"><span class="hs-identifier hs-type">PairX</span></a></span><span> </span><span id="local-6989586621679439189"><span class="annot"><span class="annottext">n :: PossibleExpr a b
@@ -337,7 +337,7 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; Maybe [Int]
 </span><a href="#local-6989586621679439190"><span class="hs-identifier hs-var">p2is</span></a></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b
 </span><a href="#local-6989586621679439188"><span class="hs-identifier hs-var">g</span></a></span><span>
-</span><span id="line-60"></span><span>        </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe [Int]
+</span><span id="line-60"></span><span>        </span><span class="hs-identifier">_</span><span>         </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe [Int]
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-61"></span><span>      </span><span id="local-6989586621679439187"><span class="annot"><span class="annottext">cleanString :: Maybe String -&gt; String
@@ -345,7 +345,7 @@ forall a. Maybe a
 </span><span id="line-62"></span><span>        </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679439186"><span class="annot"><span class="annottext">s :: String
 </span><a href="#local-6989586621679439186"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><a href="#local-6989586621679439186"><span class="hs-identifier hs-var">s</span></a></span><span>
-</span><span id="line-63"></span><span>        </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-string">&quot;unknown error&quot;</span></span><span>
+</span><span id="line-63"></span><span>        </span><span class="hs-identifier">_</span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-string">&quot;unknown error&quot;</span></span><span>
 </span><span id="line-64"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">Maybe String -&gt; String
 </span><a href="#local-6989586621679439187"><span class="hs-identifier hs-var">cleanString</span></a></span><span> </span><span class="annot"><span class="annottext">(Maybe String -&gt; String)
 -&gt; (PossibleExpr a b -&gt; Maybe String) -&gt; PossibleExpr a b -&gt; String
@@ -615,7 +615,7 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="#local-6989586621679439138"><span class="hs-identifier hs-var">px</span></a></span><span>
 </span><span id="line-102"></span><span>          </span><span class="annot"><a href="Telomare.Possible.html#PairX"><span class="hs-identifier hs-type">PairX</span></a></span><span> </span><span id="local-6989586621679439137"><span class="annot"><span class="annottext">ft :: PossibleExpr a b
 </span><a href="#local-6989586621679439137"><span class="hs-identifier hs-var">ft</span></a></span></span><span> </span><span id="local-6989586621679439136"><span class="annot"><span class="annottext">it :: PossibleExpr a b
-</span><a href="#local-6989586621679439136"><span class="hs-identifier hs-var">it</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(PossibleExpr a b -&gt; FragExpr b -&gt; m (PossibleExpr a b))
+</span><a href="#local-6989586621679439136"><span class="hs-identifier hs-var">it</span></a></span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(PossibleExpr a b -&gt; FragExpr b -&gt; m (PossibleExpr a b))
 -&gt; PossibleExpr a b
 -&gt; PossibleExpr a b
 -&gt; PossibleExpr a b
@@ -627,7 +627,7 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="#local-6989586621679439136"><span class="hs-identifier hs-var">it</span></a></span><span>
 </span><span id="line-103"></span><span>          </span><span class="annot"><a href="Telomare.Possible.html#EitherX"><span class="hs-identifier hs-type">EitherX</span></a></span><span> </span><span id="local-6989586621679439135"><span class="annot"><span class="annottext">a :: PossibleExpr a b
 </span><a href="#local-6989586621679439135"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679439134"><span class="annot"><span class="annottext">b :: PossibleExpr a b
-</span><a href="#local-6989586621679439134"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; PossibleExpr a b -&gt; PossibleExpr a b
+</span><a href="#local-6989586621679439134"><span class="hs-identifier hs-var">b</span></a></span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b -&gt; PossibleExpr a b -&gt; PossibleExpr a b
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">(&lt;&gt;)</span></span><span> </span><span class="annot"><span class="annottext">(PossibleExpr a b -&gt; PossibleExpr a b -&gt; PossibleExpr a b)
 -&gt; m (PossibleExpr a b) -&gt; m (PossibleExpr a b -&gt; PossibleExpr a b)
@@ -641,7 +641,7 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
 </span><a href="#local-6989586621679439140"><span class="hs-identifier hs-var">processSet</span></a></span><span> </span><span class="annot"><span class="annottext">PossibleExpr a b
 </span><a href="#local-6989586621679439134"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-104"></span><span>          </span><span id="local-6989586621679439133"><span class="annot"><span class="annottext">z :: PossibleExpr a b
-</span><a href="#local-6989586621679439133"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; m (PossibleExpr a b)
+</span><a href="#local-6989586621679439133"><span class="hs-identifier hs-var">z</span></a></span></span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; m (PossibleExpr a b)
 forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; m (PossibleExpr a b)) -&gt; String -&gt; m (PossibleExpr a b)
 forall a b. (a -&gt; b) -&gt; a -&gt; b

@@ -1,14 +1,14 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE LambdaCase                 #-}</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE LambdaCase #-}</span><span>
 </span><span id="line-2"></span><span>
 </span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.Decompiler</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-4"></span><span>
-</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">foldM</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">liftM2</span></span><span class="hs-special">)</span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Monad</span></span><span>       </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">foldM</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">liftM2</span></span><span class="hs-special">)</span><span>
 </span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">State</span></span><span>
-</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.List</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">intercalate</span></span><span class="hs-special">)</span><span>
-</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span>              </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
-</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Max</span></span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
-</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Parser.html"><span class="hs-identifier">Telomare.Parser</span></a></span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.List</span></span><span>           </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">intercalate</span></span><span class="hs-special">)</span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span>            </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Semigroup</span></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Max</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Telomare.Parser.html"><span class="hs-identifier">Telomare.Parser</span></a></span><span>
 </span><span id="line-12"></span><span>
 </span><span id="line-13"></span><span class="annot"><a href="Telomare.Decompiler.html#decompileUPT"><span class="hs-identifier hs-type">decompileUPT</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Parser.html#UnprocessedParsedTerm"><span class="hs-identifier hs-type">UnprocessedParsedTerm</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-14"></span><span id="decompileUPT"><span class="annot"><span class="annottext">decompileUPT :: UnprocessedParsedTerm -&gt; String
@@ -67,31 +67,31 @@ t (m a) -&gt; m (t a)
 </span><span class="hs-identifier hs-var">sequence</span></span><span>
 </span><span id="line-21"></span><span>      </span><span id="local-6989586621679441929"><span class="annot"><span class="annottext">needsParens :: UnprocessedParsedTerm -&gt; Bool
 </span><a href="#local-6989586621679441929"><span class="hs-identifier hs-var hs-var">needsParens</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span> </span><span class="hs-comment">-- will need parens if on right side of application</span><span>
-</span><span id="line-22"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#AppUP"><span class="hs-identifier hs-type">AppUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-22"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#AppUP"><span class="hs-identifier hs-type">AppUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-23"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LamUP"><span class="hs-identifier hs-type">LamUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-23"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LamUP"><span class="hs-identifier hs-type">LamUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-24"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LeftUP"><span class="hs-identifier hs-type">LeftUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-24"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LeftUP"><span class="hs-identifier hs-type">LeftUP</span></a></span><span> </span><span class="hs-identifier">_</span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-25"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#RightUP"><span class="hs-identifier hs-type">RightUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-25"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#RightUP"><span class="hs-identifier hs-type">RightUP</span></a></span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-26"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#TraceUP"><span class="hs-identifier hs-type">TraceUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-26"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#TraceUP"><span class="hs-identifier hs-type">TraceUP</span></a></span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-27"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LetUP"><span class="hs-identifier hs-type">LetUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-27"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LetUP"><span class="hs-identifier hs-type">LetUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
 </span><span id="line-28"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#ITEUP"><span class="hs-identifier hs-type">ITEUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-29"></span><span>        </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-29"></span><span>        </span><span class="hs-identifier">_</span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
 </span><span id="line-30"></span><span>      </span><span id="local-6989586621679441921"><span class="annot"><span class="annottext">needsFirstParens :: UnprocessedParsedTerm -&gt; Bool
 </span><a href="#local-6989586621679441921"><span class="hs-identifier hs-var hs-var">needsFirstParens</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-31"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LamUP"><span class="hs-identifier hs-type">LamUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-31"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LamUP"><span class="hs-identifier hs-type">LamUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-32"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LetUP"><span class="hs-identifier hs-type">LetUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-32"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#LetUP"><span class="hs-identifier hs-type">LetUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
 </span><span id="line-33"></span><span>        </span><span class="annot"><a href="Telomare.Parser.html#ITEUP"><span class="hs-identifier hs-type">ITEUP</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-34"></span><span>        </span><span class="hs-identifier">_</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-34"></span><span>        </span><span class="hs-identifier">_</span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
 </span><span id="line-35"></span><span>      </span><span id="local-6989586621679441920"><span class="annot"><span class="annottext">drawParens :: UnprocessedParsedTerm -&gt; State Int String
 </span><a href="#local-6989586621679441920"><span class="hs-identifier hs-var hs-var">drawParens</span></a></span></span><span> </span><span id="local-6989586621679441919"><span class="annot"><span class="annottext">x :: UnprocessedParsedTerm
@@ -247,9 +247,9 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><a href="#local-6989586621679441907"><span class="hs-identifier hs-var">in_</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-58"></span><span>          </span><span class="annot"><a href="Telomare.Parser.html#ListUP"><span class="hs-identifier hs-type">ListUP</span></a></span><span> </span><span id="local-6989586621679441893"><span class="annot"><span class="annottext">l :: [UnprocessedParsedTerm]
 </span><a href="#local-6989586621679441893"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679441892"><span class="annot"><span class="annottext">insertCommas :: [State Int String] -&gt; [State Int String]
-</span><a href="#local-6989586621679441892"><span class="hs-identifier hs-var hs-var">insertCommas</span></a></span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679441892"><span class="hs-identifier hs-var hs-var">insertCommas</span></a></span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
 </span><span id="line-59"></span><span>                          </span><span class="annot"><a href="#local-6989586621679441892"><span class="hs-identifier hs-var">insertCommas</span></a></span><span> </span><span class="hs-special">[</span><span id="local-6989586621679441891"><span class="annot"><span class="annottext">x :: State Int String
-</span><a href="#local-6989586621679441891"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679441891"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">]</span><span>    </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">State Int String
 </span><a href="#local-6989586621679441891"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">]</span><span>
 </span><span id="line-60"></span><span>                          </span><span class="annot"><a href="#local-6989586621679441892"><span class="hs-identifier hs-var">insertCommas</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679441890"><span class="annot"><span class="annottext">x :: State Int String
 </span><a href="#local-6989586621679441890"><span class="hs-identifier hs-var">x</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span id="local-6989586621679441889"><span class="annot"><span class="annottext">xs :: [State Int String]
@@ -394,16 +394,16 @@ forall s a. State s a -&gt; s -&gt; a
           else State.modify (+ indent)
         pure s
       draw oneLine =
-        let showTwo a b = undefined --let long = 
+        let showTwo a b = undefined --let long =
             showLine l = do
               indent &lt;- State.get
               let long = intercalate &quot; &quot; l
                          in if length long &gt; lineLimit
-                            then 
+                            then
 
 -}</span><span>
 </span><span id="line-93"></span><span>              </span><span class="hs-comment">{-m
-          drawLineOr x y = if not oneLine &amp;&amp; draw 
+          drawLineOr x y = if not oneLine &amp;&amp; draw
 -}</span><span>
 </span><span id="line-96"></span><span>
 </span><span id="line-97"></span><span class="annot"><a href="Telomare.Decompiler.html#decompileTerm1"><span class="hs-identifier hs-type">decompileTerm1</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#Term1"><span class="hs-identifier hs-type">Term1</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.Parser.html#UnprocessedParsedTerm"><span class="hs-identifier hs-type">UnprocessedParsedTerm</span></a></span><span>
@@ -825,7 +825,7 @@ forall a. Map FragIndex a -&gt; a
 -&gt; StateT
      (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
 </span><a href="#local-6989586621679441776"><span class="hs-identifier hs-var hs-var">build</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-152"></span><span>                         </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
+</span><span id="line-152"></span><span>                         </span><span class="annot"><a href="Telomare.html#Zero"><span class="hs-identifier hs-type">Zero</span></a></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
 -&gt; StateT
      (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
@@ -862,7 +862,7 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
      (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
 </span><a href="#local-6989586621679441776"><span class="hs-identifier hs-var">build</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679441772"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-154"></span><span>                         </span><span class="annot"><a href="Telomare.html#Env"><span class="hs-identifier hs-type">Env</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
+</span><span id="line-154"></span><span>                         </span><span class="annot"><a href="Telomare.html#Env"><span class="hs-identifier hs-type">Env</span></a></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
 -&gt; StateT
      (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
@@ -914,7 +914,7 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
 </span><a href="#local-6989586621679441776"><span class="hs-identifier hs-var">build</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679441766"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-157"></span><span>                         </span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span id="local-6989586621679441764"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679441764"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a -&gt; FragExpr a
+</span><a href="#local-6989586621679441764"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a -&gt; FragExpr a
 forall a. FragExpr a -&gt; FragExpr a
 </span><a href="Telomare.html#LeftFrag"><span class="hs-identifier hs-var">LeftFrag</span></a></span><span> </span><span class="annot"><span class="annottext">(FragExpr a -&gt; FragExpr a)
 -&gt; StateT
@@ -941,7 +941,7 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
      (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
 </span><a href="#local-6989586621679441776"><span class="hs-identifier hs-var">build</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679441762"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-159"></span><span>                         </span><span class="annot"><a href="Telomare.html#Trace"><span class="hs-identifier hs-type">Trace</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
+</span><span id="line-159"></span><span>                         </span><span class="annot"><a href="Telomare.html#Trace"><span class="hs-identifier hs-type">Trace</span></a></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">FragExpr a
 -&gt; StateT
      (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
@@ -949,7 +949,7 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 forall a. FragExpr a
 </span><a href="Telomare.html#TraceFrag"><span class="hs-identifier hs-var">TraceFrag</span></a></span><span>
 </span><span id="line-160"></span><span>                         </span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span> </span><span id="local-6989586621679441759"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679441759"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">StateT
+</span><a href="#local-6989586621679441759"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">StateT
   (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
 -&gt; StateT
      (FragIndex, Map FragIndex (FragExpr a)) Identity (FragExpr a)
