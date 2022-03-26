@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="%24con2tag_GayNXHrxxKD9dZCI0WdgoD"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.Optimizer</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-2"></span><span>
-</span><span id="line-3"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Control.Lens.Plated</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">transform</span></span><span class="hs-special">)</span><span>
-</span><span id="line-4"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span>            </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Map</span></span><span class="hs-special">)</span><span>
-</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span>            </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
-</span><span id="line-6"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span>            </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Set</span></span><span class="hs-special">)</span><span>
-</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span>            </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/772yp15f8a1f1czg3x3czbb5ah380lcm-lens-lib-lens-5.1-haddock-doc/share/doc/lens/html/src"><span class="hs-identifier">Control.Lens.Plated</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/772yp15f8a1f1czg3x3czbb5ah380lcm-lens-lib-lens-5.1-haddock-doc/share/doc/lens/html/src"><span class="hs-identifier">transform</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-4"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Map</span></a></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Map</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Map</span></a></span><span>            </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Set</span></a></span><span>            </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Set</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Set</span></a></span><span>            </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
 </span><span id="line-8"></span><span>
 </span><span id="line-9"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
 </span><span id="line-10"></span><span>
@@ -26,7 +26,7 @@
 </span><span id="line-26"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="VRight"><span class="annot"><a href="Telomare.Optimizer.html#VRight"><span class="hs-identifier hs-var">VRight</span></a></span></span><span> </span><span class="annot"><a href="Telomare.Optimizer.html#IExprV"><span class="hs-identifier hs-type">IExprV</span></a></span><span>
 </span><span id="line-27"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="VTrace"><span class="annot"><a href="Telomare.Optimizer.html#VTrace"><span class="hs-identifier hs-var">VTrace</span></a></span></span><span> </span><span class="annot"><a href="Telomare.Optimizer.html#IExprV"><span class="hs-identifier hs-type">IExprV</span></a></span><span>
 </span><span id="line-28"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="VClosure"><span class="annot"><a href="Telomare.Optimizer.html#VClosure"><span class="hs-identifier hs-var">VClosure</span></a></span></span><span> </span><span class="annot"><a href="Telomare.Optimizer.html#IExprV"><span class="hs-identifier hs-type">IExprV</span></a></span><span> </span><span class="annot"><a href="Telomare.Optimizer.html#IExprV"><span class="hs-identifier hs-type">IExprV</span></a></span><span>
-</span><span id="line-29"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679430850"><span id="local-6989586621679430852"><span class="annot"><span class="annottext">IExprV -&gt; IExprV -&gt; Bool
+</span><span id="line-29"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679335430"><span id="local-6989586621679335432"><span class="annot"><span class="annottext">IExprV -&gt; IExprV -&gt; Bool
 (IExprV -&gt; IExprV -&gt; Bool)
 -&gt; (IExprV -&gt; IExprV -&gt; Bool) -&gt; Eq IExprV
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -34,7 +34,7 @@ forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c/= :: IExprV -&gt; IExprV -&gt; Bool
 == :: IExprV -&gt; IExprV -&gt; Bool
 $c== :: IExprV -&gt; IExprV -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679430843"><span id="local-6989586621679430845"><span id="local-6989586621679430847"><span class="annot"><span class="annottext">Int -&gt; IExprV -&gt; ShowS
+</span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></a></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679335423"><span id="local-6989586621679335425"><span id="local-6989586621679335427"><span class="annot"><span class="annottext">Int -&gt; IExprV -&gt; ShowS
 [IExprV] -&gt; ShowS
 IExprV -&gt; String
 (Int -&gt; IExprV -&gt; ShowS)
@@ -47,9 +47,9 @@ show :: IExprV -&gt; String
 $cshow :: IExprV -&gt; String
 showsPrec :: Int -&gt; IExprV -&gt; ShowS
 $cshowsPrec :: Int -&gt; IExprV -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679430827"><span id="local-6989586621679430829"><span id="local-6989586621679430831"><span id="local-6989586621679430833"><span id="local-6989586621679430835"><span id="local-6989586621679430837"><span id="local-6989586621679430839"><span class="annot"><span class="annottext">Eq IExprV
-Eq IExprV =&gt;
-(IExprV -&gt; IExprV -&gt; Ordering)
+</span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></a></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679335407"><span id="local-6989586621679335409"><span id="local-6989586621679335411"><span id="local-6989586621679335413"><span id="local-6989586621679335415"><span id="local-6989586621679335417"><span id="local-6989586621679335419"><span class="annot"><span class="annottext">Eq IExprV
+Eq IExprV
+-&gt; (IExprV -&gt; IExprV -&gt; Ordering)
 -&gt; (IExprV -&gt; IExprV -&gt; Bool)
 -&gt; (IExprV -&gt; IExprV -&gt; Bool)
 -&gt; (IExprV -&gt; IExprV -&gt; Bool)
@@ -61,8 +61,8 @@ IExprV -&gt; IExprV -&gt; Bool
 IExprV -&gt; IExprV -&gt; Ordering
 IExprV -&gt; IExprV -&gt; IExprV
 forall a.
-Eq a =&gt;
-(a -&gt; a -&gt; Ordering)
+Eq a
+-&gt; (a -&gt; a -&gt; Ordering)
 -&gt; (a -&gt; a -&gt; Bool)
 -&gt; (a -&gt; a -&gt; Bool)
 -&gt; (a -&gt; a -&gt; Bool)
@@ -85,7 +85,7 @@ $c&lt; :: IExprV -&gt; IExprV -&gt; Bool
 compare :: IExprV -&gt; IExprV -&gt; Ordering
 $ccompare :: IExprV -&gt; IExprV -&gt; Ordering
 $cp1Ord :: Eq IExprV
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">)</span><span>
+</span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></a></span></span></span></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-30"></span><span>
 </span><span id="line-31"></span><span class="hs-comment">{- TODO something to convert all closures that don't return zerotype to ones that do
 
@@ -101,18 +101,20 @@ $cp1Ord :: Eq IExprV
 </span><span id="line-42"></span><span id="precompute"><span class="annot"><span class="annottext">precompute :: IExpr -&gt; IExpr
 </span><a href="Telomare.Optimizer.html#precompute"><span class="hs-identifier hs-var hs-var">precompute</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; IExpr -&gt; IExpr
 forall a. Plated a =&gt; (a -&gt; a) -&gt; a -&gt; a
-</span><span class="hs-identifier hs-var">transform</span></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
-</span><a href="#local-6989586621679430824"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-43"></span><span>  </span><span id="local-6989586621679430824"><span class="annot"><span class="annottext">f :: IExpr -&gt; IExpr
-</span><a href="#local-6989586621679430824"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679430821"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679430821"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-identifier">_</span><span class="hs-special">)</span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679430821"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-44"></span><span>  </span><span class="annot"><a href="#local-6989586621679430824"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span class="hs-identifier">_</span><span> </span><span id="local-6989586621679430819"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679430819"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679430819"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-45"></span><span>  </span><span class="annot"><a href="#local-6989586621679430824"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span id="local-6989586621679430818"><span class="annot"><span class="annottext">x :: IExpr
-</span><a href="#local-6989586621679430818"><span class="hs-identifier hs-var">x</span></a></span></span><span>                   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679430818"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="../file:///nix/store/772yp15f8a1f1czg3x3czbb5ah380lcm-lens-lib-lens-5.1-haddock-doc/share/doc/lens/html/src"><span class="hs-identifier hs-var">transform</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679335404"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-43"></span><span>  </span><span id="local-6989586621679335404"><span class="annot"><span class="annottext">f :: IExpr -&gt; IExpr
+</span><a href="#local-6989586621679335404"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span id="local-6989586621679335401"><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679335401"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679335401"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-44"></span><span>  </span><span class="annot"><a href="#local-6989586621679335404"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PRight"><span class="hs-identifier hs-type">PRight</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Pair"><span class="hs-identifier hs-type">Pair</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679335399"><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679335399"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679335399"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-45"></span><span>  </span><span class="annot"><a href="#local-6989586621679335404"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span id="local-6989586621679335398"><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679335398"><span class="hs-identifier hs-var">x</span></a></span></span><span>                   </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="#local-6989586621679335398"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-46"></span><span>
 </span><span id="line-47"></span><span class="annot"><a href="Telomare.Optimizer.html#optimize"><span class="hs-identifier hs-type">optimize</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.html#IExpr"><span class="hs-identifier hs-type">IExpr</span></a></span><span>
 </span><span id="line-48"></span><span id="optimize"><span class="annot"><span class="annottext">optimize :: IExpr -&gt; IExpr
