@@ -1,33 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="%24con2tag_Fp3JAvzIWcdAuy4XtlD8n1"><span id="%24con2tag_EnLeVGgp2IMFmencgVCWFp"><span id="%24con2tag_JxGfHTbiDsv9KP7K43vcat"></span></span></span><span class="hs-pragma">{-# LANGUAGE LambdaCase #-}</span><span>
-</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE DeriveGeneric              #-}</span><span>
-</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE DeriveFunctor #-}</span><span>
-</span><span id="line-4"></span><span class="hs-pragma">{-# LANGUAGE DeriveTraversable          #-}</span><span>
-</span><span id="line-5"></span><span class="hs-pragma">{-# LANGUAGE TemplateHaskell            #-}</span><span>
-</span><span id="line-6"></span><span class="hs-pragma">{-# LANGUAGE TypeFamilies               #-}</span><span>
-</span><span id="line-7"></span><span class="hs-pragma">{-# LANGUAGE PatternSynonyms            #-}</span><span>
-</span><span id="line-8"></span><span class="hs-pragma">{-# LANGUAGE ScopedTypeVariables        #-}</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span id="%24con2tag_Fp3JAvzIWcdAuy4XtlD8n1"><span id="%24con2tag_EnLeVGgp2IMFmencgVCWFp"><span id="%24con2tag_JxGfHTbiDsv9KP7K43vcat"></span></span></span><span class="hs-pragma">{-# LANGUAGE DeriveFunctor       #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE DeriveGeneric       #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE DeriveTraversable   #-}</span><span>
+</span><span id="line-4"></span><span class="hs-pragma">{-# LANGUAGE LambdaCase          #-}</span><span>
+</span><span id="line-5"></span><span class="hs-pragma">{-# LANGUAGE PatternSynonyms     #-}</span><span>
+</span><span id="line-6"></span><span class="hs-pragma">{-# LANGUAGE ScopedTypeVariables #-}</span><span>
+</span><span id="line-7"></span><span class="hs-pragma">{-# LANGUAGE TemplateHaskell     #-}</span><span>
+</span><span id="line-8"></span><span class="hs-pragma">{-# LANGUAGE TypeFamilies        #-}</span><span>
 </span><span id="line-9"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.Possible</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-10"></span><span>
 </span><span id="line-11"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Control.Applicative</span></a></span><span>
 </span><span id="line-12"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/772yp15f8a1f1czg3x3czbb5ah380lcm-lens-lib-lens-5.1-haddock-doc/share/doc/lens/html/src"><span class="hs-identifier">Control.Lens.Plated</span></a></span><span>
-</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Control.Monad</span></a></span><span>
-</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.Reader</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">Reader</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">ReaderT</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.Reader</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Reader</span></span><span>
-</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.State</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">State</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">StateT</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.State</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-8.10.7/src"><span class="hs-identifier">State</span></a></span><span>
-</span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">Control.Monad.Trans.Class</span></a></span><span>
-</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/6gs61r0f7019mngh0skny4wd6l5bv7nh-dlist-lib-dlist-1.0-haddock-doc/share/doc/dlist/html/src"><span class="hs-identifier">Data.DList</span></a></span><span>          </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/6gs61r0f7019mngh0skny4wd6l5bv7nh-dlist-lib-dlist-1.0-haddock-doc/share/doc/dlist/html/src"><span class="hs-identifier">DList</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-20"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/6gs61r0f7019mngh0skny4wd6l5bv7nh-dlist-lib-dlist-1.0-haddock-doc/share/doc/dlist/html/src"><span class="hs-identifier">Data.DList</span></a></span><span>          </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">DList</span></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Control.Monad</span></a></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.Reader</span></a></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">Reader</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">ReaderT</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.Reader</span></a></span><span>      </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Reader</span></span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.State</span></a></span><span>       </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">State</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">StateT</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/mtl-2.2.2/src"><span class="hs-identifier">Control.Monad.State</span></a></span><span>       </span><span class="hs-keyword">as</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-8.10.7/src"><span class="hs-identifier">State</span></a></span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/transformers-0.5.6.2/src"><span class="hs-identifier">Control.Monad.Trans.Class</span></a></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/6gs61r0f7019mngh0skny4wd6l5bv7nh-dlist-lib-dlist-1.0-haddock-doc/share/doc/dlist/html/src"><span class="hs-identifier">Data.DList</span></a></span><span>                </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/6gs61r0f7019mngh0skny4wd6l5bv7nh-dlist-lib-dlist-1.0-haddock-doc/share/doc/dlist/html/src"><span class="hs-identifier">DList</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/6gs61r0f7019mngh0skny4wd6l5bv7nh-dlist-lib-dlist-1.0-haddock-doc/share/doc/dlist/html/src"><span class="hs-identifier">Data.DList</span></a></span><span>                </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">DList</span></span><span>
 </span><span id="line-21"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Data.Foldable</span></a></span><span>
 </span><span id="line-22"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Data.Functor.Classes</span></a></span><span>
 </span><span id="line-23"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/yz6c7nq1jdjxi9ma9cjckzvnc5ir3mnc-recursion-schemes-lib-recursion-schemes-5.2.2.2-haddock-doc/share/doc/recursion-schemes/html/src"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span>
 </span><span id="line-24"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/yz6c7nq1jdjxi9ma9cjckzvnc5ir3mnc-recursion-schemes-lib-recursion-schemes-5.2.2.2-haddock-doc/share/doc/recursion-schemes/html/src"><span class="hs-identifier">Data.Functor.Foldable.TH</span></a></span><span>
-</span><span id="line-25"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Map</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Map</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-26"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Map</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
+</span><span id="line-25"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Map</span></a></span><span>                  </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Map</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-26"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Map</span></a></span><span>                  </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
 </span><span id="line-27"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Data.Monoid</span></a></span><span>
-</span><span id="line-28"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Set</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Set</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-29"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Set</span></a></span><span>            </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
-</span><span id="line-30"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Data.Void</span></a></span><span>
+</span><span id="line-28"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Set</span></a></span><span>                  </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Set</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-29"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/containers-0.6.5.1/src"><span class="hs-identifier">Data.Set</span></a></span><span>                  </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
+</span><span id="line-30"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Data.Void</span></a></span><span>
 </span><span id="line-31"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier">Debug.Trace</span></a></span><span>
 </span><span id="line-32"></span><span class="hs-keyword">import</span><span>           </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
 </span><span id="line-33"></span><span>
@@ -280,11 +280,11 @@ $cp1Traversable :: Functor PartExprF
 </span><a href="#local-6989586621679386157"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-47"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PartExprF a
 </span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">PartExprF b
-</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span>         </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">True</span></a></span><span>
 </span><span id="line-48"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PartExprF a
 </span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">PartExprF b
-</span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span class="hs-special">)</span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">True</span></a></span><span>
 </span><span id="line-49"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679386156"><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679386156"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679386155"><span class="annot"><span class="annottext">a
@@ -306,7 +306,7 @@ $cp1Traversable :: Functor PartExprF
 </span><a href="#local-6989586621679386150"><span class="hs-identifier hs-var">y</span></a></span><span>
 </span><span id="line-51"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span id="local-6989586621679386149"><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679386149"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span id="local-6989586621679386148"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679386148"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
+</span><a href="#local-6989586621679386148"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
 </span><a href="#local-6989586621679386159"><span class="hs-identifier hs-var">test</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679386149"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
 </span><a href="#local-6989586621679386148"><span class="hs-identifier hs-var">y</span></a></span><span>
@@ -324,18 +324,18 @@ $cp1Traversable :: Functor PartExprF
 </span><a href="#local-6989586621679386144"><span class="hs-identifier hs-var">d</span></a></span><span>
 </span><span id="line-53"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#LeftSF"><span class="hs-identifier hs-type">LeftSF</span></a></span><span> </span><span id="local-6989586621679386143"><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679386143"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#LeftSF"><span class="hs-identifier hs-type">LeftSF</span></a></span><span> </span><span id="local-6989586621679386142"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679386142"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
+</span><a href="#local-6989586621679386142"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
 </span><a href="#local-6989586621679386159"><span class="hs-identifier hs-var">test</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679386143"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
 </span><a href="#local-6989586621679386142"><span class="hs-identifier hs-var">y</span></a></span><span>
 </span><span id="line-54"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#RightSF"><span class="hs-identifier hs-type">RightSF</span></a></span><span> </span><span id="local-6989586621679386141"><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679386141"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#RightSF"><span class="hs-identifier hs-type">RightSF</span></a></span><span> </span><span id="local-6989586621679386140"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679386140"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
+</span><a href="#local-6989586621679386140"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">a -&gt; b -&gt; Bool
 </span><a href="#local-6989586621679386159"><span class="hs-identifier hs-var">test</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679386141"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">b
 </span><a href="#local-6989586621679386140"><span class="hs-identifier hs-var">y</span></a></span><span>
 </span><span id="line-55"></span><span>    </span><span class="annot"><span class="annottext">(PartExprF a, PartExprF b)
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier">_</span></span><span>                        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span><span>
 </span><span id="line-56"></span><span>
 </span><span id="line-57"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679386137"><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show1</span></a></span><span> </span><span class="annot"><a href="Telomare.Possible.html#PartExprF"><span class="hs-identifier hs-type">PartExprF</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
@@ -496,7 +496,7 @@ SplitFunctor f PartExprF (EnhancedExpr f) -&gt; EnhancedExpr f
 </span><a href="#local-6989586621679386080"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-80"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679386079"><span class="annot"><span class="annottext">f (EnhancedExpr f)
 </span><a href="#local-6989586621679386079"><span class="hs-identifier hs-var">la</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679386078"><span class="annot"><span class="annottext">f (EnhancedExpr f)
-</span><a href="#local-6989586621679386078"><span class="hs-identifier hs-var">lb</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f (EnhancedExpr f) -&gt; f (EnhancedExpr f) -&gt; Bool
+</span><a href="#local-6989586621679386078"><span class="hs-identifier hs-var">lb</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f (EnhancedExpr f) -&gt; f (EnhancedExpr f) -&gt; Bool
 forall (f :: * -&gt; *) a. (Eq1 f, Eq a) =&gt; f a -&gt; f a -&gt; Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var">eq1</span></a></span><span> </span><span class="annot"><span class="annottext">f (EnhancedExpr f)
 </span><a href="#local-6989586621679386079"><span class="hs-identifier hs-var">la</span></a></span><span> </span><span class="annot"><span class="annottext">f (EnhancedExpr f)
@@ -510,7 +510,7 @@ forall (f :: * -&gt; *) a. (Eq1 f, Eq a) =&gt; f a -&gt; f a -&gt; Bool
 </span><a href="#local-6989586621679386075"><span class="hs-identifier hs-var">rb</span></a></span><span>
 </span><span id="line-82"></span><span>    </span><span class="annot"><span class="annottext">(Either (f (EnhancedExpr f)) (PartExprF (EnhancedExpr f)),
  Either (f (EnhancedExpr f)) (PartExprF (EnhancedExpr f)))
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier">_</span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span></span><span>
 </span><span id="line-83"></span><span>
 </span><span id="line-84"></span><span id="local-6989586621679386074"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679386069"><span id="local-6989586621679386072"><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show1</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679386074"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#EnhancedExpr"><span class="hs-identifier hs-type">EnhancedExpr</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679386074"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
@@ -519,7 +519,7 @@ forall (f :: * -&gt; *) a. (Eq1 f, Eq a) =&gt; f a -&gt; f a -&gt; Bool
 </span><a href="#local-6989586621679386066"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either (f (EnhancedExpr f)) (PartExprF (EnhancedExpr f))
 </span><a href="#local-6989586621679386066"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-86"></span><span>    </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679386065"><span class="annot"><span class="annottext">f (EnhancedExpr f)
-</span><a href="#local-6989586621679386065"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679386065"><span class="hs-identifier hs-var">l</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;EnhancedExprL (&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-operator hs-var">&lt;&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; f (EnhancedExpr f) -&gt; ShowS
@@ -659,7 +659,7 @@ Functor o =&gt;
 </span><a href="#local-6989586621679386036"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386039"><span class="hs-identifier hs-var">nenv</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-111"></span><span>            </span><span class="annot"><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-type">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
-</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; EnhancedExpr o
+</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; EnhancedExpr o
 </span><a href="#local-6989586621679386045"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386037"><span class="hs-identifier hs-var">l</span></a></span><span>
 </span><span id="line-112"></span><span>            </span><span class="annot"><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-type">BasicExpr</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
@@ -668,7 +668,7 @@ Functor o =&gt;
 </span><a href="#local-6989586621679386045"><span class="hs-identifier hs-var">recur</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386036"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-113"></span><span>            </span><span class="annot"><span class="annottext">EnhancedExpr o
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><span class="hs-identifier">_</span></span><span>                      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 </span><a href="#local-6989586621679386049"><span class="hs-identifier hs-var">handleOther</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386048"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o)
 forall f. f -&gt; PartExprF f
@@ -699,7 +699,7 @@ forall f. f -&gt; PartExprF f
 </span><a href="#local-6989586621679386034"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386034"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-119"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-type">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
-</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 </span><a href="#local-6989586621679386046"><span class="hs-identifier hs-var">wrap</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
 forall f. PartExprF f
 </span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>
@@ -708,7 +708,7 @@ forall f. PartExprF f
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386033"><span class="hs-identifier hs-var">l</span></a></span><span>
 </span><span id="line-121"></span><span>        </span><span class="annot"><span class="annottext">EnhancedExpr o
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><span class="hs-identifier">_</span></span><span>                      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 </span><a href="#local-6989586621679386049"><span class="hs-identifier hs-var">handleOther</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386048"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o)
 forall f. f -&gt; PartExprF f
@@ -718,7 +718,7 @@ forall f. f -&gt; PartExprF f
 </span><a href="#local-6989586621679386032"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386032"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-123"></span><span>        </span><span class="annot"><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-type">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
-</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 </span><a href="#local-6989586621679386046"><span class="hs-identifier hs-var">wrap</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
 forall f. PartExprF f
 </span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>
@@ -727,7 +727,7 @@ forall f. PartExprF f
 </span><a href="#local-6989586621679386031"><span class="hs-identifier hs-var">r</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386031"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-125"></span><span>        </span><span class="annot"><span class="annottext">EnhancedExpr o
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><span class="hs-identifier">_</span></span><span>                      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 </span><a href="#local-6989586621679386049"><span class="hs-identifier hs-var">handleOther</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679386048"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; PartExprF (EnhancedExpr o)
 forall f. f -&gt; PartExprF f
@@ -1151,7 +1151,7 @@ $cp1Traversable :: Functor SuperPositionF
 </span><a href="#local-6989586621679385888"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-143"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SuperPositionF a
 </span><a href="Telomare.Possible.html#AnyPF"><span class="hs-identifier hs-var">AnyPF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">SuperPositionF b
-</span><a href="Telomare.Possible.html#AnyPF"><span class="hs-identifier hs-var">AnyPF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="Telomare.Possible.html#AnyPF"><span class="hs-identifier hs-var">AnyPF</span></a></span><span class="hs-special">)</span><span>               </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">True</span></a></span><span>
 </span><span id="line-144"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#EitherPF"><span class="hs-identifier hs-type">EitherPF</span></a></span><span> </span><span id="local-6989586621679385887"><span class="annot"><span class="annottext">a
 </span><a href="#local-6989586621679385887"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679385886"><span class="annot"><span class="annottext">a
@@ -1166,7 +1166,7 @@ $cp1Traversable :: Functor SuperPositionF
 </span><a href="#local-6989586621679385886"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">b
 </span><a href="#local-6989586621679385884"><span class="hs-identifier hs-var">d</span></a></span><span>
 </span><span id="line-145"></span><span>    </span><span class="annot"><span class="annottext">(SuperPositionF a, SuperPositionF b)
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier">_</span></span><span>                            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span><span>
 </span><span id="line-146"></span><span>
 </span><span id="line-147"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679385881"><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show1</span></a></span><span> </span><span class="annot"><a href="Telomare.Possible.html#SuperPositionF"><span class="hs-identifier hs-type">SuperPositionF</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
@@ -1448,7 +1448,7 @@ $cp1Traversable :: Functor AbortableF
 </span><a href="#local-6989586621679385795"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-159"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AbortableF a
 </span><a href="Telomare.Possible.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">AbortableF b
-</span><a href="Telomare.Possible.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="Telomare.Possible.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span class="hs-special">)</span><span>                  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">True</span></a></span><span>
 </span><span id="line-160"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span id="local-6989586621679385794"><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385794"><span class="hs-identifier hs-var">a</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span id="local-6989586621679385793"><span class="annot"><span class="annottext">IExpr
@@ -1459,7 +1459,7 @@ forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><a href="#local-6989586621679385793"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">True</span></a></span><span>
 </span><span id="line-161"></span><span>    </span><span class="annot"><span class="annottext">(AbortableF a, AbortableF b)
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier">_</span></span><span>                                 </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span><span>
 </span><span id="line-162"></span><span>
 </span><span id="line-163"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679385790"><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show1</span></a></span><span> </span><span class="annot"><a href="Telomare.Possible.html#AbortableF"><span class="hs-identifier hs-type">AbortableF</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
@@ -1470,7 +1470,7 @@ forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><a href="#local-6989586621679385787"><span class="hs-identifier hs-var">showList</span></a></span></span><span> </span><span id="local-6989586621679385786"><span class="annot"><span class="annottext">Int
 </span><a href="#local-6989586621679385786"><span class="hs-identifier hs-var">prec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-165"></span><span>    </span><span class="annot"><span class="annottext">AbortableF a
-</span><a href="Telomare.Possible.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="Telomare.Possible.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Show a =&gt; a -&gt; ShowS
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var">shows</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;AbortF&quot;</span></span><span>
@@ -1560,7 +1560,7 @@ Eq1 f =&gt;
 </span><a href="#local-6989586621679385765"><span class="hs-identifier hs-var">fb</span></a></span><span>
 </span><span id="line-173"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679385764"><span class="annot"><span class="annottext">g a
 </span><a href="#local-6989586621679385764"><span class="hs-identifier hs-var">ga</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679385763"><span class="annot"><span class="annottext">g b
-</span><a href="#local-6989586621679385763"><span class="hs-identifier hs-var">gb</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(a -&gt; b -&gt; Bool) -&gt; g a -&gt; g b -&gt; Bool
+</span><a href="#local-6989586621679385763"><span class="hs-identifier hs-var">gb</span></a></span></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(a -&gt; b -&gt; Bool) -&gt; g a -&gt; g b -&gt; Bool
 forall (f :: * -&gt; *) a b.
 Eq1 f =&gt;
 (a -&gt; b -&gt; Bool) -&gt; f a -&gt; f b -&gt; Bool
@@ -1569,7 +1569,7 @@ Eq1 f =&gt;
 </span><a href="#local-6989586621679385764"><span class="hs-identifier hs-var">ga</span></a></span><span> </span><span class="annot"><span class="annottext">g b
 </span><a href="#local-6989586621679385763"><span class="hs-identifier hs-var">gb</span></a></span><span>
 </span><span id="line-174"></span><span>    </span><span class="annot"><span class="annottext">(Either (g a) (f a), Either (g b) (f b))
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span class="hs-identifier">_</span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/ghc-prim-0.6.1/src"><span class="hs-identifier hs-var">False</span></a></span></span></span><span>
 </span><span id="line-175"></span><span>
 </span><span id="line-176"></span><span id="local-6989586621679385761"><span id="local-6989586621679385762"><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679385758"><span class="hs-special">(</span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show1</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679385762"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show1</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679385761"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Show1</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#SplitFunctor"><span class="hs-identifier hs-type">SplitFunctor</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679385761"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679385762"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
@@ -1629,7 +1629,7 @@ forall a. Show a =&gt; a -&gt; ShowS
 </span><a href="#local-6989586621679385743"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either (g a) (f a)
 </span><a href="#local-6989586621679385743"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-183"></span><span>    </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679385742"><span class="annot"><span class="annottext">g a
-</span><a href="#local-6989586621679385742"><span class="hs-identifier hs-var">lf</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Either (g b) (f b) -&gt; SplitFunctor g f b
+</span><a href="#local-6989586621679385742"><span class="hs-identifier hs-var">lf</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Either (g b) (f b) -&gt; SplitFunctor g f b
 forall (g :: * -&gt; *) (f :: * -&gt; *) x.
 Either (g x) (f x) -&gt; SplitFunctor g f x
 </span><a href="Telomare.Possible.html#SplitFunctor"><span class="hs-identifier hs-var">SplitFunctor</span></a></span><span> </span><span class="annot"><span class="annottext">(Either (g b) (f b) -&gt; SplitFunctor g f b)
@@ -1668,7 +1668,7 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="#local-6989586621679385702"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either (g a) (f a)
 </span><a href="#local-6989586621679385702"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-188"></span><span>    </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679385701"><span class="annot"><span class="annottext">g a
-</span><a href="#local-6989586621679385701"><span class="hs-identifier hs-var">fg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(a -&gt; m) -&gt; g a -&gt; m
+</span><a href="#local-6989586621679385701"><span class="hs-identifier hs-var">fg</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(a -&gt; m) -&gt; g a -&gt; m
 forall (t :: * -&gt; *) m a.
 (Foldable t, Monoid m) =&gt;
 (a -&gt; m) -&gt; t a -&gt; m
@@ -1691,7 +1691,7 @@ forall (t :: * -&gt; *) m a.
 </span><a href="#local-6989586621679385685"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either (g a) (f a)
 </span><a href="#local-6989586621679385685"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-193"></span><span>    </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679385684"><span class="annot"><span class="annottext">g a
-</span><a href="#local-6989586621679385684"><span class="hs-identifier hs-var">fg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Either (g b) (f b) -&gt; SplitFunctor g f b
+</span><a href="#local-6989586621679385684"><span class="hs-identifier hs-var">fg</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Either (g b) (f b) -&gt; SplitFunctor g f b
 forall (g :: * -&gt; *) (f :: * -&gt; *) x.
 Either (g x) (f x) -&gt; SplitFunctor g f x
 </span><a href="Telomare.Possible.html#SplitFunctor"><span class="hs-identifier hs-var">SplitFunctor</span></a></span><span> </span><span class="annot"><span class="annottext">(Either (g b) (f b) -&gt; SplitFunctor g f b)
@@ -1745,7 +1745,7 @@ forall (t :: * -&gt; *) (f :: * -&gt; *) a b.
 </span><a href="#local-6989586621679385678"><span class="hs-identifier hs-var">sx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either (f (SuperExpr f)) (SuperPositionF (SuperExpr f))
 </span><a href="#local-6989586621679385678"><span class="hs-identifier hs-var">sx</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-201"></span><span>    </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679385677"><span class="annot"><span class="annottext">f (SuperExpr f)
-</span><a href="#local-6989586621679385677"><span class="hs-identifier hs-var">ox</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f (SuperExpr f)
+</span><a href="#local-6989586621679385677"><span class="hs-identifier hs-var">ox</span></a></span></span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f (SuperExpr f)
 -&gt; Either
      (f (SuperExpr f))
      (SplitFunctor SuperPositionF PartExprF (SuperExpr f))
@@ -1860,7 +1860,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><a href="#local-6989586621679385669"><span class="hs-identifier hs-var">pb</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-210"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 </span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
-</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
+</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span>                  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 -&gt; Either
      (PartExprF (SuperExpr f), PartExprF (SuperExpr f))
      (PartExprF (SuperExpr f))
@@ -1870,7 +1870,7 @@ forall f. PartExprF f
 </span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>
 </span><span id="line-211"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 </span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
-</span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
+</span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span class="hs-special">)</span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 -&gt; Either
      (PartExprF (SuperExpr f), PartExprF (SuperExpr f))
      (PartExprF (SuperExpr f))
@@ -1944,7 +1944,7 @@ SuperExpr f -&gt; SuperExpr f -&gt; SuperExpr f
 </span><a href="#local-6989586621679385663"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-214"></span><span>        </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#SetEnvSF"><span class="hs-identifier hs-type">SetEnvSF</span></a></span><span> </span><span id="local-6989586621679385660"><span class="annot"><span class="annottext">SuperExpr f
 </span><a href="#local-6989586621679385660"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#SetEnvSF"><span class="hs-identifier hs-type">SetEnvSF</span></a></span><span> </span><span id="local-6989586621679385659"><span class="annot"><span class="annottext">SuperExpr f
-</span><a href="#local-6989586621679385659"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
+</span><a href="#local-6989586621679385659"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span>          </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 -&gt; Either
      (PartExprF (SuperExpr f), PartExprF (SuperExpr f))
      (PartExprF (SuperExpr f))
@@ -1969,7 +1969,7 @@ SuperExpr f -&gt; SuperExpr f -&gt; SuperExpr f
 </span><a href="#local-6989586621679385659"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-215"></span><span>        </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span id="local-6989586621679385658"><span class="annot"><span class="annottext">SuperExpr f
 </span><a href="#local-6989586621679385658"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span id="local-6989586621679385657"><span class="annot"><span class="annottext">SuperExpr f
-</span><a href="#local-6989586621679385657"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
+</span><a href="#local-6989586621679385657"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span>            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 -&gt; Either
      (PartExprF (SuperExpr f), PartExprF (SuperExpr f))
      (PartExprF (SuperExpr f))
@@ -2058,7 +2058,7 @@ SuperExpr f -&gt; SuperExpr f -&gt; SuperExpr f
 </span><a href="#local-6989586621679385651"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-218"></span><span>        </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#LeftSF"><span class="hs-identifier hs-type">LeftSF</span></a></span><span> </span><span id="local-6989586621679385648"><span class="annot"><span class="annottext">SuperExpr f
 </span><a href="#local-6989586621679385648"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#LeftSF"><span class="hs-identifier hs-type">LeftSF</span></a></span><span> </span><span id="local-6989586621679385647"><span class="annot"><span class="annottext">SuperExpr f
-</span><a href="#local-6989586621679385647"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
+</span><a href="#local-6989586621679385647"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span>              </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 -&gt; Either
      (PartExprF (SuperExpr f), PartExprF (SuperExpr f))
      (PartExprF (SuperExpr f))
@@ -2083,7 +2083,7 @@ SuperExpr f -&gt; SuperExpr f -&gt; SuperExpr f
 </span><a href="#local-6989586621679385647"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-219"></span><span>        </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Possible.html#RightSF"><span class="hs-identifier hs-type">RightSF</span></a></span><span> </span><span id="local-6989586621679385646"><span class="annot"><span class="annottext">SuperExpr f
 </span><a href="#local-6989586621679385646"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Possible.html#RightSF"><span class="hs-identifier hs-type">RightSF</span></a></span><span> </span><span id="local-6989586621679385645"><span class="annot"><span class="annottext">SuperExpr f
-</span><a href="#local-6989586621679385645"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
+</span><a href="#local-6989586621679385645"><span class="hs-identifier hs-var">y</span></a></span></span><span class="hs-special">)</span><span>            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 -&gt; Either
      (PartExprF (SuperExpr f), PartExprF (SuperExpr f))
      (PartExprF (SuperExpr f))
@@ -2107,7 +2107,7 @@ SuperExpr f -&gt; SuperExpr f -&gt; SuperExpr f
 </span><a href="#local-6989586621679385646"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">SuperExpr f
 </span><a href="#local-6989586621679385645"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-220"></span><span>        </span><span class="annot"><span class="annottext">(PartExprF (SuperExpr f), PartExprF (SuperExpr f))
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(PartExprF (SuperExpr f), PartExprF (SuperExpr f))
+</span><span class="hs-identifier">_</span></span><span>                                 </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(PartExprF (SuperExpr f), PartExprF (SuperExpr f))
 -&gt; Either
      (PartExprF (SuperExpr f), PartExprF (SuperExpr f))
      (PartExprF (SuperExpr f))
@@ -2237,7 +2237,7 @@ PartExprF (SuperExpr f)
 </span><a href="#local-6989586621679385640"><span class="hs-identifier hs-var">pa</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 </span><a href="#local-6989586621679385639"><span class="hs-identifier hs-var">pb</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-225"></span><span>      </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Right</span></a></span><span> </span><span id="local-6989586621679385638"><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
-</span><a href="#local-6989586621679385638"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f) -&gt; SuperExpr f
+</span><a href="#local-6989586621679385638"><span class="hs-identifier hs-var">r</span></a></span></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f) -&gt; SuperExpr f
 forall (f :: * -&gt; *). PartExprF (EnhancedExpr f) -&gt; EnhancedExpr f
 </span><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-var">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 </span><a href="#local-6989586621679385638"><span class="hs-identifier hs-var">r</span></a></span><span>
@@ -2798,7 +2798,7 @@ SuperExpr f -&gt; SuperExpr f -&gt; SuperExpr f
 </span><a href="#local-6989586621679385590"><span class="hs-identifier hs-var">ja</span></a></span><span> </span><span class="annot"><span class="annottext">SuperExpr f
 </span><a href="#local-6989586621679385589"><span class="hs-identifier hs-var">jb</span></a></span><span>
 </span><span id="line-267"></span><span>                  </span><span class="annot"><span class="annottext">(Maybe (SuperExpr f), Maybe (SuperExpr f))
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (SuperExpr f)
+</span><span class="hs-identifier">_</span></span><span>                  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (SuperExpr f)
 </span><a href="#local-6989586621679385592"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe (SuperExpr f) -&gt; Maybe (SuperExpr f) -&gt; Maybe (SuperExpr f)
 forall (f :: * -&gt; *) a. Alternative f =&gt; f a -&gt; f a -&gt; f a
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-operator hs-var">&lt;|&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe (SuperExpr f)
@@ -2844,7 +2844,7 @@ forall a. HasCallStack =&gt; String -&gt; a
 </span><a href="#local-6989586621679385586"><span class="hs-identifier hs-var">scx</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either (f (SuperExpr f)) (SuperPositionF (SuperExpr f))
 </span><a href="#local-6989586621679385586"><span class="hs-identifier hs-var">scx</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-274"></span><span>            </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span class="annot"><span class="annottext">f (SuperExpr f)
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">SuperExpr f -&gt; PartExprF (SuperExpr f) -&gt; SuperExpr f
+</span><span class="hs-identifier">_</span></span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">SuperExpr f -&gt; PartExprF (SuperExpr f) -&gt; SuperExpr f
 </span><a href="#local-6989586621679385628"><span class="hs-identifier hs-var">handleOther</span></a></span><span> </span><span class="annot"><span class="annottext">SuperExpr f
 </span><a href="#local-6989586621679385627"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (SuperExpr f)
 </span><a href="#local-6989586621679385626"><span class="hs-identifier hs-var">term</span></a></span><span>
@@ -2903,7 +2903,7 @@ forall a. Show a =&gt; a -&gt; String
 </span><a href="#local-6989586621679385578"><span class="hs-identifier hs-var">sa</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either (f (AbortExpr f)) (AbortableF (AbortExpr f))
 </span><a href="#local-6989586621679385578"><span class="hs-identifier hs-var">sa</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-284"></span><span>      </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Left</span></a></span><span> </span><span id="local-6989586621679385577"><span class="annot"><span class="annottext">f (AbortExpr f)
-</span><a href="#local-6989586621679385577"><span class="hs-identifier hs-var">o</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f (AbortExpr f)
+</span><a href="#local-6989586621679385577"><span class="hs-identifier hs-var">o</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f (AbortExpr f)
 -&gt; Either
      (f (AbortExpr f))
      (SplitFunctor
@@ -3349,7 +3349,7 @@ SplitFunctor (SplitFunctor g SuperPositionF) PartExprF IExpr
 </span><a href="#local-6989586621679385563"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">PartExprF IExpr
 </span><a href="#local-6989586621679385563"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-297"></span><span>            </span><span class="annot"><span class="annottext">PartExprF IExpr
-</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>
 </span><span id="line-298"></span><span>            </span><span class="annot"><a href="Telomare.Possible.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679385561"><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385561"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679385560"><span class="annot"><span class="annottext">IExpr
@@ -3364,7 +3364,7 @@ SplitFunctor (SplitFunctor g SuperPositionF) PartExprF IExpr
 </span><a href="#local-6989586621679385557"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">SuperPositionF IExpr
 </span><a href="#local-6989586621679385557"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-301"></span><span>              </span><span class="annot"><span class="annottext">SuperPositionF IExpr
-</span><a href="Telomare.Possible.html#AnyPF"><span class="hs-identifier hs-var">AnyPF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr
+</span><a href="Telomare.Possible.html#AnyPF"><span class="hs-identifier hs-var">AnyPF</span></a></span><span>        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>
 </span><span id="line-302"></span><span>              </span><span class="annot"><a href="Telomare.Possible.html#EitherPF"><span class="hs-identifier hs-type">EitherPF</span></a></span><span> </span><span id="local-6989586621679385556"><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385556"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="annot"><span class="annottext">IExpr
@@ -3533,7 +3533,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall f. PartExprF f
 </span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span>
 </span><span id="line-323"></span><span>                      </span><span id="local-6989586621679385540"><span class="annot"><span class="annottext">PartExprF (AbortExpr f)
-</span><a href="#local-6989586621679385540"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">AbortableF (AbortExpr f) -&gt; AbortExpr f
+</span><a href="#local-6989586621679385540"><span class="hs-identifier hs-var">e</span></a></span></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">AbortableF (AbortExpr f) -&gt; AbortExpr f
 forall (f :: * -&gt; *) (g :: * -&gt; *) (f :: * -&gt; *).
 f (EnhancedExpr (SplitFunctor (SplitFunctor g f) f))
 -&gt; EnhancedExpr (SplitFunctor (SplitFunctor g f) f)
@@ -3661,7 +3661,7 @@ forall a. Show a =&gt; a -&gt; String
 </span><span id="line-336"></span><span>  </span><span id="local-6989586621679385525"><span class="annot"><span class="annottext">fromTelomare :: IExpr -&gt; EnhancedExpr o
 </span><a href="Telomare.html#fromTelomare"><span class="hs-identifier hs-var hs-var hs-var hs-var">fromTelomare</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-337"></span><span>    </span><span class="annot"><span class="annottext">IExpr
-</span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 forall (f :: * -&gt; *). PartExprF (EnhancedExpr f) -&gt; EnhancedExpr f
 </span><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-var">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
 forall f. PartExprF f
@@ -3683,7 +3683,7 @@ forall a. TelomareLike a =&gt; IExpr -&gt; a
 </span><a href="Telomare.html#fromTelomare"><span class="hs-identifier hs-var">fromTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385522"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-339"></span><span>    </span><span class="annot"><span class="annottext">IExpr
-</span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 forall (f :: * -&gt; *). PartExprF (EnhancedExpr f) -&gt; EnhancedExpr f
 </span><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-var">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
 forall f. PartExprF f
@@ -3701,7 +3701,7 @@ forall a. TelomareLike a =&gt; IExpr -&gt; a
 </span><a href="Telomare.html#fromTelomare"><span class="hs-identifier hs-var">fromTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385519"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-341"></span><span>    </span><span class="annot"><a href="Telomare.html#Defer"><span class="hs-identifier hs-type">Defer</span></a></span><span> </span><span id="local-6989586621679385517"><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679385517"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><a href="#local-6989586621679385517"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 forall (f :: * -&gt; *). PartExprF (EnhancedExpr f) -&gt; EnhancedExpr f
 </span><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-var">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">(PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o)
 -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
@@ -3729,7 +3729,7 @@ forall a. TelomareLike a =&gt; IExpr -&gt; a
 </span><a href="Telomare.html#fromTelomare"><span class="hs-identifier hs-var">fromTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385514"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-343"></span><span>    </span><span class="annot"><a href="Telomare.html#PLeft"><span class="hs-identifier hs-type">PLeft</span></a></span><span> </span><span id="local-6989586621679385512"><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679385512"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
+</span><a href="#local-6989586621679385512"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
 forall (f :: * -&gt; *). PartExprF (EnhancedExpr f) -&gt; EnhancedExpr f
 </span><a href="Telomare.Possible.html#BasicExpr"><span class="hs-identifier hs-var">BasicExpr</span></a></span><span> </span><span class="annot"><span class="annottext">(PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o)
 -&gt; PartExprF (EnhancedExpr o) -&gt; EnhancedExpr o
@@ -3753,7 +3753,7 @@ forall a. TelomareLike a =&gt; IExpr -&gt; a
 </span><a href="Telomare.html#fromTelomare"><span class="hs-identifier hs-var">fromTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385510"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-345"></span><span>    </span><span class="annot"><span class="annottext">IExpr
-</span><a href="Telomare.html#Trace"><span class="hs-identifier hs-var">Trace</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; EnhancedExpr o
+</span><a href="Telomare.html#Trace"><span class="hs-identifier hs-var">Trace</span></a></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; EnhancedExpr o
 forall a. HasCallStack =&gt; String -&gt; a
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var">error</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;EnhancedExpr trace&quot;</span></span><span>
@@ -3763,7 +3763,7 @@ forall a. HasCallStack =&gt; String -&gt; a
 </span><a href="#local-6989586621679385506"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
 </span><a href="#local-6989586621679385506"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-348"></span><span>      </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
-</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Maybe IExpr
+</span><a href="Telomare.Possible.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Maybe IExpr
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Zero"><span class="hs-identifier hs-var">Zero</span></a></span><span>
@@ -3782,7 +3782,7 @@ forall a. TelomareLike a =&gt; a -&gt; Maybe IExpr
 </span><a href="Telomare.html#toTelomare"><span class="hs-identifier hs-var">toTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679385504"><span class="hs-identifier hs-var">b</span></a></span><span>
 </span><span id="line-350"></span><span>      </span><span class="annot"><span class="annottext">PartExprF (EnhancedExpr o)
-</span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Maybe IExpr
+</span><a href="Telomare.Possible.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; Maybe IExpr
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span>
@@ -3795,7 +3795,7 @@ forall a. TelomareLike a =&gt; a -&gt; Maybe IExpr
 </span><a href="Telomare.html#toTelomare"><span class="hs-identifier hs-var">toTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679385503"><span class="hs-identifier hs-var">p</span></a></span><span>
 </span><span id="line-352"></span><span>      </span><span class="annot"><a href="Telomare.Possible.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span id="local-6989586621679385502"><span class="annot"><span class="annottext">EnhancedExpr o
-</span><a href="#local-6989586621679385502"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679385502"><span class="hs-identifier hs-var">d</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#Defer"><span class="hs-identifier hs-var">Defer</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; Maybe IExpr -&gt; Maybe IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; Maybe IExpr
@@ -3817,7 +3817,7 @@ forall a. TelomareLike a =&gt; a -&gt; Maybe IExpr
 </span><a href="Telomare.html#toTelomare"><span class="hs-identifier hs-var">toTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679385500"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-354"></span><span>      </span><span class="annot"><a href="Telomare.Possible.html#LeftSF"><span class="hs-identifier hs-type">LeftSF</span></a></span><span> </span><span id="local-6989586621679385499"><span class="annot"><span class="annottext">EnhancedExpr o
-</span><a href="#local-6989586621679385499"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679385499"><span class="hs-identifier hs-var">x</span></a></span></span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PLeft"><span class="hs-identifier hs-var">PLeft</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; Maybe IExpr -&gt; Maybe IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; Maybe IExpr
@@ -3825,7 +3825,7 @@ forall a. TelomareLike a =&gt; a -&gt; Maybe IExpr
 </span><a href="Telomare.html#toTelomare"><span class="hs-identifier hs-var">toTelomare</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o
 </span><a href="#local-6989586621679385499"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-355"></span><span>      </span><span class="annot"><a href="Telomare.Possible.html#RightSF"><span class="hs-identifier hs-type">RightSF</span></a></span><span> </span><span id="local-6989586621679385498"><span class="annot"><span class="annottext">EnhancedExpr o
-</span><a href="#local-6989586621679385498"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
+</span><a href="#local-6989586621679385498"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IExpr
 </span><a href="Telomare.html#PRight"><span class="hs-identifier hs-var">PRight</span></a></span><span> </span><span class="annot"><span class="annottext">(IExpr -&gt; IExpr) -&gt; Maybe IExpr -&gt; Maybe IExpr
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-operator hs-var">&lt;$&gt;</span></a></span><span> </span><span class="annot"><span class="annottext">EnhancedExpr o -&gt; Maybe IExpr
@@ -3875,7 +3875,7 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="Telomare.html#Env"><span class="hs-identifier hs-var">Env</span></a></span><span>
 </span><span id="line-362"></span><span>    </span><span class="annot"><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-type">Just</span></a></span><span> </span><span id="local-6989586621679385494"><span class="annot"><span class="annottext">IExpr
-</span><a href="#local-6989586621679385494"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IO IExpr
+</span><a href="#local-6989586621679385494"><span class="hs-identifier hs-var">x</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">IExpr -&gt; IO IExpr
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><a href="../file:///nix/store/bacifcjs171a4z6qm5h24va3gld04p1j-ghc-8.10.7-doc/share/doc/ghc/html/libraries/base-4.14.3.0/src"><span class="hs-identifier hs-var">pure</span></a></span><span> </span><span class="annot"><span class="annottext">IExpr
 </span><a href="#local-6989586621679385494"><span class="hs-identifier hs-var">x</span></a></span><span>
@@ -4326,7 +4326,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr f
 </span><a href="#local-6989586621679385458"><span class="hs-identifier hs-var">f</span></a></span><span>
 </span><span id="line-394"></span><span>        </span><span id="local-6989586621679385457"><span class="annot"><span class="annottext">EnhancedExpr f
-</span><a href="#local-6989586621679385457"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr f
+</span><a href="#local-6989586621679385457"><span class="hs-identifier hs-var">x</span></a></span></span><span>                                            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EnhancedExpr f
 </span><a href="#local-6989586621679385457"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-395"></span><span>      </span><span id="local-6989586621679385456"><span class="annot"><span class="annottext">getAborted :: SplitFunctor
   (SplitFunctor (SplitFunctor VoidF AbortableF) SuperPositionF)
