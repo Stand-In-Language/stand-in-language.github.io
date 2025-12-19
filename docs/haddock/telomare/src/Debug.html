@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Debug</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-2"></span><span>
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.IORef</span></span><span>
+</span><span id="line-4"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">System.IO.Unsafe</span></span><span>
+</span><span id="line-5"></span><span>
+</span><span id="line-6"></span><span class="annot"><a href="Debug.html#outputLimit"><span class="hs-identifier hs-type">outputLimit</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
+</span><span id="line-7"></span><span id="outputLimit"><span class="annot"><span class="annottext">outputLimit :: Int
+</span><a href="Debug.html#outputLimit"><span class="hs-identifier hs-var hs-var">outputLimit</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">10000</span></span><span>
+</span><span id="line-8"></span><span class="hs-comment">{-
+useFile :: Bool
+useFile = True
+
+data DebugState = DebugState Handle Int
+
+file &lt;- openFile &quot;debug.txt&quot; WriteMode
+hPutStrLn file &quot;test&quot;
+-- hFlush file
+hClose file
+-}</span><span>
+</span><span id="line-19"></span><span class="hs-keyword">newtype</span><span> </span><span id="DebugState"><span class="annot"><a href="Debug.html#DebugState"><span class="hs-identifier hs-var">DebugState</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="DebugState"><span class="annot"><a href="Debug.html#DebugState"><span class="hs-identifier hs-var">DebugState</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
+</span><span id="line-20"></span><span>
+</span><span id="line-21"></span><span class="annot"><a href="Debug.html#debugState"><span class="hs-identifier hs-type">debugState</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IORef</span></span><span> </span><span class="annot"><a href="Debug.html#DebugState"><span class="hs-identifier hs-type">DebugState</span></a></span><span>
+</span><span id="line-22"></span><span class="hs-pragma">{-# NOINLINE</span><span> </span><span class="annot"><a href="Debug.html#debugState"><span class="hs-pragma hs-type">debugState</span></a></span><span> </span><span class="hs-pragma">#-}</span><span>
+</span><span id="line-23"></span><span id="debugState"><span class="annot"><span class="annottext">debugState :: IORef DebugState
+</span><a href="Debug.html#debugState"><span class="hs-identifier hs-var hs-var">debugState</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IO (IORef DebugState) -&gt; IORef DebugState
+forall a. IO a -&gt; a
+</span><span class="hs-identifier hs-var">unsafePerformIO</span></span><span> </span><span class="annot"><span class="annottext">(IO (IORef DebugState) -&gt; IORef DebugState)
+-&gt; (DebugState -&gt; IO (IORef DebugState))
+-&gt; DebugState
+-&gt; IORef DebugState
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">DebugState -&gt; IO (IORef DebugState)
+forall a. a -&gt; IO (IORef a)
+</span><span class="hs-identifier hs-var">newIORef</span></span><span> </span><span class="annot"><span class="annottext">(DebugState -&gt; IORef DebugState) -&gt; DebugState -&gt; IORef DebugState
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; DebugState
+</span><a href="Debug.html#DebugState"><span class="hs-identifier hs-var">DebugState</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span>
+</span><span id="line-24"></span><span>
+</span><span id="line-25"></span><span class="hs-comment">-- TODO looks like debugState result isn't run once and cached, so this doesn't work :(</span><span>
+</span><span id="line-26"></span><span id="local-6989586621679247747"><span class="annot"><a href="Debug.html#debugTrace%27"><span class="hs-identifier hs-type">debugTrace'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679247747"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679247747"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-27"></span><span id="debugTrace%27"><span class="annot"><span class="annottext">debugTrace' :: forall a. String -&gt; a -&gt; a
+</span><a href="Debug.html#debugTrace%27"><span class="hs-identifier hs-var hs-var">debugTrace'</span></a></span></span><span> </span><span id="local-6989586621679247775"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span id="local-6989586621679247776"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679247776"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IO a -&gt; a
+forall a. IO a -&gt; a
+</span><span class="hs-identifier hs-var">unsafePerformIO</span></span><span> </span><span class="annot"><span class="annottext">(IO a -&gt; a) -&gt; IO a -&gt; a
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-28"></span><span>  </span><span class="annot"><a href="Debug.html#DebugState"><span class="hs-identifier hs-type">DebugState</span></a></span><span> </span><span id="local-6989586621679247777"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679247777"><span class="hs-identifier hs-var">numChars</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IORef DebugState -&gt; IO DebugState
+forall a. IORef a -&gt; IO a
+</span><span class="hs-identifier hs-var">readIORef</span></span><span> </span><span class="annot"><span class="annottext">IORef DebugState
+</span><a href="Debug.html#debugState"><span class="hs-identifier hs-var">debugState</span></a></span><span>
+</span><span id="line-29"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; IO ()
+</span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-30"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679247784"><span class="annot"><span class="annottext">newNumChars :: Int
+</span><a href="#local-6989586621679247784"><span class="hs-identifier hs-var hs-var">newNumChars</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679247777"><span class="hs-identifier hs-var">numChars</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
+forall a. [a] -&gt; Int
+forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
+</span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-31"></span><span>  </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679247784"><span class="hs-identifier hs-var">newNumChars</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+forall a. Ord a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="Debug.html#outputLimit"><span class="hs-identifier hs-var">outputLimit</span></a></span><span>
+</span><span id="line-32"></span><span>    </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO a
+forall a. HasCallStack =&gt; String -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;debug output limit reached, aborting&quot;</span></span><span>
+</span><span id="line-33"></span><span>    </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">a -&gt; IO a
+forall a. a -&gt; IO a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679247776"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span>
+</span><span id="line-36"></span><span>
+</span><span id="line-37"></span></pre></body></html>
