@@ -39,34 +39,34 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-number">0</span></span><span>
 </span><span id="line-24"></span><span>
 </span><span id="line-25"></span><span class="hs-comment">-- TODO looks like debugState result isn't run once and cached, so this doesn't work :(</span><span>
-</span><span id="line-26"></span><span id="local-6989586621679247747"><span class="annot"><a href="Debug.html#debugTrace%27"><span class="hs-identifier hs-type">debugTrace'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679247747"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679247747"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-26"></span><span id="local-6989586621679247745"><span class="annot"><a href="Debug.html#debugTrace%27"><span class="hs-identifier hs-type">debugTrace'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679247745"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679247745"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-27"></span><span id="debugTrace%27"><span class="annot"><span class="annottext">debugTrace' :: forall a. String -&gt; a -&gt; a
-</span><a href="Debug.html#debugTrace%27"><span class="hs-identifier hs-var hs-var">debugTrace'</span></a></span></span><span> </span><span id="local-6989586621679247775"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span id="local-6989586621679247776"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679247776"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IO a -&gt; a
+</span><a href="Debug.html#debugTrace%27"><span class="hs-identifier hs-var hs-var">debugTrace'</span></a></span></span><span> </span><span id="local-6989586621679247773"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679247773"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span id="local-6989586621679247774"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679247774"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">IO a -&gt; a
 forall a. IO a -&gt; a
 </span><span class="hs-identifier hs-var">unsafePerformIO</span></span><span> </span><span class="annot"><span class="annottext">(IO a -&gt; a) -&gt; IO a -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-28"></span><span>  </span><span class="annot"><a href="Debug.html#DebugState"><span class="hs-identifier hs-type">DebugState</span></a></span><span> </span><span id="local-6989586621679247777"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679247777"><span class="hs-identifier hs-var">numChars</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IORef DebugState -&gt; IO DebugState
+</span><span id="line-28"></span><span>  </span><span class="annot"><a href="Debug.html#DebugState"><span class="hs-identifier hs-type">DebugState</span></a></span><span> </span><span id="local-6989586621679247775"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">numChars</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">IORef DebugState -&gt; IO DebugState
 forall a. IORef a -&gt; IO a
 </span><span class="hs-identifier hs-var">readIORef</span></span><span> </span><span class="annot"><span class="annottext">IORef DebugState
 </span><a href="Debug.html#debugState"><span class="hs-identifier hs-var">debugState</span></a></span><span>
 </span><span id="line-29"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; IO ()
 </span><span class="hs-identifier hs-var">putStrLn</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">s</span></a></span><span>
-</span><span id="line-30"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679247784"><span class="annot"><span class="annottext">newNumChars :: Int
-</span><a href="#local-6989586621679247784"><span class="hs-identifier hs-var hs-var">newNumChars</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679247777"><span class="hs-identifier hs-var">numChars</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679247773"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-30"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679247782"><span class="annot"><span class="annottext">newNumChars :: Int
+</span><a href="#local-6989586621679247782"><span class="hs-identifier hs-var hs-var">newNumChars</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">numChars</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679247775"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><a href="#local-6989586621679247773"><span class="hs-identifier hs-var">s</span></a></span><span>
 </span><span id="line-31"></span><span>  </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679247784"><span class="hs-identifier hs-var">newNumChars</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679247782"><span class="hs-identifier hs-var">newNumChars</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><a href="Debug.html#outputLimit"><span class="hs-identifier hs-var">outputLimit</span></a></span><span>
@@ -78,7 +78,7 @@ forall a. HasCallStack =&gt; String -&gt; a
 forall a. a -&gt; IO a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679247776"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679247774"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-34"></span><span>
 </span><span id="line-35"></span><span>
 </span><span id="line-36"></span><span>
