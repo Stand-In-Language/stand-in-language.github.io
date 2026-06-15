@@ -1,17 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE LambdaCase #-}</span><span>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.Decompiler</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-2"></span><span>
-</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.Decompiler</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-4"></span><span>
-</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html"><span class="hs-identifier">Control.Comonad.Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#Cofree"><span class="hs-identifier">Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator">(:&lt;)</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">foldM</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">liftM2</span></span><span class="hs-special">)</span><span>
-</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">State</span></span><span>
-</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier">embed</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier">project</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.List</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">intercalate</span></span><span class="hs-special">)</span><span>
-</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
-</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Max</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
-</span><span id="line-13"></span><span>
-</span><span id="line-14"></span><span class="hs-comment">{-
+</span><span id="line-3"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html"><span class="hs-identifier">Control.Comonad.Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#Cofree"><span class="hs-identifier">Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator">(:&lt;)</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-4"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">foldM</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">liftM2</span></span><span class="hs-special">)</span><span>
+</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">State</span></span><span>
+</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier">embed</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier">project</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.List</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">intercalate</span></span><span class="hs-special">)</span><span>
+</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
+</span><span id="line-9"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Max</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span>
+</span><span id="line-11"></span><span>
+</span><span id="line-12"></span><span class="hs-comment">{-
 decompileUPT :: UnprocessedParsedTerm -&gt; String
 decompileUPT =
   let lineLimit = 120
@@ -77,7 +75,7 @@ decompileUPT =
 
   in \x -&gt; State.evalState (draw x) 0
 -}</span><span>
-</span><span id="line-80"></span><span>  </span><span class="hs-comment">{-
+</span><span id="line-78"></span><span>  </span><span class="hs-comment">{-
       safeTail s = if null s then [] else tail s
       showMem s = do
         let indent = length . last . takeWhile (not . null) . iterate (safeTail . dropWhile (/= '\n')) $ s
@@ -94,11 +92,11 @@ decompileUPT =
                             then
 
 -}</span><span>
-</span><span id="line-97"></span><span>              </span><span class="hs-comment">{-m
+</span><span id="line-95"></span><span>              </span><span class="hs-comment">{-m
           drawLineOr x y = if not oneLine &amp;&amp; draw
 -}</span><span>
-</span><span id="line-100"></span><span>
-</span><span id="line-101"></span><span class="hs-comment">{-
+</span><span id="line-98"></span><span>
+</span><span id="line-99"></span><span class="hs-comment">{-
 decompileTerm1 :: Term1 -&gt; UnprocessedParsedTerm
 decompileTerm1 = \case
   _ :&lt; ParserTermB ZeroSF -&gt; embed $ IntUPF 0
@@ -114,314 +112,29 @@ decompileTerm1 = \case
   loc :&lt; TLamF (Closed n) x -&gt; embed $ LamUPF (locatedName loc n) (decompileTerm1 x) -- not strictly equivalent
   _ :&lt; TLimitedRecursionF t r b -&gt; embed $ UnsizedRecursionUPF (decompileTerm1 t) (decompileTerm1 r) (decompileTerm1 b)
 -}</span><span>
-</span><span id="line-117"></span><span>
-</span><span id="line-118"></span><span class="annot"><a href="Telomare.Decompiler.html#decompileTerm2"><span class="hs-identifier hs-type">decompileTerm2</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#Term2"><span class="hs-identifier hs-type">Term2</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.html#Term1"><span class="hs-identifier hs-type">Term1</span></a></span><span>
-</span><span id="line-119"></span><span id="decompileTerm2"><span class="annot"><span class="annottext">decompileTerm2 :: Term2 -&gt; Term1
-</span><a href="Telomare.Decompiler.html#decompileTerm2"><span class="hs-identifier hs-var hs-var">decompileTerm2</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-120"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679228689"><span class="annot"><span class="annottext">nameSupply :: [[Char]]
-</span><a href="#local-6989586621679228689"><span class="hs-identifier hs-var hs-var">nameSupply</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Char -&gt; [Char]) -&gt; [Char] -&gt; [[Char]]
-forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Char -&gt; [Char] -&gt; [Char]
-forall a. a -&gt; [a] -&gt; [a]
-</span><span class="hs-glyph hs-var">:</span></span><span class="hs-special">[</span><span class="hs-special">]</span><span class="hs-special">)</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Char
-</span><span class="hs-char">'a'</span></span><span class="hs-glyph">..</span><span class="annot"><span class="annottext">Char
-</span><span class="hs-char">'z'</span></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[[Char]] -&gt; [[Char]] -&gt; [[Char]]
-forall a. Semigroup a =&gt; a -&gt; a -&gt; a
-</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-special">(</span><span class="hs-special">[</span><span class="annot"><span class="annottext">[Char]
-</span><a href="#local-6989586621679228690"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
-forall a. Semigroup a =&gt; a -&gt; a -&gt; a
-</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[Char]
-</span><a href="#local-6989586621679228691"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="hs-glyph">|</span><span> </span><span id="local-6989586621679228690"><span class="annot"><span class="annottext">[Char]
-</span><a href="#local-6989586621679228690"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[[Char]]
-</span><a href="#local-6989586621679228689"><span class="hs-identifier hs-var">nameSupply</span></a></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679228691"><span class="annot"><span class="annottext">[Char]
-</span><a href="#local-6989586621679228691"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[[Char]]
-</span><a href="#local-6989586621679228689"><span class="hs-identifier hs-var">nameSupply</span></a></span><span class="hs-special">]</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-121"></span><span>      </span><span id="local-6989586621679228698"><span class="annot"><span class="annottext">getName :: Int -&gt; [Char]
-</span><a href="#local-6989586621679228698"><span class="hs-identifier hs-var hs-var">getName</span></a></span></span><span> </span><span id="local-6989586621679228699"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228699"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228699"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
-forall a. Ord a =&gt; a -&gt; a -&gt; Bool
-</span><span class="hs-operator hs-var">&lt;</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">0</span></span><span>
-</span><span id="line-122"></span><span>        </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">[[Char]] -&gt; [Char]
-forall a. HasCallStack =&gt; [a] -&gt; a
-</span><span class="hs-identifier hs-var">head</span></span><span> </span><span class="annot"><span class="annottext">[[Char]]
-</span><a href="#local-6989586621679228689"><span class="hs-identifier hs-var">nameSupply</span></a></span><span>
-</span><span id="line-123"></span><span>        </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">[[Char]]
-</span><a href="#local-6989586621679228689"><span class="hs-identifier hs-var">nameSupply</span></a></span><span> </span><span class="annot"><span class="annottext">[[Char]] -&gt; Int -&gt; [Char]
-forall a. HasCallStack =&gt; [a] -&gt; Int -&gt; a
-</span><span class="hs-operator hs-var">!!</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228699"><span class="hs-identifier hs-var">n</span></a></span><span>
-</span><span id="line-124"></span><span>      </span><span class="annot"><a href="#local-6989586621679228703"><span class="hs-identifier hs-type">go</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.html#Term2"><span class="hs-identifier hs-type">Term2</span></a></span><span>
-</span><span id="line-125"></span><span>         </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Max</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.html#Term1"><span class="hs-identifier hs-type">Term1</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-126"></span><span>      </span><span id="local-6989586621679228703"><span class="annot"><span class="annottext">go :: Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-127"></span><span>        </span><span id="local-6989586621679228704"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228704"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#ParserTermB"><span class="hs-identifier hs-type">ParserTermB</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF Term2
-</span><a href="Telomare.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; (Max Int, Term1)
-forall a. a -&gt; (Max Int, a)
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; (Max Int, Term1)) -&gt; Term1 -&gt; (Max Int, Term1)
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228704"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. BasicExprF f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#ParserTermB"><span class="hs-identifier hs-var">ParserTermB</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF Term1
-forall f. BasicExprF f
-</span><a href="Telomare.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>
-</span><span id="line-128"></span><span>        </span><span id="local-6989586621679228707"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228707"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#ParserTermB"><span class="hs-identifier hs-type">ParserTermB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679228709"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228709"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679228710"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228710"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679228711"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228711"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679228712"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228712"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228707"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. BasicExprF f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#ParserTermB"><span class="hs-identifier hs-var">ParserTermB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term1 -&gt; Term1 -&gt; BasicExprF Term1
-forall f. f -&gt; f -&gt; BasicExprF f
-</span><a href="Telomare.html#PairSF"><span class="hs-identifier hs-var">PairSF</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228711"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228712"><span class="hs-identifier hs-var">y</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1 -&gt; Term1)
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1 -&gt; Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228709"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall a b. (Max Int, a -&gt; b) -&gt; (Max Int, a) -&gt; (Max Int, b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228710"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-129"></span><span>        </span><span id="local-6989586621679228714"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228714"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TVarF"><span class="hs-identifier hs-type">TVarF</span></a></span><span> </span><span id="local-6989586621679228716"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228716"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>  </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Max Int
-forall a. a -&gt; Max a
-</span><span class="hs-identifier hs-var">Max</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228716"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228714"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. v -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TVarF"><span class="hs-identifier hs-var">TVarF</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; [Char]
-</span><a href="#local-6989586621679228698"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228716"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-130"></span><span>        </span><span id="local-6989586621679228718"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228718"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TAppF"><span class="hs-identifier hs-type">TAppF</span></a></span><span> </span><span id="local-6989586621679228720"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228720"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679228721"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228721"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679228722"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228722"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span id="local-6989586621679228723"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228723"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228718"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. f -&gt; f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TAppF"><span class="hs-identifier hs-var">TAppF</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228722"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228723"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1 -&gt; Term1)
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1 -&gt; Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228720"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall a b. (Max Int, a -&gt; b) -&gt; (Max Int, a) -&gt; (Max Int, b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228721"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-131"></span><span>        </span><span id="local-6989586621679228724"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228724"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TCheckF"><span class="hs-identifier hs-type">TCheckF</span></a></span><span> </span><span id="local-6989586621679228726"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228726"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span id="local-6989586621679228727"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228727"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679228728"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228728"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span id="local-6989586621679228729"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228729"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228724"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. f -&gt; f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TCheckF"><span class="hs-identifier hs-var">TCheckF</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228728"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228729"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1 -&gt; Term1)
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1 -&gt; Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228726"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall a b. (Max Int, a -&gt; b) -&gt; (Max Int, a) -&gt; (Max Int, b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228727"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-132"></span><span>        </span><span id="local-6989586621679228730"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228730"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TITEF"><span class="hs-identifier hs-type">TITEF</span></a></span><span> </span><span id="local-6989586621679228732"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228732"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679228733"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228733"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span id="local-6989586621679228734"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228734"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679228735"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228735"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679228736"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228736"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span id="local-6989586621679228737"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228737"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228730"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; Term1 -&gt; Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. f -&gt; f -&gt; f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TITEF"><span class="hs-identifier hs-var">TITEF</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228735"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228736"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228737"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1 -&gt; Term1 -&gt; Term1)
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1 -&gt; Term1 -&gt; Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228732"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1 -&gt; Term1 -&gt; Term1)
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1 -&gt; Term1)
-forall a b. (Max Int, a -&gt; b) -&gt; (Max Int, a) -&gt; (Max Int, b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228733"><span class="hs-identifier hs-var">t</span></a></span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall a b. (Max Int, a -&gt; b) -&gt; (Max Int, a) -&gt; (Max Int, b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228734"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-133"></span><span>        </span><span id="local-6989586621679228738"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228738"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TLeftF"><span class="hs-identifier hs-type">TLeftF</span></a></span><span> </span><span id="local-6989586621679228740"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228740"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228738"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ParserTermF [Char] [Char] Term1 -&gt; Term1)
--&gt; (Term1 -&gt; ParserTermF [Char] [Char] Term1) -&gt; Term1 -&gt; Term1
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TLeftF"><span class="hs-identifier hs-var">TLeftF</span></a></span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228740"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-134"></span><span>        </span><span id="local-6989586621679228742"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228742"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TRightF"><span class="hs-identifier hs-type">TRightF</span></a></span><span> </span><span id="local-6989586621679228744"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228744"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228742"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ParserTermF [Char] [Char] Term1 -&gt; Term1)
--&gt; (Term1 -&gt; ParserTermF [Char] [Char] Term1) -&gt; Term1 -&gt; Term1
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TRightF"><span class="hs-identifier hs-var">TRightF</span></a></span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228744"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-135"></span><span>        </span><span id="local-6989586621679228745"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228745"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TTraceF"><span class="hs-identifier hs-type">TTraceF</span></a></span><span> </span><span id="local-6989586621679228747"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228747"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228745"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ParserTermF [Char] [Char] Term1 -&gt; Term1)
--&gt; (Term1 -&gt; ParserTermF [Char] [Char] Term1) -&gt; Term1 -&gt; Term1
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TTraceF"><span class="hs-identifier hs-var">TTraceF</span></a></span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228747"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-136"></span><span>        </span><span id="local-6989586621679228748"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228748"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TLamF"><span class="hs-identifier hs-type">TLamF</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Open"><span class="hs-identifier hs-type">Open</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span id="local-6989586621679228751"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228751"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Max</span></span><span> </span><span id="local-6989586621679228752"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228752"><span class="hs-identifier hs-var">n</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679228753"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228753"><span class="hs-identifier hs-var">r</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Max Int
-forall a. a -&gt; Max a
-</span><span class="hs-identifier hs-var">Max</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228752"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228748"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ParserTermF [Char] [Char] Term1 -&gt; Term1)
--&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">LamType [Char] -&gt; Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. LamType l -&gt; f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TLamF"><span class="hs-identifier hs-var">TLamF</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; LamType [Char]
-forall l. l -&gt; LamType l
-</span><a href="Telomare.html#Open"><span class="hs-identifier hs-var">Open</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; [Char]
-</span><a href="#local-6989586621679228698"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228752"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228753"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((Max Int, Term1) -&gt; (Max Int, Term1))
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228751"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-comment">-- warning, untested</span><span>
-</span><span id="line-137"></span><span>        </span><span id="local-6989586621679228754"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228754"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TLamF"><span class="hs-identifier hs-type">TLamF</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#Closed"><span class="hs-identifier hs-type">Closed</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span id="local-6989586621679228756"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228756"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Max</span></span><span> </span><span id="local-6989586621679228757"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228757"><span class="hs-identifier hs-var">n</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679228758"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228758"><span class="hs-identifier hs-var">r</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Max Int
-forall a. a -&gt; Max a
-</span><span class="hs-identifier hs-var">Max</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">0</span></span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228754"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ParserTermF [Char] [Char] Term1 -&gt; Term1)
--&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">LamType [Char] -&gt; Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. LamType l -&gt; f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TLamF"><span class="hs-identifier hs-var">TLamF</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; LamType [Char]
-forall l. l -&gt; LamType l
-</span><a href="Telomare.html#Closed"><span class="hs-identifier hs-var">Closed</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; [Char]
-</span><a href="#local-6989586621679228698"><span class="hs-identifier hs-var">getName</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679228757"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228758"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">((Max Int, Term1) -&gt; (Max Int, Term1))
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228756"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-138"></span><span>        </span><span id="local-6989586621679228759"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228759"><span class="hs-identifier hs-var">anno</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.html#TLimitedRecursionF"><span class="hs-identifier hs-type">TLimitedRecursionF</span></a></span><span> </span><span id="local-6989586621679228761"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228761"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span id="local-6989586621679228762"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228762"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span id="local-6989586621679228763"><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228763"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679228764"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228764"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679228765"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228765"><span class="hs-identifier hs-var">y</span></a></span></span><span> </span><span id="local-6989586621679228766"><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228766"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679228759"><span class="hs-identifier hs-var">anno</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ParserTermF [Char] [Char] Term1 -&gt; Term1
-forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">Term1 -&gt; Term1 -&gt; Term1 -&gt; ParserTermF [Char] [Char] Term1
-forall l v f. f -&gt; f -&gt; f -&gt; ParserTermF l v f
-</span><a href="Telomare.html#TLimitedRecursionF"><span class="hs-identifier hs-var">TLimitedRecursionF</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228764"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228765"><span class="hs-identifier hs-var">y</span></a></span><span> </span><span class="annot"><span class="annottext">Term1
-</span><a href="#local-6989586621679228766"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term1 -&gt; Term1 -&gt; Term1 -&gt; Term1)
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1 -&gt; Term1 -&gt; Term1)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228761"><span class="hs-identifier hs-var">t</span></a></span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1 -&gt; Term1 -&gt; Term1)
--&gt; (Max Int, Term1) -&gt; (Max Int, Term1 -&gt; Term1)
-forall a b. (Max Int, a -&gt; b) -&gt; (Max Int, a) -&gt; (Max Int, b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228762"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1 -&gt; Term1) -&gt; (Max Int, Term1) -&gt; (Max Int, Term1)
-forall a b. (Max Int, a -&gt; b) -&gt; (Max Int, a) -&gt; (Max Int, b)
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="annot"><span class="annottext">Term2
-</span><a href="#local-6989586621679228763"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-139"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">(Max Int, Term1) -&gt; Term1
-forall a b. (a, b) -&gt; b
-</span><span class="hs-identifier hs-var">snd</span></span><span> </span><span class="annot"><span class="annottext">((Max Int, Term1) -&gt; Term1)
--&gt; (Term2 -&gt; (Max Int, Term1)) -&gt; Term2 -&gt; Term1
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term2 -&gt; (Max Int, Term1)
-</span><a href="#local-6989586621679228703"><span class="hs-identifier hs-var">go</span></a></span><span>
+</span><span id="line-115"></span><span>
+</span><span id="line-116"></span><span class="hs-comment">{-
+decompileTerm2 :: Term2 -&gt; Term1
+decompileTerm2 =
+  let nameSupply = (fmap (:[]) ['a'..'z'] &lt;&gt; ([x &lt;&gt; y | x &lt;- nameSupply, y &lt;- nameSupply]))
+      getName n = if n &lt; 0
+        then head nameSupply
+        else nameSupply !! n
+      go :: Term2
+         -&gt; (Max Int, Term1)
+      go = \case
+        anno :&lt; ParserTermB ZeroSF -&gt; pure $ anno :&lt; ParserTermB ZeroSF
+        anno :&lt; ParserTermB (PairSF a b) -&gt; (\x y -&gt; anno :&lt; ParserTermB (PairSF x y)) &lt;$&gt; go a &lt;*&gt; go b
+        anno :&lt; TVarF n -&gt;  (Max n, anno :&lt; TVarF (getName n))
+        anno :&lt; TAppF f x -&gt; (\y z -&gt; anno :&lt; TAppF y z) &lt;$&gt; go f &lt;*&gt; go x
+        anno :&lt; TCheckF c x -&gt; (\y z -&gt; anno :&lt; TCheckF y z) &lt;$&gt; go c &lt;*&gt; go x
+        anno :&lt; TITEF i t e -&gt; (\x y z -&gt; anno :&lt; TITEF x y z) &lt;$&gt; go i &lt;*&gt; go t &lt;*&gt; go e
+        anno :&lt; TLeftF x -&gt; (anno :&lt;) . TLeftF &lt;$&gt; go x
+        anno :&lt; TRightF x -&gt; (anno :&lt;) . TRightF &lt;$&gt; go x
+        anno :&lt; TTraceF x -&gt; (anno :&lt;) . TTraceF &lt;$&gt; go x
+        anno :&lt; TLamF (Open ()) x -&gt; (\(Max n, r) -&gt; (Max n, (anno :&lt;) $ TLamF (Open (getName n)) r)) $ go x -- warning, untested
+        anno :&lt; TLamF (Closed ()) x -&gt; (\(Max n, r) -&gt; (Max 0, (anno :&lt;) $ TLamF (Closed (getName n)) r)) $ go x
+        anno :&lt; TLimitedRecursionF t r b -&gt; (\x y z -&gt; anno :&lt; TLimitedRecursionF x y z) &lt;$&gt; go t &lt;*&gt; go r &lt;*&gt; go b
+  in snd . go
+-}</span><span>
 </span><span id="line-140"></span></pre></body></html>
