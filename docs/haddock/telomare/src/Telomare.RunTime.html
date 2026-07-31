@@ -29,17 +29,17 @@
 </span><a href="Telomare.RunTime.html#debug"><span class="hs-identifier hs-var hs-var">debug</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
 </span><span id="line-29"></span><span>
-</span><span id="line-30"></span><span id="local-6989586621679255918"><span class="annot"><a href="Telomare.RunTime.html#debugTrace"><span class="hs-identifier hs-type">debugTrace</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679255918"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679255918"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-30"></span><span id="local-6989586621679256120"><span class="annot"><a href="Telomare.RunTime.html#debugTrace"><span class="hs-identifier hs-type">debugTrace</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679256120"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679256120"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-31"></span><span id="debugTrace"><span class="annot"><span class="annottext">debugTrace :: forall a. String -&gt; a -&gt; a
-</span><a href="Telomare.RunTime.html#debugTrace"><span class="hs-identifier hs-var hs-var">debugTrace</span></a></span></span><span> </span><span id="local-6989586621679255995"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679255995"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span id="local-6989586621679255996"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679255996"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="Telomare.RunTime.html#debugTrace"><span class="hs-identifier hs-var hs-var">debugTrace</span></a></span></span><span> </span><span id="local-6989586621679256197"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679256197"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span id="local-6989586621679256198"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679256198"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><a href="Telomare.RunTime.html#debug"><span class="hs-identifier hs-var">debug</span></a></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">String -&gt; a -&gt; a
 forall a. String -&gt; a -&gt; a
 </span><span class="hs-identifier hs-var">trace</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679255995"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679255996"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679255996"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679256197"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679256198"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679256198"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-32"></span><span>
 </span><span id="line-33"></span><span class="hs-comment">-- iEval' :: (IExpr -&gt; IExpr -&gt; Either RunTimeError IExpr) -&gt; IExpr -&gt; IExpr -&gt; Either RunTimeError IExpr</span><span>
 </span><span id="line-34"></span><span class="hs-comment">-- iEval' f env g = let f' = f env in case g of</span><span>
@@ -100,11 +100,11 @@ llvmEval nexpr = do
     Right x -&gt; pure x
 -}</span><span>
 </span><span id="line-91"></span><span>
-</span><span id="line-92"></span><span id="local-6989586621679255920"><span id="local-6989586621679255921"><span class="annot"><a href="Telomare.RunTime.html#showPass"><span class="hs-identifier hs-type">showPass</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679255920"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadIO</span></span><span> </span><span class="annot"><a href="#local-6989586621679255921"><span class="hs-identifier hs-type">m</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679255921"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679255920"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679255921"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679255920"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-92"></span><span id="local-6989586621679256122"><span id="local-6989586621679256123"><span class="annot"><a href="Telomare.RunTime.html#showPass"><span class="hs-identifier hs-type">showPass</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679256122"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadIO</span></span><span> </span><span class="annot"><a href="#local-6989586621679256123"><span class="hs-identifier hs-type">m</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679256123"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679256122"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679256123"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679256122"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
 </span><span id="line-93"></span><span id="showPass"><span class="annot"><span class="annottext">showPass :: forall a (m :: * -&gt; *). (Show a, MonadIO m) =&gt; m a -&gt; m a
-</span><a href="Telomare.RunTime.html#showPass"><span class="hs-identifier hs-var hs-var">showPass</span></a></span></span><span> </span><span id="local-6989586621679256006"><span class="annot"><span class="annottext">m a
-</span><a href="#local-6989586621679256006"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">m a
-</span><a href="#local-6989586621679256006"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">m a -&gt; (a -&gt; m ()) -&gt; m ()
+</span><a href="Telomare.RunTime.html#showPass"><span class="hs-identifier hs-var hs-var">showPass</span></a></span></span><span> </span><span id="local-6989586621679256208"><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679256208"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679256208"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">m a -&gt; (a -&gt; m ()) -&gt; m ()
 forall a b. m a -&gt; (a -&gt; m b) -&gt; m b
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">IO () -&gt; m ()
@@ -118,11 +118,11 @@ forall a. Show a =&gt; a -&gt; IO ()
 forall a b. m a -&gt; m b -&gt; m b
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">m a
-</span><a href="#local-6989586621679256006"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><a href="#local-6989586621679256208"><span class="hs-identifier hs-var">a</span></a></span><span>
 </span><span id="line-94"></span><span>
 </span><span id="line-95"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Telomare.html#AbstractRunTime"><span class="hs-identifier hs-type">AbstractRunTime</span></a></span><span> </span><span class="annot"><a href="Telomare.html#StuckExpr"><span class="hs-identifier hs-type">StuckExpr</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-96"></span><span>  </span><span id="local-6989586621679256025"><span class="annot"><span class="annottext">eval :: StuckExpr -&gt; Either RunTimeError StuckExpr
-</span><a href="#local-6989586621679256025"><span class="hs-identifier hs-var hs-var hs-var hs-var">eval</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StuckExpr -&gt; Either RunTimeError StuckExpr
+</span><span id="line-96"></span><span>  </span><span id="local-6989586621679256227"><span class="annot"><span class="annottext">eval :: StuckExpr -&gt; Either RunTimeError StuckExpr
+</span><a href="#local-6989586621679256227"><span class="hs-identifier hs-var hs-var hs-var hs-var">eval</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StuckExpr -&gt; Either RunTimeError StuckExpr
 forall a. a -&gt; Either RunTimeError a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(StuckExpr -&gt; Either RunTimeError StuckExpr)
@@ -136,9 +136,9 @@ forall g (f :: * -&gt; *).
 (f g -&gt; g) -&gt; g -&gt; g
 </span><a href="Telomare.Possible.html#transformNoDefer"><span class="hs-identifier hs-var">transformNoDefer</span></a></span><span> </span><span class="annot"><span class="annottext">Base StuckExpr StuckExpr -&gt; StuckExpr
 StuckExprF StuckExpr -&gt; StuckExpr
-</span><a href="#local-6989586621679256027"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-97"></span><span>    </span><span id="local-6989586621679256027"><span class="annot"><span class="annottext">step :: Base StuckExpr StuckExpr -&gt; StuckExpr
-</span><a href="#local-6989586621679256027"><span class="hs-identifier hs-var hs-var">step</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base StuckExpr StuckExpr -&gt; StuckExpr)
+</span><a href="#local-6989586621679256229"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-97"></span><span>    </span><span id="local-6989586621679256229"><span class="annot"><span class="annottext">step :: Base StuckExpr StuckExpr -&gt; StuckExpr
+</span><a href="#local-6989586621679256229"><span class="hs-identifier hs-var hs-var">step</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base StuckExpr StuckExpr -&gt; StuckExpr)
 -&gt; Base StuckExpr StuckExpr -&gt; StuckExpr
 forall g (f :: * -&gt; *).
 (Base g ~ f, BasicBase f, Corecursive g, Recursive g) =&gt;
@@ -151,10 +151,10 @@ forall a (f :: * -&gt; *).
 (f a -&gt; a) -&gt; f a -&gt; a
 </span><a href="Telomare.Possible.html#stuckStep"><span class="hs-identifier hs-var">stuckStep</span></a></span><span> </span><span class="annot"><span class="annottext">Base StuckExpr StuckExpr -&gt; StuckExpr
 forall {p} {a}. PrettyPrintable p =&gt; p -&gt; a
-</span><a href="#local-6989586621679256049"><span class="hs-identifier hs-var">unhandledError</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-98"></span><span>    </span><span id="local-6989586621679256049"><span class="annot"><span class="annottext">unhandledError :: p -&gt; a
-</span><a href="#local-6989586621679256049"><span class="hs-identifier hs-var hs-var">unhandledError</span></a></span></span><span> </span><span id="local-6989586621679256056"><span class="annot"><span class="annottext">p
-</span><a href="#local-6989586621679256056"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; a
+</span><a href="#local-6989586621679256251"><span class="hs-identifier hs-var">unhandledError</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-98"></span><span>    </span><span id="local-6989586621679256251"><span class="annot"><span class="annottext">unhandledError :: p -&gt; a
+</span><a href="#local-6989586621679256251"><span class="hs-identifier hs-var hs-var">unhandledError</span></a></span></span><span> </span><span id="local-6989586621679256258"><span class="annot"><span class="annottext">p
+</span><a href="#local-6989586621679256258"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; a
 forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; a) -&gt; String -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -164,5 +164,5 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">p -&gt; String
 forall p. PrettyPrintable p =&gt; p -&gt; String
 </span><a href="PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="annot"><span class="annottext">p
-</span><a href="#local-6989586621679256056"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679256258"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-99"></span></pre></body></html>
