@@ -1,0 +1,701 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE DerivingVia          #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE FlexibleContexts     #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE FlexibleInstances    #-}</span><span>
+</span><span id="line-4"></span><span class="hs-pragma">{-# LANGUAGE LambdaCase           #-}</span><span>
+</span><span id="line-5"></span><span class="hs-pragma">{-# LANGUAGE ScopedTypeVariables  #-}</span><span>
+</span><span id="line-6"></span><span class="hs-pragma">{-# LANGUAGE TypeFamilies         #-}</span><span>
+</span><span id="line-7"></span><span class="hs-pragma">{-# LANGUAGE UndecidableInstances #-}</span><span>
+</span><span id="line-8"></span><span>
+</span><span id="line-9"></span><span class="hs-comment">-- |The reference evaluators: the 'AbstractRunTime' instances for</span><span>
+</span><span id="line-10"></span><span class="hs-comment">-- 'CompiledExpr' (the production path) and 'StuckExpr' (the REPL/test</span><span>
+</span><span id="line-11"></span><span class="hs-comment">-- path), the plain 'basicEval'/'regularEval' interpreters, and the</span><span>
+</span><span id="line-12"></span><span class="hs-comment">-- barrier-based partial evaluator 'evalPartial'. All are assembled from</span><span>
+</span><span id="line-13"></span><span class="hs-comment">-- 'Telomare.Machine' step algebras.</span><span>
+</span><span id="line-14"></span><span class="hs-comment">--</span><span>
+</span><span id="line-15"></span><span class="hs-comment">-- 'Telomare.Eval.Meter' reimplements the 'CompiledExpr' instance with</span><span>
+</span><span id="line-16"></span><span class="hs-comment">-- step counting; the sizing tests assert the two agree.</span><span>
+</span><span id="line-17"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.Eval.Reference</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-18"></span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Applicative</span></span><span>
+</span><span id="line-20"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html"><span class="hs-identifier">Control.Comonad.Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#Cofree"><span class="hs-identifier">Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator">(:&lt;)</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#hoistCofree"><span class="hs-identifier">hoistCofree</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-21"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html"><span class="hs-identifier">Control.Comonad.Trans.Cofree</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">CofreeT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier">CofreeF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-22"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/8bjyqlw4w7jgb5814d60g9k66zxjdfcm-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html"><span class="hs-identifier">Control.Lens.Plated</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/8bjyqlw4w7jgb5814d60g9k66zxjdfcm-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#transform"><span class="hs-identifier">transform</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-23"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad</span></span><span>
+</span><span id="line-24"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Except</span></span><span>
+</span><span id="line-25"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Reader</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Reader</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">ReaderT</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">ask</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">local</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">runReaderT</span></span><span class="hs-special">)</span><span>
+</span><span id="line-26"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Reader</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Reader</span></span><span>
+</span><span id="line-27"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State.Lazy</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">StateL</span></span><span>
+</span><span id="line-28"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State.Strict</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">State</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">StateT</span></span><span class="hs-special">)</span><span>
+</span><span id="line-29"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.State.Strict</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">State</span></span><span>
+</span><span id="line-30"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Trans.Class</span></span><span>
+</span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Bifunctor</span></span><span>
+</span><span id="line-32"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Char</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">chr</span></span><span class="hs-special">)</span><span>
+</span><span id="line-33"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html"><span class="hs-identifier">Data.Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#hoistFix%27"><span class="hs-identifier">hoistFix'</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-34"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Foldable</span></span><span>
+</span><span id="line-35"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Functor.Classes</span></span><span>
+</span><span id="line-36"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span>
+</span><span id="line-37"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.TH.html"><span class="hs-identifier">Data.Functor.Foldable.TH</span></a></span><span>
+</span><span id="line-38"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Kind</span></span><span>
+</span><span id="line-39"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.List</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">nub</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">nubBy</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">partition</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">sortBy</span></span><span class="hs-special">)</span><span>
+</span><span id="line-40"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map.Strict</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Map</span></span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map.Strict</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
+</span><span id="line-42"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Maybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">fromMaybe</span></span><span class="hs-special">)</span><span>
+</span><span id="line-43"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Monoid</span></span><span>
+</span><span id="line-44"></span><span class="hs-comment">-- import Data.SBV ((.&lt;), (.&gt;))</span><span>
+</span><span id="line-45"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html"><span class="hs-identifier">Control.Comonad.Trans.Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier">CofreeF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#headF"><span class="hs-identifier">headF</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-46"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Exception</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Exception</span></span><span class="hs-special">)</span><span>
+</span><span id="line-47"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Exception.Base</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">throw</span></span><span class="hs-special">)</span><span>
+</span><span id="line-48"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.IO.Class</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">MonadIO</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-49"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad.Reader.Class</span></span><span>
+</span><span id="line-50"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Functor.Identity</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Identity</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Identity</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">runIdentity</span></span><span class="hs-special">)</span><span>
+</span><span id="line-51"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Semigroup</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Max</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-52"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Set</span></span><span class="hs-special">)</span><span>
+</span><span id="line-53"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Set</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Set</span></span><span>
+</span><span id="line-54"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Void</span></span><span>
+</span><span id="line-55"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Debug.Trace</span></span><span>
+</span><span id="line-56"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Generic</span></span><span class="hs-special">)</span><span>
+</span><span id="line-57"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Error.html"><span class="hs-identifier">Telomare.Error</span></a></span><span>
+</span><span id="line-58"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html"><span class="hs-identifier">Telomare.IR.Base</span></a></span><span>
+</span><span id="line-59"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html"><span class="hs-identifier">Telomare.IR.Builder</span></a></span><span>
+</span><span id="line-60"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html"><span class="hs-identifier">Telomare.IR.Core</span></a></span><span>
+</span><span id="line-61"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span>
+</span><span id="line-62"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html"><span class="hs-identifier">Telomare.IR.Surface</span></a></span><span>
+</span><span id="line-63"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html"><span class="hs-identifier">Telomare.IR.Types</span></a></span><span>
+</span><span id="line-64"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Machine.html"><span class="hs-identifier">Telomare.Machine</span></a></span><span>
+</span><span id="line-65"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.html"><span class="hs-identifier">Telomare.PrettyPrint</span></a></span><span>
+</span><span id="line-66"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html"><span class="hs-identifier">Telomare.PrettyPrint.Indent</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithChildren%27"><span class="hs-identifier">indentWithChildren'</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild"><span class="hs-identifier">indentWithOneChild</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-67"></span><span>                                    </span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild%27"><span class="hs-identifier">indentWithOneChild'</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren"><span class="hs-identifier">indentWithTwoChildren</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-68"></span><span>                                    </span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren%27"><span class="hs-identifier">indentWithTwoChildren'</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#sindent"><span class="hs-identifier">sindent</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-69"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Size.IR.html"><span class="hs-identifier">Telomare.Size.IR</span></a></span><span>
+</span><span id="line-70"></span><span>
+</span><span id="line-71"></span><span class="annot"><a href="Telomare.Eval.Reference.html#regularEval"><span class="hs-identifier hs-type">regularEval</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679253465"><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span></span><span> </span><span id="local-6989586621679253463"><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#AbortBase"><span class="hs-identifier hs-type">AbortBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Size.IR.html#IndexedInputBase"><span class="hs-identifier hs-type">IndexedInputBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Size.IR.html#UnsizedBase"><span class="hs-identifier hs-type">UnsizedBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span><span>
+</span><span id="line-72"></span><span>               </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.html#PrettyPrintable"><span class="hs-identifier hs-type">PrettyPrintable</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-73"></span><span id="regularEval"><span class="annot"><span class="annottext">regularEval :: forall (f :: * -&gt; *) g.
+(Base g ~ f, BasicBase f, StuckBase f, AbortBase f,
+ IndexedInputBase f, UnsizedBase f, Recursive g, Corecursive g,
+ PrettyPrintable g) =&gt;
+g -&gt; g
+</span><a href="Telomare.Eval.Reference.html#regularEval"><span class="hs-identifier hs-var hs-var">regularEval</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g) =&gt;
+(f g -&gt; g) -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#transformNoDefer"><span class="hs-identifier hs-var">transformNoDefer</span></a></span><span> </span><span class="annot"><span class="annottext">f g -&gt; g
+Base g g -&gt; g
+</span><a href="#local-6989586621679253735"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; (g -&gt; g) -&gt; g -&gt; g
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; g -&gt; g
+forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
+forall a. (Base g a -&gt; a) -&gt; g -&gt; a
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">f g -&gt; g
+Base g g -&gt; g
+</span><a href="#local-6989586621679253738"><span class="hs-identifier hs-var">ss</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-74"></span><span>  </span><span id="local-6989586621679253735"><span class="annot"><span class="annottext">f :: Base g g -&gt; g
+</span><a href="#local-6989586621679253735"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; Base g g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, Corecursive g, Recursive g) =&gt;
+(f g -&gt; g) -&gt; f g -&gt; g
+</span><a href="Telomare.Machine.html#basicStep"><span class="hs-identifier hs-var">basicStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; Base g g -&gt; g
+forall a (f :: * -&gt; *).
+(Base a ~ f, StuckBase f, BasicBase f, Recursive a, Corecursive a,
+ PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#stuckStep"><span class="hs-identifier hs-var">stuckStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; Base g g -&gt; g
+forall a (f :: * -&gt; *).
+(Base a ~ f, BasicBase f, StuckBase f, AbortBase f, Recursive a,
+ Corecursive a, PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#abortStep"><span class="hs-identifier hs-var">abortStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Set Integer -&gt; (Base g g -&gt; g) -&gt; Base g g -&gt; g
+forall a (f :: * -&gt; *).
+(Base a ~ f, BasicBase f, StuckBase f, IndexedInputBase f,
+ Recursive a, Corecursive a) =&gt;
+Set Integer -&gt; (f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#indexedInputStep"><span class="hs-identifier hs-var">indexedInputStep</span></a></span><span> </span><span class="annot"><span class="annottext">Set Integer
+forall a. Set a
+</span><span class="hs-identifier hs-var">Set.empty</span></span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g
+forall {p} {a}. (PrettyPrintable p, Corecursive p) =&gt; Base p p -&gt; a
+</span><a href="#local-6989586621679253771"><span class="hs-identifier hs-var">unhandledError</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-75"></span><span>  </span><span id="local-6989586621679253771"><span class="annot"><span class="annottext">unhandledError :: Base p p -&gt; a
+</span><a href="#local-6989586621679253771"><span class="hs-identifier hs-var hs-var">unhandledError</span></a></span></span><span> </span><span id="local-6989586621679253783"><span class="annot"><span class="annottext">Base p p
+</span><a href="#local-6989586621679253783"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; a
+forall a. HasCallStack =&gt; [Char] -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;regularEval unhandled case\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">p -&gt; [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; [Char]
+</span><a href="Telomare.PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Base p p -&gt; p
+forall t. Corecursive t =&gt; Base t t -&gt; t
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base p p
+</span><a href="#local-6989586621679253783"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-76"></span><span>  </span><span class="annot"><a href="#local-6989586621679253738"><span class="hs-identifier hs-type">ss</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="#local-6989586621679253465"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253463"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-77"></span><span>  </span><span id="local-6989586621679253738"><span class="annot"><span class="annottext">ss :: f g -&gt; g
+</span><a href="#local-6989586621679253738"><span class="hs-identifier hs-var hs-var">ss</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-78"></span><span>    </span><span class="annot"><a href="Telomare.Size.IR.html#UnsizedFW"><span class="hs-identifier hs-type">UnsizedFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Size.IR.html#RefinementWrapperF"><span class="hs-identifier hs-type">RefinementWrapperF</span></a></span><span> </span><span id="local-6989586621679253789"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679253789"><span class="hs-identifier hs-var">lt</span></a></span></span><span> </span><span id="local-6989586621679253790"><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679253790"><span class="hs-identifier hs-var">tc</span></a></span></span><span> </span><span id="local-6989586621679253791"><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679253791"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-79"></span><span>      </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679253815"><span class="annot"><span class="annottext">innerTC :: g
+</span><a href="#local-6989586621679253815"><span class="hs-identifier hs-var hs-var">innerTC</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">g -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
+ Corecursive g) =&gt;
+g -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#appB"><span class="hs-identifier hs-var">appB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g
+</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g
+</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-80"></span><span>          </span><span id="local-6989586621679253820"><span class="annot"><span class="annottext">performTC :: g
+</span><a href="#local-6989586621679253820"><span class="hs-identifier hs-var hs-var">performTC</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
+Int -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#deferB"><span class="hs-identifier hs-var">deferB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="Telomare.Machine.html#removeRefinementWrappersTC"><span class="hs-identifier hs-var">removeRefinementWrappersTC</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; (g -&gt; g) -&gt; g -&gt; g
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; g -&gt; g
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">g -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
+g -&gt; g -&gt; g
+</span><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier hs-var">PairB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; g -&gt; g
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">g -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
+g -&gt; g -&gt; g
+</span><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier hs-var">PairB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">AbortableF g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, AbortBase f, Recursive g, Corecursive g) =&gt;
+AbortableF g -&gt; g
+</span><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-var">AbortEE</span></a></span><span> </span><span class="annot"><span class="annottext">AbortableF g
+forall f. AbortableF f
+</span><a href="Telomare.IR.Base.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679253815"><span class="hs-identifier hs-var">innerTC</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g
+</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-81"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; g -&gt; g
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">g -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
+g -&gt; g -&gt; g
+</span><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier hs-var">PairB</span></a></span><span> </span><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679253820"><span class="hs-identifier hs-var">performTC</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">g -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
+g -&gt; g -&gt; g
+</span><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier hs-var">PairB</span></a></span><span> </span><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679253790"><span class="hs-identifier hs-var">tc</span></a></span><span> </span><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679253791"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-82"></span><span>    </span><span class="annot"><a href="Telomare.Size.IR.html#UnsizedFW"><span class="hs-identifier hs-type">UnsizedFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Size.IR.html#UnsizedStubF"><span class="hs-identifier hs-type">UnsizedStubF</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">g
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; g -&gt; [g]
+forall a. (a -&gt; a) -&gt; a -&gt; [a]
+</span><span class="hs-identifier hs-var">iterate</span></span><span> </span><span class="annot"><span class="annottext">g -&gt; g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g
+</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span> </span><span class="annot"><span class="annottext">[g] -&gt; Int -&gt; g
+forall a. HasCallStack =&gt; [a] -&gt; Int -&gt; a
+</span><span class="hs-operator hs-var">!!</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">255</span></span><span>
+</span><span id="line-83"></span><span>    </span><span id="local-6989586621679253830"><span class="annot"><span class="annottext">f g
+</span><a href="#local-6989586621679253830"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g
+forall t. Corecursive t =&gt; Base t t -&gt; t
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">f g
+Base g g
+</span><a href="#local-6989586621679253830"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-84"></span><span>
+</span><span id="line-85"></span><span class="annot"><a href="Telomare.Eval.Reference.html#basicEval"><span class="hs-identifier hs-type">basicEval</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679253528"><span class="annot"><a href="#local-6989586621679253528"><span class="hs-identifier hs-type">f</span></a></span></span><span> </span><span id="local-6989586621679253527"><span class="annot"><a href="#local-6989586621679253527"><span class="hs-identifier hs-type">g</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253527"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679253528"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253528"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253528"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253527"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253527"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.html#PrettyPrintable"><span class="hs-identifier hs-type">PrettyPrintable</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253527"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253527"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253527"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-86"></span><span id="basicEval"><span class="annot"><span class="annottext">basicEval :: forall (f :: * -&gt; *) g.
+(Base g ~ f, BasicBase f, StuckBase f, Recursive g, Corecursive g,
+ PrettyPrintable g) =&gt;
+g -&gt; g
+</span><a href="Telomare.Eval.Reference.html#basicEval"><span class="hs-identifier hs-var hs-var">basicEval</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g) =&gt;
+(f g -&gt; g) -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#transformNoDefer"><span class="hs-identifier hs-var">transformNoDefer</span></a></span><span> </span><span class="annot"><span class="annottext">f g -&gt; g
+Base g g -&gt; g
+</span><a href="#local-6989586621679253846"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-87"></span><span>  </span><span id="local-6989586621679253846"><span class="annot"><span class="annottext">f :: Base g g -&gt; g
+</span><a href="#local-6989586621679253846"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; Base g g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, Corecursive g, Recursive g) =&gt;
+(f g -&gt; g) -&gt; f g -&gt; g
+</span><a href="Telomare.Machine.html#basicStep"><span class="hs-identifier hs-var">basicStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; Base g g -&gt; g
+forall a (f :: * -&gt; *).
+(Base a ~ f, StuckBase f, BasicBase f, Recursive a, Corecursive a,
+ PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#stuckStep"><span class="hs-identifier hs-var">stuckStep</span></a></span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g
+forall {p} {a}. (PrettyPrintable p, Corecursive p) =&gt; Base p p -&gt; a
+</span><a href="#local-6989586621679253861"><span class="hs-identifier hs-var">unhandledError</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-88"></span><span>  </span><span id="local-6989586621679253861"><span class="annot"><span class="annottext">unhandledError :: Base p p -&gt; a
+</span><a href="#local-6989586621679253861"><span class="hs-identifier hs-var hs-var">unhandledError</span></a></span></span><span> </span><span id="local-6989586621679253871"><span class="annot"><span class="annottext">Base p p
+</span><a href="#local-6989586621679253871"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; a
+forall a. HasCallStack =&gt; [Char] -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;basicEval unhandled case:\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">p -&gt; [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; [Char]
+</span><a href="Telomare.PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Base p p -&gt; p
+forall t. Corecursive t =&gt; Base t t -&gt; t
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base p p
+</span><a href="#local-6989586621679253871"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-89"></span><span>
+</span><span id="line-90"></span><span class="hs-keyword">newtype</span><span> </span><span id="PPOut"><span class="annot"><a href="Telomare.Eval.Reference.html#PPOut"><span class="hs-identifier hs-var">PPOut</span></a></span></span><span> </span><span id="local-6989586621679253563"><span class="annot"><a href="#local-6989586621679253563"><span class="hs-identifier hs-type">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="PPOut"><span class="annot"><a href="Telomare.Eval.Reference.html#PPOut"><span class="hs-identifier hs-var">PPOut</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679253563"><span class="hs-identifier hs-type">a</span></a></span><span>
+</span><span id="line-91"></span><span class="hs-comment">--   deriving Functor</span><span>
+</span><span id="line-92"></span><span>
+</span><span id="line-93"></span><span class="hs-keyword">instance</span><span> </span><span class="hs-pragma">{-# OVERLAPPING</span><span> </span><span class="hs-pragma">#-}</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.html#PrettyPrintable"><span class="hs-identifier hs-type">PrettyPrintable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.Reference.html#PPOut"><span class="hs-identifier hs-type">PPOut</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-94"></span><span>  </span><span id="local-6989586621679253908"><span class="annot"><span class="annottext">showP :: PPOut CompiledExpr -&gt; State Int [Char]
+</span><a href="#local-6989586621679253908"><span class="hs-identifier hs-var hs-var hs-var hs-var">showP</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.Reference.html#PPOut"><span class="hs-identifier hs-type">PPOut</span></a></span><span> </span><span id="local-6989586621679253910"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253910"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; State Int [Char]
+</span><a href="#local-6989586621679253911"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253910"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-95"></span><span>    </span><span id="local-6989586621679253911"><span class="annot"><span class="annottext">f :: CompiledExpr -&gt; State Int [Char]
+</span><a href="#local-6989586621679253911"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-96"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
+</span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; State Int [Char]
+forall a. a -&gt; StateT Int Identity a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;&quot;</span></span><span>
+</span><span id="line-97"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679253915"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253915"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679253916"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253916"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">([Char] -&gt; [Char] -&gt; [Char])
+-&gt; State Int [Char] -&gt; State Int [Char] -&gt; State Int [Char]
+forall a b c.
+(a -&gt; b -&gt; c)
+-&gt; StateT Int Identity a
+-&gt; StateT Int Identity b
+-&gt; StateT Int Identity c
+forall (f :: * -&gt; *) a b c.
+Applicative f =&gt;
+(a -&gt; b -&gt; c) -&gt; f a -&gt; f b -&gt; f c
+</span><span class="hs-identifier hs-var">liftA2</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">(&lt;&gt;)</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr -&gt; State Int [Char]
+</span><a href="#local-6989586621679253918"><span class="hs-identifier hs-var">doLet</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253915"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr -&gt; State Int [Char]
+</span><a href="#local-6989586621679253911"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253916"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-98"></span><span>      </span><span id="local-6989586621679253919"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253919"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; State Int [Char] -&gt; State Int [Char] -&gt; State Int [Char]
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren%27"><span class="hs-identifier hs-var">indentWithTwoChildren'</span></a></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;#!#&quot;</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; State Int [Char]
+forall a. a -&gt; StateT Int Identity a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr -&gt; State Int [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; State Int [Char]
+</span><a href="Telomare.PrettyPrint.html#showP"><span class="hs-identifier hs-var">showP</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253919"><span class="hs-identifier hs-var">z</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-99"></span><span>    </span><span id="local-6989586621679253918"><span class="annot"><span class="annottext">doLet :: CompiledExpr -&gt; State Int [Char]
+</span><a href="#local-6989586621679253918"><span class="hs-identifier hs-var hs-var">doLet</span></a></span></span><span> </span><span id="local-6989586621679253920"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253920"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">(Base CompiledExpr (Maybe Int) -&gt; Maybe Int)
+-&gt; CompiledExpr -&gt; Maybe Int
+forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
+forall a. (Base CompiledExpr a -&gt; a) -&gt; CompiledExpr -&gt; a
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr (Maybe Int) -&gt; Maybe Int
+CompiledExprF (Maybe Int) -&gt; Maybe Int
+</span><a href="#local-6989586621679253921"><span class="hs-identifier hs-var">lf</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253920"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-100"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679253922"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679253922"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; State Int [Char]
+forall a. a -&gt; StateT Int Identity a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int -&gt; Char
+</span><span class="hs-identifier hs-var">chr</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679253922"><span class="hs-identifier hs-var">n</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-101"></span><span>      </span><span class="annot"><span class="annottext">Maybe Int
+</span><span class="hs-identifier">_</span></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; State Int [Char] -&gt; State Int [Char] -&gt; State Int [Char]
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren%27"><span class="hs-identifier hs-var">indentWithTwoChildren'</span></a></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;#/#&quot;</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char] -&gt; State Int [Char]
+forall a. a -&gt; StateT Int Identity a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr -&gt; State Int [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; State Int [Char]
+</span><a href="Telomare.PrettyPrint.html#showP"><span class="hs-identifier hs-var">showP</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253920"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-102"></span><span>    </span><span id="local-6989586621679253921"><span class="annot"><span class="annottext">lf :: CompiledExprF (Maybe Int) -&gt; Maybe Int
+</span><a href="#local-6989586621679253921"><span class="hs-identifier hs-var hs-var">lf</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-103"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF (Maybe Int)
+</span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Maybe Int
+forall a. a -&gt; Maybe a
+</span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span>
+</span><span id="line-104"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679253935"><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679253935"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int
+forall a. Enum a =&gt; a -&gt; a
+</span><span class="hs-identifier hs-var">succ</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; Int) -&gt; Maybe Int -&gt; Maybe Int
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Maybe Int
+</span><a href="#local-6989586621679253935"><span class="hs-identifier hs-var">n</span></a></span><span>
+</span><span id="line-105"></span><span>      </span><span class="annot"><span class="annottext">CompiledExprF (Maybe Int)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe Int
+forall a. Maybe a
+</span><span class="hs-identifier hs-var">Nothing</span></span><span>
+</span><span id="line-106"></span><span>
+</span><span id="line-107"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#AbstractRunTime"><span class="hs-identifier hs-type">AbstractRunTime</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-108"></span><span>  </span><span id="local-6989586621679253954"><span class="annot"><span class="annottext">eval :: CompiledExpr -&gt; Either RunTimeError CompiledExpr
+</span><a href="#local-6989586621679253954"><span class="hs-identifier hs-var hs-var hs-var hs-var">eval</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Either RunTimeError CompiledExpr
+</span><a href="#local-6989586621679253956"><span class="hs-identifier hs-var">checkError</span></a></span><span> </span><span class="annot"><span class="annottext">(CompiledExpr -&gt; Either RunTimeError CompiledExpr)
+-&gt; (CompiledExpr -&gt; CompiledExpr)
+-&gt; CompiledExpr
+-&gt; Either RunTimeError CompiledExpr
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679253957"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253957"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; CompiledExpr -&gt; CompiledExpr
+forall a. [Char] -&gt; a -&gt; a
+</span><a href="Telomare.Machine.html#debugTrace"><span class="hs-identifier hs-var">debugTrace</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;CompiledExpr eval &quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; [Char]
+</span><a href="#local-6989586621679253959"><span class="hs-identifier hs-var">dumpEval</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253957"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253957"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(CompiledExpr -&gt; CompiledExpr)
+-&gt; (CompiledExpr -&gt; CompiledExpr) -&gt; CompiledExpr -&gt; CompiledExpr
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(CompiledExprF CompiledExpr -&gt; CompiledExpr)
+-&gt; CompiledExpr -&gt; CompiledExpr
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g) =&gt;
+(f g -&gt; g) -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#transformNoDefer"><span class="hs-identifier hs-var">transformNoDefer</span></a></span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr CompiledExpr -&gt; CompiledExpr
+CompiledExprF CompiledExpr -&gt; CompiledExpr
+</span><a href="#local-6989586621679253960"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-109"></span><span>    </span><span id="local-6989586621679253959"><span class="annot"><span class="annottext">dumpEval :: CompiledExpr -&gt; [Char]
+</span><a href="#local-6989586621679253959"><span class="hs-identifier hs-var hs-var">dumpEval</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-110"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679253976"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253976"><span class="hs-identifier hs-var">o</span></a></span></span><span> </span><span id="local-6989586621679253977"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253977"><span class="hs-identifier hs-var">s</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;output:\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">PPOut CompiledExpr -&gt; [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; [Char]
+</span><a href="Telomare.PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr -&gt; PPOut CompiledExpr
+forall a. a -&gt; PPOut a
+</span><a href="Telomare.Eval.Reference.html#PPOut"><span class="hs-identifier hs-var">PPOut</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253976"><span class="hs-identifier hs-var">o</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;\nnew state:\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; [Char]
+</span><a href="Telomare.PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253977"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-111"></span><span>      </span><span id="local-6989586621679253978"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253978"><span class="hs-identifier hs-var">z</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;unexpected eval state:\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; [Char]
+</span><a href="Telomare.PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679253978"><span class="hs-identifier hs-var">z</span></a></span><span>
+</span><span id="line-112"></span><span>    </span><span id="local-6989586621679253960"><span class="annot"><span class="annottext">step :: Base CompiledExpr CompiledExpr -&gt; CompiledExpr
+</span><a href="#local-6989586621679253960"><span class="hs-identifier hs-var hs-var">step</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base CompiledExpr CompiledExpr -&gt; CompiledExpr)
+-&gt; Base CompiledExpr CompiledExpr -&gt; CompiledExpr
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, Corecursive g, Recursive g) =&gt;
+(f g -&gt; g) -&gt; f g -&gt; g
+</span><a href="Telomare.Machine.html#basicStep"><span class="hs-identifier hs-var">basicStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Base CompiledExpr CompiledExpr -&gt; CompiledExpr)
+-&gt; Base CompiledExpr CompiledExpr -&gt; CompiledExpr
+forall a (f :: * -&gt; *).
+(Base a ~ f, StuckBase f, BasicBase f, Recursive a, Corecursive a,
+ PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#stuckStep"><span class="hs-identifier hs-var">stuckStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Base CompiledExpr CompiledExpr -&gt; CompiledExpr)
+-&gt; Base CompiledExpr CompiledExpr -&gt; CompiledExpr
+forall a (f :: * -&gt; *).
+(Base a ~ f, BasicBase f, StuckBase f, AbortBase f, Recursive a,
+ Corecursive a, PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#abortStep"><span class="hs-identifier hs-var">abortStep</span></a></span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr CompiledExpr -&gt; CompiledExpr
+forall {p} {a}. PrettyPrintable p =&gt; p -&gt; a
+</span><a href="#local-6989586621679254005"><span class="hs-identifier hs-var">unhandledError</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-113"></span><span>    </span><span id="local-6989586621679254005"><span class="annot"><span class="annottext">unhandledError :: p -&gt; a
+</span><a href="#local-6989586621679254005"><span class="hs-identifier hs-var hs-var">unhandledError</span></a></span></span><span> </span><span id="local-6989586621679254011"><span class="annot"><span class="annottext">p
+</span><a href="#local-6989586621679254011"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; a
+forall a. HasCallStack =&gt; [Char] -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">([Char] -&gt; a) -&gt; [Char] -&gt; a
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;CompiledExpr eval unhandled case &quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">p -&gt; [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; [Char]
+</span><a href="Telomare.PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="annot"><span class="annottext">p
+</span><a href="#local-6989586621679254011"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-114"></span><span>    </span><span id="local-6989586621679254017"><span class="annot"><span class="annottext">findError :: CompiledExprF (Maybe BasicExpr) -&gt; Maybe BasicExpr
+</span><a href="#local-6989586621679254017"><span class="hs-identifier hs-var hs-var">findError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-115"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#AbortFW"><span class="hs-identifier hs-type">AbortFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span id="local-6989586621679254020"><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679254020"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExpr -&gt; Maybe BasicExpr
+forall a. a -&gt; Maybe a
+</span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679254020"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-116"></span><span>      </span><span id="local-6989586621679254021"><span class="annot"><span class="annottext">CompiledExprF (Maybe BasicExpr)
+</span><a href="#local-6989586621679254021"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExprF (Maybe BasicExpr) -&gt; Maybe BasicExpr
+forall (t :: * -&gt; *) (f :: * -&gt; *) a.
+(Foldable t, Alternative f) =&gt;
+t (f a) -&gt; f a
+</span><span class="hs-identifier hs-var">asum</span></span><span> </span><span class="annot"><span class="annottext">CompiledExprF (Maybe BasicExpr)
+</span><a href="#local-6989586621679254021"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-117"></span><span>    </span><span id="local-6989586621679253956"><span class="annot"><span class="annottext">checkError :: CompiledExpr -&gt; Either RunTimeError CompiledExpr
+</span><a href="#local-6989586621679253956"><span class="hs-identifier hs-var hs-var">checkError</span></a></span></span><span> </span><span id="local-6989586621679254023"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679254023"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">(Base CompiledExpr (Maybe BasicExpr) -&gt; Maybe BasicExpr)
+-&gt; CompiledExpr -&gt; Maybe BasicExpr
+forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
+forall a. (Base CompiledExpr a -&gt; a) -&gt; CompiledExpr -&gt; a
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr (Maybe BasicExpr) -&gt; Maybe BasicExpr
+CompiledExprF (Maybe BasicExpr) -&gt; Maybe BasicExpr
+</span><a href="#local-6989586621679254017"><span class="hs-identifier hs-var">findError</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679254023"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-118"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679254024"><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679254024"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">RunTimeError -&gt; Either RunTimeError CompiledExpr
+forall a b. a -&gt; Either a b
+</span><span class="hs-identifier hs-var">Left</span></span><span> </span><span class="annot"><span class="annottext">(RunTimeError -&gt; Either RunTimeError CompiledExpr)
+-&gt; RunTimeError -&gt; Either RunTimeError CompiledExpr
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">BasicExpr -&gt; RunTimeError
+</span><a href="Telomare.IR.Core.html#AbortRunTime"><span class="hs-identifier hs-var">AbortRunTime</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679254024"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-119"></span><span>      </span><span class="annot"><span class="annottext">Maybe BasicExpr
+</span><span class="hs-identifier">_</span></span><span>      </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Either RunTimeError CompiledExpr
+forall a. a -&gt; Either RunTimeError a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679254023"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-120"></span><span>
+</span><span id="line-121"></span><span id="local-6989586621679253575"><span id="local-6989586621679253576"><span class="annot"><a href="Telomare.Eval.Reference.html#evalPartial"><span class="hs-identifier hs-type">evalPartial</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253575"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679253576"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Traversable</span></span><span> </span><span class="annot"><a href="#local-6989586621679253576"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253576"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253576"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Size.IR.html#DeferredEvalBase"><span class="hs-identifier hs-type">DeferredEvalBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253576"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253575"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253575"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.PrettyPrint.html#PrettyPrintable"><span class="hs-identifier hs-type">PrettyPrintable</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253575"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-122"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253575"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253575"><span class="hs-identifier hs-type">g</span></a></span></span></span><span>
+</span><span id="line-123"></span><span id="evalPartial"><span class="annot"><span class="annottext">evalPartial :: forall g (f :: * -&gt; *).
+(Base g ~ f, Traversable f, BasicBase f, StuckBase f,
+ DeferredEvalBase f, Recursive g, Corecursive g,
+ PrettyPrintable g) =&gt;
+g -&gt; g
+</span><a href="Telomare.Eval.Reference.html#evalPartial"><span class="hs-identifier hs-var hs-var">evalPartial</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; g -&gt; g
+forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
+forall a. (Base g a -&gt; a) -&gt; g -&gt; a
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g
+</span><a href="#local-6989586621679254075"><span class="hs-identifier hs-var">removeBarriers</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; (g -&gt; g) -&gt; g -&gt; g
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g) =&gt;
+(f g -&gt; g) -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#transformNoDefer"><span class="hs-identifier hs-var">transformNoDefer</span></a></span><span> </span><span class="annot"><span class="annottext">f g -&gt; g
+</span><a href="#local-6989586621679254076"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-124"></span><span>  </span><span id="local-6989586621679254076"><span class="annot"><span class="annottext">step :: f g -&gt; g
+</span><a href="#local-6989586621679254076"><span class="hs-identifier hs-var hs-var">step</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; f g -&gt; g
+</span><a href="#local-6989586621679254077"><span class="hs-identifier hs-var">deferStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; f g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, Corecursive g, Recursive g) =&gt;
+(f g -&gt; g) -&gt; f g -&gt; g
+</span><a href="Telomare.Machine.html#basicStep"><span class="hs-identifier hs-var">basicStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; f g -&gt; g
+forall a (f :: * -&gt; *).
+(Base a ~ f, StuckBase f, BasicBase f, Recursive a, Corecursive a,
+ PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#stuckStep"><span class="hs-identifier hs-var">stuckStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; f g -&gt; g
+forall a (f :: * -&gt; *).
+(Base a ~ f, Traversable f, BasicBase f, StuckBase f,
+ DeferredEvalBase f, Recursive a, Corecursive a,
+ PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#deferredEvalStep%27"><span class="hs-identifier hs-var">deferredEvalStep'</span></a></span><span> </span><span class="annot"><span class="annottext">f g -&gt; g
+Base g g -&gt; g
+</span><a href="#local-6989586621679254079"><span class="hs-identifier hs-var">wrapUnknownStep</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-125"></span><span>  </span><span id="local-6989586621679254077"><span class="annot"><span class="annottext">deferStep :: (f g -&gt; g) -&gt; f g -&gt; g
+</span><a href="#local-6989586621679254077"><span class="hs-identifier hs-var hs-var">deferStep</span></a></span></span><span> </span><span id="local-6989586621679254080"><span class="annot"><span class="annottext">f g -&gt; g
+</span><a href="#local-6989586621679254080"><span class="hs-identifier hs-var">handleOther</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-126"></span><span>    </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span id="local-6989586621679254083"><span class="annot"><span class="annottext">FunctionIndex
+</span><a href="#local-6989586621679254083"><span class="hs-identifier hs-var">id</span></a></span></span><span> </span><span id="local-6989586621679254084"><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679254084"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Int -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
+Int -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#deferB"><span class="hs-identifier hs-var">deferB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FunctionIndex -&gt; Int
+forall a. Enum a =&gt; a -&gt; Int
+</span><span class="hs-identifier hs-var">fromEnum</span></span><span> </span><span class="annot"><span class="annottext">FunctionIndex
+</span><a href="#local-6989586621679254083"><span class="hs-identifier hs-var">id</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; (g -&gt; g) -&gt; g -&gt; g
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(Base g g -&gt; g) -&gt; g -&gt; g
+forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
+forall a. (Base g a -&gt; a) -&gt; g -&gt; a
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g
+</span><a href="#local-6989586621679254075"><span class="hs-identifier hs-var">removeBarriers</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; g -&gt; g
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g) =&gt;
+(f g -&gt; g) -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#transformNoDefer"><span class="hs-identifier hs-var">transformNoDefer</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">f g -&gt; g
+</span><a href="#local-6989586621679254076"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">(f g -&gt; g) -&gt; (f g -&gt; f g) -&gt; f g -&gt; g
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">f g -&gt; f g
+</span><a href="#local-6989586621679254086"><span class="hs-identifier hs-var">addBarrier</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679254084"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-127"></span><span>    </span><span id="local-6989586621679254087"><span class="annot"><span class="annottext">f g
+</span><a href="#local-6989586621679254087"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f g -&gt; g
+</span><a href="#local-6989586621679254080"><span class="hs-identifier hs-var">handleOther</span></a></span><span> </span><span class="annot"><span class="annottext">f g
+</span><a href="#local-6989586621679254087"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-128"></span><span>  </span><span id="local-6989586621679254086"><span class="annot"><span class="annottext">addBarrier :: f g -&gt; f g
+</span><a href="#local-6989586621679254086"><span class="hs-identifier hs-var hs-var">addBarrier</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-129"></span><span>    </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF g
+</span><a href="Telomare.IR.Base.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DeferredEvalF g -&gt; f g
+forall x. DeferredEvalF x -&gt; f x
+forall (g :: * -&gt; *) x.
+DeferredEvalBase g =&gt;
+DeferredEvalF x -&gt; g x
+</span><a href="Telomare.Size.IR.html#embedD"><span class="hs-identifier hs-var">embedD</span></a></span><span> </span><span class="annot"><span class="annottext">(DeferredEvalF g -&gt; f g) -&gt; DeferredEvalF g -&gt; f g
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">g -&gt; DeferredEvalF g
+forall f. f -&gt; DeferredEvalF f
+</span><a href="Telomare.Size.IR.html#BarrierF"><span class="hs-identifier hs-var">BarrierF</span></a></span><span> </span><span class="annot"><span class="annottext">g
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g
+</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
+</span><span id="line-130"></span><span>    </span><span id="local-6989586621679254099"><span class="annot"><span class="annottext">f g
+</span><a href="#local-6989586621679254099"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">f g
+</span><a href="#local-6989586621679254099"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-131"></span><span>  </span><span id="local-6989586621679254075"><span class="annot"><span class="annottext">removeBarriers :: Base g g -&gt; g
+</span><a href="#local-6989586621679254075"><span class="hs-identifier hs-var hs-var">removeBarriers</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-132"></span><span>    </span><span class="annot"><a href="Telomare.Size.IR.html#DeferredFW"><span class="hs-identifier hs-type">DeferredFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Size.IR.html#BarrierF"><span class="hs-identifier hs-type">BarrierF</span></a></span><span> </span><span id="local-6989586621679254104"><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679254104"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679254104"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-133"></span><span>    </span><span id="local-6989586621679254105"><span class="annot"><span class="annottext">Base g g
+</span><a href="#local-6989586621679254105"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g -&gt; g
+forall a b. a -&gt; b -&gt; b
+</span><span class="hs-identifier hs-var">seq</span></span><span> </span><span class="annot"><span class="annottext">Base g g
+</span><a href="#local-6989586621679254105"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; g) -&gt; g -&gt; g
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g
+forall t. Corecursive t =&gt; Base t t -&gt; t
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base g g
+</span><a href="#local-6989586621679254105"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-comment">-- does seq have any performance consequence here?</span><span>
+</span><span id="line-134"></span><span>  </span><span id="local-6989586621679254079"><span class="annot"><span class="annottext">wrapUnknownStep :: Base g g -&gt; g
+</span><a href="#local-6989586621679254079"><span class="hs-identifier hs-var hs-var">wrapUnknownStep</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DeferredEvalF g -&gt; g
+forall g (f :: * -&gt; *).
+(Base g ~ f, DeferredEvalBase f, Corecursive g) =&gt;
+DeferredEvalF g -&gt; g
+</span><a href="Telomare.Size.IR.html#deferredEE"><span class="hs-identifier hs-var">deferredEE</span></a></span><span> </span><span class="annot"><span class="annottext">(DeferredEvalF g -&gt; g)
+-&gt; (Base g g -&gt; DeferredEvalF g) -&gt; Base g g -&gt; g
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">g -&gt; DeferredEvalF g
+forall f. f -&gt; DeferredEvalF f
+</span><a href="Telomare.Size.IR.html#BarrierF"><span class="hs-identifier hs-var">BarrierF</span></a></span><span> </span><span class="annot"><span class="annottext">(g -&gt; DeferredEvalF g)
+-&gt; (Base g g -&gt; g) -&gt; Base g g -&gt; DeferredEvalF g
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Base g g -&gt; g
+forall t. Corecursive t =&gt; Base t t -&gt; t
+</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span>
+</span><span id="line-135"></span><span>
+</span><span id="line-136"></span><span>
+</span><span id="line-137"></span><span id="local-6989586621679253592"><span id="local-6989586621679253593"><span class="annot"><a href="Telomare.Eval.Reference.html#showPass"><span class="hs-identifier hs-type">showPass</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679253592"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadIO</span></span><span> </span><span class="annot"><a href="#local-6989586621679253593"><span class="hs-identifier hs-type">m</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253593"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253592"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679253593"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679253592"><span class="hs-identifier hs-type">a</span></a></span></span></span><span>
+</span><span id="line-138"></span><span id="showPass"><span class="annot"><span class="annottext">showPass :: forall a (m :: * -&gt; *). (Show a, MonadIO m) =&gt; m a -&gt; m a
+</span><a href="Telomare.Eval.Reference.html#showPass"><span class="hs-identifier hs-var hs-var">showPass</span></a></span></span><span> </span><span id="local-6989586621679254121"><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679254121"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679254121"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">m a -&gt; (a -&gt; m ()) -&gt; m ()
+forall a b. m a -&gt; (a -&gt; m b) -&gt; m b
+forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+</span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">IO () -&gt; m ()
+forall a. IO a -&gt; m a
+forall (m :: * -&gt; *) a. MonadIO m =&gt; IO a -&gt; m a
+</span><span class="hs-identifier hs-var">liftIO</span></span><span> </span><span class="annot"><span class="annottext">(IO () -&gt; m ()) -&gt; (a -&gt; IO ()) -&gt; a -&gt; m ()
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; IO ()
+forall a. Show a =&gt; a -&gt; IO ()
+</span><span class="hs-identifier hs-var">print</span></span><span> </span><span class="annot"><span class="annottext">m () -&gt; m a -&gt; m a
+forall a b. m a -&gt; m b -&gt; m b
+forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
+</span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">m a
+</span><a href="#local-6989586621679254121"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><span id="line-139"></span><span>
+</span><span id="line-140"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#AbstractRunTime"><span class="hs-identifier hs-type">AbstractRunTime</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#StuckExpr"><span class="hs-identifier hs-type">StuckExpr</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-141"></span><span>  </span><span id="local-6989586621679254136"><span class="annot"><span class="annottext">eval :: StuckExpr -&gt; Either RunTimeError StuckExpr
+</span><a href="Telomare.IR.Core.html#eval"><span class="hs-identifier hs-var hs-var hs-var hs-var">eval</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StuckExpr -&gt; Either RunTimeError StuckExpr
+forall a. a -&gt; Either RunTimeError a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(StuckExpr -&gt; Either RunTimeError StuckExpr)
+-&gt; (StuckExpr -&gt; StuckExpr)
+-&gt; StuckExpr
+-&gt; Either RunTimeError StuckExpr
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(StuckExprF StuckExpr -&gt; StuckExpr) -&gt; StuckExpr -&gt; StuckExpr
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g) =&gt;
+(f g -&gt; g) -&gt; g -&gt; g
+</span><a href="Telomare.Machine.html#transformNoDefer"><span class="hs-identifier hs-var">transformNoDefer</span></a></span><span> </span><span class="annot"><span class="annottext">Base StuckExpr StuckExpr -&gt; StuckExpr
+StuckExprF StuckExpr -&gt; StuckExpr
+</span><a href="#local-6989586621679254137"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-142"></span><span>    </span><span id="local-6989586621679254137"><span class="annot"><span class="annottext">step :: Base StuckExpr StuckExpr -&gt; StuckExpr
+</span><a href="#local-6989586621679254137"><span class="hs-identifier hs-var hs-var">step</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base StuckExpr StuckExpr -&gt; StuckExpr)
+-&gt; Base StuckExpr StuckExpr -&gt; StuckExpr
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, Corecursive g, Recursive g) =&gt;
+(f g -&gt; g) -&gt; f g -&gt; g
+</span><a href="Telomare.Machine.html#basicStep"><span class="hs-identifier hs-var">basicStep</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Base StuckExpr StuckExpr -&gt; StuckExpr)
+-&gt; Base StuckExpr StuckExpr -&gt; StuckExpr
+forall a (f :: * -&gt; *).
+(Base a ~ f, StuckBase f, BasicBase f, Recursive a, Corecursive a,
+ PrettyPrintable a) =&gt;
+(f a -&gt; a) -&gt; f a -&gt; a
+</span><a href="Telomare.Machine.html#stuckStep"><span class="hs-identifier hs-var">stuckStep</span></a></span><span> </span><span class="annot"><span class="annottext">Base StuckExpr StuckExpr -&gt; StuckExpr
+forall {p} {a}. PrettyPrintable p =&gt; p -&gt; a
+</span><a href="#local-6989586621679254156"><span class="hs-identifier hs-var">unhandledError</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-143"></span><span>    </span><span id="local-6989586621679254156"><span class="annot"><span class="annottext">unhandledError :: p -&gt; a
+</span><a href="#local-6989586621679254156"><span class="hs-identifier hs-var hs-var">unhandledError</span></a></span></span><span> </span><span id="local-6989586621679254162"><span class="annot"><span class="annottext">p
+</span><a href="#local-6989586621679254162"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; a
+forall a. HasCallStack =&gt; [Char] -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">([Char] -&gt; a) -&gt; [Char] -&gt; a
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">[Char]
+</span><span class="hs-string">&quot;CompiledExpr eval unhandled case &quot;</span></span><span> </span><span class="annot"><span class="annottext">[Char] -&gt; [Char] -&gt; [Char]
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">p -&gt; [Char]
+forall p. PrettyPrintable p =&gt; p -&gt; [Char]
+</span><a href="Telomare.PrettyPrint.html#prettyPrint"><span class="hs-identifier hs-var">prettyPrint</span></a></span><span> </span><span class="annot"><span class="annottext">p
+</span><a href="#local-6989586621679254162"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-144"></span></pre></body></html>

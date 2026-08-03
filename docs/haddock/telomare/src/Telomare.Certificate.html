@@ -3,7 +3,7 @@
 </span><span id="line-3"></span><span class="hs-comment">--</span><span>
 </span><span id="line-4"></span><span class="hs-comment">-- Two analyses feed it, and they answer different questions:</span><span>
 </span><span id="line-5"></span><span class="hs-comment">--</span><span>
-</span><span id="line-6"></span><span class="hs-comment">--   * the sizing pass (&quot;Telomare.Possible&quot;) says how many times each recursion</span><span>
+</span><span id="line-6"></span><span class="hs-comment">--   * the sizing pass (&quot;Telomare.Size&quot;) says how many times each recursion</span><span>
 </span><span id="line-7"></span><span class="hs-comment">--     can iterate. That is the number that makes the program total, and it</span><span>
 </span><span id="line-8"></span><span class="hs-comment">--     costs minutes to find.</span><span>
 </span><span id="line-9"></span><span class="hs-comment">--   * the structural pass (&quot;Telomare.Levels&quot;) says how recursions nest, and</span><span>
@@ -27,84 +27,90 @@
 </span><span id="line-27"></span><span>
 </span><span id="line-28"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><span class="hs-identifier">Data.Map</span></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">Map</span></span><span>
 </span><span id="line-29"></span><span>
-</span><span id="line-30"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.html"><span class="hs-identifier">Telomare</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.html#UnsizedRecursionToken"><span class="hs-identifier">UnsizedRecursionToken</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.html#renderLocTagCompact"><span class="hs-identifier">renderLocTagCompact</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Eval.html"><span class="hs-identifier">Telomare.Eval</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.html#SizingReport"><span class="hs-identifier">SizingReport</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-32"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Levels.html"><span class="hs-identifier">Telomare.Levels</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Levels.html#BindingKey"><span class="hs-identifier">BindingKey</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#LevelsInfo"><span class="hs-identifier">LevelsInfo</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#SiteKey"><span class="hs-identifier">SiteKey</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#bangs"><span class="hs-identifier">bangs</span></a></span><span class="hs-special">,</span><span>
-</span><span id="line-33"></span><span>                        </span><span class="annot"><a href="Telomare.Levels.html#renderBinding"><span class="hs-identifier">renderBinding</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#renderDef"><span class="hs-identifier">renderDef</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#renderLevels"><span class="hs-identifier">renderLevels</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#renderSource"><span class="hs-identifier">renderSource</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-34"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.PossibleData.html"><span class="hs-identifier">Telomare.PossibleData</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.PossibleData.html#SizedRecursion"><span class="hs-identifier">SizedRecursion</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-35"></span><span>
-</span><span id="line-36"></span><span class="hs-comment">-- |The whole static report.</span><span>
-</span><span id="line-37"></span><span class="hs-comment">--</span><span>
-</span><span id="line-38"></span><span class="hs-comment">-- Sizing may be absent &#8212; a fast run never sizes &#8212; in which case no iteration</span><span>
-</span><span id="line-39"></span><span class="hs-comment">-- count is reported rather than a made-up one.</span><span>
-</span><span id="line-40"></span><span class="annot"><a href="Telomare.Certificate.html#renderStaticReport"><span class="hs-identifier hs-type">renderStaticReport</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><span class="hs-comment">-- ^Source hash, when read from an artifact.</span></span><span>
-</span><span id="line-41"></span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.Eval.html#SizingReport"><span class="hs-identifier hs-type">SizingReport</span></a></span><span>
-</span><span id="line-42"></span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><a href="Telomare.Levels.html#LevelsInfo"><span class="hs-identifier hs-type">LevelsInfo</span></a></span><span> </span><span class="annot"><span class="hs-comment">-- ^Levels, or why there are none.</span></span><span>
-</span><span id="line-43"></span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
-</span><span id="line-44"></span><span id="renderStaticReport"><span class="annot"><span class="annottext">renderStaticReport :: Maybe String
+</span><span id="line-30"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Error.html"><span class="hs-identifier">Telomare.Error</span></a></span><span>
+</span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html"><span class="hs-identifier">Telomare.IR.Base</span></a></span><span>
+</span><span id="line-32"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html"><span class="hs-identifier">Telomare.IR.Builder</span></a></span><span>
+</span><span id="line-33"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html"><span class="hs-identifier">Telomare.IR.Core</span></a></span><span>
+</span><span id="line-34"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span>
+</span><span id="line-35"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html"><span class="hs-identifier">Telomare.IR.Surface</span></a></span><span>
+</span><span id="line-36"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html"><span class="hs-identifier">Telomare.IR.Types</span></a></span><span>
+</span><span id="line-37"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Levels.html"><span class="hs-identifier">Telomare.Levels</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Levels.html#BindingKey"><span class="hs-identifier">BindingKey</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#LevelsInfo"><span class="hs-identifier">LevelsInfo</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#SiteKey"><span class="hs-identifier">SiteKey</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#bangs"><span class="hs-identifier">bangs</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-38"></span><span>                        </span><span class="annot"><a href="Telomare.Levels.html#renderBinding"><span class="hs-identifier">renderBinding</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#renderDef"><span class="hs-identifier">renderDef</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#renderLevels"><span class="hs-identifier">renderLevels</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Levels.html#renderSource"><span class="hs-identifier">renderSource</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-39"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Size.html"><span class="hs-identifier">Telomare.Size</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Size.html#SizingReport"><span class="hs-identifier">SizingReport</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-40"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Size.IR.html"><span class="hs-identifier">Telomare.Size.IR</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Size.IR.html#SizedRecursion"><span class="hs-identifier">SizedRecursion</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-41"></span><span>
+</span><span id="line-42"></span><span class="hs-comment">-- |The whole static report.</span><span>
+</span><span id="line-43"></span><span class="hs-comment">--</span><span>
+</span><span id="line-44"></span><span class="hs-comment">-- Sizing may be absent &#8212; a fast run never sizes &#8212; in which case no iteration</span><span>
+</span><span id="line-45"></span><span class="hs-comment">-- count is reported rather than a made-up one.</span><span>
+</span><span id="line-46"></span><span class="annot"><a href="Telomare.Certificate.html#renderStaticReport"><span class="hs-identifier hs-type">renderStaticReport</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><span class="hs-comment">-- ^Source hash, when read from an artifact.</span></span><span>
+</span><span id="line-47"></span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.Size.html#SizingReport"><span class="hs-identifier hs-type">SizingReport</span></a></span><span>
+</span><span id="line-48"></span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><a href="Telomare.Levels.html#LevelsInfo"><span class="hs-identifier hs-type">LevelsInfo</span></a></span><span> </span><span class="annot"><span class="hs-comment">-- ^Levels, or why there are none.</span></span><span>
+</span><span id="line-49"></span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-50"></span><span id="renderStaticReport"><span class="annot"><span class="annottext">renderStaticReport :: Maybe String
 -&gt; Maybe SizingReport -&gt; Either String LevelsInfo -&gt; String
-</span><a href="Telomare.Certificate.html#renderStaticReport"><span class="hs-identifier hs-var hs-var">renderStaticReport</span></a></span></span><span> </span><span id="local-6989586621679265187"><span class="annot"><span class="annottext">Maybe String
-</span><a href="#local-6989586621679265187"><span class="hs-identifier hs-var">sourceHash</span></a></span></span><span> </span><span id="local-6989586621679265188"><span class="annot"><span class="annottext">Maybe SizingReport
-</span><a href="#local-6989586621679265188"><span class="hs-identifier hs-var">sizing</span></a></span></span><span> </span><span id="local-6989586621679265189"><span class="annot"><span class="annottext">Either String LevelsInfo
-</span><a href="#local-6989586621679265189"><span class="hs-identifier hs-var">levels</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
+</span><a href="Telomare.Certificate.html#renderStaticReport"><span class="hs-identifier hs-var hs-var">renderStaticReport</span></a></span></span><span> </span><span id="local-6989586621679254239"><span class="annot"><span class="annottext">Maybe String
+</span><a href="#local-6989586621679254239"><span class="hs-identifier hs-var">sourceHash</span></a></span></span><span> </span><span id="local-6989586621679254240"><span class="annot"><span class="annottext">Maybe SizingReport
+</span><a href="#local-6989586621679254240"><span class="hs-identifier hs-var">sizing</span></a></span></span><span> </span><span id="local-6989586621679254241"><span class="annot"><span class="annottext">Either String LevelsInfo
+</span><a href="#local-6989586621679254241"><span class="hs-identifier hs-var">levels</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
 </span><span class="hs-identifier hs-var">unlines</span></span><span> </span><span class="annot"><span class="annottext">([String] -&gt; String) -&gt; [String] -&gt; String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span>
-</span><span id="line-45"></span><span>  </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679265191"><span class="hs-identifier hs-var">header</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
+</span><span id="line-51"></span><span>  </span><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679254243"><span class="hs-identifier hs-var">header</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679265192"><span class="hs-identifier hs-var">sizingSection</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679254244"><span class="hs-identifier hs-var">sizingSection</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679265193"><span class="hs-identifier hs-var">structuralSection</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679254245"><span class="hs-identifier hs-var">structuralSection</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679265194"><span class="hs-identifier hs-var">closing</span></a></span><span>
-</span><span id="line-46"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-47"></span><span>    </span><span id="local-6989586621679265191"><span class="annot"><span class="annottext">header :: [String]
-</span><a href="#local-6989586621679265191"><span class="hs-identifier hs-var hs-var">header</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-48"></span><span>      </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254246"><span class="hs-identifier hs-var">closing</span></a></span><span>
+</span><span id="line-52"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-53"></span><span>    </span><span id="local-6989586621679254243"><span class="annot"><span class="annottext">header :: [String]
+</span><a href="#local-6989586621679254243"><span class="hs-identifier hs-var hs-var">header</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-54"></span><span>      </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;static report: what the compiler knows without running the program&quot;</span></span><span>
-</span><span id="line-49"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
+</span><span id="line-55"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; [String]) -&gt; Maybe String -&gt; [String]
 forall m a. Monoid m =&gt; (a -&gt; m) -&gt; Maybe a -&gt; m
 forall (t :: * -&gt; *) m a.
 (Foldable t, Monoid m) =&gt;
 (a -&gt; m) -&gt; t a -&gt; m
-</span><span class="hs-identifier hs-var">foldMap</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679265201"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265201"><span class="hs-identifier hs-var">h</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><span class="hs-identifier hs-var">foldMap</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679254253"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254253"><span class="hs-identifier hs-var">h</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;source hash: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265201"><span class="hs-identifier hs-var">h</span></a></span><span class="hs-special">]</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Maybe String
-</span><a href="#local-6989586621679265187"><span class="hs-identifier hs-var">sourceHash</span></a></span><span>
-</span><span id="line-50"></span><span>
-</span><span id="line-51"></span><span>    </span><span id="local-6989586621679265192"><span class="annot"><span class="annottext">sizingSection :: [String]
-</span><a href="#local-6989586621679265192"><span class="hs-identifier hs-var hs-var">sizingSection</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Maybe SizingReport
-</span><a href="#local-6989586621679265188"><span class="hs-identifier hs-var">sizing</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-52"></span><span>      </span><span class="annot"><span class="annottext">Maybe SizingReport
+</span><a href="#local-6989586621679254253"><span class="hs-identifier hs-var">h</span></a></span><span class="hs-special">]</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Maybe String
+</span><a href="#local-6989586621679254239"><span class="hs-identifier hs-var">sourceHash</span></a></span><span>
+</span><span id="line-56"></span><span>
+</span><span id="line-57"></span><span>    </span><span id="local-6989586621679254244"><span class="annot"><span class="annottext">sizingSection :: [String]
+</span><a href="#local-6989586621679254244"><span class="hs-identifier hs-var hs-var">sizingSection</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Maybe SizingReport
+</span><a href="#local-6989586621679254240"><span class="hs-identifier hs-var">sizing</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-58"></span><span>      </span><span class="annot"><span class="annottext">Maybe SizingReport
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-53"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-59"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;iterations: not inferred, because this program was not sized.&quot;</span></span><span>
-</span><span id="line-54"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-60"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  Nothing here says it terminates. Compile it without --fast for that.&quot;</span></span><span> </span><span class="hs-special">]</span><span>
-</span><span id="line-55"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679265206"><span class="annot"><span class="annottext">SizingReport
-</span><a href="#local-6989586621679265206"><span class="hs-identifier hs-var">report</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-56"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
+</span><span id="line-61"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679254258"><span class="annot"><span class="annottext">SizingReport
+</span><a href="#local-6989586621679254258"><span class="hs-identifier hs-var">report</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-62"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;recursion sites (iterations, over every input):&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">SizingReport -&gt; [String]
 </span><a href="Telomare.Certificate.html#sizedRows"><span class="hs-identifier hs-var">sizedRows</span></a></span><span> </span><span class="annot"><span class="annottext">SizingReport
-</span><a href="#local-6989586621679265206"><span class="hs-identifier hs-var">report</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-57"></span><span>          </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679254258"><span class="hs-identifier hs-var">report</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-63"></span><span>          </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
@@ -113,34 +119,34 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SizingReport -&gt; Int
-</span><a href="Telomare.Eval.html#sizingReportBudget"><span class="hs-identifier hs-var">sizingReportBudget</span></a></span><span> </span><span class="annot"><span class="annottext">SizingReport
-</span><a href="#local-6989586621679265206"><span class="hs-identifier hs-var">report</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-58"></span><span>                </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="Telomare.Size.html#sizingReportBudget"><span class="hs-identifier hs-var">sizingReportBudget</span></a></span><span> </span><span class="annot"><span class="annottext">SizingReport
+</span><a href="#local-6989586621679254258"><span class="hs-identifier hs-var">report</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-64"></span><span>                </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; unrollings&quot;</span></span><span class="hs-special">]</span><span>
-</span><span id="line-59"></span><span>
-</span><span id="line-60"></span><span>    </span><span id="local-6989586621679265193"><span class="annot"><span class="annottext">structuralSection :: [String]
-</span><a href="#local-6989586621679265193"><span class="hs-identifier hs-var hs-var">structuralSection</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either String LevelsInfo
-</span><a href="#local-6989586621679265189"><span class="hs-identifier hs-var">levels</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-61"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679265216"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265216"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><span id="line-65"></span><span>
+</span><span id="line-66"></span><span>    </span><span id="local-6989586621679254245"><span class="annot"><span class="annottext">structuralSection :: [String]
+</span><a href="#local-6989586621679254245"><span class="hs-identifier hs-var hs-var">structuralSection</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Either String LevelsInfo
+</span><a href="#local-6989586621679254241"><span class="hs-identifier hs-var">levels</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-67"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679254268"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254268"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;recursion nesting: unavailable (&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265216"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254268"><span class="hs-identifier hs-var">err</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;)&quot;</span></span><span class="hs-special">]</span><span>
-</span><span id="line-62"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679265217"><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265217"><span class="hs-identifier hs-var">info</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-63"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
+</span><span id="line-68"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679254269"><span class="annot"><span class="annottext">LevelsInfo
+</span><a href="#local-6989586621679254269"><span class="hs-identifier hs-var">info</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-69"></span><span>        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;recursion nesting (structural, approximate):&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">LevelsInfo -&gt; [String]
 </span><a href="Telomare.Certificate.html#structuralRows"><span class="hs-identifier hs-var">structuralRows</span></a></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265217"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-64"></span><span>          </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679254269"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-70"></span><span>          </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
@@ -150,91 +156,91 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LevelsInfo -&gt; Int
 </span><a href="Telomare.Levels.html#levelsMaxDepth"><span class="hs-identifier hs-var">levelsMaxDepth</span></a></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265217"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
-</span><span id="line-65"></span><span>          </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679254269"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-71"></span><span>          </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">LevelsInfo -&gt; [String]
-</span><a href="#local-6989586621679265220"><span class="hs-identifier hs-var">pressure</span></a></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265217"><span class="hs-identifier hs-var">info</span></a></span><span>
-</span><span id="line-66"></span><span>
-</span><span id="line-67"></span><span>    </span><span id="local-6989586621679265220"><span class="annot"><span class="annottext">pressure :: LevelsInfo -&gt; [String]
-</span><a href="#local-6989586621679265220"><span class="hs-identifier hs-var hs-var">pressure</span></a></span></span><span> </span><span id="local-6989586621679265222"><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265222"><span class="hs-identifier hs-var">info</span></a></span></span><span>
-</span><span id="line-68"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">[(BindingKey, Int)] -&gt; Bool
+</span><a href="#local-6989586621679254272"><span class="hs-identifier hs-var">pressure</span></a></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
+</span><a href="#local-6989586621679254269"><span class="hs-identifier hs-var">info</span></a></span><span>
+</span><span id="line-72"></span><span>
+</span><span id="line-73"></span><span>    </span><span id="local-6989586621679254272"><span class="annot"><span class="annottext">pressure :: LevelsInfo -&gt; [String]
+</span><a href="#local-6989586621679254272"><span class="hs-identifier hs-var hs-var">pressure</span></a></span></span><span> </span><span id="local-6989586621679254274"><span class="annot"><span class="annottext">LevelsInfo
+</span><a href="#local-6989586621679254274"><span class="hs-identifier hs-var">info</span></a></span></span><span>
+</span><span id="line-74"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">[(BindingKey, Int)] -&gt; Bool
 forall a. [a] -&gt; Bool
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Bool
 </span><span class="hs-identifier hs-var">null</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LevelsInfo -&gt; [(BindingKey, Int)]
 </span><a href="Telomare.Levels.html#levelsBangs"><span class="hs-identifier hs-var">levelsBangs</span></a></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265222"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254274"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;no binding is used below the level it was bound at&quot;</span></span><span class="hs-special">]</span><span>
-</span><span id="line-69"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-75"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">otherwise</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;bindings used below the level they were bound at:&quot;</span></span><span>
-</span><span id="line-70"></span><span>          </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
+</span><span id="line-76"></span><span>          </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[(BindingKey, Int)] -&gt; [String]
 </span><a href="Telomare.Certificate.html#pressureRows"><span class="hs-identifier hs-var">pressureRows</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LevelsInfo -&gt; [(BindingKey, Int)]
 </span><a href="Telomare.Levels.html#levelsBangs"><span class="hs-identifier hs-var">levelsBangs</span></a></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265222"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-71"></span><span>
-</span><span id="line-72"></span><span>    </span><span id="local-6989586621679265194"><span class="annot"><span class="annottext">closing :: [String]
-</span><a href="#local-6989586621679265194"><span class="hs-identifier hs-var hs-var">closing</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254274"><span class="hs-identifier hs-var">info</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-77"></span><span>
+</span><span id="line-78"></span><span>    </span><span id="local-6989586621679254246"><span class="annot"><span class="annottext">closing :: [String]
+</span><a href="#local-6989586621679254246"><span class="hs-identifier hs-var hs-var">closing</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679265228"><span class="hs-identifier hs-var">correspondence</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679254280"><span class="hs-identifier hs-var">correspondence</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String] -&gt; [String]
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span>
-</span><span id="line-73"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-79"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;A site at level d has its test, recursion and last one level deeper.&quot;</span></span><span>
-</span><span id="line-74"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-80"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;Several levels for one triple mean it is reached from several places.&quot;</span></span><span>
-</span><span id="line-75"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-81"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;Levels are structural: a parameter applied as a function whose shape is&quot;</span></span><span>
-</span><span id="line-76"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-82"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;unknown counts as level 0, so a level can be reported too shallow. They&quot;</span></span><span>
-</span><span id="line-77"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-83"></span><span>      </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;are not bounds, and not a termination argument -- the counts are.&quot;</span></span><span>
-</span><span id="line-78"></span><span>      </span><span class="hs-special">]</span><span>
-</span><span id="line-79"></span><span>
-</span><span id="line-80"></span><span>    </span><span id="local-6989586621679265228"><span class="annot"><span class="annottext">correspondence :: [String]
-</span><a href="#local-6989586621679265228"><span class="hs-identifier hs-var hs-var">correspondence</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe SizingReport
-</span><a href="#local-6989586621679265188"><span class="hs-identifier hs-var">sizing</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Either String LevelsInfo
-</span><a href="#local-6989586621679265189"><span class="hs-identifier hs-var">levels</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-81"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="annot"><span class="annottext">SizingReport
+</span><span id="line-84"></span><span>      </span><span class="hs-special">]</span><span>
+</span><span id="line-85"></span><span>
+</span><span id="line-86"></span><span>    </span><span id="local-6989586621679254280"><span class="annot"><span class="annottext">correspondence :: [String]
+</span><a href="#local-6989586621679254280"><span class="hs-identifier hs-var hs-var">correspondence</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Maybe SizingReport
+</span><a href="#local-6989586621679254240"><span class="hs-identifier hs-var">sizing</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Either String LevelsInfo
+</span><a href="#local-6989586621679254241"><span class="hs-identifier hs-var">levels</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-87"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="annot"><span class="annottext">SizingReport
 </span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-82"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-88"></span><span>        </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;The two lists index differently: a count above is per instantiation (a&quot;</span></span><span>
-</span><span id="line-83"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-89"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;recursion reached from two places is sized separately at each), while a&quot;</span></span><span>
-</span><span id="line-84"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-90"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;row below is one {t, r, b} as written. They do not line up row by row.&quot;</span></span><span>
-</span><span id="line-85"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-91"></span><span>        </span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span> </span><span class="hs-special">]</span><span>
-</span><span id="line-86"></span><span>      </span><span class="annot"><span class="annottext">(Maybe SizingReport, Either String LevelsInfo)
+</span><span id="line-92"></span><span>      </span><span class="annot"><span class="annottext">(Maybe SizingReport, Either String LevelsInfo)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
-</span><span id="line-87"></span><span>
-</span><span id="line-88"></span><span class="hs-comment">-- |What sizing found: one row per instantiation, which is what the compiled</span><span>
-</span><span id="line-89"></span><span class="hs-comment">-- program actually runs on.</span><span>
-</span><span id="line-90"></span><span class="annot"><a href="Telomare.Certificate.html#sizedRows"><span class="hs-identifier hs-type">sizedRows</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.html#SizingReport"><span class="hs-identifier hs-type">SizingReport</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span>
-</span><span id="line-91"></span><span id="sizedRows"><span class="annot"><span class="annottext">sizedRows :: SizingReport -&gt; [String]
-</span><a href="Telomare.Certificate.html#sizedRows"><span class="hs-identifier hs-var hs-var">sizedRows</span></a></span></span><span> </span><span id="local-6989586621679265229"><span class="annot"><span class="annottext">SizingReport
-</span><a href="#local-6989586621679265229"><span class="hs-identifier hs-var">report</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((UnsizedRecursionToken, Maybe Int) -&gt; String)
+</span><span id="line-93"></span><span>
+</span><span id="line-94"></span><span class="hs-comment">-- |What sizing found: one row per instantiation, which is what the compiled</span><span>
+</span><span id="line-95"></span><span class="hs-comment">-- program actually runs on.</span><span>
+</span><span id="line-96"></span><span class="annot"><a href="Telomare.Certificate.html#sizedRows"><span class="hs-identifier hs-type">sizedRows</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Size.html#SizingReport"><span class="hs-identifier hs-type">SizingReport</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span>
+</span><span id="line-97"></span><span id="sizedRows"><span class="annot"><span class="annottext">sizedRows :: SizingReport -&gt; [String]
+</span><a href="Telomare.Certificate.html#sizedRows"><span class="hs-identifier hs-var hs-var">sizedRows</span></a></span></span><span> </span><span id="local-6989586621679254281"><span class="annot"><span class="annottext">SizingReport
+</span><a href="#local-6989586621679254281"><span class="hs-identifier hs-var">report</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((UnsizedRecursionToken, Maybe Int) -&gt; String)
 -&gt; [(UnsizedRecursionToken, Maybe Int)] -&gt; [String]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">(UnsizedRecursionToken, Maybe Int) -&gt; String
 forall {a}. Show a =&gt; (UnsizedRecursionToken, Maybe a) -&gt; String
-</span><a href="#local-6989586621679265230"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">[(UnsizedRecursionToken, Maybe Int)]
-</span><a href="#local-6989586621679265231"><span class="hs-identifier hs-var">counts</span></a></span><span>
-</span><span id="line-92"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-93"></span><span>    </span><span id="local-6989586621679265231"><span class="annot"><span class="annottext">counts :: [(UnsizedRecursionToken, Maybe Int)]
-</span><a href="#local-6989586621679265231"><span class="hs-identifier hs-var hs-var">counts</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Map UnsizedRecursionToken (Maybe Int)
+</span><a href="#local-6989586621679254282"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">[(UnsizedRecursionToken, Maybe Int)]
+</span><a href="#local-6989586621679254283"><span class="hs-identifier hs-var">counts</span></a></span><span>
+</span><span id="line-98"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-99"></span><span>    </span><span id="local-6989586621679254283"><span class="annot"><span class="annottext">counts :: [(UnsizedRecursionToken, Maybe Int)]
+</span><a href="#local-6989586621679254283"><span class="hs-identifier hs-var hs-var">counts</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Map UnsizedRecursionToken (Maybe Int)
 -&gt; [(UnsizedRecursionToken, Maybe Int)]
 forall k a. Map k a -&gt; [(k, a)]
 </span><span class="hs-identifier hs-var">Map.toAscList</span></span><span> </span><span class="annot"><span class="annottext">(Map UnsizedRecursionToken (Maybe Int)
@@ -244,22 +250,22 @@ forall k a. Map k a -&gt; [(k, a)]
 -&gt; [(UnsizedRecursionToken, Maybe Int)]
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">SizedRecursion -&gt; Map UnsizedRecursionToken (Maybe Int)
-</span><a href="Telomare.PossibleData.html#unSizedRecursion"><span class="hs-identifier hs-var">unSizedRecursion</span></a></span><span> </span><span class="annot"><span class="annottext">(SizedRecursion -&gt; [(UnsizedRecursionToken, Maybe Int)])
+</span><a href="Telomare.Size.IR.html#unSizedRecursion"><span class="hs-identifier hs-var">unSizedRecursion</span></a></span><span> </span><span class="annot"><span class="annottext">(SizedRecursion -&gt; [(UnsizedRecursionToken, Maybe Int)])
 -&gt; SizedRecursion -&gt; [(UnsizedRecursionToken, Maybe Int)]
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">SizingReport -&gt; SizedRecursion
-</span><a href="Telomare.Eval.html#sizingReportCounts"><span class="hs-identifier hs-var">sizingReportCounts</span></a></span><span> </span><span class="annot"><span class="annottext">SizingReport
-</span><a href="#local-6989586621679265229"><span class="hs-identifier hs-var">report</span></a></span><span>
-</span><span id="line-94"></span><span>    </span><span id="local-6989586621679265230"><span class="annot"><span class="annottext">render :: (UnsizedRecursionToken, Maybe a) -&gt; String
-</span><a href="#local-6989586621679265230"><span class="hs-identifier hs-var hs-var">render</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679265241"><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679265241"><span class="hs-identifier hs-var">tok</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679265242"><span class="annot"><span class="annottext">Maybe a
-</span><a href="#local-6989586621679265242"><span class="hs-identifier hs-var">size</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Telomare.Size.html#sizingReportCounts"><span class="hs-identifier hs-var">sizingReportCounts</span></a></span><span> </span><span class="annot"><span class="annottext">SizingReport
+</span><a href="#local-6989586621679254281"><span class="hs-identifier hs-var">report</span></a></span><span>
+</span><span id="line-100"></span><span>    </span><span id="local-6989586621679254282"><span class="annot"><span class="annottext">render :: (UnsizedRecursionToken, Maybe a) -&gt; String
+</span><a href="#local-6989586621679254282"><span class="hs-identifier hs-var hs-var">render</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679254293"><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="#local-6989586621679254293"><span class="hs-identifier hs-var">tok</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679254294"><span class="annot"><span class="annottext">Maybe a
+</span><a href="#local-6989586621679254294"><span class="hs-identifier hs-var">size</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String
-</span><a href="#local-6989586621679265243"><span class="hs-identifier hs-var">pad</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">UnsizedRecursionToken -&gt; String
-</span><a href="#local-6989586621679265244"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679265241"><span class="hs-identifier hs-var">tok</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254295"><span class="hs-identifier hs-var">pad</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">UnsizedRecursionToken -&gt; String
+</span><a href="#local-6989586621679254296"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="#local-6989586621679254293"><span class="hs-identifier hs-var">tok</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  &lt;= &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
@@ -270,47 +276,47 @@ forall b a. b -&gt; (a -&gt; b) -&gt; Maybe a -&gt; b
 </span><span class="hs-string">&quot;?&quot;</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Maybe a
-</span><a href="#local-6989586621679265242"><span class="hs-identifier hs-var">size</span></a></span><span>
-</span><span id="line-95"></span><span>    </span><span id="local-6989586621679265244"><span class="annot"><span class="annottext">place :: UnsizedRecursionToken -&gt; String
-</span><a href="#local-6989586621679265244"><span class="hs-identifier hs-var hs-var">place</span></a></span></span><span> </span><span id="local-6989586621679265253"><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679265253"><span class="hs-identifier hs-var">tok</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-96"></span><span>      </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679265256"><span class="annot"><span class="annottext">named :: String
-</span><a href="#local-6989586621679265256"><span class="hs-identifier hs-var hs-var">named</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254294"><span class="hs-identifier hs-var">size</span></a></span><span>
+</span><span id="line-101"></span><span>    </span><span id="local-6989586621679254296"><span class="annot"><span class="annottext">place :: UnsizedRecursionToken -&gt; String
+</span><a href="#local-6989586621679254296"><span class="hs-identifier hs-var hs-var">place</span></a></span></span><span> </span><span id="local-6989586621679254305"><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="#local-6989586621679254305"><span class="hs-identifier hs-var">tok</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-102"></span><span>      </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679254308"><span class="annot"><span class="annottext">named :: String
+</span><a href="#local-6989586621679254308"><span class="hs-identifier hs-var hs-var">named</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;#&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">UnsizedRecursionToken -&gt; Int
-</span><a href="Telomare.html#unUnsizedRecursionToken"><span class="hs-identifier hs-var">unUnsizedRecursionToken</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679265253"><span class="hs-identifier hs-var">tok</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-97"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="Telomare.IR.Base.html#unUnsizedRecursionToken"><span class="hs-identifier hs-var">unUnsizedRecursionToken</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="#local-6989586621679254305"><span class="hs-identifier hs-var">tok</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-103"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
 -&gt; Map UnsizedRecursionToken LocTag -&gt; Maybe LocTag
 forall k a. Ord k =&gt; k -&gt; Map k a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Map.lookup</span></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679265253"><span class="hs-identifier hs-var">tok</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SizingReport -&gt; Map UnsizedRecursionToken LocTag
-</span><a href="Telomare.Eval.html#sizingReportLocs"><span class="hs-identifier hs-var">sizingReportLocs</span></a></span><span> </span><span class="annot"><span class="annottext">SizingReport
-</span><a href="#local-6989586621679265229"><span class="hs-identifier hs-var">report</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe String) -&gt; Maybe String
+</span><a href="#local-6989586621679254305"><span class="hs-identifier hs-var">tok</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SizingReport -&gt; Map UnsizedRecursionToken LocTag
+</span><a href="Telomare.Size.html#sizingReportLocs"><span class="hs-identifier hs-var">sizingReportLocs</span></a></span><span> </span><span class="annot"><span class="annottext">SizingReport
+</span><a href="#local-6989586621679254281"><span class="hs-identifier hs-var">report</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe String) -&gt; Maybe String
 forall a b. Maybe a -&gt; (a -&gt; Maybe b) -&gt; Maybe b
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe String
-</span><a href="Telomare.html#renderLocTagCompact"><span class="hs-identifier hs-var">renderLocTagCompact</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-98"></span><span>           </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679265260"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265260"><span class="hs-identifier hs-var">spot</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265260"><span class="hs-identifier hs-var">spot</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="Telomare.IR.Loc.html#renderLocTagCompact"><span class="hs-identifier hs-var">renderLocTagCompact</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-104"></span><span>           </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679254313"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254313"><span class="hs-identifier hs-var">spot</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254313"><span class="hs-identifier hs-var">spot</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; (&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265256"><span class="hs-identifier hs-var">named</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254308"><span class="hs-identifier hs-var">named</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;)&quot;</span></span><span>
-</span><span id="line-99"></span><span>           </span><span class="annot"><span class="annottext">Maybe String
+</span><span id="line-105"></span><span>           </span><span class="annot"><span class="annottext">Maybe String
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265256"><span class="hs-identifier hs-var">named</span></a></span><span>
-</span><span id="line-100"></span><span>    </span><span id="local-6989586621679265268"><span class="annot"><span class="annottext">width :: Int
-</span><a href="#local-6989586621679265268"><span class="hs-identifier hs-var hs-var">width</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int
+</span><a href="#local-6989586621679254308"><span class="hs-identifier hs-var">named</span></a></span><span>
+</span><span id="line-106"></span><span>    </span><span id="local-6989586621679254321"><span class="annot"><span class="annottext">width :: Int
+</span><a href="#local-6989586621679254321"><span class="hs-identifier hs-var hs-var">width</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int
 forall a. Ord a =&gt; [a] -&gt; a
 forall (t :: * -&gt; *) a. (Foldable t, Ord a) =&gt; t a -&gt; a
 </span><span class="hs-identifier hs-var">maximum</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
@@ -329,7 +335,7 @@ forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 -&gt; Int
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken -&gt; String
-</span><a href="#local-6989586621679265244"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">(UnsizedRecursionToken -&gt; String)
+</span><a href="#local-6989586621679254296"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">(UnsizedRecursionToken -&gt; String)
 -&gt; ((UnsizedRecursionToken, Maybe Int) -&gt; UnsizedRecursionToken)
 -&gt; (UnsizedRecursionToken, Maybe Int)
 -&gt; String
@@ -337,36 +343,36 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(UnsizedRecursionToken, Maybe Int) -&gt; UnsizedRecursionToken
 forall a b. (a, b) -&gt; a
 </span><span class="hs-identifier hs-var">fst</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[(UnsizedRecursionToken, Maybe Int)]
-</span><a href="#local-6989586621679265231"><span class="hs-identifier hs-var">counts</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-101"></span><span>    </span><span id="local-6989586621679265243"><span class="annot"><span class="annottext">pad :: String -&gt; String
-</span><a href="#local-6989586621679265243"><span class="hs-identifier hs-var hs-var">pad</span></a></span></span><span> </span><span id="local-6989586621679265275"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265275"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265275"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254283"><span class="hs-identifier hs-var">counts</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-107"></span><span>    </span><span id="local-6989586621679254295"><span class="annot"><span class="annottext">pad :: String -&gt; String
+</span><a href="#local-6989586621679254295"><span class="hs-identifier hs-var hs-var">pad</span></a></span></span><span> </span><span id="local-6989586621679254328"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254328"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254328"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Char -&gt; String
 forall a. Int -&gt; a -&gt; [a]
 </span><span class="hs-identifier hs-var">replicate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265268"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679254321"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265275"><span class="hs-identifier hs-var">s</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Char
+</span><a href="#local-6989586621679254328"><span class="hs-identifier hs-var">s</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Char
 </span><span class="hs-char">' '</span></span><span>
-</span><span id="line-102"></span><span>
-</span><span id="line-103"></span><span class="annot"><span class="hs-comment">-- |What the structural pass found: one row per written triple.</span></span><span>
-</span><span id="line-104"></span><span class="annot"><a href="Telomare.Certificate.html#structuralRows"><span class="hs-identifier hs-type">structuralRows</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Levels.html#LevelsInfo"><span class="hs-identifier hs-type">LevelsInfo</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span>
-</span><span id="line-105"></span><span id="structuralRows"><span class="annot"><span class="annottext">structuralRows :: LevelsInfo -&gt; [String]
-</span><a href="Telomare.Certificate.html#structuralRows"><span class="hs-identifier hs-var hs-var">structuralRows</span></a></span></span><span> </span><span id="local-6989586621679265277"><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265277"><span class="hs-identifier hs-var">info</span></a></span></span><span>
-</span><span id="line-106"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">[(String, String, String)] -&gt; Bool
+</span><span id="line-108"></span><span>
+</span><span id="line-109"></span><span class="annot"><span class="hs-comment">-- |What the structural pass found: one row per written triple.</span></span><span>
+</span><span id="line-110"></span><span class="annot"><a href="Telomare.Certificate.html#structuralRows"><span class="hs-identifier hs-type">structuralRows</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Levels.html#LevelsInfo"><span class="hs-identifier hs-type">LevelsInfo</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span>
+</span><span id="line-111"></span><span id="structuralRows"><span class="annot"><span class="annottext">structuralRows :: LevelsInfo -&gt; [String]
+</span><a href="Telomare.Certificate.html#structuralRows"><span class="hs-identifier hs-var hs-var">structuralRows</span></a></span></span><span> </span><span id="local-6989586621679254330"><span class="annot"><span class="annottext">LevelsInfo
+</span><a href="#local-6989586621679254330"><span class="hs-identifier hs-var">info</span></a></span></span><span>
+</span><span id="line-112"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">[(String, String, String)] -&gt; Bool
 forall a. [a] -&gt; Bool
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Bool
 </span><span class="hs-identifier hs-var">null</span></span><span> </span><span class="annot"><span class="annottext">[(String, String, String)]
-</span><a href="#local-6989586621679265278"><span class="hs-identifier hs-var">rows</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254331"><span class="hs-identifier hs-var">rows</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  none reachable from the entry point&quot;</span></span><span class="hs-special">]</span><span>
-</span><span id="line-107"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-113"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">otherwise</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(String -&gt; String) -&gt; [String] -&gt; [String]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
@@ -374,40 +380,40 @@ forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-string">&quot;  &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(String, String, String) -&gt; String
-</span><a href="#local-6989586621679265279"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String)
-</span><a href="#local-6989586621679265280"><span class="hs-identifier hs-var">headings</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679254332"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String)
+</span><a href="#local-6989586621679254333"><span class="hs-identifier hs-var">headings</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">((String, String, String) -&gt; String)
 -&gt; [(String, String, String)] -&gt; [String]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">(String, String, String) -&gt; String
-</span><a href="#local-6989586621679265279"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">[(String, String, String)]
-</span><a href="#local-6989586621679265278"><span class="hs-identifier hs-var">rows</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-108"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-109"></span><span>    </span><span id="local-6989586621679265280"><span class="annot"><span class="annottext">headings :: (String, String, String)
-</span><a href="#local-6989586621679265280"><span class="hs-identifier hs-var hs-var">headings</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254332"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">[(String, String, String)]
+</span><a href="#local-6989586621679254331"><span class="hs-identifier hs-var">rows</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-114"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-115"></span><span>    </span><span id="local-6989586621679254333"><span class="annot"><span class="annottext">headings :: (String, String, String)
+</span><a href="#local-6989586621679254333"><span class="hs-identifier hs-var hs-var">headings</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;triple&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;function&quot;</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;levels&quot;</span></span><span class="hs-special">)</span><span>
-</span><span id="line-110"></span><span>    </span><span id="local-6989586621679265278"><span class="annot"><span class="annottext">rows :: [(String, String, String)]
-</span><a href="#local-6989586621679265278"><span class="hs-identifier hs-var hs-var">rows</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourceRef -&gt; String
+</span><span id="line-116"></span><span>    </span><span id="local-6989586621679254331"><span class="annot"><span class="annottext">rows :: [(String, String, String)]
+</span><a href="#local-6989586621679254331"><span class="hs-identifier hs-var hs-var">rows</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourceRef -&gt; String
 </span><a href="Telomare.Levels.html#renderSource"><span class="hs-identifier hs-var">renderSource</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SiteKey -&gt; SourceRef
 </span><a href="Telomare.Levels.html#siteSource"><span class="hs-identifier hs-var">siteSource</span></a></span><span> </span><span class="annot"><span class="annottext">SiteKey
-</span><a href="#local-6989586621679265282"><span class="hs-identifier hs-var">site</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">DefId -&gt; String
+</span><a href="#local-6989586621679254335"><span class="hs-identifier hs-var">site</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">DefId -&gt; String
 </span><a href="Telomare.Levels.html#renderDef"><span class="hs-identifier hs-var">renderDef</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SiteKey -&gt; DefId
 </span><a href="Telomare.Levels.html#siteOwner"><span class="hs-identifier hs-var">siteOwner</span></a></span><span> </span><span class="annot"><span class="annottext">SiteKey
-</span><a href="#local-6989586621679265282"><span class="hs-identifier hs-var">site</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Set Int -&gt; String
+</span><a href="#local-6989586621679254335"><span class="hs-identifier hs-var">site</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Set Int -&gt; String
 </span><a href="Telomare.Levels.html#renderLevels"><span class="hs-identifier hs-var">renderLevels</span></a></span><span> </span><span class="annot"><span class="annottext">Set Int
-</span><a href="#local-6989586621679265284"><span class="hs-identifier hs-var">lvls</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-111"></span><span>           </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679265282"><span class="annot"><span class="annottext">SiteKey
-</span><a href="#local-6989586621679265282"><span class="hs-identifier hs-var">site</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679265284"><span class="annot"><span class="annottext">Set Int
-</span><a href="#local-6989586621679265284"><span class="hs-identifier hs-var">lvls</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">LevelsInfo -&gt; [(SiteKey, Set Int)]
+</span><a href="#local-6989586621679254337"><span class="hs-identifier hs-var">lvls</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-117"></span><span>           </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679254335"><span class="annot"><span class="annottext">SiteKey
+</span><a href="#local-6989586621679254335"><span class="hs-identifier hs-var">site</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679254337"><span class="annot"><span class="annottext">Set Int
+</span><a href="#local-6989586621679254337"><span class="hs-identifier hs-var">lvls</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">LevelsInfo -&gt; [(SiteKey, Set Int)]
 </span><a href="Telomare.Levels.html#levelsSites"><span class="hs-identifier hs-var">levelsSites</span></a></span><span> </span><span class="annot"><span class="annottext">LevelsInfo
-</span><a href="#local-6989586621679265277"><span class="hs-identifier hs-var">info</span></a></span><span> </span><span class="hs-special">]</span><span>
-</span><span id="line-112"></span><span>    </span><span id="local-6989586621679265291"><span class="annot"><span class="annottext">width :: ((String, String, String) -&gt; t a) -&gt; Int
-</span><a href="#local-6989586621679265291"><span class="hs-identifier hs-var hs-var">width</span></a></span></span><span> </span><span id="local-6989586621679265292"><span class="annot"><span class="annottext">(String, String, String) -&gt; t a
-</span><a href="#local-6989586621679265292"><span class="hs-identifier hs-var">sel</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int
+</span><a href="#local-6989586621679254330"><span class="hs-identifier hs-var">info</span></a></span><span> </span><span class="hs-special">]</span><span>
+</span><span id="line-118"></span><span>    </span><span id="local-6989586621679254344"><span class="annot"><span class="annottext">width :: ((String, String, String) -&gt; t a) -&gt; Int
+</span><a href="#local-6989586621679254344"><span class="hs-identifier hs-var hs-var">width</span></a></span></span><span> </span><span id="local-6989586621679254345"><span class="annot"><span class="annottext">(String, String, String) -&gt; t a
+</span><a href="#local-6989586621679254345"><span class="hs-identifier hs-var">sel</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int
 forall a. Ord a =&gt; [a] -&gt; a
 forall (t :: * -&gt; *) a. (Foldable t, Ord a) =&gt; t a -&gt; a
 </span><span class="hs-identifier hs-var">maximum</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">((String, String, String) -&gt; Int)
@@ -423,88 +429,88 @@ forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 -&gt; Int
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(String, String, String) -&gt; t a
-</span><a href="#local-6989586621679265292"><span class="hs-identifier hs-var">sel</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(String, String, String)
-</span><a href="#local-6989586621679265280"><span class="hs-identifier hs-var">headings</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String)
+</span><a href="#local-6989586621679254345"><span class="hs-identifier hs-var">sel</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(String, String, String)
+</span><a href="#local-6989586621679254333"><span class="hs-identifier hs-var">headings</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String)
 -&gt; [(String, String, String)] -&gt; [(String, String, String)]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[(String, String, String)]
-</span><a href="#local-6989586621679265278"><span class="hs-identifier hs-var">rows</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-113"></span><span>    </span><span class="hs-special">(</span><span id="local-6989586621679265295"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265295"><span class="hs-identifier hs-var">w1</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679265296"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265296"><span class="hs-identifier hs-var">w2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">((String, String, String) -&gt; String) -&gt; Int
+</span><a href="#local-6989586621679254331"><span class="hs-identifier hs-var">rows</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-119"></span><span>    </span><span class="hs-special">(</span><span id="local-6989586621679254348"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679254348"><span class="hs-identifier hs-var">w1</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679254349"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679254349"><span class="hs-identifier hs-var">w2</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">((String, String, String) -&gt; String) -&gt; Int
 forall {t :: * -&gt; *} {a}.
 Foldable t =&gt;
 ((String, String, String) -&gt; t a) -&gt; Int
-</span><a href="#local-6989586621679265291"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String) -&gt; String
+</span><a href="#local-6989586621679254344"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String) -&gt; String
 forall {a} {b} {c}. (a, b, c) -&gt; a
-</span><a href="#local-6989586621679265297"><span class="hs-identifier hs-var">fst3</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">((String, String, String) -&gt; String) -&gt; Int
+</span><a href="#local-6989586621679254350"><span class="hs-identifier hs-var">fst3</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">((String, String, String) -&gt; String) -&gt; Int
 forall {t :: * -&gt; *} {a}.
 Foldable t =&gt;
 ((String, String, String) -&gt; t a) -&gt; Int
-</span><a href="#local-6989586621679265291"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String) -&gt; String
+</span><a href="#local-6989586621679254344"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">(String, String, String) -&gt; String
 forall {a} {b} {c}. (a, b, c) -&gt; b
-</span><a href="#local-6989586621679265298"><span class="hs-identifier hs-var">snd3</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-114"></span><span>    </span><span id="local-6989586621679265297"><span class="annot"><span class="annottext">fst3 :: (a, b, c) -&gt; a
-</span><a href="#local-6989586621679265297"><span class="hs-identifier hs-var hs-var">fst3</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679265299"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679265299"><span class="hs-identifier hs-var">a</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679254351"><span class="hs-identifier hs-var">snd3</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-120"></span><span>    </span><span id="local-6989586621679254350"><span class="annot"><span class="annottext">fst3 :: (a, b, c) -&gt; a
+</span><a href="#local-6989586621679254350"><span class="hs-identifier hs-var hs-var">fst3</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679254352"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679254352"><span class="hs-identifier hs-var">a</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">b
 </span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">c
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679265299"><span class="hs-identifier hs-var">a</span></a></span><span>
-</span><span id="line-115"></span><span>    </span><span id="local-6989586621679265298"><span class="annot"><span class="annottext">snd3 :: (a, b, c) -&gt; b
-</span><a href="#local-6989586621679265298"><span class="hs-identifier hs-var hs-var">snd3</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
-</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679265300"><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679265300"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">c
+</span><a href="#local-6989586621679254352"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><span id="line-121"></span><span>    </span><span id="local-6989586621679254351"><span class="annot"><span class="annottext">snd3 :: (a, b, c) -&gt; b
+</span><a href="#local-6989586621679254351"><span class="hs-identifier hs-var hs-var">snd3</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
+</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679254353"><span class="annot"><span class="annottext">b
+</span><a href="#local-6989586621679254353"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">c
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">b
-</span><a href="#local-6989586621679265300"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-116"></span><span>    </span><span id="local-6989586621679265279"><span class="annot"><span class="annottext">render :: (String, String, String) -&gt; String
-</span><a href="#local-6989586621679265279"><span class="hs-identifier hs-var hs-var">render</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679265303"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265303"><span class="hs-identifier hs-var">a</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679265304"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265304"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679265305"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265305"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
-</span><a href="#local-6989586621679265306"><span class="hs-identifier hs-var">padTo</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265295"><span class="hs-identifier hs-var">w1</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265303"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254353"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-122"></span><span>    </span><span id="local-6989586621679254332"><span class="annot"><span class="annottext">render :: (String, String, String) -&gt; String
+</span><a href="#local-6989586621679254332"><span class="hs-identifier hs-var hs-var">render</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679254356"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254356"><span class="hs-identifier hs-var">a</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679254357"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254357"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679254358"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254358"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
+</span><a href="#local-6989586621679254359"><span class="hs-identifier hs-var">padTo</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679254348"><span class="hs-identifier hs-var">w1</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254356"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
-</span><a href="#local-6989586621679265306"><span class="hs-identifier hs-var">padTo</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265296"><span class="hs-identifier hs-var">w2</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265304"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254359"><span class="hs-identifier hs-var">padTo</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679254349"><span class="hs-identifier hs-var">w2</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254357"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265305"><span class="hs-identifier hs-var">c</span></a></span><span>
-</span><span id="line-117"></span><span>    </span><span id="local-6989586621679265306"><span class="annot"><span class="annottext">padTo :: Int -&gt; String -&gt; String
-</span><a href="#local-6989586621679265306"><span class="hs-identifier hs-var hs-var">padTo</span></a></span></span><span> </span><span id="local-6989586621679265312"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265312"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679265313"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265313"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265313"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254358"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><span id="line-123"></span><span>    </span><span id="local-6989586621679254359"><span class="annot"><span class="annottext">padTo :: Int -&gt; String -&gt; String
+</span><a href="#local-6989586621679254359"><span class="hs-identifier hs-var hs-var">padTo</span></a></span></span><span> </span><span id="local-6989586621679254365"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679254365"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679254366"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254366"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254366"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Char -&gt; String
 forall a. Int -&gt; a -&gt; [a]
 </span><span class="hs-identifier hs-var">replicate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265312"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679254365"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265313"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679254366"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Char
 </span><span class="hs-char">' '</span></span><span>
-</span><span id="line-118"></span><span>
-</span><span id="line-119"></span><span class="annot"><a href="Telomare.Certificate.html#pressureRows"><span class="hs-identifier hs-type">pressureRows</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Levels.html#BindingKey"><span class="hs-identifier hs-type">BindingKey</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span>
-</span><span id="line-120"></span><span id="pressureRows"><span class="annot"><span class="annottext">pressureRows :: [(BindingKey, Int)] -&gt; [String]
-</span><a href="Telomare.Certificate.html#pressureRows"><span class="hs-identifier hs-var hs-var">pressureRows</span></a></span></span><span> </span><span id="local-6989586621679265315"><span class="annot"><span class="annottext">[(BindingKey, Int)]
-</span><a href="#local-6989586621679265315"><span class="hs-identifier hs-var">rows</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((BindingKey, Int) -&gt; String) -&gt; [(BindingKey, Int)] -&gt; [String]
+</span><span id="line-124"></span><span>
+</span><span id="line-125"></span><span class="annot"><a href="Telomare.Certificate.html#pressureRows"><span class="hs-identifier hs-type">pressureRows</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Levels.html#BindingKey"><span class="hs-identifier hs-type">BindingKey</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">)</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span>
+</span><span id="line-126"></span><span id="pressureRows"><span class="annot"><span class="annottext">pressureRows :: [(BindingKey, Int)] -&gt; [String]
+</span><a href="Telomare.Certificate.html#pressureRows"><span class="hs-identifier hs-var hs-var">pressureRows</span></a></span></span><span> </span><span id="local-6989586621679254368"><span class="annot"><span class="annottext">[(BindingKey, Int)]
+</span><a href="#local-6989586621679254368"><span class="hs-identifier hs-var">rows</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">((BindingKey, Int) -&gt; String) -&gt; [(BindingKey, Int)] -&gt; [String]
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">(BindingKey, Int) -&gt; String
-</span><a href="#local-6989586621679265316"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">[(BindingKey, Int)]
-</span><a href="#local-6989586621679265315"><span class="hs-identifier hs-var">rows</span></a></span><span>
-</span><span id="line-121"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-122"></span><span>    </span><span id="local-6989586621679265321"><span class="annot"><span class="annottext">width :: Int
-</span><a href="#local-6989586621679265321"><span class="hs-identifier hs-var hs-var">width</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int
+</span><a href="#local-6989586621679254369"><span class="hs-identifier hs-var">render</span></a></span><span> </span><span class="annot"><span class="annottext">[(BindingKey, Int)]
+</span><a href="#local-6989586621679254368"><span class="hs-identifier hs-var">rows</span></a></span><span>
+</span><span id="line-127"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-128"></span><span>    </span><span id="local-6989586621679254374"><span class="annot"><span class="annottext">width :: Int
+</span><a href="#local-6989586621679254374"><span class="hs-identifier hs-var hs-var">width</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; Int
 forall a. Ord a =&gt; [a] -&gt; a
 forall (t :: * -&gt; *) a. (Foldable t, Ord a) =&gt; t a -&gt; a
 </span><span class="hs-identifier hs-var">maximum</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">((BindingKey, Int) -&gt; Int) -&gt; [(BindingKey, Int)] -&gt; [Int]
@@ -523,40 +529,40 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(BindingKey, Int) -&gt; BindingKey
 forall a b. (a, b) -&gt; a
 </span><span class="hs-identifier hs-var">fst</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[(BindingKey, Int)]
-</span><a href="#local-6989586621679265315"><span class="hs-identifier hs-var">rows</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-123"></span><span>    </span><span id="local-6989586621679265316"><span class="annot"><span class="annottext">render :: (BindingKey, Int) -&gt; String
-</span><a href="#local-6989586621679265316"><span class="hs-identifier hs-var hs-var">render</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679265338"><span class="annot"><span class="annottext">BindingKey
-</span><a href="#local-6989586621679265338"><span class="hs-identifier hs-var">binding</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679265339"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265339"><span class="hs-identifier hs-var">k</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-124"></span><span>      </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679265340"><span class="annot"><span class="annottext">name :: String
-</span><a href="#local-6989586621679265340"><span class="hs-identifier hs-var hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BindingKey -&gt; String
+</span><a href="#local-6989586621679254368"><span class="hs-identifier hs-var">rows</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-129"></span><span>    </span><span id="local-6989586621679254369"><span class="annot"><span class="annottext">render :: (BindingKey, Int) -&gt; String
+</span><a href="#local-6989586621679254369"><span class="hs-identifier hs-var hs-var">render</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679254391"><span class="annot"><span class="annottext">BindingKey
+</span><a href="#local-6989586621679254391"><span class="hs-identifier hs-var">binding</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679254392"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679254392"><span class="hs-identifier hs-var">k</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-130"></span><span>      </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679254393"><span class="annot"><span class="annottext">name :: String
+</span><a href="#local-6989586621679254393"><span class="hs-identifier hs-var hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BindingKey -&gt; String
 </span><a href="Telomare.Levels.html#renderBinding"><span class="hs-identifier hs-var">renderBinding</span></a></span><span> </span><span class="annot"><span class="annottext">BindingKey
-</span><a href="#local-6989586621679265338"><span class="hs-identifier hs-var">binding</span></a></span><span>
-</span><span id="line-125"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679254391"><span class="hs-identifier hs-var">binding</span></a></span><span>
+</span><span id="line-131"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265340"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254393"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Char -&gt; String
 forall a. Int -&gt; a -&gt; [a]
 </span><span class="hs-identifier hs-var">replicate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265321"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679254374"><span class="hs-identifier hs-var">width</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679265340"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679254393"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Char
 </span><span class="hs-char">' '</span></span><span>
-</span><span id="line-126"></span><span>           </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><span id="line-132"></span><span>           </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 </span><a href="Telomare.Levels.html#bangs"><span class="hs-identifier hs-var">bangs</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265339"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254392"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  (&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
@@ -564,23 +570,23 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265339"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254392"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall {a}. (Eq a, Num a) =&gt; a -&gt; String
-</span><a href="#local-6989586621679265341"><span class="hs-identifier hs-var">plural</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679265339"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679254394"><span class="hs-identifier hs-var">plural</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679254392"><span class="hs-identifier hs-var">k</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; below its binding)&quot;</span></span><span>
-</span><span id="line-127"></span><span>    </span><span id="local-6989586621679265341"><span class="annot"><span class="annottext">plural :: a -&gt; String
-</span><a href="#local-6989586621679265341"><span class="hs-identifier hs-var hs-var">plural</span></a></span></span><span> </span><span class="annot"><span class="annottext">a
+</span><span id="line-133"></span><span>    </span><span id="local-6989586621679254394"><span class="annot"><span class="annottext">plural :: a -&gt; String
+</span><a href="#local-6989586621679254394"><span class="hs-identifier hs-var hs-var">plural</span></a></span></span><span> </span><span class="annot"><span class="annottext">a
 </span><span class="hs-number">1</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;level&quot;</span></span><span>
-</span><span id="line-128"></span><span>    </span><span class="annot"><a href="#local-6989586621679265341"><span class="hs-identifier hs-var">plural</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><span id="line-134"></span><span>    </span><span class="annot"><a href="#local-6989586621679254394"><span class="hs-identifier hs-var">plural</span></a></span><span> </span><span class="annot"><span class="annottext">a
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;levels&quot;</span></span><span>
-</span><span id="line-129"></span></pre></body></html>
+</span><span id="line-135"></span></pre></body></html>

@@ -1,0 +1,1144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LANGUAGE DeriveGeneric     #-}</span><span>
+</span><span id="line-2"></span><span class="hs-pragma">{-# LANGUAGE DeriveTraversable #-}</span><span>
+</span><span id="line-3"></span><span class="hs-pragma">{-# LANGUAGE DerivingVia       #-}</span><span>
+</span><span id="line-4"></span><span class="hs-pragma">{-# LANGUAGE FlexibleInstances #-}</span><span>
+</span><span id="line-5"></span><span class="hs-pragma">{-# LANGUAGE LambdaCase        #-}</span><span>
+</span><span id="line-6"></span><span class="hs-pragma">{-# LANGUAGE TypeFamilies      #-}</span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="hs-comment">-- |The surface AST: what the parser produces. 'UnprocessedParsedTermF'</span><span>
+</span><span id="line-9"></span><span class="hs-comment">-- composes the shared base functors with the surface-only forms (let, list,</span><span>
+</span><span id="line-10"></span><span class="hs-comment">-- case, imports, UDT declarations). 'AUPT' is the location-annotated</span><span>
+</span><span id="line-11"></span><span class="hs-comment">-- variant every later stage consumes.</span><span>
+</span><span id="line-12"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.IR.Surface</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-13"></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html"><span class="hs-identifier">Control.Comonad.Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#Cofree"><span class="hs-identifier">Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator">(:&lt;)</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="hs-keyword">qualified</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html"><span class="hs-identifier">Control.Comonad.Trans.Cofree</span></a></span><span> </span><span class="hs-keyword">as</span><span> </span><span class="annot"><span class="hs-identifier">CofreeT</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier">CofreeF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html"><span class="hs-identifier">Data.Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Functor.Classes</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Eq1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">Show1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-18"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Generic1</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">Generically1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-19"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html"><span class="hs-identifier">Telomare.IR.Base</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier">BasicBase</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicExprF"><span class="hs-identifier">BasicExprF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier">CarryAnno</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-20"></span><span>                         </span><span class="annot"><a href="Telomare.IR.Base.html#HighBase"><span class="hs-identifier">HighBase</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#HighTermF"><span class="hs-identifier">HighTermF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#LamBase"><span class="hs-identifier">LamBase</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
+</span><span id="line-21"></span><span>                         </span><span class="annot"><a href="Telomare.IR.Base.html#LamTermF"><span class="hs-identifier">LamTermF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-22"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier">LocatedName</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#locatedNameText"><span class="hs-identifier">locatedNameText</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-23"></span><span>
+</span><span id="line-24"></span><span class="annot"><span class="hs-comment">-- |AST for patterns in `case` expressions</span></span><span>
+</span><span id="line-25"></span><span class="hs-keyword">data</span><span> </span><span id="PatternF"><span class="annot"><a href="Telomare.IR.Surface.html#PatternF"><span class="hs-identifier hs-var">PatternF</span></a></span></span><span> </span><span id="local-6989586621679233553"><span class="annot"><a href="#local-6989586621679233553"><span class="hs-identifier hs-type">t</span></a></span></span><span> </span><span id="local-6989586621679233554"><span class="annot"><a href="#local-6989586621679233554"><span class="hs-identifier hs-type">f</span></a></span></span><span>
+</span><span id="line-26"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="PatternVarF"><span class="annot"><a href="Telomare.IR.Surface.html#PatternVarF"><span class="hs-identifier hs-var">PatternVarF</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-27"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PatternAnnotatedF"><span class="annot"><a href="Telomare.IR.Surface.html#PatternAnnotatedF"><span class="hs-identifier hs-var">PatternAnnotatedF</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679233554"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233553"><span class="hs-identifier hs-type">t</span></a></span><span>
+</span><span id="line-28"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PatternIntF"><span class="annot"><a href="Telomare.IR.Surface.html#PatternIntF"><span class="hs-identifier hs-var">PatternIntF</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
+</span><span id="line-29"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PatternStringF"><span class="annot"><a href="Telomare.IR.Surface.html#PatternStringF"><span class="hs-identifier hs-var">PatternStringF</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-30"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PatternIgnoreF"><span class="annot"><a href="Telomare.IR.Surface.html#PatternIgnoreF"><span class="hs-identifier hs-var">PatternIgnoreF</span></a></span></span><span>
+</span><span id="line-31"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PatternPairF"><span class="annot"><a href="Telomare.IR.Surface.html#PatternPairF"><span class="hs-identifier hs-var">PatternPairF</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679233554"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233554"><span class="hs-identifier hs-type">f</span></a></span><span>
+</span><span id="line-32"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679233564"><span id="local-6989586621679233582"><span id="local-6989586621679233586"><span class="annot"><span class="annottext">Int -&gt; PatternF t f -&gt; ShowS
+[PatternF t f] -&gt; ShowS
+PatternF t f -&gt; String
+(Int -&gt; PatternF t f -&gt; ShowS)
+-&gt; (PatternF t f -&gt; String)
+-&gt; ([PatternF t f] -&gt; ShowS)
+-&gt; Show (PatternF t f)
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+forall t f. (Show t, Show f) =&gt; Int -&gt; PatternF t f -&gt; ShowS
+forall t f. (Show t, Show f) =&gt; [PatternF t f] -&gt; ShowS
+forall t f. (Show t, Show f) =&gt; PatternF t f -&gt; String
+$cshowsPrec :: forall t f. (Show t, Show f) =&gt; Int -&gt; PatternF t f -&gt; ShowS
+showsPrec :: Int -&gt; PatternF t f -&gt; ShowS
+$cshow :: forall t f. (Show t, Show f) =&gt; PatternF t f -&gt; String
+show :: PatternF t f -&gt; String
+$cshowList :: forall t f. (Show t, Show f) =&gt; [PatternF t f] -&gt; ShowS
+showList :: [PatternF t f] -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233593"><span id="local-6989586621679233605"><span class="annot"><span class="annottext">PatternF t f -&gt; PatternF t f -&gt; Bool
+(PatternF t f -&gt; PatternF t f -&gt; Bool)
+-&gt; (PatternF t f -&gt; PatternF t f -&gt; Bool) -&gt; Eq (PatternF t f)
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+forall t f. (Eq t, Eq f) =&gt; PatternF t f -&gt; PatternF t f -&gt; Bool
+$c== :: forall t f. (Eq t, Eq f) =&gt; PatternF t f -&gt; PatternF t f -&gt; Bool
+== :: PatternF t f -&gt; PatternF t f -&gt; Bool
+$c/= :: forall t f. (Eq t, Eq f) =&gt; PatternF t f -&gt; PatternF t f -&gt; Bool
+/= :: PatternF t f -&gt; PatternF t f -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233611"><span id="local-6989586621679233613"><span class="annot"><span class="annottext">(forall a b. (a -&gt; b) -&gt; PatternF t a -&gt; PatternF t b)
+-&gt; (forall a b. a -&gt; PatternF t b -&gt; PatternF t a)
+-&gt; Functor (PatternF t)
+forall a b. a -&gt; PatternF t b -&gt; PatternF t a
+forall a b. (a -&gt; b) -&gt; PatternF t a -&gt; PatternF t b
+forall t a b. a -&gt; PatternF t b -&gt; PatternF t a
+forall t a b. (a -&gt; b) -&gt; PatternF t a -&gt; PatternF t b
+forall (f :: * -&gt; *).
+(forall a b. (a -&gt; b) -&gt; f a -&gt; f b)
+-&gt; (forall a b. a -&gt; f b -&gt; f a) -&gt; Functor f
+$cfmap :: forall t a b. (a -&gt; b) -&gt; PatternF t a -&gt; PatternF t b
+fmap :: forall a b. (a -&gt; b) -&gt; PatternF t a -&gt; PatternF t b
+$c&lt;$ :: forall t a b. a -&gt; PatternF t b -&gt; PatternF t a
+&lt;$ :: forall a b. a -&gt; PatternF t b -&gt; PatternF t a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233617"><span id="local-6989586621679233623"><span id="local-6989586621679233631"><span id="local-6989586621679233636"><span id="local-6989586621679233638"><span id="local-6989586621679233641"><span id="local-6989586621679233644"><span id="local-6989586621679233647"><span id="local-6989586621679233650"><span id="local-6989586621679233653"><span id="local-6989586621679233656"><span id="local-6989586621679233658"><span id="local-6989586621679233661"><span id="local-6989586621679233666"><span id="local-6989586621679233671"><span id="local-6989586621679233676"><span id="local-6989586621679233681"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; PatternF t m -&gt; m)
+-&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m)
+-&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m)
+-&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b)
+-&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b)
+-&gt; (forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b)
+-&gt; (forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a)
+-&gt; (forall a. PatternF t a -&gt; [a])
+-&gt; (forall a. PatternF t a -&gt; Bool)
+-&gt; (forall a. PatternF t a -&gt; Int)
+-&gt; (forall a. Eq a =&gt; a -&gt; PatternF t a -&gt; Bool)
+-&gt; (forall a. Ord a =&gt; PatternF t a -&gt; a)
+-&gt; (forall a. Ord a =&gt; PatternF t a -&gt; a)
+-&gt; (forall a. Num a =&gt; PatternF t a -&gt; a)
+-&gt; (forall a. Num a =&gt; PatternF t a -&gt; a)
+-&gt; Foldable (PatternF t)
+forall a. Eq a =&gt; a -&gt; PatternF t a -&gt; Bool
+forall a. Num a =&gt; PatternF t a -&gt; a
+forall a. Ord a =&gt; PatternF t a -&gt; a
+forall m. Monoid m =&gt; PatternF t m -&gt; m
+forall a. PatternF t a -&gt; Bool
+forall a. PatternF t a -&gt; Int
+forall a. PatternF t a -&gt; [a]
+forall a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a
+forall t a. Eq a =&gt; a -&gt; PatternF t a -&gt; Bool
+forall t a. Num a =&gt; PatternF t a -&gt; a
+forall t a. Ord a =&gt; PatternF t a -&gt; a
+forall m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m
+forall t m. Monoid m =&gt; PatternF t m -&gt; m
+forall t a. PatternF t a -&gt; Bool
+forall t a. PatternF t a -&gt; Int
+forall t a. PatternF t a -&gt; [a]
+forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+forall t a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a
+forall t m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m
+forall t b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+forall t a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+forall (t :: * -&gt; *).
+(forall m. Monoid m =&gt; t m -&gt; m)
+-&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m)
+-&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m)
+-&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; t a -&gt; a)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; t a -&gt; a)
+-&gt; (forall a. t a -&gt; [a])
+-&gt; (forall a. t a -&gt; Bool)
+-&gt; (forall a. t a -&gt; Int)
+-&gt; (forall a. Eq a =&gt; a -&gt; t a -&gt; Bool)
+-&gt; (forall a. Ord a =&gt; t a -&gt; a)
+-&gt; (forall a. Ord a =&gt; t a -&gt; a)
+-&gt; (forall a. Num a =&gt; t a -&gt; a)
+-&gt; (forall a. Num a =&gt; t a -&gt; a)
+-&gt; Foldable t
+$cfold :: forall t m. Monoid m =&gt; PatternF t m -&gt; m
+fold :: forall m. Monoid m =&gt; PatternF t m -&gt; m
+$cfoldMap :: forall t m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m
+foldMap :: forall m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m
+$cfoldMap' :: forall t m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m
+foldMap' :: forall m a. Monoid m =&gt; (a -&gt; m) -&gt; PatternF t a -&gt; m
+$cfoldr :: forall t a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+foldr :: forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+$cfoldr' :: forall t a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+foldr' :: forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+$cfoldl :: forall t b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+foldl :: forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+$cfoldl' :: forall t b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+foldl' :: forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; PatternF t a -&gt; b
+$cfoldr1 :: forall t a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a
+foldr1 :: forall a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a
+$cfoldl1 :: forall t a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a
+foldl1 :: forall a. (a -&gt; a -&gt; a) -&gt; PatternF t a -&gt; a
+$ctoList :: forall t a. PatternF t a -&gt; [a]
+toList :: forall a. PatternF t a -&gt; [a]
+$cnull :: forall t a. PatternF t a -&gt; Bool
+null :: forall a. PatternF t a -&gt; Bool
+$clength :: forall t a. PatternF t a -&gt; Int
+length :: forall a. PatternF t a -&gt; Int
+$celem :: forall t a. Eq a =&gt; a -&gt; PatternF t a -&gt; Bool
+elem :: forall a. Eq a =&gt; a -&gt; PatternF t a -&gt; Bool
+$cmaximum :: forall t a. Ord a =&gt; PatternF t a -&gt; a
+maximum :: forall a. Ord a =&gt; PatternF t a -&gt; a
+$cminimum :: forall t a. Ord a =&gt; PatternF t a -&gt; a
+minimum :: forall a. Ord a =&gt; PatternF t a -&gt; a
+$csum :: forall t a. Num a =&gt; PatternF t a -&gt; a
+sum :: forall a. Num a =&gt; PatternF t a -&gt; a
+$cproduct :: forall t a. Num a =&gt; PatternF t a -&gt; a
+product :: forall a. Num a =&gt; PatternF t a -&gt; a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233691"><span id="local-6989586621679233701"><span id="local-6989586621679233707"><span id="local-6989586621679233712"><span class="annot"><span class="annottext">Functor (PatternF t)
+Foldable (PatternF t)
+(Functor (PatternF t), Foldable (PatternF t)) =&gt;
+(forall (f :: * -&gt; *) a b.
+ Applicative f =&gt;
+ (a -&gt; f b) -&gt; PatternF t a -&gt; f (PatternF t b))
+-&gt; (forall (f :: * -&gt; *) a.
+    Applicative f =&gt;
+    PatternF t (f a) -&gt; f (PatternF t a))
+-&gt; (forall (m :: * -&gt; *) a b.
+    Monad m =&gt;
+    (a -&gt; m b) -&gt; PatternF t a -&gt; m (PatternF t b))
+-&gt; (forall (m :: * -&gt; *) a.
+    Monad m =&gt;
+    PatternF t (m a) -&gt; m (PatternF t a))
+-&gt; Traversable (PatternF t)
+forall t. Functor (PatternF t)
+forall t. Foldable (PatternF t)
+forall t (m :: * -&gt; *) a.
+Monad m =&gt;
+PatternF t (m a) -&gt; m (PatternF t a)
+forall t (f :: * -&gt; *) a.
+Applicative f =&gt;
+PatternF t (f a) -&gt; f (PatternF t a)
+forall t (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b) -&gt; PatternF t a -&gt; m (PatternF t b)
+forall t (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b) -&gt; PatternF t a -&gt; f (PatternF t b)
+forall (t :: * -&gt; *).
+(Functor t, Foldable t) =&gt;
+(forall (f :: * -&gt; *) a b.
+ Applicative f =&gt;
+ (a -&gt; f b) -&gt; t a -&gt; f (t b))
+-&gt; (forall (f :: * -&gt; *) a. Applicative f =&gt; t (f a) -&gt; f (t a))
+-&gt; (forall (m :: * -&gt; *) a b.
+    Monad m =&gt;
+    (a -&gt; m b) -&gt; t a -&gt; m (t b))
+-&gt; (forall (m :: * -&gt; *) a. Monad m =&gt; t (m a) -&gt; m (t a))
+-&gt; Traversable t
+forall (m :: * -&gt; *) a.
+Monad m =&gt;
+PatternF t (m a) -&gt; m (PatternF t a)
+forall (f :: * -&gt; *) a.
+Applicative f =&gt;
+PatternF t (f a) -&gt; f (PatternF t a)
+forall (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b) -&gt; PatternF t a -&gt; m (PatternF t b)
+forall (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b) -&gt; PatternF t a -&gt; f (PatternF t b)
+$ctraverse :: forall t (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b) -&gt; PatternF t a -&gt; f (PatternF t b)
+traverse :: forall (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b) -&gt; PatternF t a -&gt; f (PatternF t b)
+$csequenceA :: forall t (f :: * -&gt; *) a.
+Applicative f =&gt;
+PatternF t (f a) -&gt; f (PatternF t a)
+sequenceA :: forall (f :: * -&gt; *) a.
+Applicative f =&gt;
+PatternF t (f a) -&gt; f (PatternF t a)
+$cmapM :: forall t (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b) -&gt; PatternF t a -&gt; m (PatternF t b)
+mapM :: forall (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b) -&gt; PatternF t a -&gt; m (PatternF t b)
+$csequence :: forall t (m :: * -&gt; *) a.
+Monad m =&gt;
+PatternF t (m a) -&gt; m (PatternF t a)
+sequence :: forall (m :: * -&gt; *) a.
+Monad m =&gt;
+PatternF t (m a) -&gt; m (PatternF t a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Traversable</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233719"><span id="local-6989586621679233721"><span class="annot"><span class="annottext">(forall a. PatternF t a -&gt; Rep1 (PatternF t) a)
+-&gt; (forall a. Rep1 (PatternF t) a -&gt; PatternF t a)
+-&gt; Generic1 (PatternF t)
+forall a. Rep1 (PatternF t) a -&gt; PatternF t a
+forall a. PatternF t a -&gt; Rep1 (PatternF t) a
+forall t a. Rep1 (PatternF t) a -&gt; PatternF t a
+forall t a. PatternF t a -&gt; Rep1 (PatternF t) a
+forall k (f :: k -&gt; *).
+(forall (a :: k). f a -&gt; Rep1 f a)
+-&gt; (forall (a :: k). Rep1 f a -&gt; f a) -&gt; Generic1 f
+$cfrom1 :: forall t a. PatternF t a -&gt; Rep1 (PatternF t) a
+from1 :: forall a. PatternF t a -&gt; Rep1 (PatternF t) a
+$cto1 :: forall t a. Rep1 (PatternF t) a -&gt; PatternF t a
+to1 :: forall a. Rep1 (PatternF t) a -&gt; PatternF t a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic1</span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-33"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679233728"><span class="annot"><span class="annottext">(forall a. Eq a =&gt; Eq (PatternF t a)) =&gt;
+(forall a b.
+ (a -&gt; b -&gt; Bool) -&gt; PatternF t a -&gt; PatternF t b -&gt; Bool)
+-&gt; Eq1 (PatternF t)
+forall a. Eq a =&gt; Eq (PatternF t a)
+forall t a. (Eq t, Eq a) =&gt; Eq (PatternF t a)
+forall t a b.
+Eq t =&gt;
+(a -&gt; b -&gt; Bool) -&gt; PatternF t a -&gt; PatternF t b -&gt; Bool
+forall a b.
+(a -&gt; b -&gt; Bool) -&gt; PatternF t a -&gt; PatternF t b -&gt; Bool
+forall (f :: * -&gt; *).
+(forall a. Eq a =&gt; Eq (f a)) =&gt;
+(forall a b. (a -&gt; b -&gt; Bool) -&gt; f a -&gt; f b -&gt; Bool) -&gt; Eq1 f
+$cliftEq :: forall t a b.
+Eq t =&gt;
+(a -&gt; b -&gt; Bool) -&gt; PatternF t a -&gt; PatternF t b -&gt; Bool
+liftEq :: forall a b.
+(a -&gt; b -&gt; Bool) -&gt; PatternF t a -&gt; PatternF t b -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var">Eq1</span></span></span><span> </span><span class="hs-keyword">via</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Generically1</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#PatternF"><span class="hs-identifier hs-type">PatternF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233553"><span class="hs-identifier hs-type">t</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-34"></span><span>
+</span><span id="line-35"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233427"><span id="local-6989586621679233773"><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679233427"><span class="hs-identifier hs-type">o</span></a></span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Show1</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#PatternF"><span class="hs-identifier hs-type">PatternF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233427"><span class="hs-identifier hs-type">o</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-36"></span><span>  </span><span id="local-6989586621679233782"><span class="annot"><span class="annottext">liftShowsPrec :: forall a.
+(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; PatternF o a -&gt; ShowS
+</span><a href="#local-6989586621679233782"><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShowsPrec</span></a></span></span><span> </span><span id="local-6989586621679233784"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679233784"><span class="hs-identifier hs-var">showsPrec'</span></a></span></span><span> </span><span id="local-6989586621679233785"><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><a href="#local-6989586621679233785"><span class="hs-identifier hs-var">showList</span></a></span></span><span> </span><span id="local-6989586621679233786"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679233786"><span class="hs-identifier hs-var">prec</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-37"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternVarF"><span class="hs-identifier hs-type">PatternVarF</span></a></span><span> </span><span id="local-6989586621679233787"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679233787"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;PatternVar &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679233787"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-38"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternAnnotatedF"><span class="hs-identifier hs-type">PatternAnnotatedF</span></a></span><span> </span><span id="local-6989586621679233791"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679233791"><span class="hs-identifier hs-var">p</span></a></span></span><span> </span><span id="local-6989586621679233792"><span class="annot"><span class="annottext">o
+</span><a href="#local-6989586621679233792"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;PatternAnnotated &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679233784"><span class="hs-identifier hs-var">showsPrec'</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679233791"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">' '</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">o -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">o
+</span><a href="#local-6989586621679233792"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-39"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternIntF"><span class="hs-identifier hs-type">PatternIntF</span></a></span><span> </span><span id="local-6989586621679233794"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679233794"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;PatternInt &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679233794"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-40"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternStringF"><span class="hs-identifier hs-type">PatternStringF</span></a></span><span> </span><span id="local-6989586621679233795"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679233795"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;PatternString &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679233795"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-41"></span><span>    </span><span class="annot"><span class="annottext">PatternF o a
+</span><a href="Telomare.IR.Surface.html#PatternIgnoreF"><span class="hs-identifier hs-var">PatternIgnoreF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;PatternIgnore&quot;</span></span><span>
+</span><span id="line-42"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternPairF"><span class="hs-identifier hs-type">PatternPairF</span></a></span><span> </span><span id="local-6989586621679233796"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679233796"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679233797"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679233797"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;PatternPair &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679233784"><span class="hs-identifier hs-var">showsPrec'</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679233796"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">' '</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679233784"><span class="hs-identifier hs-var">showsPrec'</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679233797"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-43"></span><span>
+</span><span id="line-44"></span><span class="annot"><span class="hs-comment">-- |Firstly parsed AST</span></span><span>
+</span><span id="line-45"></span><span class="hs-keyword">data</span><span> </span><span id="UnprocessedParsedTermF"><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-var">UnprocessedParsedTermF</span></a></span></span><span> </span><span id="local-6989586621679233522"><span class="annot"><a href="#local-6989586621679233522"><span class="hs-identifier hs-type">p</span></a></span></span><span> </span><span id="local-6989586621679233521"><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span></span><span>
+</span><span id="line-46"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="UnprocessedParsedTermH"><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermH"><span class="hs-identifier hs-var">UnprocessedParsedTermH</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#HighTermF"><span class="hs-identifier hs-type">HighTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-47"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="UnprocessedParsedTermL"><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermL"><span class="hs-identifier hs-var">UnprocessedParsedTermL</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#LamTermF"><span class="hs-identifier hs-type">LamTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-48"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="UnprocessedParsedTermB"><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermB"><span class="hs-identifier hs-var">UnprocessedParsedTermB</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#BasicExprF"><span class="hs-identifier hs-type">BasicExprF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-49"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="LetUPF"><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-var">LetUPF</span></a></span></span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span>
+</span><span id="line-50"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ListUPF"><span class="annot"><a href="Telomare.IR.Surface.html#ListUPF"><span class="hs-identifier hs-var">ListUPF</span></a></span></span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-51"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="IntUPF"><span class="annot"><a href="Telomare.IR.Surface.html#IntUPF"><span class="hs-identifier hs-var">IntUPF</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
+</span><span id="line-52"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="StringUPF"><span class="annot"><a href="Telomare.IR.Surface.html#StringUPF"><span class="hs-identifier hs-var">StringUPF</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-53"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="UDTUPF"><span class="annot"><a href="Telomare.IR.Surface.html#UDTUPF"><span class="hs-identifier hs-var">UDTUPF</span></a></span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span>
+</span><span id="line-54"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="CaseUPF"><span class="annot"><a href="Telomare.IR.Surface.html#CaseUPF"><span class="hs-identifier hs-var">CaseUPF</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679233522"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679233521"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">)</span><span class="hs-special">]</span><span>
+</span><span id="line-55"></span><span>  </span><span class="hs-comment">-- TODO: check if adding this doesn't create partial functions</span><span>
+</span><span id="line-56"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ImportQualifiedUPF"><span class="annot"><a href="Telomare.IR.Surface.html#ImportQualifiedUPF"><span class="hs-identifier hs-var">ImportQualifiedUPF</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-57"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ImportUPF"><span class="annot"><a href="Telomare.IR.Surface.html#ImportUPF"><span class="hs-identifier hs-var">ImportUPF</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-58"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679233812"><span id="local-6989586621679233836"><span class="annot"><span class="annottext">UnprocessedParsedTermF p f -&gt; UnprocessedParsedTermF p f -&gt; Bool
+(UnprocessedParsedTermF p f -&gt; UnprocessedParsedTermF p f -&gt; Bool)
+-&gt; (UnprocessedParsedTermF p f
+    -&gt; UnprocessedParsedTermF p f -&gt; Bool)
+-&gt; Eq (UnprocessedParsedTermF p f)
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+forall p f.
+(Eq f, Eq p) =&gt;
+UnprocessedParsedTermF p f -&gt; UnprocessedParsedTermF p f -&gt; Bool
+$c== :: forall p f.
+(Eq f, Eq p) =&gt;
+UnprocessedParsedTermF p f -&gt; UnprocessedParsedTermF p f -&gt; Bool
+== :: UnprocessedParsedTermF p f -&gt; UnprocessedParsedTermF p f -&gt; Bool
+$c/= :: forall p f.
+(Eq f, Eq p) =&gt;
+UnprocessedParsedTermF p f -&gt; UnprocessedParsedTermF p f -&gt; Bool
+/= :: UnprocessedParsedTermF p f -&gt; UnprocessedParsedTermF p f -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233845"><span id="local-6989586621679233880"><span id="local-6989586621679233884"><span class="annot"><span class="annottext">Int -&gt; UnprocessedParsedTermF p f -&gt; ShowS
+[UnprocessedParsedTermF p f] -&gt; ShowS
+UnprocessedParsedTermF p f -&gt; String
+(Int -&gt; UnprocessedParsedTermF p f -&gt; ShowS)
+-&gt; (UnprocessedParsedTermF p f -&gt; String)
+-&gt; ([UnprocessedParsedTermF p f] -&gt; ShowS)
+-&gt; Show (UnprocessedParsedTermF p f)
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+forall p f.
+(Show f, Show p) =&gt;
+Int -&gt; UnprocessedParsedTermF p f -&gt; ShowS
+forall p f.
+(Show f, Show p) =&gt;
+[UnprocessedParsedTermF p f] -&gt; ShowS
+forall p f.
+(Show f, Show p) =&gt;
+UnprocessedParsedTermF p f -&gt; String
+$cshowsPrec :: forall p f.
+(Show f, Show p) =&gt;
+Int -&gt; UnprocessedParsedTermF p f -&gt; ShowS
+showsPrec :: Int -&gt; UnprocessedParsedTermF p f -&gt; ShowS
+$cshow :: forall p f.
+(Show f, Show p) =&gt;
+UnprocessedParsedTermF p f -&gt; String
+show :: UnprocessedParsedTermF p f -&gt; String
+$cshowList :: forall p f.
+(Show f, Show p) =&gt;
+[UnprocessedParsedTermF p f] -&gt; ShowS
+showList :: [UnprocessedParsedTermF p f] -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233890"><span id="local-6989586621679233902"><span class="annot"><span class="annottext">(forall a b.
+ (a -&gt; b)
+ -&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b)
+-&gt; (forall a b.
+    a -&gt; UnprocessedParsedTermF p b -&gt; UnprocessedParsedTermF p a)
+-&gt; Functor (UnprocessedParsedTermF p)
+forall a b.
+a -&gt; UnprocessedParsedTermF p b -&gt; UnprocessedParsedTermF p a
+forall a b.
+(a -&gt; b)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b
+forall p a b.
+a -&gt; UnprocessedParsedTermF p b -&gt; UnprocessedParsedTermF p a
+forall p a b.
+(a -&gt; b)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b
+forall (f :: * -&gt; *).
+(forall a b. (a -&gt; b) -&gt; f a -&gt; f b)
+-&gt; (forall a b. a -&gt; f b -&gt; f a) -&gt; Functor f
+$cfmap :: forall p a b.
+(a -&gt; b)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b
+fmap :: forall a b.
+(a -&gt; b)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b
+$c&lt;$ :: forall p a b.
+a -&gt; UnprocessedParsedTermF p b -&gt; UnprocessedParsedTermF p a
+&lt;$ :: forall a b.
+a -&gt; UnprocessedParsedTermF p b -&gt; UnprocessedParsedTermF p a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233911"><span id="local-6989586621679233917"><span id="local-6989586621679233942"><span id="local-6989586621679233947"><span id="local-6989586621679233955"><span id="local-6989586621679233958"><span id="local-6989586621679233961"><span id="local-6989586621679233964"><span id="local-6989586621679233967"><span id="local-6989586621679233970"><span id="local-6989586621679233973"><span id="local-6989586621679233979"><span id="local-6989586621679233982"><span id="local-6989586621679233987"><span id="local-6989586621679233992"><span id="local-6989586621679233997"><span id="local-6989586621679234002"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; UnprocessedParsedTermF p m -&gt; m)
+-&gt; (forall m a.
+    Monoid m =&gt;
+    (a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m)
+-&gt; (forall m a.
+    Monoid m =&gt;
+    (a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m)
+-&gt; (forall a b.
+    (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b)
+-&gt; (forall a b.
+    (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b)
+-&gt; (forall b a.
+    (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b)
+-&gt; (forall b a.
+    (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a)
+-&gt; (forall a. UnprocessedParsedTermF p a -&gt; [a])
+-&gt; (forall a. UnprocessedParsedTermF p a -&gt; Bool)
+-&gt; (forall a. UnprocessedParsedTermF p a -&gt; Int)
+-&gt; (forall a. Eq a =&gt; a -&gt; UnprocessedParsedTermF p a -&gt; Bool)
+-&gt; (forall a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a)
+-&gt; (forall a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a)
+-&gt; (forall a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a)
+-&gt; (forall a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a)
+-&gt; Foldable (UnprocessedParsedTermF p)
+forall a. Eq a =&gt; a -&gt; UnprocessedParsedTermF p a -&gt; Bool
+forall a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a
+forall a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a
+forall m. Monoid m =&gt; UnprocessedParsedTermF p m -&gt; m
+forall a. UnprocessedParsedTermF p a -&gt; Bool
+forall a. UnprocessedParsedTermF p a -&gt; Int
+forall a. UnprocessedParsedTermF p a -&gt; [a]
+forall a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a
+forall p a. Eq a =&gt; a -&gt; UnprocessedParsedTermF p a -&gt; Bool
+forall p a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a
+forall p a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a
+forall m a. Monoid m =&gt; (a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m
+forall p m. Monoid m =&gt; UnprocessedParsedTermF p m -&gt; m
+forall p a. UnprocessedParsedTermF p a -&gt; Bool
+forall p a. UnprocessedParsedTermF p a -&gt; Int
+forall p a. UnprocessedParsedTermF p a -&gt; [a]
+forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+forall p a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a
+forall p m a.
+Monoid m =&gt;
+(a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m
+forall p b a. (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+forall p a b. (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+forall (t :: * -&gt; *).
+(forall m. Monoid m =&gt; t m -&gt; m)
+-&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m)
+-&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; t a -&gt; m)
+-&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; t a -&gt; a)
+-&gt; (forall a. (a -&gt; a -&gt; a) -&gt; t a -&gt; a)
+-&gt; (forall a. t a -&gt; [a])
+-&gt; (forall a. t a -&gt; Bool)
+-&gt; (forall a. t a -&gt; Int)
+-&gt; (forall a. Eq a =&gt; a -&gt; t a -&gt; Bool)
+-&gt; (forall a. Ord a =&gt; t a -&gt; a)
+-&gt; (forall a. Ord a =&gt; t a -&gt; a)
+-&gt; (forall a. Num a =&gt; t a -&gt; a)
+-&gt; (forall a. Num a =&gt; t a -&gt; a)
+-&gt; Foldable t
+$cfold :: forall p m. Monoid m =&gt; UnprocessedParsedTermF p m -&gt; m
+fold :: forall m. Monoid m =&gt; UnprocessedParsedTermF p m -&gt; m
+$cfoldMap :: forall p m a.
+Monoid m =&gt;
+(a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m
+foldMap :: forall m a. Monoid m =&gt; (a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m
+$cfoldMap' :: forall p m a.
+Monoid m =&gt;
+(a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m
+foldMap' :: forall m a. Monoid m =&gt; (a -&gt; m) -&gt; UnprocessedParsedTermF p a -&gt; m
+$cfoldr :: forall p a b. (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+foldr :: forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+$cfoldr' :: forall p a b. (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+foldr' :: forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+$cfoldl :: forall p b a. (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+foldl :: forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+$cfoldl' :: forall p b a. (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+foldl' :: forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; UnprocessedParsedTermF p a -&gt; b
+$cfoldr1 :: forall p a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a
+foldr1 :: forall a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a
+$cfoldl1 :: forall p a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a
+foldl1 :: forall a. (a -&gt; a -&gt; a) -&gt; UnprocessedParsedTermF p a -&gt; a
+$ctoList :: forall p a. UnprocessedParsedTermF p a -&gt; [a]
+toList :: forall a. UnprocessedParsedTermF p a -&gt; [a]
+$cnull :: forall p a. UnprocessedParsedTermF p a -&gt; Bool
+null :: forall a. UnprocessedParsedTermF p a -&gt; Bool
+$clength :: forall p a. UnprocessedParsedTermF p a -&gt; Int
+length :: forall a. UnprocessedParsedTermF p a -&gt; Int
+$celem :: forall p a. Eq a =&gt; a -&gt; UnprocessedParsedTermF p a -&gt; Bool
+elem :: forall a. Eq a =&gt; a -&gt; UnprocessedParsedTermF p a -&gt; Bool
+$cmaximum :: forall p a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a
+maximum :: forall a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a
+$cminimum :: forall p a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a
+minimum :: forall a. Ord a =&gt; UnprocessedParsedTermF p a -&gt; a
+$csum :: forall p a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a
+sum :: forall a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a
+$cproduct :: forall p a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a
+product :: forall a. Num a =&gt; UnprocessedParsedTermF p a -&gt; a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234011"><span id="local-6989586621679234044"><span id="local-6989586621679234050"><span id="local-6989586621679234055"><span class="annot"><span class="annottext">Functor (UnprocessedParsedTermF p)
+Foldable (UnprocessedParsedTermF p)
+(Functor (UnprocessedParsedTermF p),
+ Foldable (UnprocessedParsedTermF p)) =&gt;
+(forall (f :: * -&gt; *) a b.
+ Applicative f =&gt;
+ (a -&gt; f b)
+ -&gt; UnprocessedParsedTermF p a -&gt; f (UnprocessedParsedTermF p b))
+-&gt; (forall (f :: * -&gt; *) a.
+    Applicative f =&gt;
+    UnprocessedParsedTermF p (f a) -&gt; f (UnprocessedParsedTermF p a))
+-&gt; (forall (m :: * -&gt; *) a b.
+    Monad m =&gt;
+    (a -&gt; m b)
+    -&gt; UnprocessedParsedTermF p a -&gt; m (UnprocessedParsedTermF p b))
+-&gt; (forall (m :: * -&gt; *) a.
+    Monad m =&gt;
+    UnprocessedParsedTermF p (m a) -&gt; m (UnprocessedParsedTermF p a))
+-&gt; Traversable (UnprocessedParsedTermF p)
+forall p. Functor (UnprocessedParsedTermF p)
+forall p. Foldable (UnprocessedParsedTermF p)
+forall p (m :: * -&gt; *) a.
+Monad m =&gt;
+UnprocessedParsedTermF p (m a) -&gt; m (UnprocessedParsedTermF p a)
+forall p (f :: * -&gt; *) a.
+Applicative f =&gt;
+UnprocessedParsedTermF p (f a) -&gt; f (UnprocessedParsedTermF p a)
+forall p (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b)
+-&gt; UnprocessedParsedTermF p a -&gt; m (UnprocessedParsedTermF p b)
+forall p (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b)
+-&gt; UnprocessedParsedTermF p a -&gt; f (UnprocessedParsedTermF p b)
+forall (t :: * -&gt; *).
+(Functor t, Foldable t) =&gt;
+(forall (f :: * -&gt; *) a b.
+ Applicative f =&gt;
+ (a -&gt; f b) -&gt; t a -&gt; f (t b))
+-&gt; (forall (f :: * -&gt; *) a. Applicative f =&gt; t (f a) -&gt; f (t a))
+-&gt; (forall (m :: * -&gt; *) a b.
+    Monad m =&gt;
+    (a -&gt; m b) -&gt; t a -&gt; m (t b))
+-&gt; (forall (m :: * -&gt; *) a. Monad m =&gt; t (m a) -&gt; m (t a))
+-&gt; Traversable t
+forall (m :: * -&gt; *) a.
+Monad m =&gt;
+UnprocessedParsedTermF p (m a) -&gt; m (UnprocessedParsedTermF p a)
+forall (f :: * -&gt; *) a.
+Applicative f =&gt;
+UnprocessedParsedTermF p (f a) -&gt; f (UnprocessedParsedTermF p a)
+forall (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b)
+-&gt; UnprocessedParsedTermF p a -&gt; m (UnprocessedParsedTermF p b)
+forall (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b)
+-&gt; UnprocessedParsedTermF p a -&gt; f (UnprocessedParsedTermF p b)
+$ctraverse :: forall p (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b)
+-&gt; UnprocessedParsedTermF p a -&gt; f (UnprocessedParsedTermF p b)
+traverse :: forall (f :: * -&gt; *) a b.
+Applicative f =&gt;
+(a -&gt; f b)
+-&gt; UnprocessedParsedTermF p a -&gt; f (UnprocessedParsedTermF p b)
+$csequenceA :: forall p (f :: * -&gt; *) a.
+Applicative f =&gt;
+UnprocessedParsedTermF p (f a) -&gt; f (UnprocessedParsedTermF p a)
+sequenceA :: forall (f :: * -&gt; *) a.
+Applicative f =&gt;
+UnprocessedParsedTermF p (f a) -&gt; f (UnprocessedParsedTermF p a)
+$cmapM :: forall p (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b)
+-&gt; UnprocessedParsedTermF p a -&gt; m (UnprocessedParsedTermF p b)
+mapM :: forall (m :: * -&gt; *) a b.
+Monad m =&gt;
+(a -&gt; m b)
+-&gt; UnprocessedParsedTermF p a -&gt; m (UnprocessedParsedTermF p b)
+$csequence :: forall p (m :: * -&gt; *) a.
+Monad m =&gt;
+UnprocessedParsedTermF p (m a) -&gt; m (UnprocessedParsedTermF p a)
+sequence :: forall (m :: * -&gt; *) a.
+Monad m =&gt;
+UnprocessedParsedTermF p (m a) -&gt; m (UnprocessedParsedTermF p a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Traversable</span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234060"><span id="local-6989586621679234064"><span class="annot"><span class="annottext">(forall a.
+ UnprocessedParsedTermF p a -&gt; Rep1 (UnprocessedParsedTermF p) a)
+-&gt; (forall a.
+    Rep1 (UnprocessedParsedTermF p) a -&gt; UnprocessedParsedTermF p a)
+-&gt; Generic1 (UnprocessedParsedTermF p)
+forall a.
+Rep1 (UnprocessedParsedTermF p) a -&gt; UnprocessedParsedTermF p a
+forall a.
+UnprocessedParsedTermF p a -&gt; Rep1 (UnprocessedParsedTermF p) a
+forall p a.
+Rep1 (UnprocessedParsedTermF p) a -&gt; UnprocessedParsedTermF p a
+forall p a.
+UnprocessedParsedTermF p a -&gt; Rep1 (UnprocessedParsedTermF p) a
+forall k (f :: k -&gt; *).
+(forall (a :: k). f a -&gt; Rep1 f a)
+-&gt; (forall (a :: k). Rep1 f a -&gt; f a) -&gt; Generic1 f
+$cfrom1 :: forall p a.
+UnprocessedParsedTermF p a -&gt; Rep1 (UnprocessedParsedTermF p) a
+from1 :: forall a.
+UnprocessedParsedTermF p a -&gt; Rep1 (UnprocessedParsedTermF p) a
+$cto1 :: forall p a.
+Rep1 (UnprocessedParsedTermF p) a -&gt; UnprocessedParsedTermF p a
+to1 :: forall a.
+Rep1 (UnprocessedParsedTermF p) a -&gt; UnprocessedParsedTermF p a
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic1</span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-59"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679234072"><span class="annot"><span class="annottext">(forall a. Eq a =&gt; Eq (UnprocessedParsedTermF p a)) =&gt;
+(forall a b.
+ (a -&gt; b -&gt; Bool)
+ -&gt; UnprocessedParsedTermF p a
+ -&gt; UnprocessedParsedTermF p b
+ -&gt; Bool)
+-&gt; Eq1 (UnprocessedParsedTermF p)
+forall a. Eq a =&gt; Eq (UnprocessedParsedTermF p a)
+forall p a. (Eq p, Eq a) =&gt; Eq (UnprocessedParsedTermF p a)
+forall p a b.
+Eq p =&gt;
+(a -&gt; b -&gt; Bool)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b -&gt; Bool
+forall a b.
+(a -&gt; b -&gt; Bool)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b -&gt; Bool
+forall (f :: * -&gt; *).
+(forall a. Eq a =&gt; Eq (f a)) =&gt;
+(forall a b. (a -&gt; b -&gt; Bool) -&gt; f a -&gt; f b -&gt; Bool) -&gt; Eq1 f
+$cliftEq :: forall p a b.
+Eq p =&gt;
+(a -&gt; b -&gt; Bool)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b -&gt; Bool
+liftEq :: forall a b.
+(a -&gt; b -&gt; Bool)
+-&gt; UnprocessedParsedTermF p a -&gt; UnprocessedParsedTermF p b -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var">Eq1</span></span></span><span> </span><span class="hs-keyword">via</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Generically1</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233522"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-60"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233501"><span class="annot"><a href="Telomare.IR.Base.html#HighBase"><span class="hs-identifier hs-type">HighBase</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233501"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-61"></span><span>  </span><span id="local-6989586621679234148"><span class="annot"><span class="annottext">embedH :: forall x. HighTermF x -&gt; UnprocessedParsedTermF p x
+</span><a href="#local-6989586621679234148"><span class="hs-identifier hs-var hs-var hs-var hs-var">embedH</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">HighTermF x -&gt; UnprocessedParsedTermF p x
+forall p x. HighTermF x -&gt; UnprocessedParsedTermF p x
+</span><a href="Telomare.IR.Surface.html#UnprocessedParsedTermH"><span class="hs-identifier hs-var">UnprocessedParsedTermH</span></a></span><span>
+</span><span id="line-62"></span><span>  </span><span id="local-6989586621679234150"><span class="annot"><span class="annottext">extractH :: forall x. UnprocessedParsedTermF p x -&gt; Maybe (HighTermF x)
+</span><a href="#local-6989586621679234150"><span class="hs-identifier hs-var hs-var hs-var hs-var">extractH</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-63"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermH"><span class="hs-identifier hs-type">UnprocessedParsedTermH</span></a></span><span> </span><span id="local-6989586621679234152"><span class="annot"><span class="annottext">HighTermF x
+</span><a href="#local-6989586621679234152"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">HighTermF x -&gt; Maybe (HighTermF x)
+forall a. a -&gt; Maybe a
+</span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">HighTermF x
+</span><a href="#local-6989586621679234152"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-64"></span><span>    </span><span class="annot"><span class="annottext">UnprocessedParsedTermF p x
+</span><span class="hs-identifier">_</span></span><span>                        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (HighTermF x)
+forall a. Maybe a
+</span><span class="hs-identifier hs-var">Nothing</span></span><span>
+</span><span id="line-65"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233509"><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233509"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-66"></span><span>  </span><span id="local-6989586621679234157"><span class="annot"><span class="annottext">embedB :: forall x. BasicExprF x -&gt; UnprocessedParsedTermF p x
+</span><a href="#local-6989586621679234157"><span class="hs-identifier hs-var hs-var hs-var hs-var">embedB</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BasicExprF x -&gt; UnprocessedParsedTermF p x
+forall p x. BasicExprF x -&gt; UnprocessedParsedTermF p x
+</span><a href="Telomare.IR.Surface.html#UnprocessedParsedTermB"><span class="hs-identifier hs-var">UnprocessedParsedTermB</span></a></span><span>
+</span><span id="line-67"></span><span>  </span><span id="local-6989586621679234159"><span class="annot"><span class="annottext">extractB :: forall x. UnprocessedParsedTermF p x -&gt; Maybe (BasicExprF x)
+</span><a href="#local-6989586621679234159"><span class="hs-identifier hs-var hs-var hs-var hs-var">extractB</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-68"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermB"><span class="hs-identifier hs-type">UnprocessedParsedTermB</span></a></span><span> </span><span id="local-6989586621679234161"><span class="annot"><span class="annottext">BasicExprF x
+</span><a href="#local-6989586621679234161"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExprF x -&gt; Maybe (BasicExprF x)
+forall a. a -&gt; Maybe a
+</span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">BasicExprF x
+</span><a href="#local-6989586621679234161"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-69"></span><span>    </span><span class="annot"><span class="annottext">UnprocessedParsedTermF p x
+</span><span class="hs-identifier">_</span></span><span>                        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (BasicExprF x)
+forall a. Maybe a
+</span><span class="hs-identifier hs-var">Nothing</span></span><span>
+</span><span id="line-70"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233519"><span class="annot"><a href="Telomare.IR.Base.html#LamBase"><span class="hs-identifier hs-type">LamBase</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233519"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-71"></span><span>  </span><span class="hs-keyword">type</span><span> </span><span id="LamVar"><span class="annot"><a href="Telomare.IR.Base.html#LamVar"><span class="hs-identifier hs-var">LamVar</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233519"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-72"></span><span>  </span><span class="hs-keyword">type</span><span> </span><span id="LamT"><span class="annot"><a href="Telomare.IR.Base.html#LamT"><span class="hs-identifier hs-var">LamT</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233519"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span>
+</span><span id="line-73"></span><span>
+</span><span id="line-74"></span><span>  </span><span id="local-6989586621679234166"><span class="annot"><span class="annottext">embedL :: forall x.
+LamTermF
+  (LamT (UnprocessedParsedTermF p))
+  (LamVar (UnprocessedParsedTermF p))
+  x
+-&gt; UnprocessedParsedTermF p x
+</span><a href="#local-6989586621679234166"><span class="hs-identifier hs-var hs-var hs-var hs-var">embedL</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">LamTermF LocatedName String x -&gt; UnprocessedParsedTermF p x
+LamTermF
+  (LamT (UnprocessedParsedTermF p))
+  (LamVar (UnprocessedParsedTermF p))
+  x
+-&gt; UnprocessedParsedTermF p x
+forall p f.
+LamTermF LocatedName String f -&gt; UnprocessedParsedTermF p f
+</span><a href="Telomare.IR.Surface.html#UnprocessedParsedTermL"><span class="hs-identifier hs-var">UnprocessedParsedTermL</span></a></span><span>
+</span><span id="line-75"></span><span>  </span><span id="local-6989586621679234168"><span class="annot"><span class="annottext">extractL :: forall x.
+UnprocessedParsedTermF p x
+-&gt; Maybe
+     (LamTermF
+        (LamT (UnprocessedParsedTermF p))
+        (LamVar (UnprocessedParsedTermF p))
+        x)
+</span><a href="#local-6989586621679234168"><span class="hs-identifier hs-var hs-var hs-var hs-var">extractL</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-76"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermL"><span class="hs-identifier hs-type">UnprocessedParsedTermL</span></a></span><span> </span><span id="local-6989586621679234170"><span class="annot"><span class="annottext">LamTermF LocatedName String x
+</span><a href="#local-6989586621679234170"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">LamTermF LocatedName String x
+-&gt; Maybe (LamTermF LocatedName String x)
+forall a. a -&gt; Maybe a
+</span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">LamTermF LocatedName String x
+</span><a href="#local-6989586621679234170"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-77"></span><span>    </span><span class="annot"><span class="annottext">UnprocessedParsedTermF p x
+</span><span class="hs-identifier">_</span></span><span>                        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe (LamTermF LocatedName String x)
+Maybe
+  (LamTermF
+     (LamT (UnprocessedParsedTermF p))
+     (LamVar (UnprocessedParsedTermF p))
+     x)
+forall a. Maybe a
+</span><span class="hs-identifier hs-var">Nothing</span></span><span>
+</span><span id="line-78"></span><span>
+</span><span id="line-79"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233525"><span id="local-6989586621679234176"><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="#local-6989586621679233525"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Show1</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679233525"><span class="hs-identifier hs-type">p</span></a></span><span class="hs-special">)</span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-80"></span><span>  </span><span id="local-6989586621679234202"><span class="annot"><span class="annottext">liftShowsPrec :: forall a.
+(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; UnprocessedParsedTermF p a -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShowsPrec</span></span></span><span> </span><span id="local-6989586621679234203"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span></span><span> </span><span id="local-6989586621679234204"><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><a href="#local-6989586621679234204"><span class="hs-identifier hs-var">showList</span></a></span></span><span> </span><span id="local-6989586621679234205"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679234205"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span id="local-6989586621679234206"><span class="annot"><span class="annottext">UnprocessedParsedTermF p a
+</span><a href="#local-6989586621679234206"><span class="hs-identifier hs-var">term</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">UnprocessedParsedTermF p a
+</span><a href="#local-6989586621679234206"><span class="hs-identifier hs-var">term</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-81"></span><span>
+</span><span id="line-82"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermB"><span class="hs-identifier hs-type">UnprocessedParsedTermB</span></a></span><span> </span><span id="local-6989586621679234207"><span class="annot"><span class="annottext">BasicExprF a
+</span><a href="#local-6989586621679234207"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; BasicExprF a -&gt; ShowS
+forall a.
+(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; BasicExprF a -&gt; ShowS
+forall (f :: * -&gt; *) a.
+Show1 f =&gt;
+(Int -&gt; a -&gt; ShowS) -&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; f a -&gt; ShowS
+</span><span class="hs-identifier hs-var">liftShowsPrec</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><a href="#local-6989586621679234204"><span class="hs-identifier hs-var">showList</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679234205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF a
+</span><a href="#local-6989586621679234207"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-83"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermH"><span class="hs-identifier hs-type">UnprocessedParsedTermH</span></a></span><span> </span><span id="local-6989586621679234208"><span class="annot"><span class="annottext">HighTermF a
+</span><a href="#local-6989586621679234208"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; HighTermF a -&gt; ShowS
+forall a.
+(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; HighTermF a -&gt; ShowS
+forall (f :: * -&gt; *) a.
+Show1 f =&gt;
+(Int -&gt; a -&gt; ShowS) -&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; f a -&gt; ShowS
+</span><span class="hs-identifier hs-var">liftShowsPrec</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><a href="#local-6989586621679234204"><span class="hs-identifier hs-var">showList</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679234205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF a
+</span><a href="#local-6989586621679234208"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-84"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermL"><span class="hs-identifier hs-type">UnprocessedParsedTermL</span></a></span><span> </span><span id="local-6989586621679234209"><span class="annot"><span class="annottext">LamTermF LocatedName String a
+</span><a href="#local-6989586621679234209"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; LamTermF LocatedName String a -&gt; ShowS
+forall a.
+(Int -&gt; a -&gt; ShowS)
+-&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; LamTermF LocatedName String a -&gt; ShowS
+forall (f :: * -&gt; *) a.
+Show1 f =&gt;
+(Int -&gt; a -&gt; ShowS) -&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; f a -&gt; ShowS
+</span><span class="hs-identifier hs-var">liftShowsPrec</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><a href="#local-6989586621679234204"><span class="hs-identifier hs-var">showList</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679234205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF LocatedName String a
+</span><a href="#local-6989586621679234209"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-85"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#ImportQualifiedUPF"><span class="hs-identifier hs-type">ImportQualifiedUPF</span></a></span><span> </span><span id="local-6989586621679234210"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234210"><span class="hs-identifier hs-var">s1</span></a></span></span><span> </span><span id="local-6989586621679234211"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234211"><span class="hs-identifier hs-var">s2</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;ImportQualifedUPF &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234210"><span class="hs-identifier hs-var">s1</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot; &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234211"><span class="hs-identifier hs-var">s2</span></a></span><span>
+</span><span id="line-86"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#ImportUPF"><span class="hs-identifier hs-type">ImportUPF</span></a></span><span> </span><span id="local-6989586621679234212"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234212"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;ImportUPF &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234212"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-87"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-type">LetUPF</span></a></span><span> </span><span id="local-6989586621679234213"><span class="annot"><span class="annottext">[(LocatedName, a)]
+</span><a href="#local-6989586621679234213"><span class="hs-identifier hs-var">bindings</span></a></span></span><span> </span><span id="local-6989586621679234214"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234214"><span class="hs-identifier hs-var">body</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-88"></span><span>      </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679234215"><span class="annot"><span class="annottext">showBinding :: (LocatedName, a) -&gt; ShowS
+</span><a href="#local-6989586621679234215"><span class="hs-identifier hs-var hs-var">showBinding</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234216"><span class="annot"><span class="annottext">LocatedName
+</span><a href="#local-6989586621679234216"><span class="hs-identifier hs-var">str</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234217"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234217"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">'('</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocatedName -&gt; String
+</span><a href="Telomare.IR.Loc.html#locatedNameText"><span class="hs-identifier hs-var">locatedNameText</span></a></span><span> </span><span class="annot"><span class="annottext">LocatedName
+</span><a href="#local-6989586621679234216"><span class="hs-identifier hs-var">str</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;, &quot;</span></span><span>
+</span><span id="line-89"></span><span>                                 </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234217"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">')'</span></span><span>
+</span><span id="line-90"></span><span>          </span><span id="local-6989586621679234218"><span class="annot"><span class="annottext">showBindings :: [(LocatedName, a)] -&gt; ShowS
+</span><a href="#local-6989586621679234218"><span class="hs-identifier hs-var hs-var">showBindings</span></a></span></span><span> </span><span id="local-6989586621679234219"><span class="annot"><span class="annottext">[(LocatedName, a)]
+</span><a href="#local-6989586621679234219"><span class="hs-identifier hs-var">bs</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">'['</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS -&gt; ShowS) -&gt; [ShowS] -&gt; ShowS
+forall a. (a -&gt; a -&gt; a) -&gt; [a] -&gt; a
+forall (t :: * -&gt; *) a. Foldable t =&gt; (a -&gt; a -&gt; a) -&gt; t a -&gt; a
+</span><span class="hs-identifier hs-var">foldr1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679234221"><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234221"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679234222"><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234222"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234221"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;, &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234222"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-91"></span><span>                           </span><span class="hs-special">(</span><span class="annot"><span class="annottext">((LocatedName, a) -&gt; ShowS) -&gt; [(LocatedName, a)] -&gt; [ShowS]
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">(LocatedName, a) -&gt; ShowS
+</span><a href="#local-6989586621679234215"><span class="hs-identifier hs-var">showBinding</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, a)]
+</span><a href="#local-6989586621679234219"><span class="hs-identifier hs-var">bs</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">']'</span></span><span>
+</span><span id="line-92"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;LetUPF &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, a)] -&gt; ShowS
+</span><a href="#local-6989586621679234218"><span class="hs-identifier hs-var">showBindings</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, a)]
+</span><a href="#local-6989586621679234213"><span class="hs-identifier hs-var">bindings</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">' '</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234214"><span class="hs-identifier hs-var">body</span></a></span><span>
+</span><span id="line-93"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#ListUPF"><span class="hs-identifier hs-type">ListUPF</span></a></span><span> </span><span id="local-6989586621679234223"><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679234223"><span class="hs-identifier hs-var">terms</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;ListUPF [&quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span>
+</span><span id="line-94"></span><span>                     </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS -&gt; ShowS) -&gt; [ShowS] -&gt; ShowS
+forall a. (a -&gt; a -&gt; a) -&gt; [a] -&gt; a
+forall (t :: * -&gt; *) a. Foldable t =&gt; (a -&gt; a -&gt; a) -&gt; t a -&gt; a
+</span><span class="hs-identifier hs-var">foldr1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679234224"><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234224"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679234225"><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234225"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234224"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;, &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234225"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-95"></span><span>                           </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(a -&gt; ShowS) -&gt; [a] -&gt; [ShowS]
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">11</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679234223"><span class="hs-identifier hs-var">terms</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span>
+</span><span id="line-96"></span><span>                     </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">']'</span></span><span>
+</span><span id="line-97"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#IntUPF"><span class="hs-identifier hs-type">IntUPF</span></a></span><span> </span><span id="local-6989586621679234226"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679234226"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;IntUPF &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679234226"><span class="hs-identifier hs-var">n</span></a></span><span>
+</span><span id="line-98"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#StringUPF"><span class="hs-identifier hs-type">StringUPF</span></a></span><span> </span><span id="local-6989586621679234227"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234227"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;StringUPF &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679234227"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-99"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#UDTUPF"><span class="hs-identifier hs-type">UDTUPF</span></a></span><span> </span><span id="local-6989586621679234228"><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679234228"><span class="hs-identifier hs-var">ss</span></a></span></span><span> </span><span id="local-6989586621679234229"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234229"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;UDTUPF &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679234228"><span class="hs-identifier hs-var">ss</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">' '</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234229"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-100"></span><span>    </span><span class="annot"><a href="Telomare.IR.Surface.html#CaseUPF"><span class="hs-identifier hs-type">CaseUPF</span></a></span><span> </span><span id="local-6989586621679234230"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234230"><span class="hs-identifier hs-var">scrutinee</span></a></span></span><span> </span><span id="local-6989586621679234231"><span class="annot"><span class="annottext">[(p, a)]
+</span><a href="#local-6989586621679234231"><span class="hs-identifier hs-var">patterns</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-101"></span><span>      </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679234232"><span class="annot"><span class="annottext">showPattern :: (p, a) -&gt; ShowS
+</span><a href="#local-6989586621679234232"><span class="hs-identifier hs-var hs-var">showPattern</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234233"><span class="annot"><span class="annottext">p
+</span><a href="#local-6989586621679234233"><span class="hs-identifier hs-var">pat</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234234"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234234"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">'('</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">p -&gt; ShowS
+forall a. Show a =&gt; a -&gt; ShowS
+</span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">p
+</span><a href="#local-6989586621679234233"><span class="hs-identifier hs-var">pat</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;, &quot;</span></span><span>
+</span><span id="line-102"></span><span>                                </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234234"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">')'</span></span><span>
+</span><span id="line-103"></span><span>          </span><span id="local-6989586621679234235"><span class="annot"><span class="annottext">showPatterns :: [(p, a)] -&gt; ShowS
+</span><a href="#local-6989586621679234235"><span class="hs-identifier hs-var hs-var">showPatterns</span></a></span></span><span> </span><span id="local-6989586621679234236"><span class="annot"><span class="annottext">[(p, a)]
+</span><a href="#local-6989586621679234236"><span class="hs-identifier hs-var">ps</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">'['</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS -&gt; ShowS) -&gt; [ShowS] -&gt; ShowS
+forall a. (a -&gt; a -&gt; a) -&gt; [a] -&gt; a
+forall (t :: * -&gt; *) a. Foldable t =&gt; (a -&gt; a -&gt; a) -&gt; t a -&gt; a
+</span><span class="hs-identifier hs-var">foldr1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679234237"><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234237"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679234238"><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234238"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234237"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;, &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">ShowS
+</span><a href="#local-6989586621679234238"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-104"></span><span>                           </span><span class="hs-special">(</span><span class="annot"><span class="annottext">((p, a) -&gt; ShowS) -&gt; [(p, a)] -&gt; [ShowS]
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
+</span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">(p, a) -&gt; ShowS
+</span><a href="#local-6989586621679234232"><span class="hs-identifier hs-var">showPattern</span></a></span><span> </span><span class="annot"><span class="annottext">[(p, a)]
+</span><a href="#local-6989586621679234231"><span class="hs-identifier hs-var">patterns</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">']'</span></span><span>
+</span><span id="line-105"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;CaseUPF &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679234203"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679234230"><span class="hs-identifier hs-var">scrutinee</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; ShowS
+</span><span class="hs-identifier hs-var">showChar</span></span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">' '</span></span><span>
+</span><span id="line-106"></span><span>         </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">[(p, a)] -&gt; ShowS
+</span><a href="#local-6989586621679234235"><span class="hs-identifier hs-var">showPatterns</span></a></span><span> </span><span class="annot"><span class="annottext">[(p, a)]
+</span><a href="#local-6989586621679234231"><span class="hs-identifier hs-var">patterns</span></a></span><span>
+</span><span id="line-107"></span><span>
+</span><span id="line-108"></span><span class="hs-keyword">type</span><span> </span><span id="Pattern"><span class="annot"><a href="Telomare.IR.Surface.html#Pattern"><span class="hs-identifier hs-var">Pattern</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#PatternF"><span class="hs-identifier hs-type">PatternF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTerm"><span class="hs-identifier hs-type">UnprocessedParsedTerm</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-109"></span><span class="hs-keyword">newtype</span><span> </span><span id="UnprocessedParsedTerm"><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTerm"><span class="hs-identifier hs-var">UnprocessedParsedTerm</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="UnprocessedParsedTerm"><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTerm"><span class="hs-identifier hs-var">UnprocessedParsedTerm</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="unUnprocessedParsedTerm"><span class="annot"><span class="annottext">UnprocessedParsedTerm -&gt; UPT
+</span><a href="Telomare.IR.Surface.html#unUnprocessedParsedTerm"><span class="hs-identifier hs-var hs-var">unUnprocessedParsedTerm</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UPT"><span class="hs-identifier hs-type">UPT</span></a></span><span class="hs-special">}</span><span>
+</span><span id="line-110"></span><span class="hs-keyword">type</span><span> </span><span id="UPT"><span class="annot"><a href="Telomare.IR.Surface.html#UPT"><span class="hs-identifier hs-var">UPT</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#Pattern"><span class="hs-identifier hs-type">Pattern</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-111"></span><span>
+</span><span id="line-112"></span><span class="hs-keyword">newtype</span><span> </span><span id="AnnotatedUPT"><span class="annot"><a href="Telomare.IR.Surface.html#AnnotatedUPT"><span class="hs-identifier hs-var">AnnotatedUPT</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="AnnotatedUPT"><span class="annot"><a href="Telomare.IR.Surface.html#AnnotatedUPT"><span class="hs-identifier hs-var">AnnotatedUPT</span></a></span></span><span> </span><span class="hs-special">{</span><span> </span><span id="unAnnotatedUPT"><span class="annot"><span class="annottext">AnnotatedUPT -&gt; AUPT
+</span><a href="Telomare.IR.Surface.html#unAnnotatedUPT"><span class="hs-identifier hs-var hs-var">unAnnotatedUPT</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#AUPT"><span class="hs-identifier hs-type">AUPT</span></a></span><span> </span><span class="hs-special">}</span><span>
+</span><span id="line-113"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234244"><span id="local-6989586621679234251"><span class="annot"><span class="annottext">AnnotatedUPT -&gt; AnnotatedUPT -&gt; Bool
+(AnnotatedUPT -&gt; AnnotatedUPT -&gt; Bool)
+-&gt; (AnnotatedUPT -&gt; AnnotatedUPT -&gt; Bool) -&gt; Eq AnnotatedUPT
+forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
+$c== :: AnnotatedUPT -&gt; AnnotatedUPT -&gt; Bool
+== :: AnnotatedUPT -&gt; AnnotatedUPT -&gt; Bool
+$c/= :: AnnotatedUPT -&gt; AnnotatedUPT -&gt; Bool
+/= :: AnnotatedUPT -&gt; AnnotatedUPT -&gt; Bool
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234266"><span id="local-6989586621679234273"><span id="local-6989586621679234277"><span class="annot"><span class="annottext">Int -&gt; AnnotatedUPT -&gt; ShowS
+[AnnotatedUPT] -&gt; ShowS
+AnnotatedUPT -&gt; String
+(Int -&gt; AnnotatedUPT -&gt; ShowS)
+-&gt; (AnnotatedUPT -&gt; String)
+-&gt; ([AnnotatedUPT] -&gt; ShowS)
+-&gt; Show AnnotatedUPT
+forall a.
+(Int -&gt; a -&gt; ShowS) -&gt; (a -&gt; String) -&gt; ([a] -&gt; ShowS) -&gt; Show a
+$cshowsPrec :: Int -&gt; AnnotatedUPT -&gt; ShowS
+showsPrec :: Int -&gt; AnnotatedUPT -&gt; ShowS
+$cshow :: AnnotatedUPT -&gt; String
+show :: AnnotatedUPT -&gt; String
+$cshowList :: [AnnotatedUPT] -&gt; ShowS
+showList :: [AnnotatedUPT] -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">)</span><span>
+</span><span id="line-114"></span><span class="hs-keyword">type</span><span> </span><span id="AUPT"><span class="annot"><a href="Telomare.IR.Surface.html#AUPT"><span class="hs-identifier hs-var">AUPT</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#Cofree"><span class="hs-identifier hs-type">Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternA"><span class="hs-identifier hs-type">PatternA</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span>
+</span><span id="line-115"></span><span class="hs-keyword">type</span><span> </span><span id="PatternA"><span class="annot"><a href="Telomare.IR.Surface.html#PatternA"><span class="hs-identifier hs-var">PatternA</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#PatternF"><span class="hs-identifier hs-type">PatternF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#AnnotatedUPT"><span class="hs-identifier hs-type">AnnotatedUPT</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-116"></span><span>
+</span><span id="line-117"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier hs-type">CarryAnno</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternA"><span class="hs-identifier hs-type">PatternA</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-118"></span><span>  </span><span class="hs-keyword">type</span><span> </span><span id="CarryWrap"><span class="annot"><a href="Telomare.IR.Base.html#CarryWrap"><span class="hs-identifier hs-var">CarryWrap</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternA"><span class="hs-identifier hs-type">PatternA</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternA"><span class="hs-identifier hs-type">PatternA</span></a></span><span>
+</span><span id="line-119"></span><span>
+</span><span id="line-120"></span><span>  </span><span id="local-6989586621679234287"><span class="annot"><span class="annottext">getEmbed :: Fix (UnprocessedParsedTermF PatternA)
+-&gt; CarryWrap
+     (Fix (UnprocessedParsedTermF PatternA))
+     (Fix (UnprocessedParsedTermF PatternA))
+-&gt; Fix (UnprocessedParsedTermF PatternA)
+</span><a href="#local-6989586621679234287"><span class="hs-identifier hs-var hs-var hs-var hs-var">getEmbed</span></a></span></span><span> </span><span class="annot"><span class="annottext">Fix (UnprocessedParsedTermF PatternA)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CarryWrap
+  (Fix (UnprocessedParsedTermF PatternA))
+  (Fix (UnprocessedParsedTermF PatternA))
+-&gt; Fix (UnprocessedParsedTermF PatternA)
+UnprocessedParsedTermF
+  PatternA (Fix (UnprocessedParsedTermF PatternA))
+-&gt; Fix (UnprocessedParsedTermF PatternA)
+forall (f :: * -&gt; *). f (Fix f) -&gt; Fix f
+</span><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-var">Fix</span></a></span><span>
+</span><span id="line-121"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier hs-type">CarryAnno</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#AUPT"><span class="hs-identifier hs-type">AUPT</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-122"></span><span>  </span><span class="hs-keyword">type</span><span> </span><span id="CarryWrap"><span class="annot"><a href="Telomare.IR.Base.html#CarryWrap"><span class="hs-identifier hs-var">CarryWrap</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#AUPT"><span class="hs-identifier hs-type">AUPT</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternA"><span class="hs-identifier hs-type">PatternA</span></a></span><span>
+</span><span id="line-123"></span><span>
+</span><span id="line-124"></span><span>  </span><span id="local-6989586621679234292"><span class="annot"><span class="annottext">getEmbed :: AUPT -&gt; CarryWrap AUPT AUPT -&gt; AUPT
+</span><a href="Telomare.IR.Base.html#getEmbed"><span class="hs-identifier hs-var hs-var hs-var hs-var">getEmbed</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234293"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679234293"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">UnprocessedParsedTermF PatternA AUPT
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679234293"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
+-&gt; CarryWrap AUPT (Cofree (CarryWrap AUPT) LocTag)
+-&gt; Cofree (CarryWrap AUPT) LocTag
+forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
+</span><a href="file:///nix/store/izn2587vngachaayqayfn10sip75lsmq-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-125"></span><span>
+</span><span id="line-126"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier hs-type">CarryAnno</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UPT"><span class="hs-identifier hs-type">UPT</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-127"></span><span>  </span><span class="hs-keyword">type</span><span> </span><span id="CarryWrap"><span class="annot"><a href="Telomare.IR.Base.html#CarryWrap"><span class="hs-identifier hs-var">CarryWrap</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UPT"><span class="hs-identifier hs-type">UPT</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermF"><span class="hs-identifier hs-type">UnprocessedParsedTermF</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#Pattern"><span class="hs-identifier hs-type">Pattern</span></a></span><span>
+</span><span id="line-128"></span><span>
+</span><span id="line-129"></span><span>  </span><span id="local-6989586621679234296"><span class="annot"><span class="annottext">getEmbed :: UPT -&gt; CarryWrap UPT UPT -&gt; UPT
+</span><a href="Telomare.IR.Base.html#getEmbed"><span class="hs-identifier hs-var hs-var hs-var hs-var">getEmbed</span></a></span></span><span> </span><span class="annot"><span class="annottext">UPT
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CarryWrap UPT UPT -&gt; UPT
+UnprocessedParsedTermF Pattern UPT -&gt; UPT
+forall (f :: * -&gt; *). f (Fix f) -&gt; Fix f
+</span><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-var">Fix</span></a></span><span>
+</span><span id="line-130"></span></pre></body></html>
