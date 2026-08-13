@@ -9,22 +9,22 @@
 </span><span id="line-9"></span><span class="annot"><span class="hs-comment">-- |Helper function to indent. Usefull for indented Show instances.</span></span><span>
 </span><span id="line-10"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-type">indent</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-11"></span><span id="indent"><span class="annot"><span class="annottext">indent :: Int -&gt; String -&gt; String
-</span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var hs-var">indent</span></a></span></span><span> </span><span id="local-6989586621679248753"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248753"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679248754"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248754"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Char -&gt; String
+</span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var hs-var">indent</span></a></span></span><span> </span><span id="local-6989586621679248531"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248531"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679248532"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248532"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Char -&gt; String
 forall a. Int -&gt; a -&gt; [a]
 </span><span class="hs-identifier hs-var">replicate</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248753"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Char
+</span><a href="#local-6989586621679248531"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Char
 </span><span class="hs-char">' '</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248754"><span class="hs-identifier hs-var">str</span></a></span><span>
+</span><a href="#local-6989586621679248532"><span class="hs-identifier hs-var">str</span></a></span><span>
 </span><span id="line-12"></span><span>
 </span><span id="line-13"></span><span class="annot"><span class="hs-comment">-- |Indentation with the State Monad.</span></span><span>
 </span><span id="line-14"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#sindent"><span class="hs-identifier hs-type">sindent</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-15"></span><span id="sindent"><span class="annot"><span class="annottext">sindent :: String -&gt; State Int String
-</span><a href="Telomare.PrettyPrint.Indent.html#sindent"><span class="hs-identifier hs-var hs-var">sindent</span></a></span></span><span> </span><span id="local-6989586621679248757"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248757"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
+</span><a href="Telomare.PrettyPrint.Indent.html#sindent"><span class="hs-identifier hs-var hs-var">sindent</span></a></span></span><span> </span><span id="local-6989586621679248535"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248535"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 forall s (m :: * -&gt; *). MonadState s m =&gt; m s
 </span><span class="hs-identifier hs-var">State.get</span></span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 -&gt; (Int -&gt; State Int String) -&gt; State Int String
@@ -32,25 +32,25 @@ forall a b.
 StateT Int Identity a
 -&gt; (a -&gt; StateT Int Identity b) -&gt; StateT Int Identity b
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
-</span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679248759"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248759"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; State Int String
+</span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679248537"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248537"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; State Int String
 forall a. a -&gt; StateT Int Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; State Int String) -&gt; String -&gt; State Int String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var">indent</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248759"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248757"><span class="hs-identifier hs-var">str</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679248537"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248535"><span class="hs-identifier hs-var">str</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-16"></span><span>
 </span><span id="line-17"></span><span class="annot"><span class="hs-comment">-- |One child indentation.</span></span><span>
 </span><span id="line-18"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild"><span class="hs-identifier hs-type">indentWithOneChild</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-19"></span><span id="indentWithOneChild"><span class="annot"><span class="annottext">indentWithOneChild :: String -&gt; State Int String -&gt; State Int String
-</span><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild"><span class="hs-identifier hs-var hs-var">indentWithOneChild</span></a></span></span><span> </span><span id="local-6989586621679248761"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248761"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248762"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248762"><span class="hs-identifier hs-var">sx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-20"></span><span>  </span><span id="local-6989586621679248763"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248763"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild"><span class="hs-identifier hs-var hs-var">indentWithOneChild</span></a></span></span><span> </span><span id="local-6989586621679248539"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248539"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248540"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248540"><span class="hs-identifier hs-var">sx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-20"></span><span>  </span><span id="local-6989586621679248541"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248541"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 forall s (m :: * -&gt; *). MonadState s m =&gt; m s
 </span><span class="hs-identifier hs-var">State.get</span></span><span>
 </span><span id="line-21"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
@@ -58,13 +58,13 @@ forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; StateT Int Identity ()) -&gt; Int -&gt; StateT Int Identity ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248763"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248541"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span>
-</span><span id="line-22"></span><span>  </span><span id="local-6989586621679248766"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248766"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248762"><span class="hs-identifier hs-var">sx</span></a></span><span>
+</span><span id="line-22"></span><span>  </span><span id="local-6989586621679248544"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248544"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248540"><span class="hs-identifier hs-var">sx</span></a></span><span>
 </span><span id="line-23"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; State Int String
 forall a. a -&gt; StateT Int Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
@@ -72,27 +72,27 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var">indent</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248763"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248761"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248541"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248539"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248766"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679248544"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-24"></span><span>
 </span><span id="line-25"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild%27"><span class="hs-identifier hs-type">indentWithOneChild'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-26"></span><span id="indentWithOneChild%27"><span class="annot"><span class="annottext">indentWithOneChild' :: String -&gt; State Int String -&gt; State Int String
-</span><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild%27"><span class="hs-identifier hs-var hs-var">indentWithOneChild'</span></a></span></span><span> </span><span id="local-6989586621679248768"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248768"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248769"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248769"><span class="hs-identifier hs-var">sx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-27"></span><span>  </span><span id="local-6989586621679248770"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248770"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithOneChild%27"><span class="hs-identifier hs-var hs-var">indentWithOneChild'</span></a></span></span><span> </span><span id="local-6989586621679248546"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248546"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248547"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248547"><span class="hs-identifier hs-var">sx</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-27"></span><span>  </span><span id="local-6989586621679248548"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248548"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 forall s (m :: * -&gt; *). MonadState s m =&gt; m s
 </span><span class="hs-identifier hs-var">State.get</span></span><span>
-</span><span id="line-28"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248772"><span class="annot"><span class="annottext">sout :: String
-</span><a href="#local-6989586621679248772"><span class="hs-identifier hs-var hs-var">sout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248768"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><span id="line-28"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248550"><span class="annot"><span class="annottext">sout :: String
+</span><a href="#local-6989586621679248550"><span class="hs-identifier hs-var hs-var">sout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248546"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; &quot;</span></span><span>
@@ -101,111 +101,111 @@ forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; StateT Int Identity ()) -&gt; Int -&gt; StateT Int Identity ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248770"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248548"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248772"><span class="hs-identifier hs-var">sout</span></a></span><span>
-</span><span id="line-30"></span><span>  </span><span id="local-6989586621679248774"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248774"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248769"><span class="hs-identifier hs-var">sx</span></a></span><span>
+</span><a href="#local-6989586621679248550"><span class="hs-identifier hs-var">sout</span></a></span><span>
+</span><span id="line-30"></span><span>  </span><span id="local-6989586621679248552"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248552"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248547"><span class="hs-identifier hs-var">sx</span></a></span><span>
 </span><span id="line-31"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; State Int String
 forall a. a -&gt; StateT Int Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; State Int String) -&gt; String -&gt; State Int String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248772"><span class="hs-identifier hs-var">sout</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248550"><span class="hs-identifier hs-var">sout</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248774"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679248552"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-32"></span><span>
 </span><span id="line-33"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren%27"><span class="hs-identifier hs-type">indentWithTwoChildren'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-34"></span><span id="indentWithTwoChildren%27"><span class="annot"><span class="annottext">indentWithTwoChildren' :: String -&gt; State Int String -&gt; State Int String -&gt; State Int String
-</span><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren%27"><span class="hs-identifier hs-var hs-var">indentWithTwoChildren'</span></a></span></span><span> </span><span id="local-6989586621679248776"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248776"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248777"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248777"><span class="hs-identifier hs-var">sl</span></a></span></span><span> </span><span id="local-6989586621679248778"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248778"><span class="hs-identifier hs-var">sr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-35"></span><span>  </span><span id="local-6989586621679248779"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248779"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren%27"><span class="hs-identifier hs-var hs-var">indentWithTwoChildren'</span></a></span></span><span> </span><span id="local-6989586621679248554"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248554"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248555"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248555"><span class="hs-identifier hs-var">sl</span></a></span></span><span> </span><span id="local-6989586621679248556"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248556"><span class="hs-identifier hs-var">sr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-35"></span><span>  </span><span id="local-6989586621679248557"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248557"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 forall s (m :: * -&gt; *). MonadState s m =&gt; m s
 </span><span class="hs-identifier hs-var">State.get</span></span><span>
-</span><span id="line-36"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248781"><span class="annot"><span class="annottext">sout :: String
-</span><a href="#local-6989586621679248781"><span class="hs-identifier hs-var hs-var">sout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248776"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><span id="line-36"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248559"><span class="annot"><span class="annottext">sout :: String
+</span><a href="#local-6989586621679248559"><span class="hs-identifier hs-var hs-var">sout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248554"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; &quot;</span></span><span>
-</span><span id="line-37"></span><span>      </span><span id="local-6989586621679248784"><span class="annot"><span class="annottext">newl :: Int
-</span><a href="#local-6989586621679248784"><span class="hs-identifier hs-var hs-var">newl</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248779"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><span id="line-37"></span><span>      </span><span id="local-6989586621679248562"><span class="annot"><span class="annottext">newl :: Int
+</span><a href="#local-6989586621679248562"><span class="hs-identifier hs-var hs-var">newl</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248557"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248781"><span class="hs-identifier hs-var">sout</span></a></span><span>
+</span><a href="#local-6989586621679248559"><span class="hs-identifier hs-var">sout</span></a></span><span>
 </span><span id="line-38"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248784"><span class="hs-identifier hs-var">newl</span></a></span><span>
-</span><span id="line-39"></span><span>  </span><span id="local-6989586621679248785"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248785"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248777"><span class="hs-identifier hs-var">sl</span></a></span><span>
+</span><a href="#local-6989586621679248562"><span class="hs-identifier hs-var">newl</span></a></span><span>
+</span><span id="line-39"></span><span>  </span><span id="local-6989586621679248563"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248563"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248555"><span class="hs-identifier hs-var">sl</span></a></span><span>
 </span><span id="line-40"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248784"><span class="hs-identifier hs-var">newl</span></a></span><span>
-</span><span id="line-41"></span><span>  </span><span id="local-6989586621679248786"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248786"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248778"><span class="hs-identifier hs-var">sr</span></a></span><span>
+</span><a href="#local-6989586621679248562"><span class="hs-identifier hs-var">newl</span></a></span><span>
+</span><span id="line-41"></span><span>  </span><span id="local-6989586621679248564"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248564"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248556"><span class="hs-identifier hs-var">sr</span></a></span><span>
 </span><span id="line-42"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; State Int String
 forall a. a -&gt; StateT Int Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; State Int String) -&gt; String -&gt; State Int String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248781"><span class="hs-identifier hs-var">sout</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248559"><span class="hs-identifier hs-var">sout</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248785"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248563"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var">indent</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248784"><span class="hs-identifier hs-var">newl</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248786"><span class="hs-identifier hs-var">r</span></a></span><span>
+</span><a href="#local-6989586621679248562"><span class="hs-identifier hs-var">newl</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248564"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-43"></span><span>
 </span><span id="line-44"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithChildren%27"><span class="hs-identifier hs-type">indentWithChildren'</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-45"></span><span id="indentWithChildren%27"><span class="annot"><span class="annottext">indentWithChildren' :: String -&gt; [State Int String] -&gt; State Int String
-</span><a href="Telomare.PrettyPrint.Indent.html#indentWithChildren%27"><span class="hs-identifier hs-var hs-var">indentWithChildren'</span></a></span></span><span> </span><span id="local-6989586621679248788"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248788"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248789"><span class="annot"><span class="annottext">[State Int String]
-</span><a href="#local-6989586621679248789"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-46"></span><span>  </span><span id="local-6989586621679248790"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248790"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithChildren%27"><span class="hs-identifier hs-var hs-var">indentWithChildren'</span></a></span></span><span> </span><span id="local-6989586621679248566"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248566"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248567"><span class="annot"><span class="annottext">[State Int String]
+</span><a href="#local-6989586621679248567"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-46"></span><span>  </span><span id="local-6989586621679248568"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248568"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 forall s (m :: * -&gt; *). MonadState s m =&gt; m s
 </span><span class="hs-identifier hs-var">State.get</span></span><span>
-</span><span id="line-47"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248792"><span class="annot"><span class="annottext">sout :: String
-</span><a href="#local-6989586621679248792"><span class="hs-identifier hs-var hs-var">sout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248788"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><span id="line-47"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248570"><span class="annot"><span class="annottext">sout :: String
+</span><a href="#local-6989586621679248570"><span class="hs-identifier hs-var hs-var">sout</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248566"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; &quot;</span></span><span>
-</span><span id="line-48"></span><span>      </span><span id="local-6989586621679248795"><span class="annot"><span class="annottext">newl :: Int
-</span><a href="#local-6989586621679248795"><span class="hs-identifier hs-var hs-var">newl</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248790"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><span id="line-48"></span><span>      </span><span id="local-6989586621679248573"><span class="annot"><span class="annottext">newl :: Int
+</span><a href="#local-6989586621679248573"><span class="hs-identifier hs-var hs-var">newl</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248568"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
 forall a. [a] -&gt; Int
 forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 </span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248792"><span class="hs-identifier hs-var">sout</span></a></span><span>
-</span><span id="line-49"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248806"><span class="annot"><span class="annottext">doLine :: State Int String -&gt; State Int String
-</span><a href="#local-6989586621679248806"><span class="hs-identifier hs-var hs-var">doLine</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(String -&gt; String) -&gt; State Int String -&gt; State Int String
+</span><a href="#local-6989586621679248570"><span class="hs-identifier hs-var">sout</span></a></span><span>
+</span><span id="line-49"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679248584"><span class="annot"><span class="annottext">doLine :: State Int String -&gt; State Int String
+</span><a href="#local-6989586621679248584"><span class="hs-identifier hs-var hs-var">doLine</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(String -&gt; String) -&gt; State Int String -&gt; State Int String
 forall a b.
 (a -&gt; b) -&gt; StateT Int Identity a -&gt; StateT Int Identity b
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
@@ -216,7 +216,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var">indent</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248795"><span class="hs-identifier hs-var">newl</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248573"><span class="hs-identifier hs-var">newl</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(State Int String -&gt; State Int String)
 -&gt; (State Int String -&gt; State Int String)
 -&gt; State Int String
@@ -225,7 +225,7 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248795"><span class="hs-identifier hs-var">newl</span></a></span><span> </span><span class="annot"><span class="annottext">StateT Int Identity () -&gt; State Int String -&gt; State Int String
+</span><a href="#local-6989586621679248573"><span class="hs-identifier hs-var">newl</span></a></span><span> </span><span class="annot"><span class="annottext">StateT Int Identity () -&gt; State Int String -&gt; State Int String
 forall a b.
 StateT Int Identity a
 -&gt; StateT Int Identity b -&gt; StateT Int Identity b
@@ -237,26 +237,26 @@ forall b a. (b -&gt; a -&gt; b) -&gt; b -&gt; [a] -&gt; b
 forall (t :: * -&gt; *) b a.
 Foldable t =&gt;
 (b -&gt; a -&gt; b) -&gt; b -&gt; t a -&gt; b
-</span><span class="hs-identifier hs-var">foldl</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679248809"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248809"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span id="local-6989586621679248810"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248810"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><span class="hs-identifier hs-var">foldl</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679248587"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248587"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span id="local-6989586621679248588"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248588"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">(&lt;&gt;)</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; String -&gt; String)
 -&gt; State Int String -&gt; StateT Int Identity (String -&gt; String)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248809"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">StateT Int Identity (String -&gt; String)
+</span><a href="#local-6989586621679248587"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">StateT Int Identity (String -&gt; String)
 -&gt; State Int String -&gt; State Int String
 forall a b.
 StateT Int Identity (a -&gt; b)
 -&gt; StateT Int Identity a -&gt; StateT Int Identity b
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248810"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; State Int String
+</span><a href="#local-6989586621679248588"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; State Int String
 forall a. a -&gt; StateT Int Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248792"><span class="hs-identifier hs-var">sout</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">([State Int String] -&gt; State Int String)
+</span><a href="#local-6989586621679248570"><span class="hs-identifier hs-var">sout</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">([State Int String] -&gt; State Int String)
 -&gt; [State Int String] -&gt; State Int String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">(State Int String -&gt; State Int String)
@@ -264,19 +264,19 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-identifier hs-var">fmap</span></span><span> </span><span class="annot"><span class="annottext">State Int String -&gt; State Int String
-</span><a href="#local-6989586621679248806"><span class="hs-identifier hs-var">doLine</span></a></span><span> </span><span class="annot"><span class="annottext">[State Int String]
-</span><a href="#local-6989586621679248789"><span class="hs-identifier hs-var">l</span></a></span><span>
+</span><a href="#local-6989586621679248584"><span class="hs-identifier hs-var">doLine</span></a></span><span> </span><span class="annot"><span class="annottext">[State Int String]
+</span><a href="#local-6989586621679248567"><span class="hs-identifier hs-var">l</span></a></span><span>
 </span><span id="line-51"></span><span>
 </span><span id="line-52"></span><span class="hs-comment">-- TODO replace with above version</span><span>
 </span><span id="line-53"></span><span class="annot"><span class="hs-comment">-- |Two children indentation.</span></span><span>
 </span><span id="line-54"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren"><span class="hs-identifier hs-type">indentWithTwoChildren</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-55"></span><span id="indentWithTwoChildren"><span class="annot"><span class="annottext">indentWithTwoChildren :: String -&gt; State Int String -&gt; State Int String -&gt; State Int String
-</span><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren"><span class="hs-identifier hs-var hs-var">indentWithTwoChildren</span></a></span></span><span> </span><span id="local-6989586621679248813"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248813"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248814"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248814"><span class="hs-identifier hs-var">sl</span></a></span></span><span> </span><span id="local-6989586621679248815"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248815"><span class="hs-identifier hs-var">sr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-56"></span><span>  </span><span id="local-6989586621679248816"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248816"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithTwoChildren"><span class="hs-identifier hs-var hs-var">indentWithTwoChildren</span></a></span></span><span> </span><span id="local-6989586621679248591"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248591"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248592"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248592"><span class="hs-identifier hs-var">sl</span></a></span></span><span> </span><span id="local-6989586621679248593"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248593"><span class="hs-identifier hs-var">sr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-56"></span><span>  </span><span id="local-6989586621679248594"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248594"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 forall s (m :: * -&gt; *). MonadState s m =&gt; m s
 </span><span class="hs-identifier hs-var">State.get</span></span><span>
 </span><span id="line-57"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
@@ -284,25 +284,25 @@ forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; StateT Int Identity ()) -&gt; Int -&gt; StateT Int Identity ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248816"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248594"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span>
-</span><span id="line-58"></span><span>  </span><span id="local-6989586621679248817"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248817"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248814"><span class="hs-identifier hs-var">sl</span></a></span><span>
+</span><span id="line-58"></span><span>  </span><span id="local-6989586621679248595"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248595"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248592"><span class="hs-identifier hs-var">sl</span></a></span><span>
 </span><span id="line-59"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; StateT Int Identity ()) -&gt; Int -&gt; StateT Int Identity ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248816"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248594"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span>
-</span><span id="line-60"></span><span>  </span><span id="local-6989586621679248818"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248818"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248815"><span class="hs-identifier hs-var">sr</span></a></span><span>
+</span><span id="line-60"></span><span>  </span><span id="local-6989586621679248596"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248596"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248593"><span class="hs-identifier hs-var">sr</span></a></span><span>
 </span><span id="line-61"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; State Int String
 forall a. a -&gt; StateT Int Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
@@ -310,20 +310,20 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var">indent</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248816"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248813"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248594"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248591"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248817"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248595"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248818"><span class="hs-identifier hs-var">r</span></a></span><span>
+</span><a href="#local-6989586621679248596"><span class="hs-identifier hs-var">r</span></a></span><span>
 </span><span id="line-62"></span><span>
 </span><span id="line-63"></span><span class="hs-comment">-- TODO replace with other version</span><span>
 </span><span id="line-64"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentWithThreeChildren"><span class="hs-identifier hs-type">indentWithThreeChildren</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
@@ -332,13 +332,13 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 -&gt; State Int String
 -&gt; State Int String
 -&gt; State Int String
-</span><a href="Telomare.PrettyPrint.Indent.html#indentWithThreeChildren"><span class="hs-identifier hs-var hs-var">indentWithThreeChildren</span></a></span></span><span> </span><span id="local-6989586621679248820"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248820"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248821"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248821"><span class="hs-identifier hs-var">sa</span></a></span></span><span> </span><span id="local-6989586621679248822"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248822"><span class="hs-identifier hs-var">sb</span></a></span></span><span> </span><span id="local-6989586621679248823"><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248823"><span class="hs-identifier hs-var">sc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-66"></span><span>  </span><span id="local-6989586621679248824"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248824"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
+</span><a href="Telomare.PrettyPrint.Indent.html#indentWithThreeChildren"><span class="hs-identifier hs-var hs-var">indentWithThreeChildren</span></a></span></span><span> </span><span id="local-6989586621679248598"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248598"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span id="local-6989586621679248599"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248599"><span class="hs-identifier hs-var">sa</span></a></span></span><span> </span><span id="local-6989586621679248600"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248600"><span class="hs-identifier hs-var">sb</span></a></span></span><span> </span><span id="local-6989586621679248601"><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248601"><span class="hs-identifier hs-var">sc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-66"></span><span>  </span><span id="local-6989586621679248602"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248602"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">StateT Int Identity Int
 forall s (m :: * -&gt; *). MonadState s m =&gt; m s
 </span><span class="hs-identifier hs-var">State.get</span></span><span>
 </span><span id="line-67"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
@@ -346,37 +346,37 @@ forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; StateT Int Identity ()) -&gt; Int -&gt; StateT Int Identity ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248824"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248602"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span>
-</span><span id="line-68"></span><span>  </span><span id="local-6989586621679248825"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248825"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248821"><span class="hs-identifier hs-var">sa</span></a></span><span>
+</span><span id="line-68"></span><span>  </span><span id="local-6989586621679248603"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248603"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248599"><span class="hs-identifier hs-var">sa</span></a></span><span>
 </span><span id="line-69"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; StateT Int Identity ()) -&gt; Int -&gt; StateT Int Identity ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248824"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248602"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span>
-</span><span id="line-70"></span><span>  </span><span id="local-6989586621679248826"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248826"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248822"><span class="hs-identifier hs-var">sb</span></a></span><span>
+</span><span id="line-70"></span><span>  </span><span id="local-6989586621679248604"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248604"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248600"><span class="hs-identifier hs-var">sb</span></a></span><span>
 </span><span id="line-71"></span><span>  </span><span class="annot"><span class="annottext">Int -&gt; StateT Int Identity ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; s -&gt; m ()
 </span><span class="hs-identifier hs-var">State.put</span></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; StateT Int Identity ()) -&gt; Int -&gt; StateT Int Identity ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248824"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248602"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">2</span></span><span>
-</span><span id="line-72"></span><span>  </span><span id="local-6989586621679248827"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248827"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
-</span><a href="#local-6989586621679248823"><span class="hs-identifier hs-var">sc</span></a></span><span>
+</span><span id="line-72"></span><span>  </span><span id="local-6989586621679248605"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248605"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">State Int String
+</span><a href="#local-6989586621679248601"><span class="hs-identifier hs-var">sc</span></a></span><span>
 </span><span id="line-73"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; State Int String
 forall a. a -&gt; StateT Int Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
@@ -384,55 +384,55 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indent"><span class="hs-identifier hs-var">indent</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248824"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248820"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248602"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248598"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248825"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248603"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248826"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248604"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248827"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><a href="#local-6989586621679248605"><span class="hs-identifier hs-var">c</span></a></span><span>
 </span><span id="line-74"></span><span>
 </span><span id="line-75"></span><span class="annot"><span class="hs-comment">-- |`dropUntil p xs` drops leading elements until `p $ head xs` is satisfied.</span></span><span>
-</span><span id="line-76"></span><span id="local-6989586621679248646"><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#dropUntil"><span class="hs-identifier hs-type">dropUntil</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679248646"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679248646"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679248646"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span></span><span>
+</span><span id="line-76"></span><span id="local-6989586621679248421"><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#dropUntil"><span class="hs-identifier hs-type">dropUntil</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="#local-6989586621679248421"><span class="hs-identifier hs-type">a</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679248421"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="#local-6989586621679248421"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">]</span></span><span>
 </span><span id="line-77"></span><span id="dropUntil"><span class="annot"><span class="annottext">dropUntil :: forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
 </span><a href="Telomare.PrettyPrint.Indent.html#dropUntil"><span class="hs-identifier hs-var hs-var">dropUntil</span></a></span></span><span> </span><span class="annot"><span class="annottext">a -&gt; Bool
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
-</span><span id="line-78"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#dropUntil"><span class="hs-identifier hs-var">dropUntil</span></a></span><span> </span><span id="local-6989586621679248829"><span class="annot"><span class="annottext">a -&gt; Bool
-</span><a href="#local-6989586621679248829"><span class="hs-identifier hs-var">p</span></a></span></span><span> </span><span id="local-6989586621679248830"><span class="annot"><span class="annottext">x :: [a]
-</span><a href="#local-6989586621679248830"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span id="local-6989586621679248831"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679248831"><span class="hs-identifier hs-var">x1</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span class="annot"><span class="annottext">[a]
+</span><span id="line-78"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#dropUntil"><span class="hs-identifier hs-var">dropUntil</span></a></span><span> </span><span id="local-6989586621679248607"><span class="annot"><span class="annottext">a -&gt; Bool
+</span><a href="#local-6989586621679248607"><span class="hs-identifier hs-var">p</span></a></span></span><span> </span><span id="local-6989586621679248608"><span class="annot"><span class="annottext">x :: [a]
+</span><a href="#local-6989586621679248608"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span id="local-6989586621679248609"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679248609"><span class="hs-identifier hs-var">x1</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span class="annot"><span class="annottext">[a]
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-79"></span><span>  </span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">a -&gt; Bool
-</span><a href="#local-6989586621679248829"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679248831"><span class="hs-identifier hs-var">x1</span></a></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679248830"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">(a -&gt; Bool) -&gt; [a] -&gt; [a]
+</span><a href="#local-6989586621679248607"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679248609"><span class="hs-identifier hs-var">x1</span></a></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="annot"><span class="annottext">[a]
+</span><a href="#local-6989586621679248608"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">(a -&gt; Bool) -&gt; [a] -&gt; [a]
 forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
 </span><a href="Telomare.PrettyPrint.Indent.html#dropUntil"><span class="hs-identifier hs-var">dropUntil</span></a></span><span> </span><span class="annot"><span class="annottext">a -&gt; Bool
-</span><a href="#local-6989586621679248829"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; [a] -&gt; [a]
+</span><a href="#local-6989586621679248607"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; [a] -&gt; [a]
 forall a. Int -&gt; [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">drop</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span> </span><span class="annot"><span class="annottext">[a]
-</span><a href="#local-6989586621679248830"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679248608"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-80"></span><span>
 </span><span id="line-81"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentation"><span class="hs-identifier hs-type">indentation</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-82"></span><span id="indentation"><span class="annot"><span class="annottext">indentation :: Int -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indentation"><span class="hs-identifier hs-var hs-var">indentation</span></a></span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
-</span><span id="line-83"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentation"><span class="hs-identifier hs-var">indentation</span></a></span><span> </span><span id="local-6989586621679248834"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248834"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Char
+</span><span id="line-83"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentation"><span class="hs-identifier hs-var">indentation</span></a></span><span> </span><span id="local-6989586621679248612"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248612"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Char
 </span><span class="hs-char">' '</span></span><span> </span><span class="annot"><span class="annottext">Char -&gt; String -&gt; String
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">Char
@@ -440,51 +440,58 @@ forall a. a -&gt; [a] -&gt; [a]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indentation"><span class="hs-identifier hs-var">indentation</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248834"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679248612"><span class="hs-identifier hs-var">n</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span class="hs-special">)</span><span>
 </span><span id="line-84"></span><span>
 </span><span id="line-85"></span><span class="annot"><a href="Telomare.PrettyPrint.Indent.html#indentSansFirstLine"><span class="hs-identifier hs-type">indentSansFirstLine</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-86"></span><span id="indentSansFirstLine"><span class="annot"><span class="annottext">indentSansFirstLine :: Int -&gt; String -&gt; String
-</span><a href="Telomare.PrettyPrint.Indent.html#indentSansFirstLine"><span class="hs-identifier hs-var hs-var">indentSansFirstLine</span></a></span></span><span> </span><span id="local-6989586621679248836"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248836"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679248837"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248837"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; String
-</span><a href="#local-6989586621679248838"><span class="hs-identifier hs-var">removeLastNewLine</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248839"><span class="hs-identifier hs-var">res</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-87"></span><span>  </span><span id="local-6989586621679248839"><span class="annot"><span class="annottext">res :: String
-</span><a href="#local-6989586621679248839"><span class="hs-identifier hs-var hs-var">res</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
+</span><a href="Telomare.PrettyPrint.Indent.html#indentSansFirstLine"><span class="hs-identifier hs-var hs-var">indentSansFirstLine</span></a></span></span><span> </span><span id="local-6989586621679248614"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679248614"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679248615"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248615"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; String
+</span><a href="#local-6989586621679248616"><span class="hs-identifier hs-var">removeLastNewLine</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248617"><span class="hs-identifier hs-var">res</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-87"></span><span>  </span><span id="local-6989586621679248617"><span class="annot"><span class="annottext">res :: String
+</span><a href="#local-6989586621679248617"><span class="hs-identifier hs-var hs-var">res</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
 </span><span class="hs-identifier hs-var">unlines</span></span><span> </span><span class="annot"><span class="annottext">([String] -&gt; String) -&gt; [String] -&gt; String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span id="local-6989586621679248843"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248843"><span class="hs-identifier hs-var">s</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span id="local-6989586621679248844"><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679248844"><span class="hs-identifier hs-var">ns</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248843"><span class="hs-identifier hs-var">s</span></a></span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; [String]
+</span><a href="#local-6989586621679248619"><span class="hs-identifier hs-var">indentTail</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; [String]
+</span><span class="hs-identifier hs-var">lines</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248615"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-88"></span><span>  </span><span id="local-6989586621679248619"><span class="annot"><span class="annottext">indentTail :: [String] -&gt; [String]
+</span><a href="#local-6989586621679248619"><span class="hs-identifier hs-var hs-var">indentTail</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679248625"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248625"><span class="hs-identifier hs-var">s</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span id="local-6989586621679248626"><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679248626"><span class="hs-identifier hs-var">ns</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248625"><span class="hs-identifier hs-var">s</span></a></span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; String
 </span><a href="Telomare.PrettyPrint.Indent.html#indentation"><span class="hs-identifier hs-var">indentation</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679248836"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679248614"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(String -&gt; String) -&gt; [String] -&gt; [String]
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679248844"><span class="hs-identifier hs-var">ns</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; [String]
-</span><span class="hs-identifier hs-var">lines</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248837"><span class="hs-identifier hs-var">x</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-88"></span><span>  </span><span id="local-6989586621679248838"><span class="annot"><span class="annottext">removeLastNewLine :: String -&gt; String
-</span><a href="#local-6989586621679248838"><span class="hs-identifier hs-var hs-var">removeLastNewLine</span></a></span></span><span> </span><span id="local-6989586621679248846"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248846"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-89"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">String -&gt; String
+</span><a href="#local-6989586621679248626"><span class="hs-identifier hs-var">ns</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-89"></span><span>  </span><span class="annot"><a href="#local-6989586621679248619"><span class="hs-identifier hs-var">indentTail</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>     </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; [String]
+forall a. HasCallStack =&gt; String -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Telomare.PrettyPrint.Indent.indentSansFirstLine: unexpected empty list of lines&quot;</span></span><span>
+</span><span id="line-90"></span><span>  </span><span id="local-6989586621679248616"><span class="annot"><span class="annottext">removeLastNewLine :: String -&gt; String
+</span><a href="#local-6989586621679248616"><span class="hs-identifier hs-var hs-var">removeLastNewLine</span></a></span></span><span> </span><span id="local-6989586621679248628"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248628"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-91"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">String -&gt; String
 forall a. [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">reverse</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248846"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-90"></span><span>      </span><span class="annot"><span class="annottext">Char
-</span><span class="hs-char">'\n'</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679248848"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248848"><span class="hs-identifier hs-var">rest</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; String
+</span><a href="#local-6989586621679248628"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-92"></span><span>      </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">'\n'</span></span><span> </span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span> </span><span id="local-6989586621679248630"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248630"><span class="hs-identifier hs-var">rest</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; String
 forall a. [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">reverse</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248848"><span class="hs-identifier hs-var">rest</span></a></span><span>
-</span><span id="line-91"></span><span>      </span><span id="local-6989586621679248849"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248849"><span class="hs-identifier hs-var">x</span></a></span></span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679248846"><span class="hs-identifier hs-var">str</span></a></span><span>
-</span><span id="line-92"></span></pre></body></html>
+</span><a href="#local-6989586621679248630"><span class="hs-identifier hs-var">rest</span></a></span><span>
+</span><span id="line-93"></span><span>      </span><span class="annot"><span class="annottext">String
+</span><span class="hs-identifier">_</span></span><span>           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679248628"><span class="hs-identifier hs-var">str</span></a></span><span>
+</span><span id="line-94"></span></pre></body></html>

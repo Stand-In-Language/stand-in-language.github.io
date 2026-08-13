@@ -53,32 +53,27 @@
 </span><span id="line-53"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier">cata</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier">project</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-54"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Numeric.Natural</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Natural</span></span><span class="hs-special">)</span><span>
 </span><span id="line-55"></span><span>
-</span><span id="line-56"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Error.html"><span class="hs-identifier">Telomare.Error</span></a></span><span>
-</span><span id="line-57"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html"><span class="hs-identifier">Telomare.IR.Base</span></a></span><span>
-</span><span id="line-58"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html"><span class="hs-identifier">Telomare.IR.Builder</span></a></span><span>
-</span><span id="line-59"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html"><span class="hs-identifier">Telomare.IR.Core</span></a></span><span>
-</span><span id="line-60"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span>
-</span><span id="line-61"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html"><span class="hs-identifier">Telomare.IR.Surface</span></a></span><span>
-</span><span id="line-62"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html"><span class="hs-identifier">Telomare.IR.Types</span></a></span><span>
-</span><span id="line-63"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Machine.html"><span class="hs-identifier">Telomare.Machine</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Machine.html#abortInd"><span class="hs-identifier">abortInd</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Machine.html#deferB"><span class="hs-identifier">deferB</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Machine.html#doLeft"><span class="hs-identifier">doLeft</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Machine.html#doRight"><span class="hs-identifier">doRight</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-64"></span><span>
-</span><span id="line-65"></span><span class="annot"><span class="hs-comment">-- |What a run cost.</span></span><span>
-</span><span id="line-66"></span><span class="hs-keyword">data</span><span> </span><span id="Meter"><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-var">Meter</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Meter"><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-var">Meter</span></a></span></span><span>
-</span><span id="line-67"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="meterSteps"><span class="annot"><span class="annottext">Meter -&gt; Natural
+</span><span id="line-56"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html"><span class="hs-identifier">Telomare.IR.Base</span></a></span><span>
+</span><span id="line-57"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html"><span class="hs-identifier">Telomare.IR.Core</span></a></span><span>
+</span><span id="line-58"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.Machine.html"><span class="hs-identifier">Telomare.Machine</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Machine.html#abortInd"><span class="hs-identifier">abortInd</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Machine.html#deferB"><span class="hs-identifier">deferB</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Machine.html#doLeft"><span class="hs-identifier">doLeft</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Machine.html#doRight"><span class="hs-identifier">doRight</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-59"></span><span>
+</span><span id="line-60"></span><span class="annot"><span class="hs-comment">-- |What a run cost.</span></span><span>
+</span><span id="line-61"></span><span class="hs-keyword">data</span><span> </span><span id="Meter"><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-var">Meter</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="Meter"><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-var">Meter</span></a></span></span><span>
+</span><span id="line-62"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="meterSteps"><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var hs-var">meterSteps</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-glyph">!</span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span>
-</span><span id="line-68"></span><span>  </span><span class="annot"><span class="hs-comment">-- ^Evaluation steps taken.</span></span><span>
-</span><span id="line-69"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="meterBuilt"><span class="annot"><span class="annottext">Meter -&gt; Natural
+</span><span id="line-63"></span><span>  </span><span class="annot"><span class="hs-comment">-- ^Evaluation steps taken.</span></span><span>
+</span><span id="line-64"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="meterBuilt"><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var hs-var">meterBuilt</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-glyph">!</span><span class="annot"><span class="hs-identifier hs-type">Natural</span></span><span>
-</span><span id="line-70"></span><span>  </span><span class="annot"><span class="hs-comment">-- ^Term nodes constructed. Not a memory figure &#8212; see the module header.</span></span><span>
-</span><span id="line-71"></span><span>  </span><span class="hs-special">}</span><span>
-</span><span id="line-72"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679262426"><span id="local-6989586621679262431"><span class="annot"><span class="annottext">Meter -&gt; Meter -&gt; Bool
+</span><span id="line-65"></span><span>  </span><span class="annot"><span class="hs-comment">-- ^Term nodes constructed. Not a memory figure &#8212; see the module header.</span></span><span>
+</span><span id="line-66"></span><span>  </span><span class="hs-special">}</span><span>
+</span><span id="line-67"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679262010"><span id="local-6989586621679262015"><span class="annot"><span class="annottext">Meter -&gt; Meter -&gt; Bool
 (Meter -&gt; Meter -&gt; Bool) -&gt; (Meter -&gt; Meter -&gt; Bool) -&gt; Eq Meter
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c== :: Meter -&gt; Meter -&gt; Bool
 == :: Meter -&gt; Meter -&gt; Bool
 $c/= :: Meter -&gt; Meter -&gt; Bool
 /= :: Meter -&gt; Meter -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679262436"><span id="local-6989586621679262442"><span id="local-6989586621679262446"><span class="annot"><span class="annottext">Int -&gt; Meter -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679262020"><span id="local-6989586621679262026"><span id="local-6989586621679262030"><span class="annot"><span class="annottext">Int -&gt; Meter -&gt; ShowS
 [Meter] -&gt; ShowS
 Meter -&gt; String
 (Int -&gt; Meter -&gt; ShowS)
@@ -92,53 +87,53 @@ show :: Meter -&gt; String
 $cshowList :: [Meter] -&gt; ShowS
 showList :: [Meter] -&gt; ShowS
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">)</span><span>
-</span><span id="line-73"></span><span>
-</span><span id="line-74"></span><span class="annot"><span class="hs-comment">-- |Across a session both totals accumulate.</span></span><span>
-</span><span id="line-75"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679262451"><span id="local-6989586621679262455"><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-76"></span><span>  </span><span id="local-6989586621679262462"><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262462"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679262463"><span class="annot"><span class="annottext">&lt;&gt; :: Meter -&gt; Meter -&gt; Meter
-</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;&gt;</span></span></span><span> </span><span id="local-6989586621679262464"><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262464"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Meter
+</span><span id="line-68"></span><span>
+</span><span id="line-69"></span><span class="annot"><span class="hs-comment">-- |Across a session both totals accumulate.</span></span><span>
+</span><span id="line-70"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679262035"><span id="local-6989586621679262039"><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-71"></span><span>  </span><span id="local-6989586621679262046"><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262046"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679262047"><span class="annot"><span class="annottext">&lt;&gt; :: Meter -&gt; Meter -&gt; Meter
+</span><span class="hs-operator hs-var hs-var hs-var hs-var">&lt;&gt;</span></span></span><span> </span><span id="local-6989586621679262048"><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262048"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Meter
 </span><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-var">Meter</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var">meterSteps</span></a></span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262462"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Natural
+</span><a href="#local-6989586621679262046"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Natural
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var">meterSteps</span></a></span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262464"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Meter -&gt; Natural
+</span><a href="#local-6989586621679262048"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var">meterBuilt</span></a></span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262462"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Natural
+</span><a href="#local-6989586621679262046"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Natural
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var">meterBuilt</span></a></span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262464"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-77"></span><span>
-</span><span id="line-78"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679262470"><span id="local-6989586621679262473"><span class="annot"><span class="hs-identifier hs-type">Monoid</span></span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-79"></span><span>  </span><span id="local-6989586621679262478"><span class="annot"><span class="annottext">mempty :: Meter
+</span><a href="#local-6989586621679262048"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-72"></span><span>
+</span><span id="line-73"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679262054"><span id="local-6989586621679262057"><span class="annot"><span class="hs-identifier hs-type">Monoid</span></span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-74"></span><span>  </span><span id="local-6989586621679262062"><span class="annot"><span class="annottext">mempty :: Meter
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">mempty</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Natural -&gt; Natural -&gt; Meter
 </span><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-var">Meter</span></a></span><span> </span><span class="annot"><span class="annottext">Natural
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Natural
 </span><span class="hs-number">0</span></span><span>
-</span><span id="line-80"></span><span>
-</span><span id="line-81"></span><span class="annot"><a href="Telomare.Eval.Meter.html#emptyMeter"><span class="hs-identifier hs-type">emptyMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span>
-</span><span id="line-82"></span><span id="emptyMeter"><span class="annot"><span class="annottext">emptyMeter :: Meter
+</span><span id="line-75"></span><span>
+</span><span id="line-76"></span><span class="annot"><a href="Telomare.Eval.Meter.html#emptyMeter"><span class="hs-identifier hs-type">emptyMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span>
+</span><span id="line-77"></span><span id="emptyMeter"><span class="annot"><span class="annottext">emptyMeter :: Meter
 </span><a href="Telomare.Eval.Meter.html#emptyMeter"><span class="hs-identifier hs-var hs-var">emptyMeter</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Meter
 forall a. Monoid a =&gt; a
 </span><span class="hs-identifier hs-var">mempty</span></span><span>
-</span><span id="line-83"></span><span>
-</span><span id="line-84"></span><span class="annot"><span class="hs-comment">-- |What to print for a measured run.</span></span><span>
-</span><span id="line-85"></span><span class="annot"><a href="Telomare.Eval.Meter.html#renderMeter"><span class="hs-identifier hs-type">renderMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
-</span><span id="line-86"></span><span id="renderMeter"><span class="annot"><span class="annottext">renderMeter :: Meter -&gt; String
-</span><a href="Telomare.Eval.Meter.html#renderMeter"><span class="hs-identifier hs-var hs-var">renderMeter</span></a></span></span><span> </span><span id="local-6989586621679262481"><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262481"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-78"></span><span>
+</span><span id="line-79"></span><span class="annot"><span class="hs-comment">-- |What to print for a measured run.</span></span><span>
+</span><span id="line-80"></span><span class="annot"><a href="Telomare.Eval.Meter.html#renderMeter"><span class="hs-identifier hs-type">renderMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-81"></span><span id="renderMeter"><span class="annot"><span class="annottext">renderMeter :: Meter -&gt; String
+</span><a href="Telomare.Eval.Meter.html#renderMeter"><span class="hs-identifier hs-var hs-var">renderMeter</span></a></span></span><span> </span><span id="local-6989586621679262065"><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262065"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;steps (measured): &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Natural -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var">meterSteps</span></a></span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262481"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-87"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679262065"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-82"></span><span>  </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\nnodes built (measured): &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
@@ -147,120 +142,120 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Meter -&gt; Natural
 </span><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var">meterBuilt</span></a></span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262481"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-88"></span><span>
-</span><span id="line-89"></span><span class="hs-keyword">type</span><span> </span><span id="M"><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-var">M</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span>
-</span><span id="line-90"></span><span>
-</span><span id="line-91"></span><span class="annot"><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-type">step</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-type">M</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-92"></span><span id="step"><span class="annot"><span class="annottext">step :: M ()
+</span><a href="#local-6989586621679262065"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-83"></span><span>
+</span><span id="line-84"></span><span class="hs-keyword">type</span><span> </span><span id="M"><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-var">M</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span>
+</span><span id="line-85"></span><span>
+</span><span id="line-86"></span><span class="annot"><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-type">step</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-type">M</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-87"></span><span id="step"><span class="annot"><span class="annottext">step :: M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var hs-var">step</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Meter -&gt; Meter) -&gt; M ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; (s -&gt; s) -&gt; m ()
 </span><span class="hs-identifier hs-var">modify'</span></span><span> </span><span class="annot"><span class="annottext">((Meter -&gt; Meter) -&gt; M ()) -&gt; (Meter -&gt; Meter) -&gt; M ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679262484"><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262484"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262484"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var">meterSteps</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var">meterSteps</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679262484"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span> </span><span class="hs-special">}</span><span>
-</span><span id="line-93"></span><span>
-</span><span id="line-94"></span><span class="annot"><a href="Telomare.Eval.Meter.html#built"><span class="hs-identifier hs-type">built</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-type">M</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
-</span><span id="line-95"></span><span id="built"><span class="annot"><span class="annottext">built :: M ()
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679262068"><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262068"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262068"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var">meterSteps</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterSteps"><span class="hs-identifier hs-var">meterSteps</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679262068"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span> </span><span class="hs-special">}</span><span>
+</span><span id="line-88"></span><span>
+</span><span id="line-89"></span><span class="annot"><a href="Telomare.Eval.Meter.html#built"><span class="hs-identifier hs-type">built</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-type">M</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">)</span><span>
+</span><span id="line-90"></span><span id="built"><span class="annot"><span class="annottext">built :: M ()
 </span><a href="Telomare.Eval.Meter.html#built"><span class="hs-identifier hs-var hs-var">built</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Meter -&gt; Meter) -&gt; M ()
 forall s (m :: * -&gt; *). MonadState s m =&gt; (s -&gt; s) -&gt; m ()
 </span><span class="hs-identifier hs-var">modify'</span></span><span> </span><span class="annot"><span class="annottext">((Meter -&gt; Meter) -&gt; M ()) -&gt; (Meter -&gt; Meter) -&gt; M ()
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679262486"><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262486"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262486"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var">meterBuilt</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var">meterBuilt</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679262486"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span> </span><span class="hs-special">}</span><span>
-</span><span id="line-96"></span><span>
-</span><span id="line-97"></span><span class="hs-comment">-- |The value `EnvSF` stands for while a function body is being evaluated.</span><span>
-</span><span id="line-98"></span><span class="hs-comment">-- Nothing at the top level, where an `EnvSF` would be a bug.</span><span>
-</span><span id="line-99"></span><span class="hs-keyword">type</span><span> </span><span id="Env"><span class="annot"><a href="Telomare.Eval.Meter.html#Env"><span class="hs-identifier hs-var">Env</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span>
-</span><span id="line-100"></span><span>
-</span><span id="line-101"></span><span class="annot"><span class="hs-comment">-- |Evaluate, metering.</span></span><span>
-</span><span id="line-102"></span><span class="annot"><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-type">runMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Env"><span class="hs-identifier hs-type">Env</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-type">M</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span>
-</span><span id="line-103"></span><span id="runMeter"><span class="annot"><span class="annottext">runMeter :: Env -&gt; CompiledExpr -&gt; M CompiledExpr
-</span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var hs-var">runMeter</span></a></span></span><span> </span><span id="local-6989586621679262488"><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span></span><span> </span><span id="local-6989586621679262489"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262489"><span class="hs-identifier hs-var">whole</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Base CompiledExpr CompiledExpr
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span id="local-6989586621679262070"><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262070"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262070"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="hs-special">{</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var">meterBuilt</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#meterBuilt"><span class="hs-identifier hs-var">meterBuilt</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679262070"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">+</span></span><span> </span><span class="annot"><span class="hs-number">1</span></span><span> </span><span class="hs-special">}</span><span>
+</span><span id="line-91"></span><span>
+</span><span id="line-92"></span><span class="hs-comment">-- |The value `EnvSF` stands for while a function body is being evaluated.</span><span>
+</span><span id="line-93"></span><span class="hs-comment">-- Nothing at the top level, where an `EnvSF` would be a bug.</span><span>
+</span><span id="line-94"></span><span class="hs-keyword">type</span><span> </span><span id="Env"><span class="annot"><a href="Telomare.Eval.Meter.html#Env"><span class="hs-identifier hs-var">Env</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span>
+</span><span id="line-95"></span><span>
+</span><span id="line-96"></span><span class="annot"><span class="hs-comment">-- |Evaluate, metering.</span></span><span>
+</span><span id="line-97"></span><span class="annot"><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-type">runMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#Env"><span class="hs-identifier hs-type">Env</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.Eval.Meter.html#M"><span class="hs-identifier hs-type">M</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span>
+</span><span id="line-98"></span><span id="runMeter"><span class="annot"><span class="annottext">runMeter :: Env -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var hs-var">runMeter</span></a></span></span><span> </span><span id="local-6989586621679262072"><span class="annot"><span class="annottext">Env
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span></span><span> </span><span id="local-6989586621679262073"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262073"><span class="hs-identifier hs-var">whole</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Base CompiledExpr CompiledExpr
 forall t. Recursive t =&gt; t -&gt; Base t t
 </span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier hs-var">project</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262489"><span class="hs-identifier hs-var">whole</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-104"></span><span>  </span><span class="hs-comment">-- Already values.</span><span>
-</span><span id="line-105"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
+</span><a href="#local-6989586621679262073"><span class="hs-identifier hs-var">whole</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-99"></span><span>  </span><span class="hs-comment">-- Already values.</span><span>
+</span><span id="line-100"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr
-</span><a href="#local-6989586621679262492"><span class="hs-identifier hs-var">settled</span></a></span><span>
-</span><span id="line-106"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr
-</span><a href="#local-6989586621679262492"><span class="hs-identifier hs-var">settled</span></a></span><span>
-</span><span id="line-107"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#AbortFW"><span class="hs-identifier hs-type">AbortFW</span></a></span><span> </span><span class="annot"><span class="annottext">AbortableF CompiledExpr
+</span><a href="#local-6989586621679262076"><span class="hs-identifier hs-var">settled</span></a></span><span>
+</span><span id="line-101"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr
+</span><a href="#local-6989586621679262076"><span class="hs-identifier hs-var">settled</span></a></span><span>
+</span><span id="line-102"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#AbortFW"><span class="hs-identifier hs-type">AbortFW</span></a></span><span> </span><span class="annot"><span class="annottext">AbortableF CompiledExpr
 </span><a href="Telomare.IR.Base.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr
-</span><a href="#local-6989586621679262492"><span class="hs-identifier hs-var">settled</span></a></span><span>
-</span><span id="line-108"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#AbortFW"><span class="hs-identifier hs-type">AbortFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262076"><span class="hs-identifier hs-var">settled</span></a></span><span>
+</span><span id="line-103"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#AbortFW"><span class="hs-identifier hs-type">AbortFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr
-</span><a href="#local-6989586621679262492"><span class="hs-identifier hs-var">settled</span></a></span><span>
-</span><span id="line-109"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
+</span><a href="#local-6989586621679262076"><span class="hs-identifier hs-var">settled</span></a></span><span>
+</span><span id="line-104"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
 </span><a href="Telomare.IR.Base.html#GateSF"><span class="hs-identifier hs-var">GateSF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr
-</span><a href="#local-6989586621679262492"><span class="hs-identifier hs-var">settled</span></a></span><span>
-</span><span id="line-110"></span><span>
-</span><span id="line-111"></span><span>  </span><span class="hs-comment">-- A gate switch. The branches sit in the application's argument pair and</span><span>
-</span><span id="line-112"></span><span>  </span><span class="hs-comment">-- stay unevaluated until the scrutinee picks one. The evaluator gets this</span><span>
-</span><span id="line-113"></span><span>  </span><span class="hs-comment">-- from Haskell's laziness: it discards the unselected thunk without ever</span><span>
-</span><span id="line-114"></span><span>  </span><span class="hs-comment">-- forcing it. That is load-bearing, not incidental &#8212; a bounded recursion's</span><span>
-</span><span id="line-115"></span><span>  </span><span class="hs-comment">-- &quot;recurse&quot; branch is still present at the base case, and evaluating it</span><span>
-</span><span id="line-116"></span><span>  </span><span class="hs-comment">-- would run off the end of the repeater's inferred size.</span><span>
-</span><span id="line-117"></span><span>  </span><span class="hs-comment">--</span><span>
-</span><span id="line-118"></span><span>  </span><span class="hs-comment">-- Only the chosen branch is evaluated, and in the current environment: a</span><span>
-</span><span id="line-119"></span><span>  </span><span class="hs-comment">-- gate is built and applied at the same node (`iteB_`), so its branches</span><span>
-</span><span id="line-120"></span><span>  </span><span class="hs-comment">-- belong to this environment.</span><span>
-</span><span id="line-121"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#GateSwitch"><span class="hs-identifier hs-type">GateSwitch</span></a></span><span> </span><span id="local-6989586621679262499"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262499"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679262500"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262500"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span id="local-6989586621679262501"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262501"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-122"></span><span>    </span><span id="local-6989586621679262502"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262502"><span class="hs-identifier hs-var">s'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262076"><span class="hs-identifier hs-var">settled</span></a></span><span>
+</span><span id="line-105"></span><span>
+</span><span id="line-106"></span><span>  </span><span class="hs-comment">-- A gate switch. The branches sit in the application's argument pair and</span><span>
+</span><span id="line-107"></span><span>  </span><span class="hs-comment">-- stay unevaluated until the scrutinee picks one. The evaluator gets this</span><span>
+</span><span id="line-108"></span><span>  </span><span class="hs-comment">-- from Haskell's laziness: it discards the unselected thunk without ever</span><span>
+</span><span id="line-109"></span><span>  </span><span class="hs-comment">-- forcing it. That is load-bearing, not incidental &#8212; a bounded recursion's</span><span>
+</span><span id="line-110"></span><span>  </span><span class="hs-comment">-- &quot;recurse&quot; branch is still present at the base case, and evaluating it</span><span>
+</span><span id="line-111"></span><span>  </span><span class="hs-comment">-- would run off the end of the repeater's inferred size.</span><span>
+</span><span id="line-112"></span><span>  </span><span class="hs-comment">--</span><span>
+</span><span id="line-113"></span><span>  </span><span class="hs-comment">-- Only the chosen branch is evaluated, and in the current environment: a</span><span>
+</span><span id="line-114"></span><span>  </span><span class="hs-comment">-- gate is built and applied at the same node (`iteB_`), so its branches</span><span>
+</span><span id="line-115"></span><span>  </span><span class="hs-comment">-- belong to this environment.</span><span>
+</span><span id="line-116"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#GateSwitch"><span class="hs-identifier hs-type">GateSwitch</span></a></span><span> </span><span id="local-6989586621679262083"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262083"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679262084"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262084"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span id="local-6989586621679262085"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262085"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-117"></span><span>    </span><span id="local-6989586621679262086"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262086"><span class="hs-identifier hs-var">s'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262501"><span class="hs-identifier hs-var">s</span></a></span><span>
-</span><span id="line-123"></span><span>    </span><span class="annot"><span class="annottext">M ()
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262085"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><span id="line-118"></span><span>    </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span>
-</span><span id="line-124"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262502"><span class="hs-identifier hs-var">s'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-125"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><span id="line-119"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262086"><span class="hs-identifier hs-var">s'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-120"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262502"><span class="hs-identifier hs-var">s'</span></a></span><span>
-</span><span id="line-126"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
+</span><a href="#local-6989586621679262086"><span class="hs-identifier hs-var">s'</span></a></span><span>
+</span><span id="line-121"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262505"><span class="hs-identifier hs-var">chose</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262499"><span class="hs-identifier hs-var">l</span></a></span><span>
-</span><span id="line-127"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262505"><span class="hs-identifier hs-var">chose</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262500"><span class="hs-identifier hs-var">r</span></a></span><span>
-</span><span id="line-128"></span><span>      </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262089"><span class="hs-identifier hs-var">chose</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262083"><span class="hs-identifier hs-var">l</span></a></span><span>
+</span><span id="line-122"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262089"><span class="hs-identifier hs-var">chose</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262084"><span class="hs-identifier hs-var">r</span></a></span><span>
+</span><span id="line-123"></span><span>      </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; CompiledExpr -&gt; M CompiledExpr
 forall {a} {a}. Show a =&gt; String -&gt; a -&gt; a
-</span><a href="#local-6989586621679262507"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679262091"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;gate on a non-data scrutinee&quot;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262502"><span class="hs-identifier hs-var">s'</span></a></span><span>
-</span><span id="line-129"></span><span>
-</span><span id="line-130"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262508"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262508"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679262509"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262509"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-131"></span><span>    </span><span id="local-6989586621679262510"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262510"><span class="hs-identifier hs-var">a'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262086"><span class="hs-identifier hs-var">s'</span></a></span><span>
+</span><span id="line-124"></span><span>
+</span><span id="line-125"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262092"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262092"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679262093"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262093"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-126"></span><span>    </span><span id="local-6989586621679262094"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262094"><span class="hs-identifier hs-var">a'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262508"><span class="hs-identifier hs-var">a</span></a></span><span>
-</span><span id="line-132"></span><span>    </span><span id="local-6989586621679262511"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262511"><span class="hs-identifier hs-var">b'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262092"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><span id="line-127"></span><span>    </span><span id="local-6989586621679262095"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262095"><span class="hs-identifier hs-var">b'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262509"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-133"></span><span>    </span><span class="annot"><span class="annottext">M ()
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262093"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-128"></span><span>    </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#built"><span class="hs-identifier hs-var">built</span></a></span><span>
-</span><span id="line-134"></span><span>    </span><span class="annot"><span class="annottext">M ()
+</span><span id="line-129"></span><span>    </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span>
-</span><span id="line-135"></span><span>    </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
+</span><span id="line-130"></span><span>    </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(CompiledExpr -&gt; M CompiledExpr) -&gt; CompiledExpr -&gt; M CompiledExpr
@@ -270,66 +265,66 @@ forall g (f :: * -&gt; *).
 (Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
 g -&gt; g -&gt; g
 </span><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier hs-var">PairB</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262510"><span class="hs-identifier hs-var">a'</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262511"><span class="hs-identifier hs-var">b'</span></a></span><span>
-</span><span id="line-136"></span><span>
-</span><span id="line-137"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#LeftSF"><span class="hs-identifier hs-type">LeftSF</span></a></span><span> </span><span id="local-6989586621679262514"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262514"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262515"><span class="hs-identifier hs-var">project'</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262514"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">((CompiledExpr -&gt; Env) -&gt; M CompiledExpr)
+</span><a href="#local-6989586621679262094"><span class="hs-identifier hs-var">a'</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262095"><span class="hs-identifier hs-var">b'</span></a></span><span>
+</span><span id="line-131"></span><span>
+</span><span id="line-132"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#LeftSF"><span class="hs-identifier hs-type">LeftSF</span></a></span><span> </span><span id="local-6989586621679262098"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262098"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262099"><span class="hs-identifier hs-var">project'</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262098"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">((CompiledExpr -&gt; Env) -&gt; M CompiledExpr)
 -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-138"></span><span>    </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262516"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262516"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><span id="line-133"></span><span>    </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262100"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262100"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262516"><span class="hs-identifier hs-var">l</span></a></span><span>
-</span><span id="line-139"></span><span>    </span><span id="local-6989586621679262517"><span class="annot"><span class="annottext">z :: CompiledExpr
-</span><a href="#local-6989586621679262517"><span class="hs-identifier hs-var">z</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
+</span><a href="#local-6989586621679262100"><span class="hs-identifier hs-var">l</span></a></span><span>
+</span><span id="line-134"></span><span>    </span><span id="local-6989586621679262101"><span class="annot"><span class="annottext">z :: CompiledExpr
+</span><a href="#local-6989586621679262101"><span class="hs-identifier hs-var">z</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262517"><span class="hs-identifier hs-var">z</span></a></span><span>
-</span><span id="line-140"></span><span>    </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262101"><span class="hs-identifier hs-var">z</span></a></span><span>
+</span><span id="line-135"></span><span>    </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Env
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-141"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#RightSF"><span class="hs-identifier hs-type">RightSF</span></a></span><span> </span><span id="local-6989586621679262519"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262519"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262515"><span class="hs-identifier hs-var">project'</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262519"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">((CompiledExpr -&gt; Env) -&gt; M CompiledExpr)
+</span><span id="line-136"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#RightSF"><span class="hs-identifier hs-type">RightSF</span></a></span><span> </span><span id="local-6989586621679262103"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262103"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262099"><span class="hs-identifier hs-var">project'</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262103"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">((CompiledExpr -&gt; Env) -&gt; M CompiledExpr)
 -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-142"></span><span>    </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679262520"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262520"><span class="hs-identifier hs-var">r</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
+</span><span id="line-137"></span><span>    </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679262104"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262104"><span class="hs-identifier hs-var">r</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262520"><span class="hs-identifier hs-var">r</span></a></span><span>
-</span><span id="line-143"></span><span>    </span><span id="local-6989586621679262521"><span class="annot"><span class="annottext">z :: CompiledExpr
-</span><a href="#local-6989586621679262521"><span class="hs-identifier hs-var">z</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
+</span><a href="#local-6989586621679262104"><span class="hs-identifier hs-var">r</span></a></span><span>
+</span><span id="line-138"></span><span>    </span><span id="local-6989586621679262105"><span class="annot"><span class="annottext">z :: CompiledExpr
+</span><a href="#local-6989586621679262105"><span class="hs-identifier hs-var">z</span></a></span></span><span class="hs-glyph">@</span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span>   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262521"><span class="hs-identifier hs-var">z</span></a></span><span>
-</span><span id="line-144"></span><span>    </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262105"><span class="hs-identifier hs-var">z</span></a></span><span>
+</span><span id="line-139"></span><span>    </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Env
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
-</span><span id="line-145"></span><span>
-</span><span id="line-146"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#SetEnvSF"><span class="hs-identifier hs-type">SetEnvSF</span></a></span><span> </span><span id="local-6989586621679262523"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262523"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-147"></span><span>    </span><span id="local-6989586621679262524"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262524"><span class="hs-identifier hs-var">x'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><span id="line-140"></span><span>
+</span><span id="line-141"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#SetEnvSF"><span class="hs-identifier hs-type">SetEnvSF</span></a></span><span> </span><span id="local-6989586621679262107"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262107"><span class="hs-identifier hs-var">x</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-142"></span><span>    </span><span id="local-6989586621679262108"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262108"><span class="hs-identifier hs-var">x'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262523"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-148"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262524"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-149"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262107"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-143"></span><span>    </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262108"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-144"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
 forall a b.
@@ -340,26 +335,26 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262524"><span class="hs-identifier hs-var">x'</span></a></span><span>
-</span><span id="line-150"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262525"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262525"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679262526"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262526"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; CompiledExpr -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262527"><span class="hs-identifier hs-var">apply</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262525"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262526"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-151"></span><span>      </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262108"><span class="hs-identifier hs-var">x'</span></a></span><span>
+</span><span id="line-145"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262109"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262109"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679262110"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262110"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262111"><span class="hs-identifier hs-var">apply</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262109"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262110"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-146"></span><span>      </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; CompiledExpr -&gt; M CompiledExpr
 forall {a} {a}. Show a =&gt; String -&gt; a -&gt; a
-</span><a href="#local-6989586621679262507"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679262091"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;SetEnv of something that is not a pair&quot;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262524"><span class="hs-identifier hs-var">x'</span></a></span><span>
-</span><span id="line-152"></span><span>
-</span><span id="line-153"></span><span>  </span><span class="hs-comment">-- The environment is a value, already evaluated by whoever bound it.</span><span>
-</span><span id="line-154"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
+</span><a href="#local-6989586621679262108"><span class="hs-identifier hs-var">x'</span></a></span><span>
+</span><span id="line-147"></span><span>
+</span><span id="line-148"></span><span>  </span><span class="hs-comment">-- The environment is a value, already evaluated by whoever bound it.</span><span>
+</span><span id="line-149"></span><span>  </span><span class="annot"><a href="Telomare.IR.Base.html#StuckFW"><span class="hs-identifier hs-type">StuckFW</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
 </span><a href="Telomare.IR.Base.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-155"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679262528"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262528"><span class="hs-identifier hs-var">bound</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-150"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679262112"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262112"><span class="hs-identifier hs-var">bound</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
 forall a b.
 StateT Meter Identity a
@@ -369,16 +364,22 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262528"><span class="hs-identifier hs-var">bound</span></a></span><span>
-</span><span id="line-156"></span><span>    </span><span class="annot"><span class="annottext">Env
+</span><a href="#local-6989586621679262112"><span class="hs-identifier hs-var">bound</span></a></span><span>
+</span><span id="line-151"></span><span>    </span><span class="annot"><span class="annottext">Env
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; CompiledExpr -&gt; M CompiledExpr
 forall {a} {a}. Show a =&gt; String -&gt; a -&gt; a
-</span><a href="#local-6989586621679262507"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679262091"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;unapplied environment reference&quot;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262489"><span class="hs-identifier hs-var">whole</span></a></span><span>
-</span><span id="line-157"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-158"></span><span>    </span><span id="local-6989586621679262492"><span class="annot"><span class="annottext">settled :: M CompiledExpr
-</span><a href="#local-6989586621679262492"><span class="hs-identifier hs-var hs-var">settled</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">M ()
+</span><a href="#local-6989586621679262073"><span class="hs-identifier hs-var">whole</span></a></span><span>
+</span><span id="line-152"></span><span>
+</span><span id="line-153"></span><span>  </span><span class="annot"><span class="annottext">Base CompiledExpr CompiledExpr
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; M CompiledExpr
+forall a. HasCallStack =&gt; String -&gt; a
+</span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;Telomare.Eval.Meter.runMeter: unexpected expression&quot;</span></span><span>
+</span><span id="line-154"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-155"></span><span>    </span><span id="local-6989586621679262076"><span class="annot"><span class="annottext">settled :: M CompiledExpr
+</span><a href="#local-6989586621679262076"><span class="hs-identifier hs-var hs-var">settled</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
 forall a b.
 StateT Meter Identity a
@@ -388,11 +389,11 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262489"><span class="hs-identifier hs-var">whole</span></a></span><span>
-</span><span id="line-159"></span><span>
-</span><span id="line-160"></span><span>    </span><span id="local-6989586621679262505"><span class="annot"><span class="annottext">chose :: CompiledExpr -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262505"><span class="hs-identifier hs-var hs-var">chose</span></a></span></span><span> </span><span id="local-6989586621679262535"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262535"><span class="hs-identifier hs-var">branch</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">M ()
+</span><a href="#local-6989586621679262073"><span class="hs-identifier hs-var">whole</span></a></span><span>
+</span><span id="line-156"></span><span>
+</span><span id="line-157"></span><span>    </span><span id="local-6989586621679262089"><span class="annot"><span class="annottext">chose :: CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262089"><span class="hs-identifier hs-var hs-var">chose</span></a></span></span><span> </span><span id="local-6989586621679262120"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262120"><span class="hs-identifier hs-var">branch</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
 forall a b.
 StateT Meter Identity a
@@ -400,52 +401,52 @@ StateT Meter Identity a
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262535"><span class="hs-identifier hs-var">branch</span></a></span><span>
-</span><span id="line-161"></span><span>
-</span><span id="line-162"></span><span>    </span><span id="local-6989586621679262515"><span class="annot"><span class="annottext">project' :: CompiledExpr -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262515"><span class="hs-identifier hs-var hs-var">project'</span></a></span></span><span> </span><span id="local-6989586621679262550"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262550"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679262551"><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
-</span><a href="#local-6989586621679262551"><span class="hs-identifier hs-var">pick</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-163"></span><span>      </span><span id="local-6989586621679262552"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262552"><span class="hs-identifier hs-var">x'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262120"><span class="hs-identifier hs-var">branch</span></a></span><span>
+</span><span id="line-158"></span><span>
+</span><span id="line-159"></span><span>    </span><span id="local-6989586621679262099"><span class="annot"><span class="annottext">project' :: CompiledExpr -&gt; (CompiledExpr -&gt; Env) -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262099"><span class="hs-identifier hs-var hs-var">project'</span></a></span></span><span> </span><span id="local-6989586621679262135"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262135"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span id="local-6989586621679262136"><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
+</span><a href="#local-6989586621679262136"><span class="hs-identifier hs-var">pick</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-160"></span><span>      </span><span id="local-6989586621679262137"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262137"><span class="hs-identifier hs-var">x'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Env
-</span><a href="#local-6989586621679262488"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262550"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-164"></span><span>      </span><span class="annot"><span class="annottext">M ()
+</span><a href="#local-6989586621679262072"><span class="hs-identifier hs-var">env</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262135"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-161"></span><span>      </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span>
-</span><span id="line-165"></span><span>      </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262552"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-166"></span><span>        </span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><span id="line-162"></span><span>      </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262137"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-163"></span><span>        </span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262552"><span class="hs-identifier hs-var">x'</span></a></span><span>
-</span><span id="line-167"></span><span>        </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262137"><span class="hs-identifier hs-var">x'</span></a></span><span>
+</span><span id="line-164"></span><span>        </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
-</span><a href="#local-6989586621679262551"><span class="hs-identifier hs-var">pick</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262552"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-168"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679262553"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262553"><span class="hs-identifier hs-var">v</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262136"><span class="hs-identifier hs-var">pick</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262137"><span class="hs-identifier hs-var">x'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-165"></span><span>          </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679262138"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262138"><span class="hs-identifier hs-var">v</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262553"><span class="hs-identifier hs-var">v</span></a></span><span>
-</span><span id="line-169"></span><span>          </span><span class="annot"><span class="annottext">Env
+</span><a href="#local-6989586621679262138"><span class="hs-identifier hs-var">v</span></a></span><span>
+</span><span id="line-166"></span><span>          </span><span class="annot"><span class="annottext">Env
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; CompiledExpr -&gt; M CompiledExpr
 forall {a} {a}. Show a =&gt; String -&gt; a -&gt; a
-</span><a href="#local-6989586621679262507"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679262091"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;projection of something that is not a pair&quot;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262552"><span class="hs-identifier hs-var">x'</span></a></span><span>
-</span><span id="line-170"></span><span>
-</span><span id="line-171"></span><span>    </span><span id="local-6989586621679262527"><span class="annot"><span class="annottext">apply :: CompiledExpr -&gt; CompiledExpr -&gt; M CompiledExpr
-</span><a href="#local-6989586621679262527"><span class="hs-identifier hs-var hs-var">apply</span></a></span></span><span> </span><span id="local-6989586621679262641"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262641"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679262642"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262642"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262641"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262642"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-172"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262137"><span class="hs-identifier hs-var">x'</span></a></span><span>
+</span><span id="line-167"></span><span>
+</span><span id="line-168"></span><span>    </span><span id="local-6989586621679262111"><span class="annot"><span class="annottext">apply :: CompiledExpr -&gt; CompiledExpr -&gt; M CompiledExpr
+</span><a href="#local-6989586621679262111"><span class="hs-identifier hs-var hs-var">apply</span></a></span></span><span> </span><span id="local-6989586621679262226"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262226"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span id="local-6989586621679262227"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262227"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262226"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262227"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-169"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
@@ -457,8 +458,8 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262641"><span class="hs-identifier hs-var">f</span></a></span><span>
-</span><span id="line-173"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262226"><span class="hs-identifier hs-var">f</span></a></span><span>
+</span><span id="line-170"></span><span>      </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
@@ -470,9 +471,9 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262642"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-174"></span><span>      </span><span class="hs-comment">-- `assert` on a passing value yields the identity function.</span><span>
-</span><span id="line-175"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="annot"><span class="annottext">AbortableF CompiledExpr
+</span><a href="#local-6989586621679262227"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-171"></span><span>      </span><span class="hs-comment">-- `assert` on a passing value yields the identity function.</span><span>
+</span><span id="line-172"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="annot"><span class="annottext">AbortableF CompiledExpr
 </span><a href="Telomare.IR.Base.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
@@ -485,14 +486,14 @@ forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#identityFunction"><span class="hs-identifier hs-var">identityFunction</span></a></span><span>
-</span><span id="line-176"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="annot"><span class="annottext">AbortableF CompiledExpr
+</span><span id="line-173"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortEE"><span class="hs-identifier hs-type">AbortEE</span></a></span><span> </span><span class="annot"><span class="annottext">AbortableF CompiledExpr
 </span><a href="Telomare.IR.Base.html#AbortF"><span class="hs-identifier hs-var">AbortF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-177"></span><span>        </span><span class="annot"><span class="annottext">M ()
+</span><span id="line-174"></span><span>        </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span>
-</span><span id="line-178"></span><span>        </span><span class="annot"><span class="annottext">M ()
+</span><span id="line-175"></span><span>        </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#built"><span class="hs-identifier hs-var">built</span></a></span><span>
-</span><span id="line-179"></span><span>        </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
+</span><span id="line-176"></span><span>        </span><span class="annot"><span class="annottext">CompiledExpr -&gt; M CompiledExpr
 forall a. a -&gt; StateT Meter Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(CompiledExpr -&gt; M CompiledExpr)
@@ -517,12 +518,12 @@ forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
 forall a. (Base CompiledExpr a -&gt; a) -&gt; CompiledExpr -&gt; a
 </span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr BasicExpr -&gt; BasicExpr
 CompiledExprF BasicExpr -&gt; BasicExpr
-</span><a href="#local-6989586621679262645"><span class="hs-identifier hs-var">truncateToData</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262642"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-180"></span><span>      </span><span class="hs-comment">-- A gate applied to its scrutinee alone yields the branch-selector</span><span>
-</span><span id="line-181"></span><span>      </span><span class="hs-comment">-- function the evaluator would produce; the `GateSwitch` case above is</span><span>
-</span><span id="line-182"></span><span>      </span><span class="hs-comment">-- the one that keeps the usual full shape lazy.</span><span>
-</span><span id="line-183"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
+</span><a href="#local-6989586621679262230"><span class="hs-identifier hs-var">truncateToData</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262227"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-177"></span><span>      </span><span class="hs-comment">-- A gate applied to its scrutinee alone yields the branch-selector</span><span>
+</span><span id="line-178"></span><span>      </span><span class="hs-comment">-- function the evaluator would produce; the `GateSwitch` case above is</span><span>
+</span><span id="line-179"></span><span>      </span><span class="hs-comment">-- the one that keeps the usual full shape lazy.</span><span>
+</span><span id="line-180"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
 </span><a href="Telomare.IR.Base.html#GateSF"><span class="hs-identifier hs-var">GateSF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF CompiledExpr
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
@@ -539,7 +540,7 @@ forall g (f :: * -&gt; *).
  Corecursive g) =&gt;
 g
 </span><a href="Telomare.Machine.html#doLeft"><span class="hs-identifier hs-var">doLeft</span></a></span><span>
-</span><span id="line-184"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
+</span><span id="line-181"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
 </span><a href="Telomare.IR.Base.html#GateSF"><span class="hs-identifier hs-var">GateSF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-type">BasicEE</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="hs-special">{</span><span class="hs-special">}</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
 forall a b.
@@ -555,10 +556,10 @@ forall g (f :: * -&gt; *).
  Corecursive g) =&gt;
 g
 </span><a href="Telomare.Machine.html#doRight"><span class="hs-identifier hs-var">doRight</span></a></span><span>
-</span><span id="line-185"></span><span>      </span><span class="hs-comment">-- The body's environment is now `e`; nothing is substituted or built.</span><span>
-</span><span id="line-186"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span class="annot"><span class="annottext">FunctionIndex
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679262647"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262647"><span class="hs-identifier hs-var">body</span></a></span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><span id="line-182"></span><span>      </span><span class="hs-comment">-- The body's environment is now `e`; nothing is substituted or built.</span><span>
+</span><span id="line-183"></span><span>      </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span class="annot"><span class="annottext">FunctionIndex
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679262232"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262232"><span class="hs-identifier hs-var">body</span></a></span></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">M ()
 </span><a href="Telomare.Eval.Meter.html#step"><span class="hs-identifier hs-var">step</span></a></span><span> </span><span class="annot"><span class="annottext">M () -&gt; M CompiledExpr -&gt; M CompiledExpr
 forall a b.
@@ -569,18 +570,18 @@ forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; m b -&gt; m b
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">CompiledExpr -&gt; Env
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262642"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262647"><span class="hs-identifier hs-var">body</span></a></span><span>
-</span><span id="line-187"></span><span>      </span><span class="annot"><span class="annottext">(CompiledExpr, CompiledExpr)
+</span><a href="#local-6989586621679262227"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262232"><span class="hs-identifier hs-var">body</span></a></span><span>
+</span><span id="line-184"></span><span>      </span><span class="annot"><span class="annottext">(CompiledExpr, CompiledExpr)
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; CompiledExpr -&gt; M CompiledExpr
 forall {a} {a}. Show a =&gt; String -&gt; a -&gt; a
-</span><a href="#local-6989586621679262507"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679262091"><span class="hs-identifier hs-var">unhandled</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;application of something that is not a function&quot;</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262641"><span class="hs-identifier hs-var">f</span></a></span><span>
-</span><span id="line-188"></span><span>
-</span><span id="line-189"></span><span>    </span><span id="local-6989586621679262645"><span class="annot"><span class="annottext">truncateToData :: CompiledExprF BasicExpr -&gt; BasicExpr
-</span><a href="#local-6989586621679262645"><span class="hs-identifier hs-var hs-var">truncateToData</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-190"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF BasicExpr
+</span><a href="#local-6989586621679262226"><span class="hs-identifier hs-var">f</span></a></span><span>
+</span><span id="line-185"></span><span>
+</span><span id="line-186"></span><span>    </span><span id="local-6989586621679262230"><span class="annot"><span class="annottext">truncateToData :: CompiledExprF BasicExpr -&gt; BasicExpr
+</span><a href="#local-6989586621679262230"><span class="hs-identifier hs-var hs-var">truncateToData</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-187"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF BasicExpr
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExprF BasicExpr -&gt; BasicExpr
 forall g (f :: * -&gt; *).
 (Base g ~ f, BasicBase f, Recursive g, Corecursive g) =&gt;
@@ -588,16 +589,16 @@ BasicExprF g -&gt; g
 </span><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-var">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF BasicExpr
 forall f. BasicExprF f
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>
-</span><span id="line-191"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262668"><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262668"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679262669"><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262669"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExpr -&gt; BasicExpr -&gt; BasicExpr
+</span><span id="line-188"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#BasicFW"><span class="hs-identifier hs-type">BasicFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span id="local-6989586621679262253"><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262253"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679262254"><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262254"><span class="hs-identifier hs-var">b</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExpr -&gt; BasicExpr -&gt; BasicExpr
 forall g (f :: * -&gt; *).
 (Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
 g -&gt; g -&gt; g
 </span><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier hs-var">PairB</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262668"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262669"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-192"></span><span>      </span><span class="annot"><span class="annottext">CompiledExprF BasicExpr
+</span><a href="#local-6989586621679262253"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262254"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-189"></span><span>      </span><span class="annot"><span class="annottext">CompiledExprF BasicExpr
 </span><span class="hs-identifier">_</span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExprF BasicExpr -&gt; BasicExpr
 forall g (f :: * -&gt; *).
 (Base g ~ f, BasicBase f, Recursive g, Corecursive g) =&gt;
@@ -605,11 +606,11 @@ BasicExprF g -&gt; g
 </span><a href="Telomare.IR.Base.html#BasicEE"><span class="hs-identifier hs-var">BasicEE</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExprF BasicExpr
 forall f. BasicExprF f
 </span><a href="Telomare.IR.Base.html#ZeroSF"><span class="hs-identifier hs-var">ZeroSF</span></a></span><span>
-</span><span id="line-193"></span><span>
-</span><span id="line-194"></span><span>    </span><span id="local-6989586621679262507"><span class="annot"><span class="annottext">unhandled :: String -&gt; a -&gt; a
-</span><a href="#local-6989586621679262507"><span class="hs-identifier hs-var hs-var">unhandled</span></a></span></span><span> </span><span id="local-6989586621679262677"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679262677"><span class="hs-identifier hs-var">why</span></a></span></span><span> </span><span id="local-6989586621679262678"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679262678"><span class="hs-identifier hs-var">what</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; a
+</span><span id="line-190"></span><span>
+</span><span id="line-191"></span><span>    </span><span id="local-6989586621679262091"><span class="annot"><span class="annottext">unhandled :: String -&gt; a -&gt; a
+</span><a href="#local-6989586621679262091"><span class="hs-identifier hs-var hs-var">unhandled</span></a></span></span><span> </span><span id="local-6989586621679262262"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679262262"><span class="hs-identifier hs-var">why</span></a></span></span><span> </span><span id="local-6989586621679262263"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679262263"><span class="hs-identifier hs-var">what</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String -&gt; a
 forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; a) -&gt; String -&gt; a
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -617,7 +618,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-string">&quot;Telomare.Meter: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679262677"><span class="hs-identifier hs-var">why</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679262262"><span class="hs-identifier hs-var">why</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;:\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
@@ -625,12 +626,12 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">a -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679262678"><span class="hs-identifier hs-var">what</span></a></span><span>
-</span><span id="line-195"></span><span>
-</span><span id="line-196"></span><span class="hs-comment">-- |The identity function a passed assertion becomes, carrying the index the</span><span>
-</span><span id="line-197"></span><span class="hs-comment">-- evaluator gives it.</span><span>
-</span><span id="line-198"></span><span class="annot"><a href="Telomare.Eval.Meter.html#identityFunction"><span class="hs-identifier hs-type">identityFunction</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span>
-</span><span id="line-199"></span><span id="identityFunction"><span class="annot"><span class="annottext">identityFunction :: CompiledExpr
+</span><a href="#local-6989586621679262263"><span class="hs-identifier hs-var">what</span></a></span><span>
+</span><span id="line-192"></span><span>
+</span><span id="line-193"></span><span class="hs-comment">-- |The identity function a passed assertion becomes, carrying the index the</span><span>
+</span><span id="line-194"></span><span class="hs-comment">-- evaluator gives it.</span><span>
+</span><span id="line-195"></span><span class="annot"><a href="Telomare.Eval.Meter.html#identityFunction"><span class="hs-identifier hs-type">identityFunction</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span>
+</span><span id="line-196"></span><span id="identityFunction"><span class="annot"><span class="annottext">identityFunction :: CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#identityFunction"><span class="hs-identifier hs-var hs-var">identityFunction</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; CompiledExpr -&gt; CompiledExpr
 forall g (f :: * -&gt; *).
 (Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
@@ -645,46 +646,46 @@ StuckF g -&gt; g
 </span><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-var">StuckEE</span></a></span><span> </span><span class="annot"><span class="annottext">StuckF CompiledExpr
 forall f. StuckF f
 </span><a href="Telomare.IR.Base.html#EnvSF"><span class="hs-identifier hs-var">EnvSF</span></a></span><span>
-</span><span id="line-200"></span><span>
-</span><span id="line-201"></span><span class="hs-comment">-- |Run a compiled program on an input, reporting what it cost. The result</span><span>
-</span><span id="line-202"></span><span class="hs-comment">-- mirrors @eval@: an abort surfaces as a `RunTimeError`.</span><span>
-</span><span id="line-203"></span><span class="annot"><a href="Telomare.Eval.Meter.html#evalMeter"><span class="hs-identifier hs-type">evalMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#RunTimeError"><span class="hs-identifier hs-type">RunTimeError</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-204"></span><span id="evalMeter"><span class="annot"><span class="annottext">evalMeter :: CompiledExpr -&gt; (Meter, Either RunTimeError CompiledExpr)
-</span><a href="Telomare.Eval.Meter.html#evalMeter"><span class="hs-identifier hs-var hs-var">evalMeter</span></a></span></span><span> </span><span id="local-6989586621679262680"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262680"><span class="hs-identifier hs-var">expr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-205"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679262682"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262682"><span class="hs-identifier hs-var">result</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679262683"><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262683"><span class="hs-identifier hs-var">measured</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr -&gt; Meter -&gt; (CompiledExpr, Meter)
+</span><span id="line-197"></span><span>
+</span><span id="line-198"></span><span class="hs-comment">-- |Run a compiled program on an input, reporting what it cost. The result</span><span>
+</span><span id="line-199"></span><span class="hs-comment">-- mirrors @eval@: an abort surfaces as a `RunTimeError`.</span><span>
+</span><span id="line-200"></span><span class="annot"><a href="Telomare.Eval.Meter.html#evalMeter"><span class="hs-identifier hs-type">evalMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.Meter.html#Meter"><span class="hs-identifier hs-type">Meter</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#RunTimeError"><span class="hs-identifier hs-type">RunTimeError</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-201"></span><span id="evalMeter"><span class="annot"><span class="annottext">evalMeter :: CompiledExpr -&gt; (Meter, Either RunTimeError CompiledExpr)
+</span><a href="Telomare.Eval.Meter.html#evalMeter"><span class="hs-identifier hs-var hs-var">evalMeter</span></a></span></span><span> </span><span id="local-6989586621679262264"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262264"><span class="hs-identifier hs-var">expr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-202"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679262266"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262266"><span class="hs-identifier hs-var">result</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679262267"><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262267"><span class="hs-identifier hs-var">measured</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">M CompiledExpr -&gt; Meter -&gt; (CompiledExpr, Meter)
 forall s a. State s a -&gt; s -&gt; (a, s)
 </span><span class="hs-identifier hs-var">runState</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Env -&gt; CompiledExpr -&gt; M CompiledExpr
 </span><a href="Telomare.Eval.Meter.html#runMeter"><span class="hs-identifier hs-var">runMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Env
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262680"><span class="hs-identifier hs-var">expr</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262264"><span class="hs-identifier hs-var">expr</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Meter
 forall a. Monoid a =&gt; a
 </span><span class="hs-identifier hs-var">mempty</span></span><span>
-</span><span id="line-206"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Meter
-</span><a href="#local-6989586621679262683"><span class="hs-identifier hs-var">measured</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Maybe BasicExpr
-</span><a href="#local-6989586621679262684"><span class="hs-identifier hs-var">findAborted</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262682"><span class="hs-identifier hs-var">result</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-207"></span><span>       </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679262685"><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262685"><span class="hs-identifier hs-var">e</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">RunTimeError -&gt; Either RunTimeError CompiledExpr
+</span><span id="line-203"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Meter
+</span><a href="#local-6989586621679262267"><span class="hs-identifier hs-var">measured</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Maybe BasicExpr
+</span><a href="#local-6989586621679262268"><span class="hs-identifier hs-var">findAborted</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679262266"><span class="hs-identifier hs-var">result</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-204"></span><span>       </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679262269"><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262269"><span class="hs-identifier hs-var">e</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">RunTimeError -&gt; Either RunTimeError CompiledExpr
 forall a b. a -&gt; Either a b
 </span><span class="hs-identifier hs-var">Left</span></span><span> </span><span class="annot"><span class="annottext">(RunTimeError -&gt; Either RunTimeError CompiledExpr)
 -&gt; RunTimeError -&gt; Either RunTimeError CompiledExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">BasicExpr -&gt; RunTimeError
 </span><a href="Telomare.IR.Core.html#AbortRunTime"><span class="hs-identifier hs-var">AbortRunTime</span></a></span><span> </span><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262685"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-208"></span><span>       </span><span class="annot"><span class="annottext">Maybe BasicExpr
+</span><a href="#local-6989586621679262269"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-205"></span><span>       </span><span class="annot"><span class="annottext">Maybe BasicExpr
 </span><span class="hs-identifier hs-var">Nothing</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; Either RunTimeError CompiledExpr
 forall a. a -&gt; Either RunTimeError a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679262682"><span class="hs-identifier hs-var">result</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-209"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-210"></span><span>    </span><span id="local-6989586621679262684"><span class="annot"><span class="annottext">findAborted :: CompiledExpr -&gt; Maybe BasicExpr
-</span><a href="#local-6989586621679262684"><span class="hs-identifier hs-var hs-var">findAborted</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base CompiledExpr (Maybe BasicExpr) -&gt; Maybe BasicExpr)
+</span><a href="#local-6989586621679262266"><span class="hs-identifier hs-var">result</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-206"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-207"></span><span>    </span><span id="local-6989586621679262268"><span class="annot"><span class="annottext">findAborted :: CompiledExpr -&gt; Maybe BasicExpr
+</span><a href="#local-6989586621679262268"><span class="hs-identifier hs-var hs-var">findAborted</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base CompiledExpr (Maybe BasicExpr) -&gt; Maybe BasicExpr)
 -&gt; CompiledExpr -&gt; Maybe BasicExpr
 forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
 forall a. (Base CompiledExpr a -&gt; a) -&gt; CompiledExpr -&gt; a
@@ -695,16 +696,16 @@ forall a. (Base CompiledExpr a -&gt; a) -&gt; CompiledExpr -&gt; a
 -&gt; Maybe BasicExpr
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-211"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#AbortFW"><span class="hs-identifier hs-type">AbortFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span id="local-6989586621679262695"><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262695"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExpr -&gt; Maybe BasicExpr
+</span><span id="line-208"></span><span>      </span><span class="annot"><a href="Telomare.IR.Base.html#AbortFW"><span class="hs-identifier hs-type">AbortFW</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#AbortedF"><span class="hs-identifier hs-type">AbortedF</span></a></span><span> </span><span id="local-6989586621679262279"><span class="annot"><span class="annottext">BasicExpr
+</span><a href="#local-6989586621679262279"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">BasicExpr -&gt; Maybe BasicExpr
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">BasicExpr
-</span><a href="#local-6989586621679262695"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-212"></span><span>      </span><span id="local-6989586621679262696"><span class="annot"><span class="annottext">Base CompiledExpr (Maybe BasicExpr)
-</span><a href="#local-6989586621679262696"><span class="hs-identifier hs-var">x</span></a></span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr (Maybe BasicExpr) -&gt; Maybe BasicExpr
+</span><a href="#local-6989586621679262279"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-209"></span><span>      </span><span id="local-6989586621679262280"><span class="annot"><span class="annottext">Base CompiledExpr (Maybe BasicExpr)
+</span><a href="#local-6989586621679262280"><span class="hs-identifier hs-var">x</span></a></span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr (Maybe BasicExpr) -&gt; Maybe BasicExpr
 forall (t :: * -&gt; *) (f :: * -&gt; *) a.
 (Foldable t, Alternative f) =&gt;
 t (f a) -&gt; f a
 </span><span class="hs-identifier hs-var">asum</span></span><span> </span><span class="annot"><span class="annottext">Base CompiledExpr (Maybe BasicExpr)
-</span><a href="#local-6989586621679262696"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-213"></span></pre></body></html>
+</span><a href="#local-6989586621679262280"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-210"></span></pre></body></html>
