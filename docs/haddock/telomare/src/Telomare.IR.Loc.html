@@ -5,11 +5,11 @@
 </span><span id="line-5"></span><span class="hs-comment">-- |Source locations. The lowest layer of the IR vocabulary: every stage</span><span>
 </span><span id="line-6"></span><span class="hs-comment">-- annotates its terms with a 'LocTag' so diagnostics can say where a term</span><span>
 </span><span id="line-7"></span><span class="hs-comment">-- came from.</span><span>
-</span><span id="line-8"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.IR.Loc</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-8"></span><span class="hs-keyword">module</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-9"></span><span>
 </span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.DeepSeq</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">NFData</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html"><span class="hs-identifier">Data.GenValidity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier">GenValid</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html"><span class="hs-identifier">Data.Validity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier">Validity</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html"><span class="hs-identifier">Data.GenValidity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier">GenValid</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html"><span class="hs-identifier">Data.Validity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier">Validity</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Generic</span></span><span class="hs-special">)</span><span>
 </span><span id="line-14"></span><span>
 </span><span id="line-15"></span><span class="hs-keyword">data</span><span> </span><span id="SourcePosition"><span class="annot"><a href="Telomare.IR.Loc.html#SourcePosition"><span class="hs-identifier hs-var">SourcePosition</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="SourcePosition"><span class="annot"><a href="Telomare.IR.Loc.html#SourcePosition"><span class="hs-identifier hs-var">SourcePosition</span></a></span></span><span>
@@ -20,7 +20,7 @@
 </span><span id="line-18"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="sourcePositionOffset"><span class="annot"><span class="annottext">SourcePosition -&gt; Int
 </span><a href="Telomare.IR.Loc.html#sourcePositionOffset"><span class="hs-identifier hs-var hs-var">sourcePositionOffset</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
 </span><span id="line-19"></span><span>  </span><span class="hs-special">}</span><span>
-</span><span id="line-20"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679233712"><span id="local-6989586621679233718"><span class="annot"><span class="annottext">SourcePosition -&gt; SourcePosition -&gt; Bool
+</span><span id="line-20"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679264145"><span id="local-6989586621679264151"><span class="annot"><span class="annottext">SourcePosition -&gt; SourcePosition -&gt; Bool
 (SourcePosition -&gt; SourcePosition -&gt; Bool)
 -&gt; (SourcePosition -&gt; SourcePosition -&gt; Bool) -&gt; Eq SourcePosition
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -28,7 +28,7 @@ $c== :: SourcePosition -&gt; SourcePosition -&gt; Bool
 == :: SourcePosition -&gt; SourcePosition -&gt; Bool
 $c/= :: SourcePosition -&gt; SourcePosition -&gt; Bool
 /= :: SourcePosition -&gt; SourcePosition -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233723"><span id="local-6989586621679233730"><span id="local-6989586621679233734"><span class="annot"><span class="annottext">Int -&gt; SourcePosition -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264156"><span id="local-6989586621679264163"><span id="local-6989586621679264167"><span class="annot"><span class="annottext">Int -&gt; SourcePosition -&gt; ShowS
 [SourcePosition] -&gt; ShowS
 SourcePosition -&gt; String
 (Int -&gt; SourcePosition -&gt; ShowS)
@@ -43,7 +43,7 @@ $cshow :: SourcePosition -&gt; String
 show :: SourcePosition -&gt; String
 $cshowList :: [SourcePosition] -&gt; ShowS
 showList :: [SourcePosition] -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233740"><span id="local-6989586621679233745"><span id="local-6989586621679233750"><span id="local-6989586621679233754"><span id="local-6989586621679233757"><span id="local-6989586621679233760"><span id="local-6989586621679233763"><span class="annot"><span class="annottext">Eq SourcePosition
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264174"><span id="local-6989586621679264179"><span id="local-6989586621679264184"><span id="local-6989586621679264188"><span id="local-6989586621679264191"><span id="local-6989586621679264194"><span id="local-6989586621679264197"><span class="annot"><span class="annottext">Eq SourcePosition
 Eq SourcePosition =&gt;
 (SourcePosition -&gt; SourcePosition -&gt; Ordering)
 -&gt; (SourcePosition -&gt; SourcePosition -&gt; Bool)
@@ -80,7 +80,7 @@ $cmax :: SourcePosition -&gt; SourcePosition -&gt; SourcePosition
 max :: SourcePosition -&gt; SourcePosition -&gt; SourcePosition
 $cmin :: SourcePosition -&gt; SourcePosition -&gt; SourcePosition
 min :: SourcePosition -&gt; SourcePosition -&gt; SourcePosition
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233767"><span id="local-6989586621679233769"><span class="annot"><span class="annottext">(forall x. SourcePosition -&gt; Rep SourcePosition x)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264205"><span id="local-6989586621679264207"><span class="annot"><span class="annottext">(forall x. SourcePosition -&gt; Rep SourcePosition x)
 -&gt; (forall x. Rep SourcePosition x -&gt; SourcePosition)
 -&gt; Generic SourcePosition
 forall x. Rep SourcePosition x -&gt; SourcePosition
@@ -91,15 +91,15 @@ $cfrom :: forall x. SourcePosition -&gt; Rep SourcePosition x
 from :: forall x. SourcePosition -&gt; Rep SourcePosition x
 $cto :: forall x. Rep SourcePosition x -&gt; SourcePosition
 to :: forall x. Rep SourcePosition x -&gt; SourcePosition
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233773"><span class="annot"><span class="annottext">SourcePosition -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264213"><span class="annot"><span class="annottext">SourcePosition -&gt; ()
 (SourcePosition -&gt; ()) -&gt; NFData SourcePosition
 forall a. (a -&gt; ()) -&gt; NFData a
 $crnf :: SourcePosition -&gt; ()
 rnf :: SourcePosition -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">NFData</span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-21"></span><span>
-</span><span id="line-22"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233793"><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourcePosition"><span class="hs-identifier hs-type">SourcePosition</span></a></span></span><span>
-</span><span id="line-23"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233851"><span id="local-6989586621679233858"><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourcePosition"><span class="hs-identifier hs-type">SourcePosition</span></a></span></span></span><span>
+</span><span id="line-22"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679264233"><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourcePosition"><span class="hs-identifier hs-type">SourcePosition</span></a></span></span><span>
+</span><span id="line-23"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679264291"><span id="local-6989586621679264298"><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourcePosition"><span class="hs-identifier hs-type">SourcePosition</span></a></span></span></span><span>
 </span><span id="line-24"></span><span>
 </span><span id="line-25"></span><span class="hs-keyword">data</span><span> </span><span id="SourceSpan"><span class="annot"><a href="Telomare.IR.Loc.html#SourceSpan"><span class="hs-identifier hs-var">SourceSpan</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="SourceSpan"><span class="annot"><a href="Telomare.IR.Loc.html#SourceSpan"><span class="hs-identifier hs-var">SourceSpan</span></a></span></span><span>
 </span><span id="line-26"></span><span>  </span><span class="hs-special">{</span><span> </span><span id="sourceSpanFile"><span class="annot"><span class="annottext">SourceSpan -&gt; Maybe String
@@ -109,7 +109,7 @@ rnf :: SourcePosition -&gt; ()
 </span><span id="line-28"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="sourceSpanEnd"><span class="annot"><span class="annottext">SourceSpan -&gt; SourcePosition
 </span><a href="Telomare.IR.Loc.html#sourceSpanEnd"><span class="hs-identifier hs-var hs-var">sourceSpanEnd</span></a></span></span><span>   </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourcePosition"><span class="hs-identifier hs-type">SourcePosition</span></a></span><span>
 </span><span id="line-29"></span><span>  </span><span class="hs-special">}</span><span>
-</span><span id="line-30"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679233907"><span id="local-6989586621679233914"><span class="annot"><span class="annottext">SourceSpan -&gt; SourceSpan -&gt; Bool
+</span><span id="line-30"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679264347"><span id="local-6989586621679264354"><span class="annot"><span class="annottext">SourceSpan -&gt; SourceSpan -&gt; Bool
 (SourceSpan -&gt; SourceSpan -&gt; Bool)
 -&gt; (SourceSpan -&gt; SourceSpan -&gt; Bool) -&gt; Eq SourceSpan
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -117,7 +117,7 @@ $c== :: SourceSpan -&gt; SourceSpan -&gt; Bool
 == :: SourceSpan -&gt; SourceSpan -&gt; Bool
 $c/= :: SourceSpan -&gt; SourceSpan -&gt; Bool
 /= :: SourceSpan -&gt; SourceSpan -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233921"><span id="local-6989586621679233928"><span id="local-6989586621679233932"><span class="annot"><span class="annottext">Int -&gt; SourceSpan -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264361"><span id="local-6989586621679264368"><span id="local-6989586621679264372"><span class="annot"><span class="annottext">Int -&gt; SourceSpan -&gt; ShowS
 [SourceSpan] -&gt; ShowS
 SourceSpan -&gt; String
 (Int -&gt; SourceSpan -&gt; ShowS)
@@ -132,7 +132,7 @@ $cshow :: SourceSpan -&gt; String
 show :: SourceSpan -&gt; String
 $cshowList :: [SourceSpan] -&gt; ShowS
 showList :: [SourceSpan] -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233937"><span id="local-6989586621679233944"><span id="local-6989586621679233950"><span id="local-6989586621679233954"><span id="local-6989586621679233957"><span id="local-6989586621679233960"><span id="local-6989586621679233963"><span class="annot"><span class="annottext">Eq SourceSpan
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264377"><span id="local-6989586621679264384"><span id="local-6989586621679264390"><span id="local-6989586621679264394"><span id="local-6989586621679264397"><span id="local-6989586621679264400"><span id="local-6989586621679264403"><span class="annot"><span class="annottext">Eq SourceSpan
 Eq SourceSpan =&gt;
 (SourceSpan -&gt; SourceSpan -&gt; Ordering)
 -&gt; (SourceSpan -&gt; SourceSpan -&gt; Bool)
@@ -169,7 +169,7 @@ $cmax :: SourceSpan -&gt; SourceSpan -&gt; SourceSpan
 max :: SourceSpan -&gt; SourceSpan -&gt; SourceSpan
 $cmin :: SourceSpan -&gt; SourceSpan -&gt; SourceSpan
 min :: SourceSpan -&gt; SourceSpan -&gt; SourceSpan
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233970"><span id="local-6989586621679233972"><span class="annot"><span class="annottext">(forall x. SourceSpan -&gt; Rep SourceSpan x)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264410"><span id="local-6989586621679264412"><span class="annot"><span class="annottext">(forall x. SourceSpan -&gt; Rep SourceSpan x)
 -&gt; (forall x. Rep SourceSpan x -&gt; SourceSpan) -&gt; Generic SourceSpan
 forall x. Rep SourceSpan x -&gt; SourceSpan
 forall x. SourceSpan -&gt; Rep SourceSpan x
@@ -179,15 +179,15 @@ $cfrom :: forall x. SourceSpan -&gt; Rep SourceSpan x
 from :: forall x. SourceSpan -&gt; Rep SourceSpan x
 $cto :: forall x. Rep SourceSpan x -&gt; SourceSpan
 to :: forall x. Rep SourceSpan x -&gt; SourceSpan
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679233975"><span class="annot"><span class="annottext">SourceSpan -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264415"><span class="annot"><span class="annottext">SourceSpan -&gt; ()
 (SourceSpan -&gt; ()) -&gt; NFData SourceSpan
 forall a. (a -&gt; ()) -&gt; NFData a
 $crnf :: SourceSpan -&gt; ()
 rnf :: SourceSpan -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">NFData</span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-31"></span><span>
-</span><span id="line-32"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679233997"><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceSpan"><span class="hs-identifier hs-type">SourceSpan</span></a></span></span><span>
-</span><span id="line-33"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679234044"><span id="local-6989586621679234051"><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceSpan"><span class="hs-identifier hs-type">SourceSpan</span></a></span></span></span><span>
+</span><span id="line-32"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679264437"><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceSpan"><span class="hs-identifier hs-type">SourceSpan</span></a></span></span><span>
+</span><span id="line-33"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679264484"><span id="local-6989586621679264491"><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceSpan"><span class="hs-identifier hs-type">SourceSpan</span></a></span></span></span><span>
 </span><span id="line-34"></span><span>
 </span><span id="line-35"></span><span class="hs-keyword">data</span><span> </span><span id="LocTag"><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-var">LocTag</span></a></span></span><span>
 </span><span id="line-36"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="SourceLoc"><span class="annot"><a href="Telomare.IR.Loc.html#SourceLoc"><span class="hs-identifier hs-var">SourceLoc</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceSpan"><span class="hs-identifier hs-type">SourceSpan</span></a></span><span>
@@ -196,7 +196,7 @@ rnf :: SourceSpan -&gt; ()
 </span><span id="line-39"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="RuntimeLoc"><span class="annot"><a href="Telomare.IR.Loc.html#RuntimeLoc"><span class="hs-identifier hs-var">RuntimeLoc</span></a></span></span><span>
 </span><span id="line-40"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="DecompiledLoc"><span class="annot"><a href="Telomare.IR.Loc.html#DecompiledLoc"><span class="hs-identifier hs-var">DecompiledLoc</span></a></span></span><span>
 </span><span id="line-41"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="UnknownLoc"><span class="annot"><a href="Telomare.IR.Loc.html#UnknownLoc"><span class="hs-identifier hs-var">UnknownLoc</span></a></span></span><span>
-</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234100"><span id="local-6989586621679234108"><span class="annot"><span class="annottext">LocTag -&gt; LocTag -&gt; Bool
+</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679264540"><span id="local-6989586621679264551"><span class="annot"><span class="annottext">LocTag -&gt; LocTag -&gt; Bool
 (LocTag -&gt; LocTag -&gt; Bool)
 -&gt; (LocTag -&gt; LocTag -&gt; Bool) -&gt; Eq LocTag
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -204,7 +204,7 @@ $c== :: LocTag -&gt; LocTag -&gt; Bool
 == :: LocTag -&gt; LocTag -&gt; Bool
 $c/= :: LocTag -&gt; LocTag -&gt; Bool
 /= :: LocTag -&gt; LocTag -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234112"><span id="local-6989586621679234122"><span id="local-6989586621679234126"><span class="annot"><span class="annottext">Int -&gt; LocTag -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264555"><span id="local-6989586621679264565"><span id="local-6989586621679264569"><span class="annot"><span class="annottext">Int -&gt; LocTag -&gt; ShowS
 [LocTag] -&gt; ShowS
 LocTag -&gt; String
 (Int -&gt; LocTag -&gt; ShowS)
@@ -217,7 +217,7 @@ $cshow :: LocTag -&gt; String
 show :: LocTag -&gt; String
 $cshowList :: [LocTag] -&gt; ShowS
 showList :: [LocTag] -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234131"><span id="local-6989586621679234139"><span id="local-6989586621679234143"><span id="local-6989586621679234146"><span id="local-6989586621679234149"><span id="local-6989586621679234152"><span id="local-6989586621679234155"><span class="annot"><span class="annottext">Eq LocTag
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264574"><span id="local-6989586621679264585"><span id="local-6989586621679264589"><span id="local-6989586621679264592"><span id="local-6989586621679264595"><span id="local-6989586621679264598"><span id="local-6989586621679264601"><span class="annot"><span class="annottext">Eq LocTag
 Eq LocTag =&gt;
 (LocTag -&gt; LocTag -&gt; Ordering)
 -&gt; (LocTag -&gt; LocTag -&gt; Bool)
@@ -254,7 +254,7 @@ $cmax :: LocTag -&gt; LocTag -&gt; LocTag
 max :: LocTag -&gt; LocTag -&gt; LocTag
 $cmin :: LocTag -&gt; LocTag -&gt; LocTag
 min :: LocTag -&gt; LocTag -&gt; LocTag
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234158"><span id="local-6989586621679234160"><span class="annot"><span class="annottext">(forall x. LocTag -&gt; Rep LocTag x)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264604"><span id="local-6989586621679264606"><span class="annot"><span class="annottext">(forall x. LocTag -&gt; Rep LocTag x)
 -&gt; (forall x. Rep LocTag x -&gt; LocTag) -&gt; Generic LocTag
 forall x. Rep LocTag x -&gt; LocTag
 forall x. LocTag -&gt; Rep LocTag x
@@ -264,36 +264,36 @@ $cfrom :: forall x. LocTag -&gt; Rep LocTag x
 from :: forall x. LocTag -&gt; Rep LocTag x
 $cto :: forall x. Rep LocTag x -&gt; LocTag
 to :: forall x. Rep LocTag x -&gt; LocTag
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234163"><span class="annot"><span class="annottext">LocTag -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264609"><span class="annot"><span class="annottext">LocTag -&gt; ()
 (LocTag -&gt; ()) -&gt; NFData LocTag
 forall a. (a -&gt; ()) -&gt; NFData a
 $crnf :: LocTag -&gt; ()
 rnf :: LocTag -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">NFData</span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-43"></span><span>
-</span><span id="line-44"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679234195"><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span></span><span>
-</span><span id="line-45"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679234253"><span id="local-6989586621679234260"><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span></span></span><span>
+</span><span id="line-44"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679264641"><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span></span><span>
+</span><span id="line-45"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679264699"><span id="local-6989586621679264706"><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span></span></span><span>
 </span><span id="line-46"></span><span>
 </span><span id="line-47"></span><span class="annot"><a href="Telomare.IR.Loc.html#locStartLineColumn"><span class="hs-identifier hs-type">locStartLineColumn</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">)</span><span>
 </span><span id="line-48"></span><span id="locStartLineColumn"><span class="annot"><span class="annottext">locStartLineColumn :: LocTag -&gt; Maybe (Int, Int)
 </span><a href="Telomare.IR.Loc.html#locStartLineColumn"><span class="hs-identifier hs-var hs-var">locStartLineColumn</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-49"></span><span>  </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceLoc"><span class="hs-identifier hs-type">SourceLoc</span></a></span><span> </span><span id="local-6989586621679234340"><span class="annot"><span class="annottext">SourceSpan
-</span><a href="#local-6989586621679234340"><span class="hs-identifier hs-var">spn</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-50"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679234341"><span class="annot"><span class="annottext">start :: SourcePosition
-</span><a href="#local-6989586621679234341"><span class="hs-identifier hs-var hs-var">start</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SourceSpan -&gt; SourcePosition
+</span><span id="line-49"></span><span>  </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceLoc"><span class="hs-identifier hs-type">SourceLoc</span></a></span><span> </span><span id="local-6989586621679264786"><span class="annot"><span class="annottext">SourceSpan
+</span><a href="#local-6989586621679264786"><span class="hs-identifier hs-var">spn</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-50"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679264787"><span class="annot"><span class="annottext">start :: SourcePosition
+</span><a href="#local-6989586621679264787"><span class="hs-identifier hs-var hs-var">start</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SourceSpan -&gt; SourcePosition
 </span><a href="Telomare.IR.Loc.html#sourceSpanStart"><span class="hs-identifier hs-var">sourceSpanStart</span></a></span><span> </span><span class="annot"><span class="annottext">SourceSpan
-</span><a href="#local-6989586621679234340"><span class="hs-identifier hs-var">spn</span></a></span><span>
+</span><a href="#local-6989586621679264786"><span class="hs-identifier hs-var">spn</span></a></span><span>
 </span><span id="line-51"></span><span>    </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">(Int, Int) -&gt; Maybe (Int, Int)
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePosition -&gt; Int
 </span><a href="Telomare.IR.Loc.html#sourcePositionLine"><span class="hs-identifier hs-var">sourcePositionLine</span></a></span><span> </span><span class="annot"><span class="annottext">SourcePosition
-</span><a href="#local-6989586621679234341"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">SourcePosition -&gt; Int
+</span><a href="#local-6989586621679264787"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">SourcePosition -&gt; Int
 </span><a href="Telomare.IR.Loc.html#sourcePositionColumn"><span class="hs-identifier hs-var">sourcePositionColumn</span></a></span><span> </span><span class="annot"><span class="annottext">SourcePosition
-</span><a href="#local-6989586621679234341"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679264787"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-52"></span><span>  </span><span class="annot"><a href="Telomare.IR.Loc.html#GeneratedLoc"><span class="hs-identifier hs-type">GeneratedLoc</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679234342"><span class="annot"><span class="annottext">Maybe LocTag
-</span><a href="#local-6989586621679234342"><span class="hs-identifier hs-var">parent</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
-</span><a href="#local-6989586621679234342"><span class="hs-identifier hs-var">parent</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe (Int, Int)) -&gt; Maybe (Int, Int)
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679264788"><span class="annot"><span class="annottext">Maybe LocTag
+</span><a href="#local-6989586621679264788"><span class="hs-identifier hs-var">parent</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
+</span><a href="#local-6989586621679264788"><span class="hs-identifier hs-var">parent</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe (Int, Int)) -&gt; Maybe (Int, Int)
 forall a b. Maybe a -&gt; (a -&gt; Maybe b) -&gt; Maybe b
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe (Int, Int)
@@ -305,13 +305,13 @@ forall a. Maybe a
 </span><span id="line-54"></span><span>
 </span><span id="line-55"></span><span class="annot"><a href="Telomare.IR.Loc.html#renderLocTag"><span class="hs-identifier hs-type">renderLocTag</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-56"></span><span id="renderLocTag"><span class="annot"><span class="annottext">renderLocTag :: LocTag -&gt; Maybe String
-</span><a href="Telomare.IR.Loc.html#renderLocTag"><span class="hs-identifier hs-var hs-var">renderLocTag</span></a></span></span><span> </span><span id="local-6989586621679234344"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234344"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe (Int, Int)
+</span><a href="Telomare.IR.Loc.html#renderLocTag"><span class="hs-identifier hs-var hs-var">renderLocTag</span></a></span></span><span> </span><span id="local-6989586621679264790"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679264790"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe (Int, Int)
 </span><a href="Telomare.IR.Loc.html#locStartLineColumn"><span class="hs-identifier hs-var">locStartLineColumn</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234344"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-57"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234345"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679234345"><span class="hs-identifier hs-var">line</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234346"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679234346"><span class="hs-identifier hs-var">column</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Maybe String
+</span><a href="#local-6989586621679264790"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-57"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679264791"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679264791"><span class="hs-identifier hs-var">line</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264792"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679264792"><span class="hs-identifier hs-var">column</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Maybe String
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Maybe String) -&gt; String -&gt; Maybe String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -321,7 +321,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679234345"><span class="hs-identifier hs-var">line</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679264791"><span class="hs-identifier hs-var">line</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;, column &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
@@ -329,7 +329,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679234346"><span class="hs-identifier hs-var">column</span></a></span><span>
+</span><a href="#local-6989586621679264792"><span class="hs-identifier hs-var">column</span></a></span><span>
 </span><span id="line-58"></span><span>  </span><span class="annot"><span class="annottext">Maybe (Int, Int)
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>             </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe String
 forall a. Maybe a
@@ -340,18 +340,18 @@ forall a. Maybe a
 </span><span id="line-62"></span><span class="annot"><a href="Telomare.IR.Loc.html#renderLocTagCompact"><span class="hs-identifier hs-type">renderLocTagCompact</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-63"></span><span id="renderLocTagCompact"><span class="annot"><span class="annottext">renderLocTagCompact :: LocTag -&gt; Maybe String
 </span><a href="Telomare.IR.Loc.html#renderLocTagCompact"><span class="hs-identifier hs-var hs-var">renderLocTagCompact</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-64"></span><span>  </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceLoc"><span class="hs-identifier hs-type">SourceLoc</span></a></span><span> </span><span id="local-6989586621679234349"><span class="annot"><span class="annottext">SourceSpan
-</span><a href="#local-6989586621679234349"><span class="hs-identifier hs-var">spn</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
-</span><span id="line-65"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679234350"><span class="annot"><span class="annottext">start :: SourcePosition
-</span><a href="#local-6989586621679234350"><span class="hs-identifier hs-var hs-var">start</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SourceSpan -&gt; SourcePosition
+</span><span id="line-64"></span><span>  </span><span class="annot"><a href="Telomare.IR.Loc.html#SourceLoc"><span class="hs-identifier hs-type">SourceLoc</span></a></span><span> </span><span id="local-6989586621679264795"><span class="annot"><span class="annottext">SourceSpan
+</span><a href="#local-6989586621679264795"><span class="hs-identifier hs-var">spn</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-65"></span><span>    </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679264796"><span class="annot"><span class="annottext">start :: SourcePosition
+</span><a href="#local-6989586621679264796"><span class="hs-identifier hs-var hs-var">start</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">SourceSpan -&gt; SourcePosition
 </span><a href="Telomare.IR.Loc.html#sourceSpanStart"><span class="hs-identifier hs-var">sourceSpanStart</span></a></span><span> </span><span class="annot"><span class="annottext">SourceSpan
-</span><a href="#local-6989586621679234349"><span class="hs-identifier hs-var">spn</span></a></span><span>
-</span><span id="line-66"></span><span>        </span><span id="local-6989586621679234355"><span class="annot"><span class="annottext">lineCol :: String
-</span><a href="#local-6989586621679234355"><span class="hs-identifier hs-var hs-var">lineCol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
+</span><a href="#local-6989586621679264795"><span class="hs-identifier hs-var">spn</span></a></span><span>
+</span><span id="line-66"></span><span>        </span><span id="local-6989586621679264801"><span class="annot"><span class="annottext">lineCol :: String
+</span><a href="#local-6989586621679264801"><span class="hs-identifier hs-var hs-var">lineCol</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePosition -&gt; Int
 </span><a href="Telomare.IR.Loc.html#sourcePositionLine"><span class="hs-identifier hs-var">sourcePositionLine</span></a></span><span> </span><span class="annot"><span class="annottext">SourcePosition
-</span><a href="#local-6989586621679234350"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679264796"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;:&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
@@ -360,7 +360,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourcePosition -&gt; Int
 </span><a href="Telomare.IR.Loc.html#sourcePositionColumn"><span class="hs-identifier hs-var">sourcePositionColumn</span></a></span><span> </span><span class="annot"><span class="annottext">SourcePosition
-</span><a href="#local-6989586621679234350"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679264796"><span class="hs-identifier hs-var">start</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-67"></span><span>    </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">String -&gt; Maybe String
 forall a. a -&gt; Maybe a
 </span><span class="hs-identifier hs-var">Just</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; Maybe String) -&gt; String -&gt; Maybe String
@@ -368,19 +368,19 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS -&gt; Maybe String -&gt; String
 forall b a. b -&gt; (a -&gt; b) -&gt; Maybe a -&gt; b
 </span><span class="hs-identifier hs-var">maybe</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234355"><span class="hs-identifier hs-var">lineCol</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679264801"><span class="hs-identifier hs-var">lineCol</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;:&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234355"><span class="hs-identifier hs-var">lineCol</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourceSpan -&gt; Maybe String
+</span><a href="#local-6989586621679264801"><span class="hs-identifier hs-var">lineCol</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SourceSpan -&gt; Maybe String
 </span><a href="Telomare.IR.Loc.html#sourceSpanFile"><span class="hs-identifier hs-var">sourceSpanFile</span></a></span><span> </span><span class="annot"><span class="annottext">SourceSpan
-</span><a href="#local-6989586621679234349"><span class="hs-identifier hs-var">spn</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679264795"><span class="hs-identifier hs-var">spn</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-68"></span><span>  </span><span class="annot"><a href="Telomare.IR.Loc.html#GeneratedLoc"><span class="hs-identifier hs-type">GeneratedLoc</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679234357"><span class="annot"><span class="annottext">Maybe LocTag
-</span><a href="#local-6989586621679234357"><span class="hs-identifier hs-var">parent</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
-</span><a href="#local-6989586621679234357"><span class="hs-identifier hs-var">parent</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe String) -&gt; Maybe String
+</span><span class="hs-identifier">_</span></span><span> </span><span id="local-6989586621679264803"><span class="annot"><span class="annottext">Maybe LocTag
+</span><a href="#local-6989586621679264803"><span class="hs-identifier hs-var">parent</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
+</span><a href="#local-6989586621679264803"><span class="hs-identifier hs-var">parent</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe String) -&gt; Maybe String
 forall a b. Maybe a -&gt; (a -&gt; Maybe b) -&gt; Maybe b
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe String
@@ -392,42 +392,42 @@ forall a. Maybe a
 </span><span id="line-70"></span><span>
 </span><span id="line-71"></span><span class="annot"><a href="Telomare.IR.Loc.html#renderLocTagVerbose"><span class="hs-identifier hs-type">renderLocTagVerbose</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-72"></span><span id="renderLocTagVerbose"><span class="annot"><span class="annottext">renderLocTagVerbose :: LocTag -&gt; String
-</span><a href="Telomare.IR.Loc.html#renderLocTagVerbose"><span class="hs-identifier hs-var hs-var">renderLocTagVerbose</span></a></span></span><span> </span><span id="local-6989586621679234359"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234359"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234359"><span class="hs-identifier hs-var">loc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe String
+</span><a href="Telomare.IR.Loc.html#renderLocTagVerbose"><span class="hs-identifier hs-var hs-var">renderLocTagVerbose</span></a></span></span><span> </span><span id="local-6989586621679264805"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679264805"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679264805"><span class="hs-identifier hs-var">loc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe String
 </span><a href="Telomare.IR.Loc.html#renderLocTag"><span class="hs-identifier hs-var">renderLocTag</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234359"><span class="hs-identifier hs-var">loc</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-73"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#GeneratedLoc"><span class="hs-identifier hs-type">GeneratedLoc</span></a></span><span> </span><span id="local-6989586621679234360"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234360"><span class="hs-identifier hs-var">reason</span></a></span></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
-</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679234361"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234361"><span class="hs-identifier hs-var">rendered</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234361"><span class="hs-identifier hs-var">rendered</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679264805"><span class="hs-identifier hs-var">loc</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-73"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#GeneratedLoc"><span class="hs-identifier hs-type">GeneratedLoc</span></a></span><span> </span><span id="local-6989586621679264806"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264806"><span class="hs-identifier hs-var">reason</span></a></span></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
+</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679264807"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264807"><span class="hs-identifier hs-var">rendered</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264807"><span class="hs-identifier hs-var">rendered</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; (generated by &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234360"><span class="hs-identifier hs-var">reason</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679264806"><span class="hs-identifier hs-var">reason</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;)&quot;</span></span><span>
-</span><span id="line-74"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#GeneratedLoc"><span class="hs-identifier hs-type">GeneratedLoc</span></a></span><span> </span><span id="local-6989586621679234362"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234362"><span class="hs-identifier hs-var">reason</span></a></span></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
+</span><span id="line-74"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#GeneratedLoc"><span class="hs-identifier hs-type">GeneratedLoc</span></a></span><span> </span><span id="local-6989586621679264808"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264808"><span class="hs-identifier hs-var">reason</span></a></span></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag
 </span><span class="hs-identifier hs-var">Nothing</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Maybe String
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span>       </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;generated by &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234362"><span class="hs-identifier hs-var">reason</span></a></span><span>
-</span><span id="line-75"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#BuiltinLoc"><span class="hs-identifier hs-type">BuiltinLoc</span></a></span><span> </span><span id="local-6989586621679234363"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234363"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Maybe String
+</span><a href="#local-6989586621679264808"><span class="hs-identifier hs-var">reason</span></a></span><span>
+</span><span id="line-75"></span><span>  </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#BuiltinLoc"><span class="hs-identifier hs-type">BuiltinLoc</span></a></span><span> </span><span id="local-6989586621679264809"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264809"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Maybe String
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span>                   </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;builtin &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">ShowS
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234363"><span class="hs-identifier hs-var">name</span></a></span><span>
+</span><a href="#local-6989586621679264809"><span class="hs-identifier hs-var">name</span></a></span><span>
 </span><span id="line-76"></span><span>  </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
 </span><a href="Telomare.IR.Loc.html#RuntimeLoc"><span class="hs-identifier hs-var">RuntimeLoc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Maybe String
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span>                        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
@@ -441,16 +441,16 @@ forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span>                        </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;unknown location&quot;</span></span><span>
 </span><span id="line-79"></span><span>  </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679234364"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234364"><span class="hs-identifier hs-var">rendered</span></a></span></span><span class="hs-special">)</span><span>                     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234364"><span class="hs-identifier hs-var">rendered</span></a></span><span>
+</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679264810"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264810"><span class="hs-identifier hs-var">rendered</span></a></span></span><span class="hs-special">)</span><span>                     </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264810"><span class="hs-identifier hs-var">rendered</span></a></span><span>
 </span><span id="line-80"></span><span>  </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
 </span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Maybe String
 </span><span class="hs-identifier hs-var">Nothing</span></span><span class="hs-special">)</span><span>                           </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;unknown location&quot;</span></span><span>
 </span><span id="line-81"></span><span>
 </span><span id="line-82"></span><span class="hs-keyword">newtype</span><span> </span><span id="LocatedName"><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-var">LocatedName</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="LocatedName"><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-var">LocatedName</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">)</span><span>
-</span><span id="line-83"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234367"><span id="local-6989586621679234374"><span class="annot"><span class="annottext">LocatedName -&gt; LocatedName -&gt; Bool
+</span><span id="line-83"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679264813"><span id="local-6989586621679264820"><span class="annot"><span class="annottext">LocatedName -&gt; LocatedName -&gt; Bool
 (LocatedName -&gt; LocatedName -&gt; Bool)
 -&gt; (LocatedName -&gt; LocatedName -&gt; Bool) -&gt; Eq LocatedName
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -458,7 +458,7 @@ $c== :: LocatedName -&gt; LocatedName -&gt; Bool
 == :: LocatedName -&gt; LocatedName -&gt; Bool
 $c/= :: LocatedName -&gt; LocatedName -&gt; Bool
 /= :: LocatedName -&gt; LocatedName -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234385"><span id="local-6989586621679234392"><span id="local-6989586621679234398"><span id="local-6989586621679234404"><span id="local-6989586621679234410"><span id="local-6989586621679234416"><span id="local-6989586621679234422"><span class="annot"><span class="annottext">Eq LocatedName
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264832"><span id="local-6989586621679264839"><span id="local-6989586621679264845"><span id="local-6989586621679264851"><span id="local-6989586621679264857"><span id="local-6989586621679264863"><span id="local-6989586621679264869"><span class="annot"><span class="annottext">Eq LocatedName
 Eq LocatedName =&gt;
 (LocatedName -&gt; LocatedName -&gt; Ordering)
 -&gt; (LocatedName -&gt; LocatedName -&gt; Bool)
@@ -495,7 +495,7 @@ $cmax :: LocatedName -&gt; LocatedName -&gt; LocatedName
 max :: LocatedName -&gt; LocatedName -&gt; LocatedName
 $cmin :: LocatedName -&gt; LocatedName -&gt; LocatedName
 min :: LocatedName -&gt; LocatedName -&gt; LocatedName
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234436"><span id="local-6989586621679234442"><span id="local-6989586621679234446"><span class="annot"><span class="annottext">Int -&gt; LocatedName -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264885"><span id="local-6989586621679264891"><span id="local-6989586621679264895"><span class="annot"><span class="annottext">Int -&gt; LocatedName -&gt; ShowS
 [LocatedName] -&gt; ShowS
 LocatedName -&gt; String
 (Int -&gt; LocatedName -&gt; ShowS)
@@ -514,47 +514,39 @@ showList :: [LocatedName] -&gt; ShowS
 </span><span id="line-84"></span><span>
 </span><span id="line-85"></span><span class="annot"><a href="Telomare.IR.Loc.html#locatedNameLoc"><span class="hs-identifier hs-type">locatedNameLoc</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span>
 </span><span id="line-86"></span><span id="locatedNameLoc"><span class="annot"><span class="annottext">locatedNameLoc :: LocatedName -&gt; LocTag
-</span><a href="Telomare.IR.Loc.html#locatedNameLoc"><span class="hs-identifier hs-var hs-var">locatedNameLoc</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234449"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234449"><span class="hs-identifier hs-var">loc</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Telomare.IR.Loc.html#locatedNameLoc"><span class="hs-identifier hs-var hs-var">locatedNameLoc</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679264898"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679264898"><span class="hs-identifier hs-var">loc</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234449"><span class="hs-identifier hs-var">loc</span></a></span><span>
+</span><a href="#local-6989586621679264898"><span class="hs-identifier hs-var">loc</span></a></span><span>
 </span><span id="line-87"></span><span>
 </span><span id="line-88"></span><span class="annot"><a href="Telomare.IR.Loc.html#locatedNameText"><span class="hs-identifier hs-type">locatedNameText</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-89"></span><span id="locatedNameText"><span class="annot"><span class="annottext">locatedNameText :: LocatedName -&gt; String
 </span><a href="Telomare.IR.Loc.html#locatedNameText"><span class="hs-identifier hs-var hs-var">locatedNameText</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234451"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234451"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234451"><span class="hs-identifier hs-var">name</span></a></span><span>
+</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264900"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264900"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264900"><span class="hs-identifier hs-var">name</span></a></span><span>
 </span><span id="line-90"></span><span>
 </span><span id="line-91"></span><span class="annot"><a href="Telomare.IR.Loc.html#locatedName"><span class="hs-identifier hs-type">locatedName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span>
 </span><span id="line-92"></span><span id="locatedName"><span class="annot"><span class="annottext">locatedName :: LocTag -&gt; String -&gt; LocatedName
-</span><a href="Telomare.IR.Loc.html#locatedName"><span class="hs-identifier hs-var hs-var">locatedName</span></a></span></span><span> </span><span id="local-6989586621679234453"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234453"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679234454"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234454"><span class="hs-identifier hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(LocTag, String) -&gt; LocatedName
+</span><a href="Telomare.IR.Loc.html#locatedName"><span class="hs-identifier hs-var hs-var">locatedName</span></a></span></span><span> </span><span id="local-6989586621679264902"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679264902"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679264903"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264903"><span class="hs-identifier hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(LocTag, String) -&gt; LocatedName
 </span><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-var">LocatedName</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679234453"><span class="hs-identifier hs-var">loc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679234454"><span class="hs-identifier hs-var">name</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679264902"><span class="hs-identifier hs-var">loc</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679264903"><span class="hs-identifier hs-var">name</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-93"></span><span>
-</span><span id="line-94"></span><span id="local-6989586621679233680"><span class="annot"><a href="Telomare.IR.Loc.html#letBindingName"><span class="hs-identifier hs-type">letBindingName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679233680"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span></span><span>
+</span><span id="line-94"></span><span id="local-6989586621679264115"><span class="annot"><a href="Telomare.IR.Loc.html#letBindingName"><span class="hs-identifier hs-type">letBindingName</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679264115"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span></span><span>
 </span><span id="line-95"></span><span id="letBindingName"><span class="annot"><span class="annottext">letBindingName :: forall a. (LocatedName, a) -&gt; String
-</span><a href="Telomare.IR.Loc.html#letBindingName"><span class="hs-identifier hs-var hs-var">letBindingName</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234456"><span class="annot"><span class="annottext">LocatedName
-</span><a href="#local-6989586621679234456"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="Telomare.IR.Loc.html#letBindingName"><span class="hs-identifier hs-var hs-var">letBindingName</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679264905"><span class="annot"><span class="annottext">LocatedName
+</span><a href="#local-6989586621679264905"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">a
 </span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">LocatedName -&gt; String
 </span><a href="Telomare.IR.Loc.html#locatedNameText"><span class="hs-identifier hs-var">locatedNameText</span></a></span><span> </span><span class="annot"><span class="annottext">LocatedName
-</span><a href="#local-6989586621679234456"><span class="hs-identifier hs-var">name</span></a></span><span>
+</span><a href="#local-6989586621679264905"><span class="hs-identifier hs-var">name</span></a></span><span>
 </span><span id="line-96"></span><span>
-</span><span id="line-97"></span><span id="local-6989586621679233682"><span class="annot"><a href="Telomare.IR.Loc.html#letBindingValue"><span class="hs-identifier hs-type">letBindingValue</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679233682"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679233682"><span class="hs-identifier hs-type">a</span></a></span></span><span>
+</span><span id="line-97"></span><span id="local-6989586621679264117"><span class="annot"><a href="Telomare.IR.Loc.html#letBindingValue"><span class="hs-identifier hs-type">letBindingValue</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679264117"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679264117"><span class="hs-identifier hs-type">a</span></a></span></span><span>
 </span><span id="line-98"></span><span id="letBindingValue"><span class="annot"><span class="annottext">letBindingValue :: forall a. (LocatedName, a) -&gt; a
 </span><a href="Telomare.IR.Loc.html#letBindingValue"><span class="hs-identifier hs-var hs-var">letBindingValue</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocatedName
-</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679234458"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679234458"><span class="hs-identifier hs-var">value</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679234458"><span class="hs-identifier hs-var">value</span></a></span><span>
-</span><span id="line-99"></span><span>
-</span><span id="line-100"></span><span id="local-6989586621679233684"><span class="annot"><a href="Telomare.IR.Loc.html#letBindingLoc"><span class="hs-identifier hs-type">letBindingLoc</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocatedName"><span class="hs-identifier hs-type">LocatedName</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="#local-6989586621679233684"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span></span><span>
-</span><span id="line-101"></span><span id="letBindingLoc"><span class="annot"><span class="annottext">letBindingLoc :: forall a. (LocatedName, a) -&gt; LocTag
-</span><a href="Telomare.IR.Loc.html#letBindingLoc"><span class="hs-identifier hs-var hs-var">letBindingLoc</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679234460"><span class="annot"><span class="annottext">LocatedName
-</span><a href="#local-6989586621679234460"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">a
-</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">LocatedName -&gt; LocTag
-</span><a href="Telomare.IR.Loc.html#locatedNameLoc"><span class="hs-identifier hs-var">locatedNameLoc</span></a></span><span> </span><span class="annot"><span class="annottext">LocatedName
-</span><a href="#local-6989586621679234460"><span class="hs-identifier hs-var">name</span></a></span><span>
-</span><span id="line-102"></span></pre></body></html>
+</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679264907"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679264907"><span class="hs-identifier hs-var">value</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679264907"><span class="hs-identifier hs-var">value</span></a></span><span>
+</span><span id="line-99"></span></pre></body></html>

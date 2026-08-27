@@ -5,14 +5,14 @@
 </span><span id="line-5"></span><span>
 </span><span id="line-6"></span><span class="hs-comment">-- |The type language the type checker works over: concrete 'DataType's and</span><span>
 </span><span id="line-7"></span><span class="hs-comment">-- 'PartialType's with unification variables.</span><span>
-</span><span id="line-8"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Telomare.IR.Types</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-8"></span><span class="hs-keyword">module</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html"><span class="hs-identifier">Telomare.IR.Types</span></a></span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-9"></span><span>
-</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/8bjyqlw4w7jgb5814d60g9k66zxjdfcm-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Combinators.html"><span class="hs-identifier">Control.Lens.Combinators</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/8bjyqlw4w7jgb5814d60g9k66zxjdfcm-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#Plated"><span class="hs-identifier">Plated</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/8bjyqlw4w7jgb5814d60g9k66zxjdfcm-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#transform"><span class="hs-identifier">transform</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html"><span class="hs-identifier">Data.Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-10"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/rfkqpn0qjvb26m1ir57agiz8lh9166ax-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Combinators.html"><span class="hs-identifier">Control.Lens.Combinators</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/rfkqpn0qjvb26m1ir57agiz8lh9166ax-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#Plated"><span class="hs-identifier">Plated</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/rfkqpn0qjvb26m1ir57agiz8lh9166ax-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#transform"><span class="hs-identifier">transform</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-11"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html"><span class="hs-identifier">Data.Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-12"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Functor.Classes</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Eq1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">Ord1</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">Show1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier">Corecursive</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier">embed</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier">Recursive</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier">cata</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html"><span class="hs-identifier">Data.GenValidity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier">GenValid</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html"><span class="hs-identifier">Data.Validity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier">Validity</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier">Corecursive</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier">embed</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html"><span class="hs-identifier">Data.GenValidity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier">GenValid</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html"><span class="hs-identifier">Data.Validity</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier">Validity</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">GHC.Generics</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">Generic</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">Generic1</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier">Generically1</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier">LocTag</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-18"></span><span>
@@ -20,7 +20,7 @@
 </span><span id="line-20"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="ZeroType"><span class="annot"><a href="Telomare.IR.Types.html#ZeroType"><span class="hs-identifier hs-var">ZeroType</span></a></span></span><span>
 </span><span id="line-21"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ArrType"><span class="annot"><a href="Telomare.IR.Types.html#ArrType"><span class="hs-identifier hs-var">ArrType</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span>
 </span><span id="line-22"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PairType"><span class="annot"><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-var">PairType</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span> </span><span class="hs-comment">-- only used when at least one side of a pair is not ZeroType</span><span>
-</span><span id="line-23"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679245348"><span id="local-6989586621679245355"><span class="annot"><span class="annottext">DataType -&gt; DataType -&gt; Bool
+</span><span id="line-23"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679275770"><span id="local-6989586621679275780"><span class="annot"><span class="annottext">DataType -&gt; DataType -&gt; Bool
 (DataType -&gt; DataType -&gt; Bool)
 -&gt; (DataType -&gt; DataType -&gt; Bool) -&gt; Eq DataType
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -28,7 +28,7 @@ $c== :: DataType -&gt; DataType -&gt; Bool
 == :: DataType -&gt; DataType -&gt; Bool
 $c/= :: DataType -&gt; DataType -&gt; Bool
 /= :: DataType -&gt; DataType -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245359"><span id="local-6989586621679245369"><span id="local-6989586621679245372"><span class="annot"><span class="annottext">Int -&gt; DataType -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679275784"><span id="local-6989586621679275794"><span id="local-6989586621679275797"><span class="annot"><span class="annottext">Int -&gt; DataType -&gt; ShowS
 [DataType] -&gt; ShowS
 DataType -&gt; String
 (Int -&gt; DataType -&gt; ShowS)
@@ -41,7 +41,7 @@ $cshow :: DataType -&gt; String
 show :: DataType -&gt; String
 $cshowList :: [DataType] -&gt; ShowS
 showList :: [DataType] -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245378"><span id="local-6989586621679245385"><span id="local-6989586621679245391"><span id="local-6989586621679245394"><span id="local-6989586621679245397"><span id="local-6989586621679245400"><span id="local-6989586621679245403"><span class="annot"><span class="annottext">Eq DataType
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679275804"><span id="local-6989586621679275811"><span id="local-6989586621679275817"><span id="local-6989586621679275820"><span id="local-6989586621679275823"><span id="local-6989586621679275826"><span id="local-6989586621679275829"><span class="annot"><span class="annottext">Eq DataType
 Eq DataType =&gt;
 (DataType -&gt; DataType -&gt; Ordering)
 -&gt; (DataType -&gt; DataType -&gt; Bool)
@@ -78,7 +78,7 @@ $cmax :: DataType -&gt; DataType -&gt; DataType
 max :: DataType -&gt; DataType -&gt; DataType
 $cmin :: DataType -&gt; DataType -&gt; DataType
 min :: DataType -&gt; DataType -&gt; DataType
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245407"><span id="local-6989586621679245409"><span class="annot"><span class="annottext">(forall x. DataType -&gt; Rep DataType x)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679275837"><span id="local-6989586621679275839"><span class="annot"><span class="annottext">(forall x. DataType -&gt; Rep DataType x)
 -&gt; (forall x. Rep DataType x -&gt; DataType) -&gt; Generic DataType
 forall x. Rep DataType x -&gt; DataType
 forall x. DataType -&gt; Rep DataType x
@@ -90,55 +90,55 @@ $cto :: forall x. Rep DataType x -&gt; DataType
 to :: forall x. Rep DataType x -&gt; DataType
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-24"></span><span>
-</span><span id="line-25"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679245413"><span class="annot"><a href="file:///nix/store/vz28wywyaa426syxb5ssjg0f6lhb57z4-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span></span><span>
-</span><span id="line-26"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679245466"><span id="local-6989586621679245473"><span class="annot"><a href="file:///nix/store/bs6rx4my42lwrym728lknck6ylmnbhbn-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span></span></span><span>
+</span><span id="line-25"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679275845"><span class="annot"><a href="file:///nix/store/r40j4m3p69zwf9rbzikmm08p58hsaa6a-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span></span><span>
+</span><span id="line-26"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679275898"><span id="local-6989586621679275905"><span class="annot"><a href="file:///nix/store/vfivgah6s7s285hrl0m3a49n016ma0q7-genvalidity-1.1.1.0-doc/share/doc/genvalidity-1.1.1.0/html/src/Data.GenValidity.html#GenValid"><span class="hs-identifier hs-type">GenValid</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span></span></span><span>
 </span><span id="line-27"></span><span>
-</span><span id="line-28"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="file:///nix/store/8bjyqlw4w7jgb5814d60g9k66zxjdfcm-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#Plated"><span class="hs-identifier hs-type">Plated</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-29"></span><span>  </span><span id="local-6989586621679245538"><span class="annot"><span class="annottext">plate :: Traversal' DataType DataType
-</span><a href="#local-6989586621679245538"><span class="hs-identifier hs-var hs-var hs-var hs-var">plate</span></a></span></span><span> </span><span id="local-6989586621679245540"><span class="annot"><span class="annottext">DataType -&gt; f DataType
-</span><a href="#local-6989586621679245540"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-30"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#ArrType"><span class="hs-identifier hs-type">ArrType</span></a></span><span> </span><span id="local-6989586621679245541"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245541"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679245542"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245542"><span class="hs-identifier hs-var">o</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DataType -&gt; DataType -&gt; DataType
+</span><span id="line-28"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><a href="file:///nix/store/rfkqpn0qjvb26m1ir57agiz8lh9166ax-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#Plated"><span class="hs-identifier hs-type">Plated</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-29"></span><span>  </span><span id="local-6989586621679275970"><span class="annot"><span class="annottext">plate :: Traversal' DataType DataType
+</span><a href="#local-6989586621679275970"><span class="hs-identifier hs-var hs-var hs-var">plate</span></a></span></span><span> </span><span id="local-6989586621679275972"><span class="annot"><span class="annottext">DataType -&gt; f DataType
+</span><a href="#local-6989586621679275972"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-30"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#ArrType"><span class="hs-identifier hs-type">ArrType</span></a></span><span> </span><span id="local-6989586621679275973"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275973"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679275974"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275974"><span class="hs-identifier hs-var">o</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DataType -&gt; DataType -&gt; DataType
 </span><a href="Telomare.IR.Types.html#ArrType"><span class="hs-identifier hs-var">ArrType</span></a></span><span> </span><span class="annot"><span class="annottext">(DataType -&gt; DataType -&gt; DataType)
 -&gt; f DataType -&gt; f (DataType -&gt; DataType)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">DataType -&gt; f DataType
-</span><a href="#local-6989586621679245540"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245541"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">f (DataType -&gt; DataType) -&gt; f DataType -&gt; f DataType
+</span><a href="#local-6989586621679275972"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275973"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">f (DataType -&gt; DataType) -&gt; f DataType -&gt; f DataType
 forall a b. f (a -&gt; b) -&gt; f a -&gt; f b
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">DataType -&gt; f DataType
-</span><a href="#local-6989586621679245540"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245542"><span class="hs-identifier hs-var">o</span></a></span><span>
-</span><span id="line-31"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-type">PairType</span></a></span><span> </span><span id="local-6989586621679245544"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245544"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679245545"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245545"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DataType -&gt; DataType -&gt; DataType
+</span><a href="#local-6989586621679275972"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275974"><span class="hs-identifier hs-var">o</span></a></span><span>
+</span><span id="line-31"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-type">PairType</span></a></span><span> </span><span id="local-6989586621679275976"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275976"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679275977"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275977"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DataType -&gt; DataType -&gt; DataType
 </span><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-var">PairType</span></a></span><span> </span><span class="annot"><span class="annottext">(DataType -&gt; DataType -&gt; DataType)
 -&gt; f DataType -&gt; f (DataType -&gt; DataType)
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">DataType -&gt; f DataType
-</span><a href="#local-6989586621679245540"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245544"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">f (DataType -&gt; DataType) -&gt; f DataType -&gt; f DataType
+</span><a href="#local-6989586621679275972"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275976"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">f (DataType -&gt; DataType) -&gt; f DataType -&gt; f DataType
 forall a b. f (a -&gt; b) -&gt; f a -&gt; f b
 forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
 </span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">DataType -&gt; f DataType
-</span><a href="#local-6989586621679245540"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245545"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-32"></span><span>    </span><span id="local-6989586621679245546"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245546"><span class="hs-identifier hs-var">x</span></a></span></span><span>            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DataType -&gt; f DataType
+</span><a href="#local-6989586621679275972"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275977"><span class="hs-identifier hs-var">b</span></a></span><span>
+</span><span id="line-32"></span><span>    </span><span id="local-6989586621679275978"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679275978"><span class="hs-identifier hs-var">x</span></a></span></span><span>            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">DataType -&gt; f DataType
 forall a. a -&gt; f a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245546"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><a href="#local-6989586621679275978"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-33"></span><span>
-</span><span id="line-34"></span><span class="hs-keyword">data</span><span> </span><span id="PartialTypeF"><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-var">PartialTypeF</span></a></span></span><span> </span><span id="local-6989586621679245321"><span class="annot"><a href="#local-6989586621679245321"><span class="hs-identifier hs-type">f</span></a></span></span><span>
+</span><span id="line-34"></span><span class="hs-keyword">data</span><span> </span><span id="PartialTypeF"><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-var">PartialTypeF</span></a></span></span><span> </span><span id="local-6989586621679275750"><span class="annot"><a href="#local-6989586621679275750"><span class="hs-identifier hs-type">f</span></a></span></span><span>
 </span><span id="line-35"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="ZeroTypeP"><span class="annot"><a href="Telomare.IR.Types.html#ZeroTypeP"><span class="hs-identifier hs-var">ZeroTypeP</span></a></span></span><span>
 </span><span id="line-36"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="AnyType"><span class="annot"><a href="Telomare.IR.Types.html#AnyType"><span class="hs-identifier hs-var">AnyType</span></a></span></span><span>
 </span><span id="line-37"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="TypeVariable"><span class="annot"><a href="Telomare.IR.Types.html#TypeVariable"><span class="hs-identifier hs-var">TypeVariable</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
-</span><span id="line-38"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ArrTypeP"><span class="annot"><a href="Telomare.IR.Types.html#ArrTypeP"><span class="hs-identifier hs-var">ArrTypeP</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679245321"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679245321"><span class="hs-identifier hs-type">f</span></a></span><span>
-</span><span id="line-39"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PairTypeP"><span class="annot"><a href="Telomare.IR.Types.html#PairTypeP"><span class="hs-identifier hs-var">PairTypeP</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679245321"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679245321"><span class="hs-identifier hs-type">f</span></a></span><span>
-</span><span id="line-40"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679245554"><span id="local-6989586621679245564"><span class="annot"><span class="annottext">PartialTypeF f -&gt; PartialTypeF f -&gt; Bool
+</span><span id="line-38"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ArrTypeP"><span class="annot"><a href="Telomare.IR.Types.html#ArrTypeP"><span class="hs-identifier hs-var">ArrTypeP</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679275750"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679275750"><span class="hs-identifier hs-type">f</span></a></span><span>
+</span><span id="line-39"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="PairTypeP"><span class="annot"><a href="Telomare.IR.Types.html#PairTypeP"><span class="hs-identifier hs-var">PairTypeP</span></a></span></span><span> </span><span class="annot"><a href="#local-6989586621679275750"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679275750"><span class="hs-identifier hs-type">f</span></a></span><span>
+</span><span id="line-40"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679275986"><span id="local-6989586621679275998"><span class="annot"><span class="annottext">PartialTypeF f -&gt; PartialTypeF f -&gt; Bool
 (PartialTypeF f -&gt; PartialTypeF f -&gt; Bool)
 -&gt; (PartialTypeF f -&gt; PartialTypeF f -&gt; Bool)
 -&gt; Eq (PartialTypeF f)
@@ -148,7 +148,7 @@ $c== :: forall f. Eq f =&gt; PartialTypeF f -&gt; PartialTypeF f -&gt; Bool
 == :: PartialTypeF f -&gt; PartialTypeF f -&gt; Bool
 $c/= :: forall f. Eq f =&gt; PartialTypeF f -&gt; PartialTypeF f -&gt; Bool
 /= :: PartialTypeF f -&gt; PartialTypeF f -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245572"><span id="local-6989586621679245581"><span id="local-6989586621679245585"><span id="local-6989586621679245588"><span id="local-6989586621679245591"><span id="local-6989586621679245594"><span id="local-6989586621679245597"><span class="annot"><span class="annottext">Eq (PartialTypeF f)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679276006"><span id="local-6989586621679276016"><span id="local-6989586621679276020"><span id="local-6989586621679276023"><span id="local-6989586621679276026"><span id="local-6989586621679276029"><span id="local-6989586621679276032"><span class="annot"><span class="annottext">Eq (PartialTypeF f)
 Eq (PartialTypeF f) =&gt;
 (PartialTypeF f -&gt; PartialTypeF f -&gt; Ordering)
 -&gt; (PartialTypeF f -&gt; PartialTypeF f -&gt; Bool)
@@ -195,7 +195,7 @@ $cmin :: forall f.
 Ord f =&gt;
 PartialTypeF f -&gt; PartialTypeF f -&gt; PartialTypeF f
 min :: PartialTypeF f -&gt; PartialTypeF f -&gt; PartialTypeF f
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245602"><span id="local-6989586621679245615"><span id="local-6989586621679245619"><span class="annot"><span class="annottext">Int -&gt; PartialTypeF f -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679276037"><span id="local-6989586621679276050"><span id="local-6989586621679276054"><span class="annot"><span class="annottext">Int -&gt; PartialTypeF f -&gt; ShowS
 [PartialTypeF f] -&gt; ShowS
 PartialTypeF f -&gt; String
 (Int -&gt; PartialTypeF f -&gt; ShowS)
@@ -213,7 +213,7 @@ $cshow :: forall f. Show f =&gt; PartialTypeF f -&gt; String
 show :: PartialTypeF f -&gt; String
 $cshowList :: forall f. Show f =&gt; [PartialTypeF f] -&gt; ShowS
 showList :: [PartialTypeF f] -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245622"><span id="local-6989586621679245624"><span class="annot"><span class="annottext">(forall a. PartialTypeF a -&gt; Rep1 PartialTypeF a)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679276057"><span id="local-6989586621679276059"><span class="annot"><span class="annottext">(forall a. PartialTypeF a -&gt; Rep1 PartialTypeF a)
 -&gt; (forall a. Rep1 PartialTypeF a -&gt; PartialTypeF a)
 -&gt; Generic1 PartialTypeF
 forall a. Rep1 PartialTypeF a -&gt; PartialTypeF a
@@ -225,7 +225,7 @@ $cfrom1 :: forall a. PartialTypeF a -&gt; Rep1 PartialTypeF a
 from1 :: forall a. PartialTypeF a -&gt; Rep1 PartialTypeF a
 $cto1 :: forall a. Rep1 PartialTypeF a -&gt; PartialTypeF a
 to1 :: forall a. Rep1 PartialTypeF a -&gt; PartialTypeF a
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic1</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245628"><span id="local-6989586621679245630"><span class="annot"><span class="annottext">(forall a b. (a -&gt; b) -&gt; PartialTypeF a -&gt; PartialTypeF b)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic1</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679276065"><span id="local-6989586621679276067"><span class="annot"><span class="annottext">(forall a b. (a -&gt; b) -&gt; PartialTypeF a -&gt; PartialTypeF b)
 -&gt; (forall a b. a -&gt; PartialTypeF b -&gt; PartialTypeF a)
 -&gt; Functor PartialTypeF
 forall a b. a -&gt; PartialTypeF b -&gt; PartialTypeF a
@@ -237,7 +237,7 @@ $cfmap :: forall a b. (a -&gt; b) -&gt; PartialTypeF a -&gt; PartialTypeF b
 fmap :: forall a b. (a -&gt; b) -&gt; PartialTypeF a -&gt; PartialTypeF b
 $c&lt;$ :: forall a b. a -&gt; PartialTypeF b -&gt; PartialTypeF a
 &lt;$ :: forall a b. a -&gt; PartialTypeF b -&gt; PartialTypeF a
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245633"><span id="local-6989586621679245639"><span id="local-6989586621679245647"><span id="local-6989586621679245652"><span id="local-6989586621679245654"><span id="local-6989586621679245657"><span id="local-6989586621679245660"><span id="local-6989586621679245663"><span id="local-6989586621679245666"><span id="local-6989586621679245669"><span id="local-6989586621679245672"><span id="local-6989586621679245674"><span id="local-6989586621679245677"><span id="local-6989586621679245682"><span id="local-6989586621679245687"><span id="local-6989586621679245692"><span id="local-6989586621679245697"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; PartialTypeF m -&gt; m)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Functor</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679276071"><span id="local-6989586621679276077"><span id="local-6989586621679276085"><span id="local-6989586621679276090"><span id="local-6989586621679276092"><span id="local-6989586621679276095"><span id="local-6989586621679276098"><span id="local-6989586621679276101"><span id="local-6989586621679276104"><span id="local-6989586621679276107"><span id="local-6989586621679276110"><span id="local-6989586621679276112"><span id="local-6989586621679276115"><span id="local-6989586621679276120"><span id="local-6989586621679276125"><span id="local-6989586621679276130"><span id="local-6989586621679276135"><span class="annot"><span class="annottext">(forall m. Monoid m =&gt; PartialTypeF m -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; PartialTypeF a -&gt; m)
 -&gt; (forall m a. Monoid m =&gt; (a -&gt; m) -&gt; PartialTypeF a -&gt; m)
 -&gt; (forall a b. (a -&gt; b -&gt; b) -&gt; b -&gt; PartialTypeF a -&gt; b)
@@ -319,7 +319,7 @@ $csum :: forall a. Num a =&gt; PartialTypeF a -&gt; a
 sum :: forall a. Num a =&gt; PartialTypeF a -&gt; a
 $cproduct :: forall a. Num a =&gt; PartialTypeF a -&gt; a
 product :: forall a. Num a =&gt; PartialTypeF a -&gt; a
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679245707"><span id="local-6989586621679245715"><span id="local-6989586621679245721"><span id="local-6989586621679245726"><span class="annot"><span class="annottext">Functor PartialTypeF
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Foldable</span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679276148"><span id="local-6989586621679276156"><span id="local-6989586621679276162"><span id="local-6989586621679276167"><span class="annot"><span class="annottext">Functor PartialTypeF
 Foldable PartialTypeF
 (Functor PartialTypeF, Foldable PartialTypeF) =&gt;
 (forall (f :: * -&gt; *) a b.
@@ -383,7 +383,7 @@ sequence :: forall (m :: * -&gt; *) a.
 Monad m =&gt;
 PartialTypeF (m a) -&gt; m (PartialTypeF a)
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Traversable</span></span></span></span></span></span><span class="hs-special">)</span><span>
-</span><span id="line-41"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679245734"><span class="annot"><span class="annottext">(forall f. Eq f =&gt; Eq (PartialTypeF f)) =&gt;
+</span><span id="line-41"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679276176"><span class="annot"><span class="annottext">(forall f. Eq f =&gt; Eq (PartialTypeF f)) =&gt;
 (forall a b.
  (a -&gt; b -&gt; Bool) -&gt; PartialTypeF a -&gt; PartialTypeF b -&gt; Bool)
 -&gt; Eq1 PartialTypeF
@@ -398,7 +398,7 @@ $cliftEq :: forall a b.
 liftEq :: forall a b.
 (a -&gt; b -&gt; Bool) -&gt; PartialTypeF a -&gt; PartialTypeF b -&gt; Bool
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var">Eq1</span></span></span><span> </span><span class="hs-keyword">via</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Generically1</span></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-type">PartialTypeF</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679245775"><span class="annot"><span class="annottext">Eq1 PartialTypeF
+</span><span id="line-42"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679276218"><span class="annot"><span class="annottext">Eq1 PartialTypeF
 (Eq1 PartialTypeF, forall f. Ord f =&gt; Ord (PartialTypeF f)) =&gt;
 (forall a b.
  (a -&gt; b -&gt; Ordering)
@@ -419,14 +419,14 @@ liftCompare :: forall a b.
 (a -&gt; b -&gt; Ordering)
 -&gt; PartialTypeF a -&gt; PartialTypeF b -&gt; Ordering
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Ord1</span></span></span><span> </span><span class="hs-keyword">via</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Generically1</span></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-type">PartialTypeF</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-43"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679245815"><span class="annot"><span class="hs-identifier hs-type">Show1</span></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-type">PartialTypeF</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-44"></span><span>  </span><span id="local-6989586621679245821"><span class="annot"><span class="annottext">liftShowsPrec :: forall a.
+</span><span id="line-43"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679276259"><span class="annot"><span class="hs-identifier hs-type">Show1</span></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-type">PartialTypeF</span></a></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-44"></span><span>  </span><span id="local-6989586621679276265"><span class="annot"><span class="annottext">liftShowsPrec :: forall a.
 (Int -&gt; a -&gt; ShowS)
 -&gt; ([a] -&gt; ShowS) -&gt; Int -&gt; PartialTypeF a -&gt; ShowS
-</span><a href="#local-6989586621679245821"><span class="hs-identifier hs-var hs-var hs-var hs-var">liftShowsPrec</span></a></span></span><span> </span><span id="local-6989586621679245823"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679245823"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span></span><span> </span><span id="local-6989586621679245824"><span class="annot"><span class="annottext">[a] -&gt; ShowS
-</span><a href="#local-6989586621679245824"><span class="hs-identifier hs-var">_showList</span></a></span></span><span> </span><span id="local-6989586621679245825"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679245825"><span class="hs-identifier hs-var">_d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="#local-6989586621679276265"><span class="hs-identifier hs-var hs-var hs-var">liftShowsPrec</span></a></span></span><span> </span><span id="local-6989586621679276267"><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
+</span><a href="#local-6989586621679276267"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span></span><span> </span><span id="local-6989586621679276268"><span class="annot"><span class="annottext">[a] -&gt; ShowS
+</span><a href="#local-6989586621679276268"><span class="hs-identifier hs-var">_showList</span></a></span></span><span> </span><span id="local-6989586621679276269"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679276269"><span class="hs-identifier hs-var">_d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-45"></span><span>    </span><span class="annot"><span class="annottext">PartialTypeF a
 </span><a href="Telomare.IR.Types.html#ZeroTypeP"><span class="hs-identifier hs-var">ZeroTypeP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
@@ -435,16 +435,16 @@ liftCompare :: forall a b.
 </span><a href="Telomare.IR.Types.html#AnyType"><span class="hs-identifier hs-var">AnyType</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;AnyType&quot;</span></span><span>
-</span><span id="line-47"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#TypeVariable"><span class="hs-identifier hs-type">TypeVariable</span></a></span><span> </span><span id="local-6989586621679245827"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679245827"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679245828"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679245828"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span id="line-47"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#TypeVariable"><span class="hs-identifier hs-type">TypeVariable</span></a></span><span> </span><span id="local-6989586621679276271"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679276271"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679276272"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679276272"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;TypeVariable &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; ShowS
 forall a. Show a =&gt; a -&gt; ShowS
 </span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679245827"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+</span><a href="#local-6989586621679276271"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
@@ -453,55 +453,55 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; ShowS
 forall a. Show a =&gt; a -&gt; ShowS
 </span><span class="hs-identifier hs-var">shows</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679245828"><span class="hs-identifier hs-var">i</span></a></span><span>
-</span><span id="line-48"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#ArrTypeP"><span class="hs-identifier hs-type">ArrTypeP</span></a></span><span> </span><span id="local-6989586621679245831"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245831"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679245832"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245832"><span class="hs-identifier hs-var">o</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679276272"><span class="hs-identifier hs-var">i</span></a></span><span>
+</span><span id="line-48"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#ArrTypeP"><span class="hs-identifier hs-type">ArrTypeP</span></a></span><span> </span><span id="local-6989586621679276275"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679276275"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679276276"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679276276"><span class="hs-identifier hs-var">o</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;ArrTypeP (&quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679245823"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679276267"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245831"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+</span><a href="#local-6989586621679276275"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; -&gt; &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679245823"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679276267"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245832"><span class="hs-identifier hs-var">o</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+</span><a href="#local-6989586621679276276"><span class="hs-identifier hs-var">o</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;)&quot;</span></span><span>
-</span><span id="line-49"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#PairTypeP"><span class="hs-identifier hs-type">PairTypeP</span></a></span><span> </span><span id="local-6989586621679245833"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245833"><span class="hs-identifier hs-var">_a</span></a></span></span><span> </span><span id="local-6989586621679245834"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245834"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span id="line-49"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#PairTypeP"><span class="hs-identifier hs-type">PairTypeP</span></a></span><span> </span><span id="local-6989586621679276277"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679276277"><span class="hs-identifier hs-var">_a</span></a></span></span><span> </span><span id="local-6989586621679276278"><span class="annot"><span class="annottext">a
+</span><a href="#local-6989586621679276278"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;PairTypeP (&quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679245823"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679276267"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245834"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+</span><a href="#local-6989586621679276278"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;, &quot;</span></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; a -&gt; ShowS
-</span><a href="#local-6989586621679245823"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679276267"><span class="hs-identifier hs-var">showsPrecFunc</span></a></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679245834"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
+</span><a href="#local-6989586621679276278"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">ShowS -&gt; ShowS -&gt; ShowS
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;)&quot;</span></span><span>
 </span><span id="line-50"></span><span>
-</span><span id="line-51"></span><span class="hs-keyword">type</span><span> </span><span id="PartialType"><span class="annot"><a href="Telomare.IR.Types.html#PartialType"><span class="hs-identifier hs-var">PartialType</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-type">PartialTypeF</span></a></span><span>
+</span><span id="line-51"></span><span class="hs-keyword">type</span><span> </span><span id="PartialType"><span class="annot"><a href="Telomare.IR.Types.html#PartialType"><span class="hs-identifier hs-var">PartialType</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialTypeF"><span class="hs-identifier hs-type">PartialTypeF</span></a></span><span>
 </span><span id="line-52"></span><span>
 </span><span id="line-53"></span><span class="annot"><a href="Telomare.IR.Types.html#toPartialType"><span class="hs-identifier hs-type">toPartialType</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialType"><span class="hs-identifier hs-type">PartialType</span></a></span><span>
 </span><span id="line-54"></span><span id="toPartialType"><span class="annot"><span class="annottext">toPartialType :: DataType -&gt; PartialType
@@ -509,120 +509,52 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span id="line-55"></span><span>  </span><span class="annot"><span class="annottext">DataType
 </span><a href="Telomare.IR.Types.html#ZeroType"><span class="hs-identifier hs-var">ZeroType</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
 forall t. Corecursive t =&gt; Base t t -&gt; t
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType
+</span><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType
 PartialTypeF PartialType
 forall f. PartialTypeF f
 </span><a href="Telomare.IR.Types.html#ZeroTypeP"><span class="hs-identifier hs-var">ZeroTypeP</span></a></span><span>
-</span><span id="line-56"></span><span>  </span><span class="annot"><a href="Telomare.IR.Types.html#ArrType"><span class="hs-identifier hs-type">ArrType</span></a></span><span> </span><span id="local-6989586621679245836"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245836"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679245837"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245837"><span class="hs-identifier hs-var">o</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
+</span><span id="line-56"></span><span>  </span><span class="annot"><a href="Telomare.IR.Types.html#ArrType"><span class="hs-identifier hs-type">ArrType</span></a></span><span> </span><span id="local-6989586621679276280"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679276280"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679276281"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679276281"><span class="hs-identifier hs-var">o</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
 forall t. Corecursive t =&gt; Base t t -&gt; t
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">(Base PartialType PartialType -&gt; PartialType)
+</span><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">(Base PartialType PartialType -&gt; PartialType)
 -&gt; Base PartialType PartialType -&gt; PartialType
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PartialType -&gt; PartialType -&gt; PartialTypeF PartialType
 forall f. f -&gt; f -&gt; PartialTypeF f
 </span><a href="Telomare.IR.Types.html#ArrTypeP"><span class="hs-identifier hs-var">ArrTypeP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataType -&gt; PartialType
 </span><a href="Telomare.IR.Types.html#toPartialType"><span class="hs-identifier hs-var">toPartialType</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245836"><span class="hs-identifier hs-var">i</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataType -&gt; PartialType
+</span><a href="#local-6989586621679276280"><span class="hs-identifier hs-var">i</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataType -&gt; PartialType
 </span><a href="Telomare.IR.Types.html#toPartialType"><span class="hs-identifier hs-var">toPartialType</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245837"><span class="hs-identifier hs-var">o</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-57"></span><span>  </span><span class="annot"><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-type">PairType</span></a></span><span> </span><span id="local-6989586621679245838"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245838"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679245839"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245839"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
+</span><a href="#local-6989586621679276281"><span class="hs-identifier hs-var">o</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-57"></span><span>  </span><span class="annot"><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-type">PairType</span></a></span><span> </span><span id="local-6989586621679276282"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679276282"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679276283"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679276283"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
 forall t. Corecursive t =&gt; Base t t -&gt; t
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">(Base PartialType PartialType -&gt; PartialType)
+</span><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">(Base PartialType PartialType -&gt; PartialType)
 -&gt; Base PartialType PartialType -&gt; PartialType
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">PartialType -&gt; PartialType -&gt; PartialTypeF PartialType
 forall f. f -&gt; f -&gt; PartialTypeF f
 </span><a href="Telomare.IR.Types.html#PairTypeP"><span class="hs-identifier hs-var">PairTypeP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataType -&gt; PartialType
 </span><a href="Telomare.IR.Types.html#toPartialType"><span class="hs-identifier hs-var">toPartialType</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245838"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataType -&gt; PartialType
+</span><a href="#local-6989586621679276282"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">DataType -&gt; PartialType
 </span><a href="Telomare.IR.Types.html#toPartialType"><span class="hs-identifier hs-var">toPartialType</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245839"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679276283"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-58"></span><span>
 </span><span id="line-59"></span><span class="annot"><a href="Telomare.IR.Types.html#mergePairType"><span class="hs-identifier hs-type">mergePairType</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#DataType"><span class="hs-identifier hs-type">DataType</span></a></span><span>
 </span><span id="line-60"></span><span id="mergePairType"><span class="annot"><span class="annottext">mergePairType :: DataType -&gt; DataType
 </span><a href="Telomare.IR.Types.html#mergePairType"><span class="hs-identifier hs-var hs-var">mergePairType</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(DataType -&gt; DataType) -&gt; DataType -&gt; DataType
 forall a. Plated a =&gt; (a -&gt; a) -&gt; a -&gt; a
-</span><a href="file:///nix/store/8bjyqlw4w7jgb5814d60g9k66zxjdfcm-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#transform"><span class="hs-identifier hs-var">transform</span></a></span><span> </span><span class="annot"><span class="annottext">DataType -&gt; DataType
-</span><a href="#local-6989586621679245841"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-61"></span><span>  </span><span id="local-6989586621679245841"><span class="annot"><span class="annottext">f :: DataType -&gt; DataType
-</span><a href="#local-6989586621679245841"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-type">PairType</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
+</span><a href="file:///nix/store/rfkqpn0qjvb26m1ir57agiz8lh9166ax-lens-5.3.6-doc/share/doc/lens-5.3.6/html/src/Control.Lens.Plated.html#transform"><span class="hs-identifier hs-var">transform</span></a></span><span> </span><span class="annot"><span class="annottext">DataType -&gt; DataType
+</span><a href="#local-6989586621679276285"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-61"></span><span>  </span><span id="local-6989586621679276285"><span class="annot"><span class="annottext">f :: DataType -&gt; DataType
+</span><a href="#local-6989586621679276285"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Types.html#PairType"><span class="hs-identifier hs-type">PairType</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
 </span><a href="Telomare.IR.Types.html#ZeroType"><span class="hs-identifier hs-var">ZeroType</span></a></span><span> </span><span class="annot"><span class="annottext">DataType
 </span><a href="Telomare.IR.Types.html#ZeroType"><span class="hs-identifier hs-var">ZeroType</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DataType
 </span><a href="Telomare.IR.Types.html#ZeroType"><span class="hs-identifier hs-var">ZeroType</span></a></span><span>
-</span><span id="line-62"></span><span>  </span><span class="annot"><a href="#local-6989586621679245841"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span id="local-6989586621679245842"><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245842"><span class="hs-identifier hs-var">x</span></a></span></span><span>                            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DataType
-</span><a href="#local-6989586621679245842"><span class="hs-identifier hs-var">x</span></a></span><span>
+</span><span id="line-62"></span><span>  </span><span class="annot"><a href="#local-6989586621679276285"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span id="local-6989586621679276286"><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679276286"><span class="hs-identifier hs-var">x</span></a></span></span><span>                            </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">DataType
+</span><a href="#local-6989586621679276286"><span class="hs-identifier hs-var">x</span></a></span><span>
 </span><span id="line-63"></span><span>
-</span><span id="line-64"></span><span class="annot"><a href="Telomare.IR.Types.html#mergePairTypeP"><span class="hs-identifier hs-type">mergePairTypeP</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialType"><span class="hs-identifier hs-type">PartialType</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialType"><span class="hs-identifier hs-type">PartialType</span></a></span><span>
-</span><span id="line-65"></span><span id="mergePairTypeP"><span class="annot"><span class="annottext">mergePairTypeP :: PartialType -&gt; PartialType
-</span><a href="Telomare.IR.Types.html#mergePairTypeP"><span class="hs-identifier hs-var hs-var">mergePairTypeP</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base PartialType PartialType -&gt; PartialType)
--&gt; PartialType -&gt; PartialType
-forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
-forall a. (Base PartialType a -&gt; a) -&gt; PartialType -&gt; a
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
-PartialTypeF PartialType -&gt; PartialType
-</span><a href="#local-6989586621679245844"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-66"></span><span>  </span><span id="local-6989586621679245844"><span class="annot"><span class="annottext">f :: PartialTypeF PartialType -&gt; PartialType
-</span><a href="#local-6989586621679245844"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-67"></span><span>    </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Types.html#PairTypeP"><span class="hs-identifier hs-type">PairTypeP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="annot"><span class="annottext">PartialTypeF PartialType
-</span><a href="Telomare.IR.Types.html#ZeroTypeP"><span class="hs-identifier hs-var">ZeroTypeP</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/7ra6cs2sk6p9kiy12xvrmr389griizjx-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="annot"><span class="annottext">PartialTypeF PartialType
-</span><a href="Telomare.IR.Types.html#ZeroTypeP"><span class="hs-identifier hs-var">ZeroTypeP</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
-forall t. Corecursive t =&gt; Base t t -&gt; t
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType
-PartialTypeF PartialType
-forall f. PartialTypeF f
-</span><a href="Telomare.IR.Types.html#ZeroTypeP"><span class="hs-identifier hs-var">ZeroTypeP</span></a></span><span>
-</span><span id="line-68"></span><span>    </span><span id="local-6989586621679245849"><span class="annot"><span class="annottext">PartialTypeF PartialType
-</span><a href="#local-6989586621679245849"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType -&gt; PartialType
-forall t. Corecursive t =&gt; Base t t -&gt; t
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base PartialType PartialType
-PartialTypeF PartialType
-</span><a href="#local-6989586621679245849"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-69"></span><span>
-</span><span id="line-70"></span><span class="annot"><a href="Telomare.IR.Types.html#containsFunction"><span class="hs-identifier hs-type">containsFunction</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialType"><span class="hs-identifier hs-type">PartialType</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
-</span><span id="line-71"></span><span id="containsFunction"><span class="annot"><span class="annottext">containsFunction :: PartialType -&gt; Bool
-</span><a href="Telomare.IR.Types.html#containsFunction"><span class="hs-identifier hs-var hs-var">containsFunction</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base PartialType Bool -&gt; Bool) -&gt; PartialType -&gt; Bool
-forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
-forall a. (Base PartialType a -&gt; a) -&gt; PartialType -&gt; a
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base PartialType Bool -&gt; Bool
-PartialTypeF Bool -&gt; Bool
-</span><a href="#local-6989586621679245851"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-72"></span><span>  </span><span id="local-6989586621679245851"><span class="annot"><span class="annottext">f :: PartialTypeF Bool -&gt; Bool
-</span><a href="#local-6989586621679245851"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-73"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#ArrTypeP"><span class="hs-identifier hs-type">ArrTypeP</span></a></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-74"></span><span>    </span><span id="local-6989586621679245853"><span class="annot"><span class="annottext">PartialTypeF Bool
-</span><a href="#local-6989586621679245853"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">PartialTypeF Bool -&gt; Bool
-forall (t :: * -&gt; *). Foldable t =&gt; t Bool -&gt; Bool
-</span><span class="hs-identifier hs-var">or</span></span><span> </span><span class="annot"><span class="annottext">PartialTypeF Bool
-</span><a href="#local-6989586621679245853"><span class="hs-identifier hs-var">x</span></a></span><span>
-</span><span id="line-75"></span><span>
-</span><span id="line-76"></span><span class="annot"><a href="Telomare.IR.Types.html#cleanType"><span class="hs-identifier hs-type">cleanType</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Types.html#PartialType"><span class="hs-identifier hs-type">PartialType</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
-</span><span id="line-77"></span><span id="cleanType"><span class="annot"><span class="annottext">cleanType :: PartialType -&gt; Bool
-</span><a href="Telomare.IR.Types.html#cleanType"><span class="hs-identifier hs-var hs-var">cleanType</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Base PartialType Bool -&gt; Bool) -&gt; PartialType -&gt; Bool
-forall t a. Recursive t =&gt; (Base t a -&gt; a) -&gt; t -&gt; a
-forall a. (Base PartialType a -&gt; a) -&gt; PartialType -&gt; a
-</span><a href="file:///nix/store/nw4mryq9rqrijqizy4jnx7v7cw25mrr6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#cata"><span class="hs-identifier hs-var">cata</span></a></span><span> </span><span class="annot"><span class="annottext">Base PartialType Bool -&gt; Bool
-PartialTypeF Bool -&gt; Bool
-</span><a href="#local-6989586621679245856"><span class="hs-identifier hs-var">f</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-78"></span><span>  </span><span id="local-6989586621679245856"><span class="annot"><span class="annottext">f :: PartialTypeF Bool -&gt; Bool
-</span><a href="#local-6989586621679245856"><span class="hs-identifier hs-var hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-79"></span><span>    </span><span class="annot"><span class="annottext">PartialTypeF Bool
-</span><a href="Telomare.IR.Types.html#ZeroTypeP"><span class="hs-identifier hs-var">ZeroTypeP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-80"></span><span>    </span><span class="annot"><a href="Telomare.IR.Types.html#PairTypeP"><span class="hs-identifier hs-type">PairTypeP</span></a></span><span> </span><span id="local-6989586621679245857"><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679245857"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679245858"><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679245858"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679245857"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
-</span><span class="hs-operator hs-var">&amp;&amp;</span></span><span> </span><span class="annot"><span class="annottext">Bool
-</span><a href="#local-6989586621679245858"><span class="hs-identifier hs-var">b</span></a></span><span>
-</span><span id="line-81"></span><span>    </span><span class="annot"><span class="annottext">PartialTypeF Bool
-</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
-</span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-82"></span></pre></body></html>
+</span><span id="line-64"></span></pre></body></html>

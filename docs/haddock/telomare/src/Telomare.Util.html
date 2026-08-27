@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-comment">-- | Small helpers shared across the compiler. Nothing here may depend on</span><span>
+</span><span id="line-2"></span><span class="hs-comment">-- other Telomare modules.</span><span>
+</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="annot"><a href="Telomare.Util.html"><span class="hs-identifier">Telomare.Util</span></a></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-4"></span><span>
+</span><span id="line-5"></span><span class="annot"><a href="Telomare.Util.html#padRight"><span class="hs-identifier hs-type">padRight</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-6"></span><span id="padRight"><span class="annot"><span class="annottext">padRight :: Int -&gt; String -&gt; String
+</span><a href="Telomare.Util.html#padRight"><span class="hs-identifier hs-var hs-var">padRight</span></a></span></span><span> </span><span id="local-6989586621679294447"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679294447"><span class="hs-identifier hs-var">w</span></a></span></span><span> </span><span id="local-6989586621679294448"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679294448"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679294448"><span class="hs-identifier hs-var">s</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Char -&gt; String
+forall a. Int -&gt; a -&gt; [a]
+</span><span class="hs-identifier hs-var">replicate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+forall a. Ord a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-identifier hs-var">max</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679294447"><span class="hs-identifier hs-var">w</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+forall a. Num a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int
+forall a. [a] -&gt; Int
+forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
+</span><span class="hs-identifier hs-var">length</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679294448"><span class="hs-identifier hs-var">s</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Char
+</span><span class="hs-char">' '</span></span><span>
+</span><span id="line-7"></span><span>
+</span><span id="line-8"></span><span class="annot"><a href="Telomare.Util.html#plural"><span class="hs-identifier hs-type">plural</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
+</span><span id="line-9"></span><span id="plural"><span class="annot"><span class="annottext">plural :: String -&gt; Int -&gt; String
+</span><a href="Telomare.Util.html#plural"><span class="hs-identifier hs-var hs-var">plural</span></a></span></span><span> </span><span id="local-6989586621679294453"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679294453"><span class="hs-identifier hs-var">word</span></a></span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679294453"><span class="hs-identifier hs-var">word</span></a></span><span>
+</span><span id="line-10"></span><span class="annot"><a href="Telomare.Util.html#plural"><span class="hs-identifier hs-var">plural</span></a></span><span> </span><span id="local-6989586621679294454"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679294454"><span class="hs-identifier hs-var">word</span></a></span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679294454"><span class="hs-identifier hs-var">word</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+forall a. Semigroup a =&gt; a -&gt; a -&gt; a
+</span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
+</span><span class="hs-string">&quot;s&quot;</span></span><span>
+</span><span id="line-11"></span></pre></body></html>
