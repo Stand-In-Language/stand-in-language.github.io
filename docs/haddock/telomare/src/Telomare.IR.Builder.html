@@ -16,16 +16,16 @@
 </span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier">Base</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier">Corecursive</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier">embed</span></a></span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier">Recursive</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier">project</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-17"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html"><span class="hs-identifier">Telomare.IR.Base</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier">BasicBase</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicExprF"><span class="hs-identifier">BasicExprF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier">CarryAnno</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
 </span><span id="line-18"></span><span>                         </span><span class="annot"><a href="Telomare.IR.Base.html#FunctionIndex"><span class="hs-identifier">FunctionIndex</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier">StuckBase</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckF"><span class="hs-identifier">StuckF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">,</span><span>
-</span><span id="line-19"></span><span>                         </span><span class="annot"><a href="Telomare.IR.Base.html#UnsizedRecursionToken"><span class="hs-identifier">UnsizedRecursionToken</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#i2B"><span class="hs-identifier">i2B</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#iteB_"><span class="hs-identifier">iteB_</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#AbortB"><span class="hs-identifier">AbortB</span></a></span><span class="hs-special">,</span><span>
-</span><span id="line-20"></span><span>                         </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier">EnvB</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier">LeftB</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier">PairP</span></a></span><span class="hs-special">,</span><span>
-</span><span id="line-21"></span><span>                         </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier">RightB</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier">SetEnvB</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier">StuckEE</span></a></span><span class="hs-special">,</span><span>
-</span><span id="line-22"></span><span>                         </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#ZeroB"><span class="hs-identifier">ZeroB</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier">varB</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-19"></span><span>                         </span><span class="annot"><a href="Telomare.IR.Base.html#UnsizedRecursionToken"><span class="hs-identifier">UnsizedRecursionToken</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier">EnvB</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-20"></span><span>                         </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#FillFunctionEE"><span class="hs-identifier">FillFunctionEE</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#GateB"><span class="hs-identifier">GateB</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier">LeftB</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-21"></span><span>                         </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier">PairB</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier">PairP</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier">RightB</span></a></span><span class="hs-special">,</span><span>
+</span><span id="line-22"></span><span>                         </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier">SetEnvB</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier">StuckEE</span></a></span><span class="hs-special">,</span><span> </span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#ZeroB"><span class="hs-identifier">ZeroB</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier">varB</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-23"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html"><span class="hs-identifier">Telomare.IR.Core</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier">Term3</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3F"><span class="hs-identifier">Term3F</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-24"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier">LocTag</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-25"></span><span>
-</span><span id="line-26"></span><span class="hs-keyword">type</span><span> </span><span id="Term3Builder"><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-var">Term3Builder</span></a></span></span><span> </span><span id="local-6989586621679270767"><span class="annot"><a href="#local-6989586621679270767"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#FunctionIndex"><span class="hs-identifier hs-type">FunctionIndex</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#UnsizedRecursionToken"><span class="hs-identifier hs-type">UnsizedRecursionToken</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><a href="#local-6989586621679270767"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-26"></span><span class="hs-keyword">type</span><span> </span><span id="Term3Builder"><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-var">Term3Builder</span></a></span></span><span> </span><span id="local-6989586621679295212"><span class="annot"><a href="#local-6989586621679295212"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="hs-identifier hs-type">State</span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#FunctionIndex"><span class="hs-identifier hs-type">FunctionIndex</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#UnsizedRecursionToken"><span class="hs-identifier hs-type">UnsizedRecursionToken</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><a href="#local-6989586621679295212"><span class="hs-identifier hs-type">g</span></a></span><span>
 </span><span id="line-27"></span><span>
-</span><span id="line-28"></span><span id="local-6989586621679270191"><span class="annot"><a href="Telomare.IR.Builder.html#buildTerm"><span class="hs-identifier hs-type">buildTerm</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270191"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270191"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679270191"><span class="hs-identifier hs-type">g</span></a></span></span><span>
+</span><span id="line-28"></span><span id="local-6989586621679294932"><span class="annot"><a href="Telomare.IR.Builder.html#buildTerm"><span class="hs-identifier hs-type">buildTerm</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294932"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294932"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679294932"><span class="hs-identifier hs-type">g</span></a></span></span><span>
 </span><span id="line-29"></span><span id="buildTerm"><span class="annot"><span class="annottext">buildTerm :: forall g. Corecursive g =&gt; Term3Builder g -&gt; g
 </span><a href="Telomare.IR.Builder.html#buildTerm"><span class="hs-identifier hs-var hs-var">buildTerm</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(Term3Builder g -&gt; (FunctionIndex, UnsizedRecursionToken) -&gt; g)
 -&gt; (FunctionIndex, UnsizedRecursionToken) -&gt; Term3Builder g -&gt; g
@@ -40,13 +40,13 @@ forall a. Enum a =&gt; Int -&gt; a
 </span><span class="hs-identifier hs-var">toEnum</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span class="hs-special">)</span><span>
 </span><span id="line-30"></span><span>
-</span><span id="line-31"></span><span id="local-6989586621679270201"><span id="local-6989586621679270202"><span class="annot"><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-type">deferS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270201"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679270202"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270202"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270201"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270201"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679270201"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270201"><span class="hs-identifier hs-type">g</span></a></span></span></span><span>
+</span><span id="line-31"></span><span id="local-6989586621679294942"><span id="local-6989586621679294943"><span class="annot"><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-type">deferS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294942"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679294943"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294943"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294942"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294942"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679294942"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294942"><span class="hs-identifier hs-type">g</span></a></span></span></span><span>
 </span><span id="line-32"></span><span id="deferS"><span class="annot"><span class="annottext">deferS :: forall g (f :: * -&gt; *).
 (Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
 g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-var hs-var">deferS</span></a></span></span><span> </span><span id="local-6989586621679270794"><span class="annot"><span class="annottext">g
-</span><a href="#local-6989586621679270794"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-33"></span><span>  </span><span id="local-6989586621679270795"><span class="annot"><a href="#local-6989586621679270795"><span class="hs-identifier hs-var">fi</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((FunctionIndex, UnsizedRecursionToken) -&gt; FunctionIndex)
+</span><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-var hs-var">deferS</span></a></span></span><span> </span><span id="local-6989586621679295240"><span class="annot"><span class="annottext">g
+</span><a href="#local-6989586621679295240"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-33"></span><span>  </span><span id="local-6989586621679295241"><span class="annot"><a href="#local-6989586621679295241"><span class="hs-identifier hs-var">fi</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((FunctionIndex, UnsizedRecursionToken) -&gt; FunctionIndex)
 -&gt; StateT
      (FunctionIndex, UnsizedRecursionToken) Identity FunctionIndex
 forall s (m :: * -&gt; *) a. MonadState s m =&gt; (s -&gt; a) -&gt; m a
@@ -54,43 +54,43 @@ forall s (m :: * -&gt; *) a. MonadState s m =&gt; (s -&gt; a) -&gt; m a
 forall a b. (a, b) -&gt; a
 </span><span class="hs-identifier hs-var">fst</span></span><span>
 </span><span id="line-34"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">State.modify</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span class="hs-special">(</span><span class="annot"><span class="annottext">FunctionIndex
-</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679270799"><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679270799"><span class="hs-identifier hs-var">urt</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FunctionIndex -&gt; FunctionIndex
+</span><span class="hs-identifier">_</span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679295245"><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="#local-6989586621679295245"><span class="hs-identifier hs-var">urt</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">FunctionIndex -&gt; FunctionIndex
 forall a. Enum a =&gt; a -&gt; a
 </span><span class="hs-identifier hs-var">succ</span></span><span> </span><span class="annot"><span class="annottext">FunctionIndex
-</span><a href="#local-6989586621679270795"><span class="hs-identifier hs-var">fi</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679270799"><span class="hs-identifier hs-var">urt</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-35"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">.</span></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270795"><span class="hs-identifier hs-type">fi</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270794"><span class="hs-identifier hs-type">x</span></a></span><span>
+</span><a href="#local-6989586621679295241"><span class="hs-identifier hs-var">fi</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="#local-6989586621679295245"><span class="hs-identifier hs-var">urt</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-35"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">.</span></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckEE"><span class="hs-identifier hs-type">StuckEE</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#DeferSF"><span class="hs-identifier hs-type">DeferSF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295241"><span class="hs-identifier hs-type">fi</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295240"><span class="hs-identifier hs-type">x</span></a></span><span>
 </span><span id="line-36"></span><span>
 </span><span id="line-37"></span><span class="hs-comment">-- TODO: replace with PairP?</span><span>
-</span><span id="line-38"></span><span id="local-6989586621679270228"><span id="local-6989586621679270229"><span id="local-6989586621679270230"><span id="local-6989586621679270231"><span class="annot"><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-type">pairS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270228"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270229"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270230"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270229"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270228"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270228"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Monad</span></span><span> </span><span class="annot"><a href="#local-6989586621679270231"><span class="hs-identifier hs-type">m</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679270231"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270228"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679270231"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270228"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679270231"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270228"><span class="hs-identifier hs-type">g</span></a></span></span></span></span></span><span>
+</span><span id="line-38"></span><span id="local-6989586621679294969"><span id="local-6989586621679294970"><span id="local-6989586621679294971"><span id="local-6989586621679294972"><span class="annot"><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-type">pairS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294969"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294970"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294971"><span class="hs-identifier hs-type">a</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294970"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294969"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294969"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Monad</span></span><span> </span><span class="annot"><a href="#local-6989586621679294972"><span class="hs-identifier hs-type">m</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679294972"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294969"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679294972"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294969"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="#local-6989586621679294972"><span class="hs-identifier hs-type">m</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294969"><span class="hs-identifier hs-type">g</span></a></span></span></span></span></span><span>
 </span><span id="line-39"></span><span id="pairS"><span class="annot"><span class="annottext">pairS :: forall g (f :: * -&gt; *) a (m :: * -&gt; *).
 (Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
-</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var hs-var">pairS</span></a></span></span><span> </span><span id="local-6989586621679270818"><span class="annot"><span class="annottext">m g
-</span><a href="#local-6989586621679270818"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679270819"><span class="annot"><span class="annottext">m g
-</span><a href="#local-6989586621679270819"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-40"></span><span>  </span><span id="local-6989586621679270820"><span class="annot"><a href="#local-6989586621679270820"><span class="hs-identifier hs-var">a'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m g
-</span><a href="#local-6989586621679270818"><span class="hs-identifier hs-var">a</span></a></span><span>
-</span><span id="line-41"></span><span>  </span><span id="local-6989586621679270821"><span class="annot"><a href="#local-6989586621679270821"><span class="hs-identifier hs-var">b'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><a href="#local-6989586621679270819"><span class="hs-identifier hs-type">b</span></a></span><span>
-</span><span id="line-42"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679270822"><span class="annot"><a href="#local-6989586621679270822"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#%3A%3C"><span class="hs-operator hs-type">CofreeT.:&lt;</span></a></span><span> </span><span class="annot"><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier hs-type">project</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270820"><span class="hs-identifier hs-type">a'</span></a></span><span>
-</span><span id="line-43"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">.</span></span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-type">embed</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="#local-6989586621679270822"><span class="hs-identifier hs-type">l</span></a></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#%3A%3C"><span class="hs-operator hs-type">CofreeT.:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#embedB"><span class="hs-identifier hs-type">embedB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270820"><span class="hs-identifier hs-type">a'</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270821"><span class="hs-identifier hs-type">b'</span></a></span><span class="hs-special">)</span><span>
+</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var hs-var">pairS</span></a></span></span><span> </span><span id="local-6989586621679295264"><span class="annot"><span class="annottext">m g
+</span><a href="#local-6989586621679295264"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679295265"><span class="annot"><span class="annottext">m g
+</span><a href="#local-6989586621679295265"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-40"></span><span>  </span><span id="local-6989586621679295266"><span class="annot"><a href="#local-6989586621679295266"><span class="hs-identifier hs-var">a'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">m g
+</span><a href="#local-6989586621679295264"><span class="hs-identifier hs-var">a</span></a></span><span>
+</span><span id="line-41"></span><span>  </span><span id="local-6989586621679295267"><span class="annot"><a href="#local-6989586621679295267"><span class="hs-identifier hs-var">b'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><a href="#local-6989586621679295265"><span class="hs-identifier hs-type">b</span></a></span><span>
+</span><span id="line-42"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679295268"><span class="annot"><a href="#local-6989586621679295268"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#%3A%3C"><span class="hs-operator hs-type">CofreeT.:&lt;</span></a></span><span> </span><span class="annot"><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier hs-type">project</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295266"><span class="hs-identifier hs-type">a'</span></a></span><span>
+</span><span id="line-43"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">.</span></span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-type">embed</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="#local-6989586621679295268"><span class="hs-identifier hs-type">l</span></a></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#%3A%3C"><span class="hs-operator hs-type">CofreeT.:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#embedB"><span class="hs-identifier hs-type">embedB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairSF"><span class="hs-identifier hs-type">PairSF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295266"><span class="hs-identifier hs-type">a'</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295267"><span class="hs-identifier hs-type">b'</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-44"></span><span>
-</span><span id="line-45"></span><span class="annot"><a href="Telomare.IR.Builder.html#clamS"><span class="hs-identifier hs-type">clamS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679270246"><span class="annot"><a href="#local-6989586621679270246"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679270247"><span class="annot"><a href="#local-6989586621679270247"><span class="hs-identifier hs-type">f</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270246"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270247"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270247"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270247"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270246"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270246"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-46"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270246"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270246"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-45"></span><span class="annot"><a href="Telomare.IR.Builder.html#clamS"><span class="hs-identifier hs-type">clamS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679294987"><span class="annot"><a href="#local-6989586621679294987"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679294988"><span class="annot"><a href="#local-6989586621679294988"><span class="hs-identifier hs-type">f</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294987"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294988"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294988"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294988"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294987"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294987"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-46"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294987"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294987"><span class="hs-identifier hs-type">g</span></a></span><span>
 </span><span id="line-47"></span><span id="clamS"><span class="annot"><span class="annottext">clamS :: forall g (f :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g) =&gt;
 Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#clamS"><span class="hs-identifier hs-var hs-var">clamS</span></a></span></span><span> </span><span id="local-6989586621679270851"><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270851"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
+</span><a href="Telomare.IR.Builder.html#clamS"><span class="hs-identifier hs-var hs-var">clamS</span></a></span></span><span> </span><span id="local-6989586621679295297"><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295297"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
 forall g (f :: * -&gt; *) a (m :: * -&gt; *).
 (Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
 </span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270851"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; (g -&gt; Term3Builder g) -&gt; Term3Builder g
+</span><a href="#local-6989586621679295297"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; (g -&gt; Term3Builder g) -&gt; Term3Builder g
 forall a b.
 StateT (FunctionIndex, UnsizedRecursionToken) Identity a
 -&gt; (a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b)
@@ -113,20 +113,20 @@ forall g (f :: * -&gt; *).
 g
 </span><a href="Telomare.IR.Base.html#ZeroB"><span class="hs-identifier hs-var">ZeroB</span></a></span><span>
 </span><span id="line-48"></span><span>
-</span><span id="line-49"></span><span class="annot"><a href="Telomare.IR.Builder.html#lamS"><span class="hs-identifier hs-type">lamS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679270853"><span class="annot"><a href="#local-6989586621679270853"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679270854"><span class="annot"><a href="#local-6989586621679270854"><span class="hs-identifier hs-type">f</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270853"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270854"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270854"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270854"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270853"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270853"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-50"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270853"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270853"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-49"></span><span class="annot"><a href="Telomare.IR.Builder.html#lamS"><span class="hs-identifier hs-type">lamS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679295299"><span class="annot"><a href="#local-6989586621679295299"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679295300"><span class="annot"><a href="#local-6989586621679295300"><span class="hs-identifier hs-type">f</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295299"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295300"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295300"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295300"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295299"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295299"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-50"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295299"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295299"><span class="hs-identifier hs-type">g</span></a></span><span>
 </span><span id="line-51"></span><span id="lamS"><span class="annot"><span class="annottext">lamS :: forall g (f :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g) =&gt;
 Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#lamS"><span class="hs-identifier hs-var hs-var">lamS</span></a></span></span><span> </span><span id="local-6989586621679270879"><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270879"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
+</span><a href="Telomare.IR.Builder.html#lamS"><span class="hs-identifier hs-var hs-var">lamS</span></a></span></span><span> </span><span id="local-6989586621679295325"><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295325"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
 forall g (f :: * -&gt; *) a (m :: * -&gt; *).
 (Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
 </span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270879"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; (g -&gt; Term3Builder g) -&gt; Term3Builder g
+</span><a href="#local-6989586621679295325"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder g -&gt; (g -&gt; Term3Builder g) -&gt; Term3Builder g
 forall a b.
 StateT (FunctionIndex, UnsizedRecursionToken) Identity a
 -&gt; (a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b)
@@ -149,8 +149,8 @@ forall g (f :: * -&gt; *).
 g
 </span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
 </span><span id="line-52"></span><span>
-</span><span id="line-53"></span><span class="annot"><a href="Telomare.IR.Builder.html#twiddleS"><span class="hs-identifier hs-type">twiddleS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679270258"><span class="annot"><a href="#local-6989586621679270258"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679270259"><span class="annot"><a href="#local-6989586621679270259"><span class="hs-identifier hs-type">f</span></a></span></span><span> </span><span id="local-6989586621679270260"><span class="annot"><a href="#local-6989586621679270260"><span class="hs-identifier hs-type">w</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270258"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270259"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270259"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270259"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270258"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270258"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier hs-type">CarryAnno</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270258"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryWrap"><span class="hs-identifier hs-type">CarryWrap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270258"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679270260"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270260"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-54"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270258"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-53"></span><span class="annot"><a href="Telomare.IR.Builder.html#twiddleS"><span class="hs-identifier hs-type">twiddleS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679294999"><span class="annot"><a href="#local-6989586621679294999"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679295000"><span class="annot"><a href="#local-6989586621679295000"><span class="hs-identifier hs-type">f</span></a></span></span><span> </span><span id="local-6989586621679295001"><span class="annot"><a href="#local-6989586621679295001"><span class="hs-identifier hs-type">w</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294999"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295000"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295000"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295000"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294999"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294999"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier hs-type">CarryAnno</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294999"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryWrap"><span class="hs-identifier hs-type">CarryWrap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294999"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679295001"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295001"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-54"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679294999"><span class="hs-identifier hs-type">g</span></a></span><span>
 </span><span id="line-55"></span><span id="twiddleS"><span class="annot"><span class="annottext">twiddleS :: forall g (f :: * -&gt; *) (w :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
@@ -211,15 +211,15 @@ forall g (f :: * -&gt; *).
 g
 </span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-56"></span><span>
-</span><span id="line-57"></span><span class="annot"><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-type">appS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679270269"><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679270270"><span class="annot"><a href="#local-6989586621679270270"><span class="hs-identifier hs-type">f</span></a></span></span><span> </span><span id="local-6989586621679270271"><span class="annot"><a href="#local-6989586621679270271"><span class="hs-identifier hs-type">w</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270270"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270270"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270270"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier hs-type">CarryAnno</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryWrap"><span class="hs-identifier hs-type">CarryWrap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679270271"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270271"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-58"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679270269"><span class="hs-identifier hs-type">g</span></a></span><span>
+</span><span id="line-57"></span><span class="annot"><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-type">appS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-keyword">forall</span><span> </span><span id="local-6989586621679295010"><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span></span><span> </span><span id="local-6989586621679295011"><span class="annot"><a href="#local-6989586621679295011"><span class="hs-identifier hs-type">f</span></a></span></span><span> </span><span id="local-6989586621679295012"><span class="annot"><a href="#local-6989586621679295012"><span class="hs-identifier hs-type">w</span></a></span></span><span class="hs-operator">.</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295011"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295011"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295011"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryAnno"><span class="hs-identifier hs-type">CarryAnno</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#CarryWrap"><span class="hs-identifier hs-type">CarryWrap</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="#local-6989586621679295012"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295012"><span class="hs-identifier hs-type">w</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-58"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295010"><span class="hs-identifier hs-type">g</span></a></span><span>
 </span><span id="line-59"></span><span id="appS"><span class="annot"><span class="annottext">appS :: forall g (f :: * -&gt; *) (w :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
 Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var hs-var">appS</span></a></span></span><span> </span><span id="local-6989586621679270996"><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270996"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span id="local-6989586621679270997"><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270997"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">g -&gt; g
+</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var hs-var">appS</span></a></span></span><span> </span><span id="local-6989586621679295443"><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295443"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span id="local-6989586621679295444"><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295444"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">g -&gt; g
 forall g (f :: * -&gt; *).
 (Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
 g -&gt; g
@@ -247,286 +247,42 @@ forall g (f :: * -&gt; *) a (m :: * -&gt; *).
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
 </span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270997"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder g
-</span><a href="#local-6989586621679270996"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679295444"><span class="hs-identifier hs-var">i</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295443"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-60"></span><span>
-</span><span id="line-61"></span><span class="hs-comment">-- inside three lambdas (\r f x -&gt; ...)</span><span>
-</span><span id="line-62"></span><span class="hs-comment">-- r is the repeater function</span><span>
-</span><span id="line-63"></span><span class="hs-comment">-- creates and iterates on a function &quot;frame&quot; (rf, (rf, (f', (x, env'))))</span><span>
-</span><span id="line-64"></span><span class="hs-comment">-- rf is the function to pull arguments out of the frame, run f', and construct the next frame</span><span>
-</span><span id="line-65"></span><span class="hs-comment">-- (f',env') is f (since f may contain a saved environment/closure env we want to use for each iteration)</span><span>
-</span><span id="line-66"></span><span class="annot"><a href="Telomare.IR.Builder.html#repeatFunctionS"><span class="hs-identifier hs-type">repeatFunctionS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
-</span><span id="line-67"></span><span id="repeatFunctionS"><span class="annot"><span class="annottext">repeatFunctionS :: LocTag -&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#repeatFunctionS"><span class="hs-identifier hs-var hs-var">repeatFunctionS</span></a></span></span><span> </span><span id="local-6989586621679271000"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271000"><span class="hs-identifier hs-var">_l</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-68"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679271017"><span class="annot"><span class="annottext">applyF :: Term3
-</span><a href="#local-6989586621679271017"><span class="hs-identifier hs-var hs-var">applyF</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-69"></span><span>      </span><span id="local-6989586621679271037"><span class="annot"><span class="annottext">env' :: Term3
-</span><a href="#local-6989586621679271037"><span class="hs-identifier hs-var hs-var">env'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-70"></span><span>      </span><span class="hs-comment">-- takes (rf, (f', (x, env'))), executes f' with (x, env') and creates a new frame</span><span>
-</span><span id="line-71"></span><span>      </span><span id="local-6989586621679271038"><span class="annot"><span class="annottext">rf :: Term3Builder Term3
-</span><a href="#local-6989586621679271038"><span class="hs-identifier hs-var hs-var">rf</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
-g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-var">deferS</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-72"></span><span>                          </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-73"></span><span>                                 </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-74"></span><span>                                        </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271017"><span class="hs-identifier hs-var">applyF</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271037"><span class="hs-identifier hs-var">env'</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-75"></span><span>      </span><span id="local-6989586621679271062"><span class="annot"><span class="annottext">r :: Term3
-</span><a href="#local-6989586621679271062"><span class="hs-identifier hs-var hs-var">r</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-76"></span><span>      </span><span id="local-6989586621679271074"><span class="annot"><span class="annottext">x :: Term3
-</span><a href="#local-6989586621679271074"><span class="hs-identifier hs-var hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-77"></span><span>      </span><span id="local-6989586621679271094"><span class="annot"><span class="annottext">f' :: Term3
-</span><a href="#local-6989586621679271094"><span class="hs-identifier hs-var hs-var">f'</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-78"></span><span>      </span><span id="local-6989586621679271114"><span class="annot"><span class="annottext">fenv :: Term3
-</span><a href="#local-6989586621679271114"><span class="hs-identifier hs-var hs-var">fenv</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-79"></span><span>      </span><span class="hs-comment">-- (r, (x, ((f', fenv), 0))) -&gt; (rf, (rf, (f', (x, fenv))))</span><span>
-</span><span id="line-80"></span><span>      </span><span id="local-6989586621679271115"><span class="annot"><span class="annottext">frameSetup :: Term3Builder Term3
-</span><a href="#local-6989586621679271115"><span class="hs-identifier hs-var hs-var">frameSetup</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) a (m :: * -&gt; *).
-(Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
- Monad m) =&gt;
-m g -&gt; m g -&gt; m g
-</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271038"><span class="hs-identifier hs-var">rf</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) a (m :: * -&gt; *).
-(Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
- Monad m) =&gt;
-m g -&gt; m g -&gt; m g
-</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271038"><span class="hs-identifier hs-var">rf</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271094"><span class="hs-identifier hs-var">f'</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271074"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271114"><span class="hs-identifier hs-var">fenv</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
-</span><span id="line-81"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *).
+</span><span id="line-61"></span><span class="hs-comment">-- | Builder-level lazy if-then-else: the 'Telomare.Machine.iteB' encoding,</span><span>
+</span><span id="line-62"></span><span class="hs-comment">-- but each branch closure gets a fresh defer index from the builder supply</span><span>
+</span><span id="line-63"></span><span class="hs-comment">-- instead of the reserved sizing-step indexes (which must keep one grammar</span><span>
+</span><span id="line-64"></span><span class="hs-comment">-- per index).</span><span>
+</span><span id="line-65"></span><span id="local-6989586621679295021"><span id="local-6989586621679295022"><span class="annot"><a href="Telomare.IR.Builder.html#iteS"><span class="hs-identifier hs-type">iteS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Base"><span class="hs-identifier hs-type">Base</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295021"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">~</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#CofreeF"><span class="hs-identifier hs-type">CofreeT.CofreeF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295022"><span class="hs-identifier hs-type">f</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#StuckBase"><span class="hs-identifier hs-type">StuckBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295022"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#BasicBase"><span class="hs-identifier hs-type">BasicBase</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295022"><span class="hs-identifier hs-type">f</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Recursive"><span class="hs-identifier hs-type">Recursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295021"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#Corecursive"><span class="hs-identifier hs-type">Corecursive</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295021"><span class="hs-identifier hs-type">g</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-66"></span><span>  </span><span class="hs-glyph">=&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295021"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295021"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295021"><span class="hs-identifier hs-type">g</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295021"><span class="hs-identifier hs-type">g</span></a></span></span></span><span>
+</span><span id="line-67"></span><span id="iteS"><span class="annot"><span class="annottext">iteS :: forall g (f :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g) =&gt;
-Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#clamS"><span class="hs-identifier hs-var">clamS</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; (Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; Term3Builder Term3
--&gt; Term3Builder Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g) =&gt;
-Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#lamS"><span class="hs-identifier hs-var">lamS</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; (Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; Term3Builder Term3
--&gt; Term3Builder Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g) =&gt;
-Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#lamS"><span class="hs-identifier hs-var">lamS</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) a (m :: * -&gt; *).
-(Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
- Monad m) =&gt;
-m g -&gt; m g -&gt; m g
-</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271062"><span class="hs-identifier hs-var">r</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271115"><span class="hs-identifier hs-var">frameSetup</span></a></span><span>
-</span><span id="line-82"></span><span>
-</span><span id="line-83"></span><span class="annot"><a href="Telomare.IR.Builder.html#unsizedRepeater"><span class="hs-identifier hs-type">unsizedRepeater</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#UnsizedRecursionToken"><span class="hs-identifier hs-type">UnsizedRecursionToken</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
-</span><span id="line-84"></span><span id="unsizedRepeater"><span class="annot"><span class="annottext">unsizedRepeater :: LocTag -&gt; UnsizedRecursionToken -&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#unsizedRepeater"><span class="hs-identifier hs-var hs-var">unsizedRepeater</span></a></span></span><span> </span><span id="local-6989586621679271117"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271117"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679271118"><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679271118"><span class="hs-identifier hs-var">tok</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
+Term3Builder g
+-&gt; Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
+</span><a href="Telomare.IR.Builder.html#iteS"><span class="hs-identifier hs-var hs-var">iteS</span></a></span></span><span> </span><span id="local-6989586621679295502"><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295502"><span class="hs-identifier hs-var">i</span></a></span></span><span> </span><span id="local-6989586621679295503"><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295503"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span id="local-6989586621679295504"><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295504"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-68"></span><span>  </span><span id="local-6989586621679295505"><span class="annot"><a href="#local-6989586621679295505"><span class="hs-identifier hs-var">i'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Term3Builder g
+</span><a href="#local-6989586621679295502"><span class="hs-identifier hs-var">i</span></a></span><span>
+</span><span id="line-69"></span><span>  </span><span id="local-6989586621679295506"><span class="annot"><a href="#local-6989586621679295506"><span class="hs-identifier hs-var">ec</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><a href="#local-6989586621679295504"><span class="hs-identifier hs-type">e</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">&gt;&gt;=</span></span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-type">deferS</span></a></span><span>
+</span><span id="line-70"></span><span>  </span><span id="local-6989586621679295507"><span class="annot"><a href="#local-6989586621679295507"><span class="hs-identifier hs-var">tc</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><a href="#local-6989586621679295503"><span class="hs-identifier hs-type">t</span></a></span><span> </span><span class="annot"><span class="hs-operator hs-type">&gt;&gt;=</span></span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-type">deferS</span></a></span><span>
+</span><span id="line-71"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#FillFunctionEE"><span class="hs-identifier hs-type">FillFunctionEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#FillFunctionEE"><span class="hs-identifier hs-type">FillFunctionEE</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#FillFunctionEE"><span class="hs-identifier hs-type">FillFunctionEE</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#GateB"><span class="hs-identifier hs-type">GateB</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295505"><span class="hs-identifier hs-type">i'</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#PairB"><span class="hs-identifier hs-type">PairB</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295506"><span class="hs-identifier hs-type">ec</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679295507"><span class="hs-identifier hs-type">tc</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-type">EnvB</span></a></span><span>
+</span><span id="line-72"></span><span>
+</span><span id="line-73"></span><span class="hs-comment">-- | The per-use-site sizing oracle: a closed closure whose body is the</span><span>
+</span><span id="line-74"></span><span class="hs-comment">-- sizing hole for one recursion token. The wrapper applies it to its</span><span>
+</span><span id="line-75"></span><span class="hs-comment">-- captured @(tWrap, (recur, (base, 0)))@ triple; the sizing pass expands</span><span>
+</span><span id="line-76"></span><span class="hs-comment">-- the hole into successive step unfoldings, and size substitution finally</span><span>
+</span><span id="line-77"></span><span class="hs-comment">-- replaces it with the n-fold approximant chain</span><span>
+</span><span id="line-78"></span><span class="hs-comment">-- ('Telomare.Machine.sizedRecursionChain'). One oracle per syntactic use</span><span>
+</span><span id="line-79"></span><span class="hs-comment">-- of a recursive binding, so each use site sizes independently.</span><span>
+</span><span id="line-80"></span><span class="annot"><a href="Telomare.IR.Builder.html#unsizedRecursionOracle"><span class="hs-identifier hs-type">unsizedRecursionOracle</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#UnsizedRecursionToken"><span class="hs-identifier hs-type">UnsizedRecursionToken</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
+</span><span id="line-81"></span><span id="unsizedRecursionOracle"><span class="annot"><span class="annottext">unsizedRecursionOracle :: LocTag -&gt; UnsizedRecursionToken -&gt; Term3Builder Term3
+</span><a href="Telomare.IR.Builder.html#unsizedRecursionOracle"><span class="hs-identifier hs-var hs-var">unsizedRecursionOracle</span></a></span></span><span> </span><span id="local-6989586621679295509"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679295509"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679295510"><span class="annot"><span class="annottext">UnsizedRecursionToken
+</span><a href="#local-6989586621679295510"><span class="hs-identifier hs-var">tok</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
 forall g (f :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g) =&gt;
@@ -545,42 +301,6 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 -&gt; CofreeF Term3F LocTag Term3
 -&gt; Term3Builder Term3
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3)
--&gt; (CofreeF Term3F LocTag Term3 -&gt; Term3)
--&gt; CofreeF Term3F LocTag Term3
--&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3)
--&gt; (CofreeF Term3F LocTag Term3 -&gt; Term3)
--&gt; CofreeF Term3F LocTag Term3
--&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3)
--&gt; (CofreeF Term3F LocTag Term3 -&gt; Term3)
--&gt; CofreeF Term3F LocTag Term3
--&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3)
--&gt; (CofreeF Term3F LocTag Term3 -&gt; Term3)
--&gt; CofreeF Term3F LocTag Term3
--&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">CofreeF Term3F LocTag Term3 -&gt; Term3
 Base Term3 Term3 -&gt; Term3
 forall t. Corecursive t =&gt; Base t t -&gt; t
@@ -588,290 +308,28 @@ forall t. Corecursive t =&gt; Base t t -&gt; t
 -&gt; CofreeF Term3F LocTag Term3 -&gt; Term3Builder Term3
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271117"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Term3F Term3 -&gt; CofreeF Term3F LocTag Term3
+</span><a href="#local-6989586621679295509"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Term3F Term3 -&gt; CofreeF Term3F LocTag Term3
 forall (f :: * -&gt; *) a b. a -&gt; f b -&gt; CofreeF f a b
 </span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Trans.Cofree.html#%3A%3C"><span class="hs-operator hs-var">CofreeT.:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken -&gt; Term3F Term3
 forall f. UnsizedRecursionToken -&gt; Term3F f
 </span><a href="Telomare.IR.Core.html#Term3Unsized"><span class="hs-identifier hs-var">Term3Unsized</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679271118"><span class="hs-identifier hs-var">tok</span></a></span><span>
-</span><span id="line-85"></span><span>
-</span><span id="line-86"></span><span class="annot"><a href="Telomare.IR.Builder.html#repeaterAndAbort"><span class="hs-identifier hs-type">repeaterAndAbort</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#UnsizedRecursionToken"><span class="hs-identifier hs-type">UnsizedRecursionToken</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
-</span><span id="line-87"></span><span id="repeaterAndAbort"><span class="annot"><span class="annottext">repeaterAndAbort :: LocTag -&gt; UnsizedRecursionToken -&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#repeaterAndAbort"><span class="hs-identifier hs-var hs-var">repeaterAndAbort</span></a></span></span><span> </span><span id="local-6989586621679271121"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271121"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679271122"><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679271122"><span class="hs-identifier hs-var">tok</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) a (m :: * -&gt; *).
-(Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
- Monad m) =&gt;
-m g -&gt; m g -&gt; m g
-</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag -&gt; UnsizedRecursionToken -&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#unsizedRepeater"><span class="hs-identifier hs-var">unsizedRepeater</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271121"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679271122"><span class="hs-identifier hs-var">tok</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271123"><span class="hs-identifier hs-var">abrt</span></a></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-88"></span><span>  </span><span class="hs-comment">-- args are (i, (b, ...)) since trb is on the stack</span><span>
-</span><span id="line-89"></span><span>  </span><span class="hs-comment">-- abrt = (&gt;&gt;= deferS) $ SetEnvB . PairP (SetEnvB $ PairP AbortB abortToken) &lt;$&gt; appS (pure secondArgB) (pure firstArgB)</span><span>
-</span><span id="line-90"></span><span>  </span><span id="local-6989586621679271123"><span class="annot"><span class="annottext">abrt :: Term3Builder Term3
-</span><a href="#local-6989586621679271123"><span class="hs-identifier hs-var hs-var">abrt</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3
--&gt; (Term3 -&gt; Term3Builder Term3) -&gt; Term3Builder Term3
-forall a b.
-StateT (FunctionIndex, UnsizedRecursionToken) Identity a
--&gt; (a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b)
--&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b
-forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
-</span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
-g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-var">deferS</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, AbortBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#AbortB"><span class="hs-identifier hs-var">AbortB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271124"><span class="hs-identifier hs-var">abortToken</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
- Corecursive g) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
- Corecursive g) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span>
-</span><span id="line-91"></span><span>  </span><span id="local-6989586621679271124"><span class="annot"><span class="annottext">abortToken :: Term3
-</span><a href="#local-6989586621679271124"><span class="hs-identifier hs-var hs-var">abortToken</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#ZeroB"><span class="hs-identifier hs-var">ZeroB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Int -&gt; Term3) -&gt; Int -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ f, BasicBase f, Recursive g, Corecursive g, CarryAnno g,
- CarryWrap g ~ w, BasicBase w) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#i2B"><span class="hs-identifier hs-var">i2B</span></a></span><span> </span><span class="annot"><span class="annottext">(Int -&gt; Term3) -&gt; Int -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken -&gt; Int
-forall a. Enum a =&gt; a -&gt; Int
-</span><span class="hs-identifier hs-var">fromEnum</span></span><span> </span><span class="annot"><span class="annottext">UnsizedRecursionToken
-</span><a href="#local-6989586621679271122"><span class="hs-identifier hs-var">tok</span></a></span><span>
-</span><span id="line-92"></span><span>
-</span><span id="line-93"></span><span class="hs-comment">-- to construct a church numeral (\f x -&gt; f ... (f x))</span><span>
-</span><span id="line-94"></span><span class="hs-comment">-- the core is nested setenvs around an env, where the number of setenvs is magnitude of church numeral</span><span>
-</span><span id="line-95"></span><span class="annot"><a href="Telomare.IR.Builder.html#i2CB"><span class="hs-identifier hs-type">i2CB</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
-</span><span id="line-96"></span><span id="i2CB"><span class="annot"><span class="annottext">i2CB :: LocTag -&gt; Int -&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#i2CB"><span class="hs-identifier hs-var hs-var">i2CB</span></a></span></span><span> </span><span id="local-6989586621679271127"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271127"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679271128"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679271128"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag -&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#repeatFunctionS"><span class="hs-identifier hs-var">repeatFunctionS</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271127"><span class="hs-identifier hs-var">l</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; (Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
+</span><a href="#local-6989586621679295510"><span class="hs-identifier hs-var">tok</span></a></span><span>
+</span><span id="line-82"></span><span>
+</span><span id="line-83"></span><span class="hs-comment">-- | A church numeral: @\\f x -&gt; f (f ... (f x))@ as plain nested</span><span>
+</span><span id="line-84"></span><span class="hs-comment">-- applications of a shared f. Bounded iteration by duplication of the</span><span>
+</span><span id="line-85"></span><span class="hs-comment">-- iterated function is the encoding both EAL certification and a</span><span>
+</span><span id="line-86"></span><span class="hs-comment">-- sharing-based runtime want; the old form (a self-applying frame driven</span><span>
+</span><span id="line-87"></span><span class="hs-comment">-- by nested SetEnvs) was outside the EAL fragment and foreclosed sharing.</span><span>
+</span><span id="line-88"></span><span class="annot"><a href="Telomare.IR.Builder.html#i2CB"><span class="hs-identifier hs-type">i2CB</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
+</span><span id="line-89"></span><span id="i2CB"><span class="annot"><span class="annottext">i2CB :: LocTag -&gt; Int -&gt; Term3Builder Term3
+</span><a href="Telomare.IR.Builder.html#i2CB"><span class="hs-identifier hs-var hs-var">i2CB</span></a></span></span><span> </span><span id="local-6989586621679295513"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679295513"><span class="hs-identifier hs-var">_l</span></a></span></span><span> </span><span id="local-6989586621679295514"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679295514"><span class="hs-identifier hs-var">n</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
 forall g (f :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g) =&gt;
 Term3Builder g -&gt; Term3Builder g
 </span><a href="Telomare.IR.Builder.html#clamS"><span class="hs-identifier hs-var">clamS</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
--&gt; (Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3)
--&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
-</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; [Term3]
-forall a. (a -&gt; a) -&gt; a -&gt; [a]
-</span><span class="hs-identifier hs-var">iterate</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#SetEnvB"><span class="hs-identifier hs-var">SetEnvB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span> </span><span class="annot"><span class="annottext">[Term3] -&gt; Int -&gt; Term3
-forall a. HasCallStack =&gt; [a] -&gt; Int -&gt; a
-</span><span class="hs-operator hs-var">!!</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679271128"><span class="hs-identifier hs-var">n</span></a></span><span>
-</span><span id="line-97"></span><span>
-</span><span id="line-98"></span><span class="hs-comment">-- function is called with (r,a), where r is the repeating function, and a is the abort function</span><span>
-</span><span id="line-99"></span><span class="annot"><a href="Telomare.IR.Builder.html#unsizedRecursionWrapper"><span class="hs-identifier hs-type">unsizedRecursionWrapper</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
-</span><span id="line-100"></span><span id="unsizedRecursionWrapper"><span class="annot"><span class="annottext">unsizedRecursionWrapper :: LocTag
--&gt; Term3Builder Term3
--&gt; Term3Builder Term3
--&gt; Term3Builder Term3
--&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#unsizedRecursionWrapper"><span class="hs-identifier hs-var hs-var">unsizedRecursionWrapper</span></a></span></span><span> </span><span id="local-6989586621679271132"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271132"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679271133"><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271133"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span id="local-6989586621679271134"><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271134"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span id="local-6989586621679271135"><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271135"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-101"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679271151"><span class="annot"><span class="annottext">repeater :: Term3
-</span><a href="#local-6989586621679271151"><span class="hs-identifier hs-var hs-var">repeater</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-102"></span><span>      </span><span id="local-6989586621679271177"><span class="annot"><span class="annottext">abrt :: Term3
-</span><a href="#local-6989586621679271177"><span class="hs-identifier hs-var hs-var">abrt</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Recursive g, CarryAnno g, Base g ~ f, CarryWrap g ~ w,
- BasicBase f, BasicBase w) =&gt;
-g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#PairP"><span class="hs-identifier hs-var">PairP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#LeftB"><span class="hs-identifier hs-var">LeftB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span>
-</span><span id="line-103"></span><span>      </span><span class="hs-comment">-- drop first arg (repeater)</span><span>
-</span><span id="line-104"></span><span>      </span><span class="annot"><a href="#local-6989586621679271178"><span class="hs-identifier hs-type">nsLamS</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
-</span><span id="line-105"></span><span>      </span><span id="local-6989586621679271178"><span class="annot"><span class="annottext">nsLamS :: Term3Builder Term3 -&gt; Term3Builder Term3
-</span><a href="#local-6989586621679271178"><span class="hs-identifier hs-var hs-var">nsLamS</span></a></span></span><span> </span><span id="local-6989586621679271179"><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271179"><span class="hs-identifier hs-var">x</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) a (m :: * -&gt; *).
-(Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
- Monad m) =&gt;
-m g -&gt; m g -&gt; m g
-</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271179"><span class="hs-identifier hs-var">x</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
--&gt; (Term3 -&gt; Term3Builder Term3) -&gt; Term3Builder Term3
-forall a b.
-StateT (FunctionIndex, UnsizedRecursionToken) Identity a
--&gt; (a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b)
--&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b
-forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
-</span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
-g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-var">deferS</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g -&gt; g
-</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
-forall g (f :: * -&gt; *).
-(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
-g
-</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-106"></span><span>      </span><span class="hs-comment">-- \t r b r' i -&gt; if t i then r r' i else b i -- t r b are already on the stack when this is evaluated</span><span>
-</span><span id="line-107"></span><span>      </span><span id="local-6989586621679271291"><span class="annot"><span class="annottext">rWrap :: Term3Builder Term3
-</span><a href="#local-6989586621679271291"><span class="hs-identifier hs-var hs-var">rWrap</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3
-</span><a href="#local-6989586621679271178"><span class="hs-identifier hs-var">nsLamS</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; (Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; Term3Builder Term3
 -&gt; Term3Builder Term3
@@ -884,83 +342,15 @@ Term3Builder g -&gt; Term3Builder g
 </span><a href="Telomare.IR.Builder.html#lamS"><span class="hs-identifier hs-var">lamS</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
 forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3 -&gt; Term3 -&gt; Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g, Corecursive g,
- CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-g -&gt; g -&gt; g -&gt; g
-</span><a href="Telomare.IR.Base.html#iteB_"><span class="hs-identifier hs-var">iteB_</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3 -&gt; Term3 -&gt; Term3)
--&gt; Term3Builder Term3
--&gt; StateT
-     (FunctionIndex, UnsizedRecursionToken)
-     Identity
-     (Term3 -&gt; Term3 -&gt; Term3)
-forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;$&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
+-&gt; Term3Builder Term3 -&gt; [Term3Builder Term3]
+forall a. (a -&gt; a) -&gt; a -&gt; [a]
+</span><span class="hs-identifier hs-var">iterate</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
 forall g (f :: * -&gt; *) (w :: * -&gt; *).
 (Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
  Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
 Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
 </span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
- Corecursive g) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">4</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
- Corecursive g) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span>
-</span><span id="line-108"></span><span>                                    </span><span class="annot"><span class="annottext">StateT
-  (FunctionIndex, UnsizedRecursionToken)
-  Identity
-  (Term3 -&gt; Term3 -&gt; Term3)
--&gt; Term3Builder Term3
--&gt; StateT
-     (FunctionIndex, UnsizedRecursionToken) Identity (Term3 -&gt; Term3)
-forall a b.
-StateT (FunctionIndex, UnsizedRecursionToken) Identity (a -&gt; b)
--&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
--&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
- Corecursive g) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">3</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
 forall a.
 a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
@@ -984,48 +374,33 @@ forall g (f :: * -&gt; *).
  Corecursive g) =&gt;
 Int -&gt; g
 </span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span>
-</span><span id="line-109"></span><span>                                    </span><span class="annot"><span class="annottext">StateT
-  (FunctionIndex, UnsizedRecursionToken) Identity (Term3 -&gt; Term3)
--&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall a b.
-StateT (FunctionIndex, UnsizedRecursionToken) Identity (a -&gt; b)
--&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
--&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b
-forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f b
-</span><span class="hs-operator hs-var">&lt;*&gt;</span></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
- Corecursive g) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">2</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
-forall a b. (a -&gt; b) -&gt; a -&gt; b
-</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
-forall g (f :: * -&gt; *).
-(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
- Corecursive g) =&gt;
-Int -&gt; g
-</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span>
-</span><span id="line-110"></span><span>      </span><span class="hs-comment">-- hack to make sure recursion test wrapper can be put in a definite place when sizing</span><span>
-</span><span id="line-111"></span><span>      </span><span id="local-6989586621679271292"><span class="annot"><span class="annottext">tWrap :: Term3Builder Term3
-</span><a href="#local-6989586621679271292"><span class="hs-identifier hs-var hs-var">tWrap</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
+</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Term3Builder Term3] -&gt; Int -&gt; Term3Builder Term3
+forall a. HasCallStack =&gt; [a] -&gt; Int -&gt; a
+</span><span class="hs-operator hs-var">!!</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679295514"><span class="hs-identifier hs-var">n</span></a></span><span>
+</span><span id="line-90"></span><span>
+</span><span id="line-91"></span><span class="hs-comment">-- | @{t, r, b}@: a closure over the evaluated test/recur/base triple that,</span><span>
+</span><span id="line-92"></span><span class="hs-comment">-- once handed its per-site oracle, becomes the recursion function</span><span>
+</span><span id="line-93"></span><span class="hs-comment">-- @\\x -&gt; approximants x@. The recursion itself is Y-approximant</span><span>
+</span><span id="line-94"></span><span class="hs-comment">-- composition: sizing replaces the oracle's hole with @step^n base@ where</span><span>
+</span><span id="line-95"></span><span class="hs-comment">-- @step recur i = if t i then r recur i else b i@ (lazy branches), so no</span><span>
+</span><span id="line-96"></span><span class="hs-comment">-- function ever applies itself.</span><span>
+</span><span id="line-97"></span><span class="annot"><a href="Telomare.IR.Builder.html#unsizedRecursionWrapper"><span class="hs-identifier hs-type">unsizedRecursionWrapper</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Builder.html#Term3Builder"><span class="hs-identifier hs-type">Term3Builder</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#Term3"><span class="hs-identifier hs-type">Term3</span></a></span><span>
+</span><span id="line-98"></span><span id="unsizedRecursionWrapper"><span class="annot"><span class="annottext">unsizedRecursionWrapper :: LocTag
+-&gt; Term3Builder Term3
+-&gt; Term3Builder Term3
+-&gt; Term3Builder Term3
+-&gt; Term3Builder Term3
+</span><a href="Telomare.IR.Builder.html#unsizedRecursionWrapper"><span class="hs-identifier hs-var hs-var">unsizedRecursionWrapper</span></a></span></span><span> </span><span id="local-6989586621679295518"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679295518"><span class="hs-identifier hs-var">_loc</span></a></span></span><span> </span><span id="local-6989586621679295519"><span class="annot"><span class="annottext">Term3Builder Term3
+</span><a href="#local-6989586621679295519"><span class="hs-identifier hs-var">t</span></a></span></span><span> </span><span id="local-6989586621679295520"><span class="annot"><span class="annottext">Term3Builder Term3
+</span><a href="#local-6989586621679295520"><span class="hs-identifier hs-var">r</span></a></span></span><span> </span><span id="local-6989586621679295521"><span class="annot"><span class="annottext">Term3Builder Term3
+</span><a href="#local-6989586621679295521"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-99"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-comment">-- the test behind a syntactically definite closure, so the sizing</span><span>
+</span><span id="line-100"></span><span>      </span><span class="hs-comment">-- pass can wrap its body ('RecursionTestF') whatever shape t's own</span><span>
+</span><span id="line-101"></span><span>      </span><span class="hs-comment">-- value takes (it may be a superposition during abstract evaluation)</span><span>
+</span><span id="line-102"></span><span>      </span><span id="local-6989586621679295522"><span class="annot"><span class="annottext">tWrap :: Term3Builder Term3
+</span><a href="#local-6989586621679295522"><span class="hs-identifier hs-var hs-var">tWrap</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
 forall g (f :: * -&gt; *) a (m :: * -&gt; *).
 (Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
  Monad m) =&gt;
@@ -1076,7 +451,7 @@ forall g (f :: * -&gt; *) a (m :: * -&gt; *).
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
 </span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271133"><span class="hs-identifier hs-var">t</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
+</span><a href="#local-6989586621679295519"><span class="hs-identifier hs-var">t</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
@@ -1088,14 +463,14 @@ forall g (f :: * -&gt; *).
 (Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
 g
 </span><a href="Telomare.IR.Base.html#ZeroB"><span class="hs-identifier hs-var">ZeroB</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-112"></span><span>      </span><span id="local-6989586621679271293"><span class="annot"><span class="annottext">trb :: Term3Builder Term3
-</span><a href="#local-6989586621679271293"><span class="hs-identifier hs-var hs-var">trb</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
+</span><span id="line-103"></span><span>      </span><span id="local-6989586621679295523"><span class="annot"><span class="annottext">trb :: Term3Builder Term3
+</span><a href="#local-6989586621679295523"><span class="hs-identifier hs-var hs-var">trb</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
 forall g (f :: * -&gt; *) a (m :: * -&gt; *).
 (Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
 </span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271135"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
+</span><a href="#local-6989586621679295522"><span class="hs-identifier hs-var">tWrap</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; (Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; Term3Builder Term3
 -&gt; Term3Builder Term3
@@ -1106,7 +481,7 @@ forall g (f :: * -&gt; *) a (m :: * -&gt; *).
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
 </span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271134"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
+</span><a href="#local-6989586621679295520"><span class="hs-identifier hs-var">r</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; (Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; Term3Builder Term3
 -&gt; Term3Builder Term3
@@ -1117,7 +492,7 @@ forall g (f :: * -&gt; *) a (m :: * -&gt; *).
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
 </span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271292"><span class="hs-identifier hs-var">tWrap</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
+</span><a href="#local-6989586621679295521"><span class="hs-identifier hs-var">b</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3Builder Term3 -&gt; Term3Builder Term3)
 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
@@ -1129,40 +504,100 @@ forall g (f :: * -&gt; *).
 (Recursive g, Corecursive g, Base g ~ f, BasicBase f) =&gt;
 g
 </span><a href="Telomare.IR.Base.html#ZeroB"><span class="hs-identifier hs-var">ZeroB</span></a></span><span>
-</span><span id="line-113"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
+</span><span id="line-104"></span><span>      </span><span class="hs-comment">-- env: (x, (oracle, trb)); apply the oracle to trb, the resulting</span><span>
+</span><span id="line-105"></span><span>      </span><span class="hs-comment">-- approximant chain to x</span><span>
+</span><span id="line-106"></span><span>      </span><span id="local-6989586621679295578"><span class="annot"><span class="annottext">innerBody :: Term3Builder Term3
+</span><a href="#local-6989586621679295578"><span class="hs-identifier hs-var hs-var">innerBody</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
+forall g (f :: * -&gt; *) (w :: * -&gt; *).
+(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
+ Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
+Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
+</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
+forall g (f :: * -&gt; *) (w :: * -&gt; *).
+(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
+ Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
+Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
+</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
+forall a.
+a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
+ Corecursive g) =&gt;
+Int -&gt; g
+</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">1</span></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
+forall a.
+a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3)
+-&gt; (Term3 -&gt; Term3) -&gt; Term3 -&gt; Term3Builder Term3
+forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
+</span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g -&gt; g
+</span><a href="Telomare.IR.Base.html#RightB"><span class="hs-identifier hs-var">RightB</span></a></span><span> </span><span class="annot"><span class="annottext">Term3
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g
+</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
+forall a.
+a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
+forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
+</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">(Term3 -&gt; Term3Builder Term3) -&gt; Term3 -&gt; Term3Builder Term3
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Term3
+forall g (f :: * -&gt; *).
+(Base g ~ f, BasicBase f, StuckBase f, Recursive g,
+ Corecursive g) =&gt;
+Int -&gt; g
+</span><a href="Telomare.IR.Base.html#varB"><span class="hs-identifier hs-var">varB</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span class="hs-special">)</span><span>
+</span><span id="line-107"></span><span>      </span><span class="hs-comment">-- env: (oracle, trb); capture it and await x</span><span>
+</span><span id="line-108"></span><span>      </span><span id="local-6989586621679295579"><span class="annot"><span class="annottext">mainBody :: Term3Builder Term3
+</span><a href="#local-6989586621679295579"><span class="hs-identifier hs-var hs-var">mainBody</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
 forall g (f :: * -&gt; *) a (m :: * -&gt; *).
 (Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
  Monad m) =&gt;
 m g -&gt; m g -&gt; m g
-</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
-forall g (f :: * -&gt; *) (w :: * -&gt; *).
-(Base g ~ CofreeF f LocTag, StuckBase f, BasicBase f, Recursive g,
- Corecursive g, CarryAnno g, CarryWrap g ~ w, BasicBase w) =&gt;
-Term3Builder g -&gt; Term3Builder g -&gt; Term3Builder g
-</span><a href="Telomare.IR.Builder.html#appS"><span class="hs-identifier hs-var">appS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag -&gt; Term3Builder Term3
-</span><a href="Telomare.IR.Builder.html#repeatFunctionS"><span class="hs-identifier hs-var">repeatFunctionS</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679271132"><span class="hs-identifier hs-var">loc</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
+</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3
+</span><a href="#local-6989586621679295578"><span class="hs-identifier hs-var">innerBody</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
+-&gt; (Term3 -&gt; Term3Builder Term3) -&gt; Term3Builder Term3
+forall a b.
+StateT (FunctionIndex, UnsizedRecursionToken) Identity a
+-&gt; (a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b)
+-&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity b
+forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
+</span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
+forall g (f :: * -&gt; *).
+(Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
+g -&gt; Term3Builder g
+</span><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-var">deferS</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
 forall a.
 a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271151"><span class="hs-identifier hs-var">repeater</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271291"><span class="hs-identifier hs-var">rWrap</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3 -&gt; Term3Builder Term3
-forall a.
-a -&gt; StateT (FunctionIndex, UnsizedRecursionToken) Identity a
-forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
-</span><span class="hs-identifier hs-var">pure</span></span><span> </span><span class="annot"><span class="annottext">Term3
-</span><a href="#local-6989586621679271177"><span class="hs-identifier hs-var">abrt</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
+forall g (f :: * -&gt; *).
+(Recursive g, Corecursive g, Base g ~ f, StuckBase f) =&gt;
+g
+</span><a href="Telomare.IR.Base.html#EnvB"><span class="hs-identifier hs-var">EnvB</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-109"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3 -&gt; Term3Builder Term3 -&gt; Term3Builder Term3
+forall g (f :: * -&gt; *) a (m :: * -&gt; *).
+(Base g ~ CofreeF f a, BasicBase f, Recursive g, Corecursive g,
+ Monad m) =&gt;
+m g -&gt; m g -&gt; m g
+</span><a href="Telomare.IR.Builder.html#pairS"><span class="hs-identifier hs-var">pairS</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Term3Builder Term3
+</span><a href="#local-6989586621679295579"><span class="hs-identifier hs-var">mainBody</span></a></span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
 -&gt; (Term3 -&gt; Term3Builder Term3) -&gt; Term3Builder Term3
 forall a b.
 StateT (FunctionIndex, UnsizedRecursionToken) Identity a
@@ -1174,5 +609,5 @@ forall g (f :: * -&gt; *).
 (Base g ~ f, StuckBase f, Recursive g, Corecursive g) =&gt;
 g -&gt; Term3Builder g
 </span><a href="Telomare.IR.Builder.html#deferS"><span class="hs-identifier hs-var">deferS</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Term3Builder Term3
-</span><a href="#local-6989586621679271293"><span class="hs-identifier hs-var">trb</span></a></span><span>
-</span><span id="line-114"></span></pre></body></html>
+</span><a href="#local-6989586621679295523"><span class="hs-identifier hs-var">trb</span></a></span><span>
+</span><span id="line-110"></span></pre></body></html>
