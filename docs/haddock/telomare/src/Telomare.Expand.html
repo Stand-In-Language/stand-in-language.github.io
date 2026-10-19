@@ -24,13 +24,13 @@
 </span><span id="line-24"></span><span>  </span><span class="hs-special">,</span><span> </span><span class="annot"><a href="Telomare.Expand.html#buildMultiLambda"><span class="hs-identifier">buildMultiLambda</span></a></span><span>
 </span><span id="line-25"></span><span>  </span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
 </span><span id="line-26"></span><span>
-</span><span id="line-27"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html"><span class="hs-identifier">Control.Comonad.Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#Cofree"><span class="hs-identifier">Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-27"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html"><span class="hs-identifier">Control.Comonad.Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#Cofree"><span class="hs-identifier">Cofree</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-28"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Control.Monad</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">when</span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-operator">(&gt;=&gt;)</span></span><span class="hs-special">)</span><span>
 </span><span id="line-29"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Bifunctor</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">first</span></span><span class="hs-special">)</span><span>
 </span><span id="line-30"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Char</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">isUpper</span></span><span class="hs-special">)</span><span>
-</span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html"><span class="hs-identifier">Data.Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><span id="line-31"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/9g5ncnsgms8qyacpl2fdx8w8ahk4gzrh-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html"><span class="hs-identifier">Data.Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/9g5ncnsgms8qyacpl2fdx8w8ahk4gzrh-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">..</span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-32"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Data.Functor</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier">void</span></span><span class="hs-special">)</span><span>
-</span><span id="line-33"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier">embed</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier">project</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-33"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="file:///nix/store/y6f47fbiy7zy6yg0i3mhjasda21vgrbz-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html"><span class="hs-identifier">Data.Functor.Foldable</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/y6f47fbiy7zy6yg0i3mhjasda21vgrbz-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier">embed</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><a href="file:///nix/store/y6f47fbiy7zy6yg0i3mhjasda21vgrbz-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier">project</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-34"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Base.html"><span class="hs-identifier">Telomare.IR.Base</span></a></span><span>
 </span><span id="line-35"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html"><span class="hs-identifier">Telomare.IR.Loc</span></a></span><span>
 </span><span id="line-36"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html"><span class="hs-identifier">Telomare.IR.Surface</span></a></span><span>
@@ -219,7 +219,7 @@ forall a. Maybe a
 </span><span id="line-85"></span><span class="annot"><a href="Telomare.Expand.html#expandTerm"><span class="hs-identifier hs-type">expandTerm</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#ParsedSurfaceTerm"><span class="hs-identifier hs-type">ParsedSurfaceTerm</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.Expand.html#ExpansionError"><span class="hs-identifier hs-type">ExpansionError</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#ExpandedSurfaceTerm"><span class="hs-identifier hs-type">ExpandedSurfaceTerm</span></a></span><span>
 </span><span id="line-86"></span><span id="expandTerm"><span class="annot"><span class="annottext">expandTerm :: ParsedSurfaceTerm -&gt; Either ExpansionError ExpandedSurfaceTerm
 </span><a href="Telomare.Expand.html#expandTerm"><span class="hs-identifier hs-var hs-var">expandTerm</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679309958"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679309958"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span id="local-6989586621679309960"><span class="annot"><span class="annottext">ParsedTermF PatternP ParsedSurfaceTerm
+</span><a href="#local-6989586621679309958"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span id="local-6989586621679309960"><span class="annot"><span class="annottext">ParsedTermF PatternP ParsedSurfaceTerm
 </span><a href="#local-6989586621679309960"><span class="hs-identifier hs-var">term</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ParsedTermF PatternP ParsedSurfaceTerm
 </span><a href="#local-6989586621679309960"><span class="hs-identifier hs-var">term</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-87"></span><span>  </span><span class="annot"><a href="Telomare.IR.Surface.html#ParsedTermSugar"><span class="hs-identifier hs-type">ParsedTermSugar</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#LamPatF"><span class="hs-identifier hs-type">LamPatF</span></a></span><span> </span><span id="local-6989586621679309962"><span class="annot"><span class="annottext">[(LocTag, PatternP)]
@@ -255,7 +255,7 @@ Applicative f =&gt;
 </span><a href="Telomare.Expand.html#expandDefs"><span class="hs-identifier hs-var">expandDefs</span></a></span><span> </span><span class="annot"><span class="annottext">[DefinitionF ParsedSurfaceTerm]
 </span><a href="#local-6989586621679309967"><span class="hs-identifier hs-var">defs</span></a></span><span>
 </span><span id="line-93"></span><span>    </span><span id="local-6989586621679309970"><span class="annot"><a href="#local-6989586621679309970"><span class="hs-identifier hs-var">body'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><a href="Telomare.Expand.html#expandTerm"><span class="hs-identifier hs-type">expandTerm</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309968"><span class="hs-identifier hs-type">body</span></a></span><span>
-</span><span id="line-94"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="#local-6989586621679309958"><span class="hs-identifier hs-type">loc</span></a></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-type">LetUPF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309969"><span class="hs-identifier hs-type">bindings</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309970"><span class="hs-identifier hs-type">body'</span></a></span><span>
+</span><span id="line-94"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="#local-6989586621679309958"><span class="hs-identifier hs-type">loc</span></a></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-type">LetUPF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309969"><span class="hs-identifier hs-type">bindings</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309970"><span class="hs-identifier hs-type">body'</span></a></span><span>
 </span><span id="line-95"></span><span>  </span><span class="annot"><a href="Telomare.IR.Surface.html#ParsedTermUP"><span class="hs-identifier hs-type">ParsedTermUP</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#CaseUPF"><span class="hs-identifier hs-type">CaseUPF</span></a></span><span> </span><span id="local-6989586621679309972"><span class="annot"><span class="annottext">ParsedSurfaceTerm
 </span><a href="#local-6989586621679309972"><span class="hs-identifier hs-var">scrutinee</span></a></span></span><span> </span><span id="local-6989586621679309973"><span class="annot"><span class="annottext">[(PatternP, ParsedSurfaceTerm)]
 </span><a href="#local-6989586621679309973"><span class="hs-identifier hs-var">alternatives</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
@@ -263,7 +263,7 @@ Applicative f =&gt;
 </span><a href="Telomare.Expand.html#expandTerm"><span class="hs-identifier hs-var">expandTerm</span></a></span><span> </span><span class="annot"><span class="annottext">ParsedSurfaceTerm
 </span><a href="#local-6989586621679309972"><span class="hs-identifier hs-var">scrutinee</span></a></span><span>
 </span><span id="line-97"></span><span>    </span><span id="local-6989586621679309975"><span class="annot"><a href="#local-6989586621679309975"><span class="hs-identifier hs-var">alternatives'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="hs-identifier hs-type">traverse</span></span><span> </span><span class="annot"><a href="#local-6989586621679309976"><span class="hs-identifier hs-type">expandAlternative</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309973"><span class="hs-identifier hs-type">alternatives</span></a></span><span>
-</span><span id="line-98"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="#local-6989586621679309958"><span class="hs-identifier hs-type">loc</span></a></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#CaseUPF"><span class="hs-identifier hs-type">CaseUPF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309974"><span class="hs-identifier hs-type">scrutinee'</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309975"><span class="hs-identifier hs-type">alternatives'</span></a></span><span>
+</span><span id="line-98"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">pure</span></span><span> </span><span class="annot"><span class="hs-operator hs-type">$</span></span><span> </span><span class="annot"><a href="#local-6989586621679309958"><span class="hs-identifier hs-type">loc</span></a></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#CaseUPF"><span class="hs-identifier hs-type">CaseUPF</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309974"><span class="hs-identifier hs-type">scrutinee'</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679309975"><span class="hs-identifier hs-type">alternatives'</span></a></span><span>
 </span><span id="line-99"></span><span>  </span><span class="annot"><a href="Telomare.IR.Surface.html#ParsedTermUP"><span class="hs-identifier hs-type">ParsedTermUP</span></a></span><span> </span><span id="local-6989586621679309977"><span class="annot"><span class="annottext">UnprocessedParsedTermF () PatternP ParsedSurfaceTerm
 </span><a href="#local-6989586621679309977"><span class="hs-identifier hs-var">upf</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-100"></span><span>    </span><span id="local-6989586621679309978"><span class="annot"><a href="#local-6989586621679309978"><span class="hs-identifier hs-var">upf'</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">(ParsedSurfaceTerm -&gt; Either ExpansionError ExpandedSurfaceTerm)
@@ -315,10 +315,10 @@ forall (f :: * -&gt; *) a b. Applicative f =&gt; f (a -&gt; b) -&gt; f a -&gt; f
 </span><span id="line-107"></span><span class="hs-comment">-- the parser leaves raw too.</span><span>
 </span><span id="line-108"></span><span class="annot"><a href="Telomare.Expand.html#expandPattern"><span class="hs-identifier hs-type">expandPattern</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternP"><span class="hs-identifier hs-type">PatternP</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.Expand.html#ExpansionError"><span class="hs-identifier hs-type">ExpansionError</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternA"><span class="hs-identifier hs-type">PatternA</span></a></span><span>
 </span><span id="line-109"></span><span id="expandPattern"><span class="annot"><span class="annottext">expandPattern :: PatternP -&gt; Either ExpansionError PatternA
-</span><a href="Telomare.Expand.html#expandPattern"><span class="hs-identifier hs-var hs-var">expandPattern</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span id="local-6989586621679309986"><span class="annot"><span class="annottext">PatternF AnnotatedPST PatternP
+</span><a href="Telomare.Expand.html#expandPattern"><span class="hs-identifier hs-var hs-var">expandPattern</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="file:///nix/store/9g5ncnsgms8qyacpl2fdx8w8ahk4gzrh-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span id="local-6989586621679309986"><span class="annot"><span class="annottext">PatternF AnnotatedPST PatternP
 </span><a href="#local-6989586621679309986"><span class="hs-identifier hs-var">pattern'</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">PatternF AnnotatedEST PatternA -&gt; PatternA
 forall (f :: * -&gt; *). f (Fix f) -&gt; Fix f
-</span><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-var">Fix</span></a></span><span> </span><span class="annot"><span class="annottext">(PatternF AnnotatedEST PatternA -&gt; PatternA)
+</span><a href="file:///nix/store/9g5ncnsgms8qyacpl2fdx8w8ahk4gzrh-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-var">Fix</span></a></span><span> </span><span class="annot"><span class="annottext">(PatternF AnnotatedEST PatternA -&gt; PatternA)
 -&gt; Either ExpansionError (PatternF AnnotatedEST PatternA)
 -&gt; Either ExpansionError PatternA
 forall (f :: * -&gt; *) a b. Functor f =&gt; (a -&gt; b) -&gt; f a -&gt; f b
@@ -603,7 +603,7 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, ExpandedSurfaceTerm)]
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, ExpandedSurfaceTerm)]
 -&gt; ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall c p f.
@@ -674,7 +674,7 @@ forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall x. HighTermF x -&gt; UnprocessedParsedTermF () PatternA x
 forall (g :: * -&gt; *) x. HighBase g =&gt; HighTermF x -&gt; g x
@@ -737,7 +737,7 @@ a -&gt; (LocTag, Fix (PatternF t)) -&gt; LocatedName
 </span><a href="#local-6989586621679310053"><span class="hs-identifier hs-var">loc</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679310054"><span class="annot"><span class="annottext">Fix (PatternF t)
 </span><a href="#local-6989586621679310054"><span class="hs-identifier hs-var">pattern'</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">Fix (PatternF t)
 </span><a href="#local-6989586621679310054"><span class="hs-identifier hs-var">pattern'</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-168"></span><span>      </span><span class="annot"><a href="file:///nix/store/xyyqakk5dfgj6331p17qsmqgj78yq8lj-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#PatternVarF"><span class="hs-identifier hs-type">PatternVarF</span></a></span><span> </span><span id="local-6989586621679310055"><span class="annot"><span class="annottext">LocatedName
+</span><span id="line-168"></span><span>      </span><span class="annot"><a href="file:///nix/store/9g5ncnsgms8qyacpl2fdx8w8ahk4gzrh-data-fix-0.3.4-doc/share/doc/data-fix-0.3.4/html/src/Data.Fix.html#Fix"><span class="hs-identifier hs-type">Fix</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Surface.html#PatternVarF"><span class="hs-identifier hs-type">PatternVarF</span></a></span><span> </span><span id="local-6989586621679310055"><span class="annot"><span class="annottext">LocatedName
 </span><a href="#local-6989586621679310055"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">LocatedName
 </span><a href="#local-6989586621679310055"><span class="hs-identifier hs-var">name</span></a></span><span>
 </span><span id="line-169"></span><span>      </span><span class="annot"><span class="annottext">Fix (PatternF t)
@@ -835,7 +835,7 @@ n -&gt; g -&gt; g
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -869,7 +869,7 @@ g -&gt; g -&gt; g
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -892,13 +892,13 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall c p f. String -&gt; UnprocessedParsedTermF c p f
 </span><a href="Telomare.IR.Surface.html#StringUPF"><span class="hs-identifier hs-var">StringUPF</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;buildMultiLambda: pattern not reached&quot;</span></span><span class="hs-special">)</span><span>
 </span><span id="line-197"></span><span>      </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">PatternA -&gt; Base PatternA PatternA
 forall t. Recursive t =&gt; t -&gt; Base t t
-</span><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier hs-var">project</span></a></span><span> </span><span class="annot"><span class="annottext">PatternA
+</span><a href="file:///nix/store/y6f47fbiy7zy6yg0i3mhjasda21vgrbz-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#project"><span class="hs-identifier hs-var">project</span></a></span><span> </span><span class="annot"><span class="annottext">PatternA
 </span><a href="#local-6989586621679310090"><span class="hs-identifier hs-var">p</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-198"></span><span>           </span><span class="annot"><a href="Telomare.IR.Surface.html#PatternVarF"><span class="hs-identifier hs-type">PatternVarF</span></a></span><span> </span><span class="annot"><span class="annottext">LocatedName
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ExpandedSurfaceTerm
@@ -924,7 +924,7 @@ g -&gt; g -&gt; g
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">ExpandedSurfaceTerm
 -&gt; [(PatternA, ExpandedSurfaceTerm)]
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall f p. f -&gt; [(p, f)] -&gt; UnprocessedParsedTermF () p f
@@ -939,7 +939,7 @@ forall f p. f -&gt; [(p, f)] -&gt; UnprocessedParsedTermF () p f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">ExpandedSurfaceTerm
 -&gt; [(PatternA, ExpandedSurfaceTerm)]
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall f p. f -&gt; [(p, f)] -&gt; UnprocessedParsedTermF () p f
@@ -950,7 +950,7 @@ forall f p. f -&gt; [(p, f)] -&gt; UnprocessedParsedTermF () p f
 </span><a href="#local-6989586621679310092"><span class="hs-identifier hs-var">inner</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-208"></span><span>               </span><span class="hs-special">,</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Base PatternA PatternA -&gt; PatternA
 forall t. Corecursive t =&gt; Base t t -&gt; t
-</span><a href="file:///nix/store/pjp29k8pbcc0c2j3cywv4y51kqfn48c6-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base PatternA PatternA
+</span><a href="file:///nix/store/y6f47fbiy7zy6yg0i3mhjasda21vgrbz-recursion-schemes-5.2.3-doc/share/doc/recursion-schemes-5.2.3/html/src/Data.Functor.Foldable.html#embed"><span class="hs-identifier hs-var">embed</span></a></span><span> </span><span class="annot"><span class="annottext">Base PatternA PatternA
 PatternF AnnotatedEST PatternA
 forall t f. PatternF t f
 </span><a href="Telomare.IR.Surface.html#PatternIgnoreF"><span class="hs-identifier hs-var">PatternIgnoreF</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">ExpandedSurfaceTerm
@@ -1062,7 +1062,7 @@ forall (t :: * -&gt; *) a. Foldable t =&gt; t a -&gt; Int
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1147,7 +1147,7 @@ Cofree (UnprocessedParsedTermF c p) a
       Cofree (UnprocessedParsedTermF c p) a
       -&gt; Cofree (UnprocessedParsedTermF c p) a)
 </span><a href="#local-6989586621679310143"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679310151"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679310151"><span class="hs-identifier hs-var">_l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#ListUPF"><span class="hs-identifier hs-type">ListUPF</span></a></span><span> </span><span id="local-6989586621679310153"><span class="annot"><span class="annottext">[Cofree (UnprocessedParsedTermF c p) a]
+</span><a href="#local-6989586621679310151"><span class="hs-identifier hs-var">_l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#ListUPF"><span class="hs-identifier hs-type">ListUPF</span></a></span><span> </span><span id="local-6989586621679310153"><span class="annot"><span class="annottext">[Cofree (UnprocessedParsedTermF c p) a]
 </span><a href="#local-6989586621679310153"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Cofree (UnprocessedParsedTermF c p) a],
  Cofree (UnprocessedParsedTermF c p) a
  -&gt; Cofree (UnprocessedParsedTermF c p) a)
@@ -1162,7 +1162,7 @@ forall a. a -&gt; Maybe a
 forall a. a -&gt; a
 </span><span class="hs-identifier hs-var">id</span></span><span class="hs-special">)</span><span>
 </span><span id="line-239"></span><span>  </span><span class="annot"><a href="#local-6989586621679310143"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679310155"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679310155"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-type">LetUPF</span></a></span><span> </span><span id="local-6989586621679310156"><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
+</span><a href="#local-6989586621679310155"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-type">LetUPF</span></a></span><span> </span><span id="local-6989586621679310156"><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
 </span><a href="#local-6989586621679310156"><span class="hs-identifier hs-var">binds</span></a></span></span><span> </span><span id="local-6989586621679310157"><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
 </span><a href="#local-6989586621679310157"><span class="hs-identifier hs-var">inner</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-240"></span><span>    </span><span class="hs-special">(</span><span id="local-6989586621679310158"><span class="annot"><a href="#local-6989586621679310158"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679310159"><span class="annot"><a href="#local-6989586621679310159"><span class="hs-identifier hs-var">wrapBody</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
@@ -1179,7 +1179,7 @@ forall a. a -&gt; a
      c p (Cofree (UnprocessedParsedTermF c p) a)
 -&gt; Cofree (UnprocessedParsedTermF c p) a
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
 -&gt; Cofree (UnprocessedParsedTermF c p) a
 -&gt; UnprocessedParsedTermF
      c p (Cofree (UnprocessedParsedTermF c p) a)
@@ -1191,7 +1191,7 @@ forall c p f.
 </span><a href="#local-6989586621679310159"><span class="hs-identifier hs-var">wrapBody</span></a></span><span> </span><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
 </span><a href="#local-6989586621679310160"><span class="hs-identifier hs-var">expr</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-242"></span><span>  </span><span class="annot"><a href="#local-6989586621679310143"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679310161"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679310161"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermL"><span class="hs-identifier hs-type">UnprocessedParsedTermL</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#LamF"><span class="hs-identifier hs-type">LamF</span></a></span><span> </span><span id="local-6989586621679310163"><span class="annot"><span class="annottext">LocatedName
+</span><a href="#local-6989586621679310161"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#UnprocessedParsedTermL"><span class="hs-identifier hs-type">UnprocessedParsedTermL</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.IR.Base.html#LamF"><span class="hs-identifier hs-type">LamF</span></a></span><span> </span><span id="local-6989586621679310163"><span class="annot"><span class="annottext">LocatedName
 </span><a href="#local-6989586621679310163"><span class="hs-identifier hs-var">var</span></a></span></span><span> </span><span id="local-6989586621679310164"><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
 </span><a href="#local-6989586621679310164"><span class="hs-identifier hs-var">inner</span></a></span></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-243"></span><span>    </span><span class="hs-special">(</span><span id="local-6989586621679310165"><span class="annot"><a href="#local-6989586621679310165"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679310166"><span class="annot"><a href="#local-6989586621679310166"><span class="hs-identifier hs-var">wrapBody</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
@@ -1208,7 +1208,7 @@ forall c p f.
      c p (Cofree (UnprocessedParsedTermF c p) a)
 -&gt; Cofree (UnprocessedParsedTermF c p) a
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF c p))
   (LamVar (UnprocessedParsedTermF c p))
   (Cofree (UnprocessedParsedTermF c p) a)
@@ -1278,7 +1278,7 @@ forall a. Show a =&gt; a -&gt; String
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall x. HighTermF x -&gt; UnprocessedParsedTermF () PatternA x
 forall (g :: * -&gt; *) x. HighBase g =&gt; HighTermF x -&gt; g x
@@ -1294,7 +1294,7 @@ forall f. f -&gt; HighTermF f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall x. HighTermF x -&gt; UnprocessedParsedTermF () PatternA x
 forall (g :: * -&gt; *) x. HighBase g =&gt; HighTermF x -&gt; g x
@@ -1309,7 +1309,7 @@ forall a. (a -&gt; a) -&gt; a -&gt; [a]
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall x. HighTermF x -&gt; UnprocessedParsedTermF () PatternA x
 forall (g :: * -&gt; *) x. HighBase g =&gt; HighTermF x -&gt; g x
@@ -1463,7 +1463,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1490,7 +1490,7 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[ExpandedSurfaceTerm]
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[ExpandedSurfaceTerm]
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall c p f. [f] -&gt; UnprocessedParsedTermF c p f
 </span><a href="Telomare.IR.Surface.html#ListUPF"><span class="hs-identifier hs-var">ListUPF</span></a></span><span> </span><span class="hs-special">(</span><span class="hs-special">(</span><span class="annot"><span class="annottext">LocTag
@@ -1498,7 +1498,7 @@ forall c p f. [f] -&gt; UnprocessedParsedTermF c p f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1524,7 +1524,7 @@ forall a. a -&gt; [a] -&gt; [a]
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1552,7 +1552,7 @@ forall a. a -&gt; [a] -&gt; [a]
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, ExpandedSurfaceTerm)]
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, ExpandedSurfaceTerm)]
 -&gt; ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall c p f.
@@ -1583,7 +1583,7 @@ g -&gt; g -&gt; g
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall x. HighTermF x -&gt; UnprocessedParsedTermF () PatternA x
 forall (g :: * -&gt; *) x. HighBase g =&gt; HighTermF x -&gt; g x
@@ -1612,7 +1612,7 @@ forall a. a -&gt; Maybe a
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1642,7 +1642,7 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1670,7 +1670,7 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, ExpandedSurfaceTerm)]
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, ExpandedSurfaceTerm)]
 -&gt; ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall c p f.
@@ -1755,7 +1755,7 @@ Cofree (UnprocessedParsedTermF c p) a
       Cofree (UnprocessedParsedTermF c p) a
       -&gt; Cofree (UnprocessedParsedTermF c p) a)
 </span><a href="#local-6989586621679310275"><span class="hs-identifier hs-var hs-var">go</span></a></span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679310286"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679310286"><span class="hs-identifier hs-var">_l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#ListUPF"><span class="hs-identifier hs-type">ListUPF</span></a></span><span> </span><span id="local-6989586621679310287"><span class="annot"><span class="annottext">[Cofree (UnprocessedParsedTermF c p) a]
+</span><a href="#local-6989586621679310286"><span class="hs-identifier hs-var">_l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#ListUPF"><span class="hs-identifier hs-type">ListUPF</span></a></span><span> </span><span id="local-6989586621679310287"><span class="annot"><span class="annottext">[Cofree (UnprocessedParsedTermF c p) a]
 </span><a href="#local-6989586621679310287"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">([Cofree (UnprocessedParsedTermF c p) a],
  Cofree (UnprocessedParsedTermF c p) a
  -&gt; Cofree (UnprocessedParsedTermF c p) a)
@@ -1771,7 +1771,7 @@ forall a b. b -&gt; Either a b
 forall a. a -&gt; a
 </span><span class="hs-identifier hs-var">id</span></span><span class="hs-special">)</span><span>
 </span><span id="line-333"></span><span>  </span><span class="annot"><a href="#local-6989586621679310275"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679310288"><span class="annot"><span class="annottext">a
-</span><a href="#local-6989586621679310288"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-type">LetUPF</span></a></span><span> </span><span id="local-6989586621679310289"><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
+</span><a href="#local-6989586621679310288"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Surface.html#LetUPF"><span class="hs-identifier hs-type">LetUPF</span></a></span><span> </span><span id="local-6989586621679310289"><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
 </span><a href="#local-6989586621679310289"><span class="hs-identifier hs-var">binds</span></a></span></span><span> </span><span id="local-6989586621679310290"><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
 </span><a href="#local-6989586621679310290"><span class="hs-identifier hs-var">inner</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
 </span><span id="line-334"></span><span>    </span><span class="hs-special">(</span><span id="local-6989586621679310291"><span class="annot"><a href="#local-6989586621679310291"><span class="hs-identifier hs-var">xs</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679310292"><span class="annot"><a href="#local-6989586621679310292"><span class="hs-identifier hs-var">wrapBody</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
@@ -1789,7 +1789,7 @@ forall a. a -&gt; a
      c p (Cofree (UnprocessedParsedTermF c p) a)
 -&gt; Cofree (UnprocessedParsedTermF c p) a
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">[(LocatedName, Cofree (UnprocessedParsedTermF c p) a)]
 -&gt; Cofree (UnprocessedParsedTermF c p) a
 -&gt; UnprocessedParsedTermF
      c p (Cofree (UnprocessedParsedTermF c p) a)
@@ -1801,7 +1801,7 @@ forall c p f.
 </span><a href="#local-6989586621679310292"><span class="hs-identifier hs-var">wrapBody</span></a></span><span> </span><span class="annot"><span class="annottext">Cofree (UnprocessedParsedTermF c p) a
 </span><a href="#local-6989586621679310293"><span class="hs-identifier hs-var">expr</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-336"></span><span>  </span><span class="annot"><a href="#local-6989586621679310275"><span class="hs-identifier hs-var">go</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">a
-</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span id="local-6989586621679310294"><span class="annot"><span class="annottext">UnprocessedParsedTermF c p (Cofree (UnprocessedParsedTermF c p) a)
+</span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-type">:&lt;</span></a></span><span> </span><span id="local-6989586621679310294"><span class="annot"><span class="annottext">UnprocessedParsedTermF c p (Cofree (UnprocessedParsedTermF c p) a)
 </span><a href="#local-6989586621679310294"><span class="hs-identifier hs-var">other</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ExpansionError
 -&gt; Either
      ExpansionError
@@ -1883,7 +1883,7 @@ g -&gt; g -&gt; g
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1906,7 +1906,7 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall x. HighTermF x -&gt; UnprocessedParsedTermF () PatternA x
 forall (g :: * -&gt; *) x. HighBase g =&gt; HighTermF x -&gt; g x
@@ -1917,7 +1917,7 @@ forall f. f -&gt; HighTermF f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1940,7 +1940,7 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -1963,7 +1963,7 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">HighTermF ExpandedSurfaceTerm
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall x. HighTermF x -&gt; UnprocessedParsedTermF () PatternA x
 forall (g :: * -&gt; *) x. HighBase g =&gt; HighTermF x -&gt; g x
@@ -1974,7 +1974,7 @@ forall f. f -&gt; HighTermF f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -2003,7 +2003,7 @@ g -&gt; g -&gt; g
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">LamTermF
   (LamT (UnprocessedParsedTermF () PatternA))
   (LamVar (UnprocessedParsedTermF () PatternA))
   ExpandedSurfaceTerm
@@ -2026,7 +2026,7 @@ forall l v f. v -&gt; LamTermF l v f
 -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 -&gt; ExpandedSurfaceTerm
 forall (f :: * -&gt; *) a. a -&gt; f (Cofree f a) -&gt; Cofree f a
-</span><a href="file:///nix/store/99dwwx9hfy67g2y979c3jnl50zalgpip-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
+</span><a href="file:///nix/store/cjc0k0sk8a72597wl6cwxb8g7xqcnbc4-free-5.2-doc/share/doc/free-5.2/html/src/Control.Comonad.Cofree.html#%3A%3C"><span class="hs-operator hs-var">:&lt;</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; UnprocessedParsedTermF () PatternA ExpandedSurfaceTerm
 forall c p f. String -&gt; UnprocessedParsedTermF c p f
 </span><a href="Telomare.IR.Surface.html#StringUPF"><span class="hs-identifier hs-var">StringUPF</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;not &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
