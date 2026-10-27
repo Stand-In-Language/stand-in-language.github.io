@@ -43,15 +43,15 @@
 </span><span id="line-42"></span><span class="hs-comment">-- 'Telomare.Driver.programPlan' instead of paying for it again here.</span><span>
 </span><span id="line-43"></span><span class="annot"><a href="Telomare.Eval.IC.html#admitIC"><span class="hs-identifier hs-type">admitIC</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><a href="Telomare.Eval.IC.html#ICPlan"><span class="hs-identifier hs-type">ICPlan</span></a></span><span>
 </span><span id="line-44"></span><span id="admitIC"><span class="annot"><span class="annottext">admitIC :: CompiledExpr -&gt; Either String ICPlan
-</span><a href="Telomare.Eval.IC.html#admitIC"><span class="hs-identifier hs-var hs-var">admitIC</span></a></span></span><span> </span><span id="local-6989586621679338099"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679338099"><span class="hs-identifier hs-var">expr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-45"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679338100"><span class="annot"><span class="annottext">lr :: EALLiftedResult
-</span><a href="#local-6989586621679338100"><span class="hs-identifier hs-var hs-var">lr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; EALLiftedResult
+</span><a href="Telomare.Eval.IC.html#admitIC"><span class="hs-identifier hs-var hs-var">admitIC</span></a></span></span><span> </span><span id="local-6989586621679337451"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679337451"><span class="hs-identifier hs-var">expr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-45"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679337452"><span class="annot"><span class="annottext">lr :: EALLiftedResult
+</span><a href="#local-6989586621679337452"><span class="hs-identifier hs-var hs-var">lr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">CompiledExpr -&gt; EALLiftedResult
 </span><a href="Telomare.EAL.html#inferEALCompiled"><span class="hs-identifier hs-var">inferEALCompiled</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679338099"><span class="hs-identifier hs-var">expr</span></a></span><span>
+</span><a href="#local-6989586621679337451"><span class="hs-identifier hs-var">expr</span></a></span><span>
 </span><span id="line-46"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">EALLiftedResult -&gt; Either EALError EALResult
 </span><a href="Telomare.EAL.html#ealLiftedMain"><span class="hs-identifier hs-var">ealLiftedMain</span></a></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult
-</span><a href="#local-6989586621679338100"><span class="hs-identifier hs-var">lr</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679337452"><span class="hs-identifier hs-var">lr</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-47"></span><span>       </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span class="annot"><span class="annottext">EALResult
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">ICPlan -&gt; Either String ICPlan
 forall a b. b -&gt; Either a b
@@ -66,7 +66,7 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult -&gt; Map (Digest SHA256) CapShape
 </span><a href="Telomare.EAL.html#ealCaptureLayouts"><span class="hs-identifier hs-var">ealCaptureLayouts</span></a></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult
-</span><a href="#local-6989586621679338100"><span class="hs-identifier hs-var">lr</span></a></span><span>
+</span><a href="#local-6989586621679337452"><span class="hs-identifier hs-var">lr</span></a></span><span>
 </span><span id="line-48"></span><span>       </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span class="annot"><span class="annottext">EALError
 </span><span class="hs-identifier">_</span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; Either String ICPlan
 forall a b. a -&gt; Either a b
@@ -74,43 +74,43 @@ forall a b. a -&gt; Either a b
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult -&gt; String
 </span><a href="Telomare.Eval.IC.html#renderRefusal"><span class="hs-identifier hs-var">renderRefusal</span></a></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult
-</span><a href="#local-6989586621679338100"><span class="hs-identifier hs-var">lr</span></a></span><span>
+</span><a href="#local-6989586621679337452"><span class="hs-identifier hs-var">lr</span></a></span><span>
 </span><span id="line-49"></span><span>
 </span><span id="line-50"></span><span class="annot"><a href="Telomare.Eval.IC.html#renderRefusal"><span class="hs-identifier hs-type">renderRefusal</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.EAL.html#EALLiftedResult"><span class="hs-identifier hs-type">EALLiftedResult</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-51"></span><span id="renderRefusal"><span class="annot"><span class="annottext">renderRefusal :: EALLiftedResult -&gt; String
-</span><a href="Telomare.Eval.IC.html#renderRefusal"><span class="hs-identifier hs-var hs-var">renderRefusal</span></a></span></span><span> </span><span id="local-6989586621679338104"><span class="annot"><span class="annottext">EALLiftedResult
-</span><a href="#local-6989586621679338104"><span class="hs-identifier hs-var">lr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
+</span><a href="Telomare.Eval.IC.html#renderRefusal"><span class="hs-identifier hs-var hs-var">renderRefusal</span></a></span></span><span> </span><span id="local-6989586621679337456"><span class="annot"><span class="annottext">EALLiftedResult
+</span><a href="#local-6989586621679337456"><span class="hs-identifier hs-var">lr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
 </span><span class="hs-identifier hs-var">unlines</span></span><span> </span><span class="annot"><span class="annottext">([String] -&gt; String) -&gt; [String] -&gt; String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679338106"><span class="hs-identifier hs-var">verdict</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
+</span><a href="#local-6989586621679337458"><span class="hs-identifier hs-var">verdict</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679338107"><span class="hs-identifier hs-var">bodies</span></a></span><span>
+</span><a href="#local-6989586621679337459"><span class="hs-identifier hs-var">bodies</span></a></span><span>
 </span><span id="line-52"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-53"></span><span>    </span><span id="local-6989586621679338106"><span class="annot"><span class="annottext">verdict :: String
-</span><a href="#local-6989586621679338106"><span class="hs-identifier hs-var hs-var">verdict</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-53"></span><span>    </span><span id="local-6989586621679337458"><span class="annot"><span class="annottext">verdict :: String
+</span><a href="#local-6989586621679337458"><span class="hs-identifier hs-var hs-var">verdict</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-54"></span><span>      </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;the IC runtime requires an EAL certificate; this program &quot;</span></span><span>
 </span><span id="line-55"></span><span>        </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult -&gt; String
 </span><a href="Telomare.EAL.html#renderEALVerdict"><span class="hs-identifier hs-var">renderEALVerdict</span></a></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult
-</span><a href="#local-6989586621679338104"><span class="hs-identifier hs-var">lr</span></a></span><span>
-</span><span id="line-56"></span><span>    </span><span id="local-6989586621679338109"><span class="annot"><span class="annottext">failures :: [(Digest SHA256, EALError)]
-</span><a href="#local-6989586621679338109"><span class="hs-identifier hs-var hs-var">failures</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Digest SHA256
-</span><a href="#local-6989586621679338110"><span class="hs-identifier hs-var">h</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679338111"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679338110"><span class="annot"><span class="annottext">Digest SHA256
-</span><a href="#local-6989586621679338110"><span class="hs-identifier hs-var">h</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679338111"><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679338111"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Map (Digest SHA256) (Either EALError CodeGuidance)
+</span><a href="#local-6989586621679337456"><span class="hs-identifier hs-var">lr</span></a></span><span>
+</span><span id="line-56"></span><span>    </span><span id="local-6989586621679337461"><span class="annot"><span class="annottext">failures :: [(Digest SHA256, EALError)]
+</span><a href="#local-6989586621679337461"><span class="hs-identifier hs-var hs-var">failures</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Digest SHA256
+</span><a href="#local-6989586621679337462"><span class="hs-identifier hs-var">h</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">EALError
+</span><a href="#local-6989586621679337463"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679337462"><span class="annot"><span class="annottext">Digest SHA256
+</span><a href="#local-6989586621679337462"><span class="hs-identifier hs-var">h</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span id="local-6989586621679337463"><span class="annot"><span class="annottext">EALError
+</span><a href="#local-6989586621679337463"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">Map (Digest SHA256) (Either EALError CodeGuidance)
 -&gt; [(Digest SHA256, Either EALError CodeGuidance)]
 forall k a. Map k a -&gt; [(k, a)]
 </span><span class="hs-identifier hs-var">Map.toList</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">EALLiftedResult
 -&gt; Map (Digest SHA256) (Either EALError CodeGuidance)
 </span><a href="Telomare.EAL.html#ealGuidance"><span class="hs-identifier hs-var">ealGuidance</span></a></span><span> </span><span class="annot"><span class="annottext">EALLiftedResult
-</span><a href="#local-6989586621679338104"><span class="hs-identifier hs-var">lr</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">]</span><span>
-</span><span id="line-57"></span><span>    </span><span id="local-6989586621679338114"><span class="annot"><span class="annottext">rootCauses :: [(Digest SHA256, EALError)]
-</span><a href="#local-6989586621679338114"><span class="hs-identifier hs-var hs-var">rootCauses</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">((Digest SHA256, EALError) -&gt; Bool)
+</span><a href="#local-6989586621679337456"><span class="hs-identifier hs-var">lr</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">]</span><span>
+</span><span id="line-57"></span><span>    </span><span id="local-6989586621679337466"><span class="annot"><span class="annottext">rootCauses :: [(Digest SHA256, EALError)]
+</span><a href="#local-6989586621679337466"><span class="hs-identifier hs-var hs-var">rootCauses</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">((Digest SHA256, EALError) -&gt; Bool)
 -&gt; [(Digest SHA256, EALError)] -&gt; [(Digest SHA256, EALError)]
 forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">filter</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Bool -&gt; Bool
@@ -120,7 +120,7 @@ forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
 -&gt; Bool
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">EALError -&gt; Bool
-</span><a href="#local-6989586621679338116"><span class="hs-identifier hs-var">isCascade</span></a></span><span> </span><span class="annot"><span class="annottext">(EALError -&gt; Bool)
+</span><a href="#local-6989586621679337468"><span class="hs-identifier hs-var">isCascade</span></a></span><span> </span><span class="annot"><span class="annottext">(EALError -&gt; Bool)
 -&gt; ((Digest SHA256, EALError) -&gt; EALError)
 -&gt; (Digest SHA256, EALError)
 -&gt; Bool
@@ -128,22 +128,22 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">(Digest SHA256, EALError) -&gt; EALError
 forall a b. (a, b) -&gt; b
 </span><span class="hs-identifier hs-var">snd</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
-</span><a href="#local-6989586621679338109"><span class="hs-identifier hs-var">failures</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><a href="#local-6989586621679337461"><span class="hs-identifier hs-var">failures</span></a></span><span> </span><span class="hs-keyword">of</span><span>
 </span><span id="line-58"></span><span>      </span><span class="hs-special">[</span><span class="hs-special">]</span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
-</span><a href="#local-6989586621679338109"><span class="hs-identifier hs-var">failures</span></a></span><span>
-</span><span id="line-59"></span><span>      </span><span id="local-6989586621679338118"><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
-</span><a href="#local-6989586621679338118"><span class="hs-identifier hs-var">roots</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
-</span><a href="#local-6989586621679338118"><span class="hs-identifier hs-var">roots</span></a></span><span>
-</span><span id="line-60"></span><span>    </span><span id="local-6989586621679338116"><span class="annot"><span class="annottext">isCascade :: EALError -&gt; Bool
-</span><a href="#local-6989586621679338116"><span class="hs-identifier hs-var hs-var">isCascade</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><a href="#local-6989586621679337461"><span class="hs-identifier hs-var">failures</span></a></span><span>
+</span><span id="line-59"></span><span>      </span><span id="local-6989586621679337470"><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
+</span><a href="#local-6989586621679337470"><span class="hs-identifier hs-var">roots</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
+</span><a href="#local-6989586621679337470"><span class="hs-identifier hs-var">roots</span></a></span><span>
+</span><span id="line-60"></span><span>    </span><span id="local-6989586621679337468"><span class="annot"><span class="annottext">isCascade :: EALError -&gt; Bool
+</span><a href="#local-6989586621679337468"><span class="hs-identifier hs-var hs-var">isCascade</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
 </span><span id="line-61"></span><span>      </span><span class="annot"><a href="Telomare.Error.html#EALDependencyFailed"><span class="hs-identifier hs-type">EALDependencyFailed</span></a></span><span> </span><span class="annot"><span class="annottext">Digest SHA256
 </span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">True</span></span><span>
-</span><span id="line-62"></span><span>      </span><span id="local-6989586621679338120"><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679338120"><span class="hs-identifier hs-var">_rootCause</span></a></span></span><span>            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><span id="line-62"></span><span>      </span><span id="local-6989586621679337472"><span class="annot"><span class="annottext">EALError
+</span><a href="#local-6989586621679337472"><span class="hs-identifier hs-var">_rootCause</span></a></span></span><span>            </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool
 </span><span class="hs-identifier hs-var">False</span></span><span>
-</span><span id="line-63"></span><span>    </span><span id="local-6989586621679338107"><span class="annot"><span class="annottext">bodies :: [String]
-</span><a href="#local-6989586621679338107"><span class="hs-identifier hs-var hs-var">bodies</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-63"></span><span>    </span><span id="local-6989586621679337459"><span class="annot"><span class="annottext">bodies :: [String]
+</span><a href="#local-6989586621679337459"><span class="hs-identifier hs-var hs-var">bodies</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-64"></span><span>      </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  body &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
@@ -153,18 +153,18 @@ forall a. Int -&gt; [a] -&gt; [a]
 </span><span class="hs-number">12</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Digest SHA256 -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Digest SHA256
-</span><a href="#local-6989586621679338128"><span class="hs-identifier hs-var">h</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679337480"><span class="hs-identifier hs-var">h</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">EALError -&gt; String
 </span><a href="Telomare.Error.html#renderEALError"><span class="hs-identifier hs-var">renderEALError</span></a></span><span> </span><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679338129"><span class="hs-identifier hs-var">e</span></a></span><span>
-</span><span id="line-65"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679338128"><span class="annot"><span class="annottext">Digest SHA256
-</span><a href="#local-6989586621679338128"><span class="hs-identifier hs-var">h</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679338129"><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679338129"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
-</span><a href="#local-6989586621679338114"><span class="hs-identifier hs-var">rootCauses</span></a></span><span> </span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679337481"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-65"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679337480"><span class="annot"><span class="annottext">Digest SHA256
+</span><a href="#local-6989586621679337480"><span class="hs-identifier hs-var">h</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679337481"><span class="annot"><span class="annottext">EALError
+</span><a href="#local-6989586621679337481"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">[(Digest SHA256, EALError)]
+</span><a href="#local-6989586621679337466"><span class="hs-identifier hs-var">rootCauses</span></a></span><span> </span><span class="hs-special">]</span><span>
 </span><span id="line-66"></span><span>
 </span><span id="line-67"></span><span class="hs-comment">-- | What a session on the net cost: interactions spent against fuel, and</span><span>
 </span><span id="line-68"></span><span class="hs-comment">-- every counter the runtime keeps (interaction rules and compile-time</span><span>
@@ -174,7 +174,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><a href="Telomare.Eval.IC.html#icMeterInteractions"><span class="hs-identifier hs-var hs-var">icMeterInteractions</span></a></span></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="hs-glyph">!</span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
 </span><span id="line-72"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="icMeterEvents"><span class="annot"><span class="annottext">ICMeter -&gt; Map String Int
 </span><a href="Telomare.Eval.IC.html#icMeterEvents"><span class="hs-identifier hs-var hs-var">icMeterEvents</span></a></span></span><span>       </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Map</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>
-</span><span id="line-73"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679338134"><span id="local-6989586621679338141"><span class="annot"><span class="annottext">ICMeter -&gt; ICMeter -&gt; Bool
+</span><span id="line-73"></span><span>  </span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679337486"><span id="local-6989586621679337493"><span class="annot"><span class="annottext">ICMeter -&gt; ICMeter -&gt; Bool
 (ICMeter -&gt; ICMeter -&gt; Bool)
 -&gt; (ICMeter -&gt; ICMeter -&gt; Bool) -&gt; Eq ICMeter
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -182,7 +182,7 @@ $c== :: ICMeter -&gt; ICMeter -&gt; Bool
 == :: ICMeter -&gt; ICMeter -&gt; Bool
 $c/= :: ICMeter -&gt; ICMeter -&gt; Bool
 /= :: ICMeter -&gt; ICMeter -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679338149"><span id="local-6989586621679338156"><span id="local-6989586621679338160"><span class="annot"><span class="annottext">Int -&gt; ICMeter -&gt; String -&gt; String
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679337501"><span id="local-6989586621679337508"><span id="local-6989586621679337512"><span class="annot"><span class="annottext">Int -&gt; ICMeter -&gt; String -&gt; String
 [ICMeter] -&gt; String -&gt; String
 ICMeter -&gt; String
 (Int -&gt; ICMeter -&gt; String -&gt; String)
@@ -201,19 +201,19 @@ showList :: [ICMeter] -&gt; String -&gt; String
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-74"></span><span>
 </span><span id="line-75"></span><span class="annot"><span class="hs-comment">-- | Across a session both the total and the per-event counts accumulate.</span></span><span>
-</span><span id="line-76"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679338169"><span id="local-6989586621679338173"><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="annot"><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-type">ICMeter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-77"></span><span>  </span><span id="local-6989586621679338185"><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338185"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679338186"><span class="annot"><span class="annottext">&lt;&gt; :: ICMeter -&gt; ICMeter -&gt; ICMeter
-</span><span class="hs-operator hs-var hs-var hs-var">&lt;&gt;</span></span></span><span> </span><span id="local-6989586621679338187"><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338187"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Map String Int -&gt; ICMeter
+</span><span id="line-76"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679337521"><span id="local-6989586621679337525"><span class="annot"><span class="hs-identifier hs-type">Semigroup</span></span><span> </span><span class="annot"><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-type">ICMeter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-77"></span><span>  </span><span id="local-6989586621679337537"><span class="annot"><span class="annottext">ICMeter
+</span><a href="#local-6989586621679337537"><span class="hs-identifier hs-var">a</span></a></span></span><span> </span><span id="local-6989586621679337538"><span class="annot"><span class="annottext">&lt;&gt; :: ICMeter -&gt; ICMeter -&gt; ICMeter
+</span><span class="hs-operator hs-var hs-var hs-var">&lt;&gt;</span></span></span><span> </span><span id="local-6989586621679337539"><span class="annot"><span class="annottext">ICMeter
+</span><a href="#local-6989586621679337539"><span class="hs-identifier hs-var">b</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Map String Int -&gt; ICMeter
 </span><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-var">ICMeter</span></a></span><span>
 </span><span id="line-78"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ICMeter -&gt; Int
 </span><a href="Telomare.Eval.IC.html#icMeterInteractions"><span class="hs-identifier hs-var">icMeterInteractions</span></a></span><span> </span><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338185"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679337537"><span class="hs-identifier hs-var">a</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">+</span></span><span> </span><span class="annot"><span class="annottext">ICMeter -&gt; Int
 </span><a href="Telomare.Eval.IC.html#icMeterInteractions"><span class="hs-identifier hs-var">icMeterInteractions</span></a></span><span> </span><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338187"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679337539"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-79"></span><span>    </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(Int -&gt; Int -&gt; Int)
 -&gt; Map String Int -&gt; Map String Int -&gt; Map String Int
 forall k a. Ord k =&gt; (a -&gt; a -&gt; a) -&gt; Map k a -&gt; Map k a -&gt; Map k a
@@ -221,12 +221,12 @@ forall k a. Ord k =&gt; (a -&gt; a -&gt; a) -&gt; Map k a -&gt; Map k a -&gt; Ma
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">(+)</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ICMeter -&gt; Map String Int
 </span><a href="Telomare.Eval.IC.html#icMeterEvents"><span class="hs-identifier hs-var">icMeterEvents</span></a></span><span> </span><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338185"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ICMeter -&gt; Map String Int
+</span><a href="#local-6989586621679337537"><span class="hs-identifier hs-var">a</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ICMeter -&gt; Map String Int
 </span><a href="Telomare.Eval.IC.html#icMeterEvents"><span class="hs-identifier hs-var">icMeterEvents</span></a></span><span> </span><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338187"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679337539"><span class="hs-identifier hs-var">b</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-80"></span><span>
-</span><span id="line-81"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679338194"><span id="local-6989586621679338198"><span class="annot"><span class="hs-identifier hs-type">Monoid</span></span><span> </span><span class="annot"><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-type">ICMeter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-82"></span><span>  </span><span id="local-6989586621679338201"><span class="annot"><span class="annottext">mempty :: ICMeter
+</span><span id="line-81"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679337546"><span id="local-6989586621679337550"><span class="annot"><span class="hs-identifier hs-type">Monoid</span></span><span> </span><span class="annot"><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-type">ICMeter</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-82"></span><span>  </span><span id="local-6989586621679337553"><span class="annot"><span class="annottext">mempty :: ICMeter
 </span><span class="hs-identifier hs-var hs-var hs-var">mempty</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Int -&gt; Map String Int -&gt; ICMeter
 </span><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-var">ICMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">0</span></span><span> </span><span class="annot"><span class="annottext">Map String Int
@@ -236,8 +236,8 @@ forall k a. Map k a
 </span><span id="line-84"></span><span class="annot"><span class="hs-comment">-- | What to print for a measured session, busiest counters first.</span></span><span>
 </span><span id="line-85"></span><span class="annot"><a href="Telomare.Eval.IC.html#renderICMeter"><span class="hs-identifier hs-type">renderICMeter</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-type">ICMeter</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-86"></span><span id="renderICMeter"><span class="annot"><span class="annottext">renderICMeter :: ICMeter -&gt; String
-</span><a href="Telomare.Eval.IC.html#renderICMeter"><span class="hs-identifier hs-var hs-var">renderICMeter</span></a></span></span><span> </span><span id="local-6989586621679338204"><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338204"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
+</span><a href="Telomare.Eval.IC.html#renderICMeter"><span class="hs-identifier hs-var hs-var">renderICMeter</span></a></span></span><span> </span><span id="local-6989586621679337556"><span class="annot"><span class="annottext">ICMeter
+</span><a href="#local-6989586621679337556"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
 </span><span class="hs-identifier hs-var">unlines</span></span><span> </span><span class="annot"><span class="annottext">([String] -&gt; String) -&gt; [String] -&gt; String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span>
@@ -248,14 +248,14 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ICMeter -&gt; Int
 </span><a href="Telomare.Eval.IC.html#icMeterInteractions"><span class="hs-identifier hs-var">icMeterInteractions</span></a></span><span> </span><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338204"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679337556"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span>
 </span><span id="line-88"></span><span>    </span><span class="annot"><span class="annottext">String -&gt; [String] -&gt; [String]
 forall a. a -&gt; [a] -&gt; [a]
 </span><span class="hs-glyph hs-var">:</span></span><span> </span><span class="hs-special">[</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;  &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679338205"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679337557"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
@@ -263,10 +263,10 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679338206"><span class="hs-identifier hs-var">n</span></a></span><span>
-</span><span id="line-89"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679338205"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679338205"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679338206"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679338206"><span class="hs-identifier hs-var">n</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((String, Int) -&gt; Down Int) -&gt; [(String, Int)] -&gt; [(String, Int)]
+</span><a href="#local-6989586621679337558"><span class="hs-identifier hs-var">n</span></a></span><span>
+</span><span id="line-89"></span><span>      </span><span class="hs-glyph">|</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679337557"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679337557"><span class="hs-identifier hs-var">name</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679337558"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679337558"><span class="hs-identifier hs-var">n</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">((String, Int) -&gt; Down Int) -&gt; [(String, Int)] -&gt; [(String, Int)]
 forall b a. Ord b =&gt; (a -&gt; b) -&gt; [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">sortOn</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Down Int
 forall a. a -&gt; Down a
@@ -279,7 +279,7 @@ forall a b. (a, b) -&gt; b
 forall k a. Map k a -&gt; [(k, a)]
 </span><span class="hs-identifier hs-var">Map.toList</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ICMeter -&gt; Map String Int
 </span><a href="Telomare.Eval.IC.html#icMeterEvents"><span class="hs-identifier hs-var">icMeterEvents</span></a></span><span> </span><span class="annot"><span class="annottext">ICMeter
-</span><a href="#local-6989586621679338204"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">]</span><span>
+</span><a href="#local-6989586621679337556"><span class="hs-identifier hs-var">m</span></a></span><span class="hs-special">)</span><span class="hs-special">)</span><span> </span><span class="hs-special">]</span><span>
 </span><span id="line-90"></span><span>
 </span><span id="line-91"></span><span class="hs-comment">-- | One iteration on the net under an admission's plan, measured. The</span><span>
 </span><span id="line-92"></span><span class="hs-comment">-- outcome follows the reference evaluator's contract</span><span>
@@ -287,25 +287,25 @@ forall k a. Map k a -&gt; [(k, a)]
 </span><span id="line-94"></span><span class="annot"><a href="Telomare.Eval.IC.html#evalIC"><span class="hs-identifier hs-type">evalIC</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Eval.IC.html#ICPlan"><span class="hs-identifier hs-type">ICPlan</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-type">ICMeter</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#RunTimeError"><span class="hs-identifier hs-type">RunTimeError</span></a></span><span> </span><span class="annot"><a href="Telomare.IR.Core.html#CompiledExpr"><span class="hs-identifier hs-type">CompiledExpr</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-95"></span><span id="evalIC"><span class="annot"><span class="annottext">evalIC :: ICPlan
 -&gt; CompiledExpr -&gt; (ICMeter, Either RunTimeError CompiledExpr)
-</span><a href="Telomare.Eval.IC.html#evalIC"><span class="hs-identifier hs-var hs-var">evalIC</span></a></span></span><span> </span><span id="local-6989586621679338209"><span class="annot"><span class="annottext">ICPlan
-</span><a href="#local-6989586621679338209"><span class="hs-identifier hs-var">plan</span></a></span></span><span> </span><span id="local-6989586621679338210"><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679338210"><span class="hs-identifier hs-var">term</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-96"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679338211"><span class="annot"><span class="annottext">Either RunTimeError CompiledExpr
-</span><a href="#local-6989586621679338211"><span class="hs-identifier hs-var">outcome</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679338212"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679338212"><span class="hs-identifier hs-var">spent</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679338213"><span class="annot"><span class="annottext">Map String Int
-</span><a href="#local-6989586621679338213"><span class="hs-identifier hs-var">events</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
+</span><a href="Telomare.Eval.IC.html#evalIC"><span class="hs-identifier hs-var hs-var">evalIC</span></a></span></span><span> </span><span id="local-6989586621679337561"><span class="annot"><span class="annottext">ICPlan
+</span><a href="#local-6989586621679337561"><span class="hs-identifier hs-var">plan</span></a></span></span><span> </span><span id="local-6989586621679337562"><span class="annot"><span class="annottext">CompiledExpr
+</span><a href="#local-6989586621679337562"><span class="hs-identifier hs-var">term</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-96"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679337563"><span class="annot"><span class="annottext">Either RunTimeError CompiledExpr
+</span><a href="#local-6989586621679337563"><span class="hs-identifier hs-var">outcome</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679337564"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679337564"><span class="hs-identifier hs-var">spent</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679337565"><span class="annot"><span class="annottext">Map String Int
+</span><a href="#local-6989586621679337565"><span class="hs-identifier hs-var">events</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span>
 </span><span id="line-97"></span><span>        </span><span class="annot"><span class="annottext">Map (Digest SHA256) CapShape
 -&gt; Int
 -&gt; CompiledExpr
 -&gt; (Either RunTimeError CompiledExpr, Int, Map String Int)
 </span><a href="Telomare.IC.html#icRunReport"><span class="hs-identifier hs-var">icRunReport</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ICPlan -&gt; Map (Digest SHA256) CapShape
 </span><a href="Telomare.Eval.IC.html#icPlanLayouts"><span class="hs-identifier hs-var">icPlanLayouts</span></a></span><span> </span><span class="annot"><span class="annottext">ICPlan
-</span><a href="#local-6989586621679338209"><span class="hs-identifier hs-var">plan</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679337561"><span class="hs-identifier hs-var">plan</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Int
 </span><a href="Telomare.IC.html#defaultFuel"><span class="hs-identifier hs-var">defaultFuel</span></a></span><span> </span><span class="annot"><span class="annottext">CompiledExpr
-</span><a href="#local-6989586621679338210"><span class="hs-identifier hs-var">term</span></a></span><span>
+</span><a href="#local-6989586621679337562"><span class="hs-identifier hs-var">term</span></a></span><span>
 </span><span id="line-98"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; Map String Int -&gt; ICMeter
 </span><a href="Telomare.Eval.IC.html#ICMeter"><span class="hs-identifier hs-var">ICMeter</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679338212"><span class="hs-identifier hs-var">spent</span></a></span><span> </span><span class="annot"><span class="annottext">Map String Int
-</span><a href="#local-6989586621679338213"><span class="hs-identifier hs-var">events</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Either RunTimeError CompiledExpr
-</span><a href="#local-6989586621679338211"><span class="hs-identifier hs-var">outcome</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679337564"><span class="hs-identifier hs-var">spent</span></a></span><span> </span><span class="annot"><span class="annottext">Map String Int
+</span><a href="#local-6989586621679337565"><span class="hs-identifier hs-var">events</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Either RunTimeError CompiledExpr
+</span><a href="#local-6989586621679337563"><span class="hs-identifier hs-var">outcome</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-99"></span></pre></body></html>
