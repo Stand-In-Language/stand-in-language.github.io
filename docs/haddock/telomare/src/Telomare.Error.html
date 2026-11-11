@@ -22,14 +22,14 @@
 </span><span id="line-22"></span><span class="hs-comment">-- lifted body whose walk made it, if one did: a failed certification</span><span>
 </span><span id="line-23"></span><span class="hs-comment">-- names the bodies it is about through these (see</span><span>
 </span><span id="line-24"></span><span class="hs-comment">-- 'Telomare.EAL.specializeLets').</span><span>
-</span><span id="line-25"></span><span class="hs-keyword">data</span><span> </span><span id="Blame"><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-var">Blame</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="BlameIn"><span class="annot"><a href="Telomare.Error.html#BlameIn"><span class="hs-identifier hs-var">BlameIn</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#FunctionIndex"><span class="hs-identifier hs-type">FunctionIndex</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679317182"><span id="local-6989586621679317192"><span class="annot"><span class="annottext">Blame -&gt; Blame -&gt; Bool
+</span><span id="line-25"></span><span class="hs-keyword">data</span><span> </span><span id="Blame"><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-var">Blame</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="BlameIn"><span class="annot"><a href="Telomare.Error.html#BlameIn"><span class="hs-identifier hs-var">BlameIn</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.IR.Base.html#FunctionIndex"><span class="hs-identifier hs-type">FunctionIndex</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679319681"><span id="local-6989586621679319691"><span class="annot"><span class="annottext">Blame -&gt; Blame -&gt; Bool
 (Blame -&gt; Blame -&gt; Bool) -&gt; (Blame -&gt; Blame -&gt; Bool) -&gt; Eq Blame
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
 $c== :: Blame -&gt; Blame -&gt; Bool
 == :: Blame -&gt; Blame -&gt; Bool
 $c/= :: Blame -&gt; Blame -&gt; Bool
 /= :: Blame -&gt; Blame -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317199"><span id="local-6989586621679317209"><span id="local-6989586621679317213"><span class="annot"><span class="annottext">Int -&gt; Blame -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679319698"><span id="local-6989586621679319708"><span id="local-6989586621679319712"><span class="annot"><span class="annottext">Int -&gt; Blame -&gt; ShowS
 [Blame] -&gt; ShowS
 Blame -&gt; String
 (Int -&gt; Blame -&gt; ShowS)
@@ -48,33 +48,33 @@ showList :: [Blame] -&gt; ShowS
 </span><span id="line-28"></span><span class="hs-keyword">pattern</span><span> </span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-type">Blame</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-type">Blame</span></a></span><span>
 </span><span id="line-29"></span><span class="hs-keyword">pattern</span><span> </span><span id="Blame"><span id="%24mBlame"><span id="%24bBlame"><span class="annot"><span class="annottext">$mBlame :: forall {r}. Blame -&gt; (LocTag -&gt; String -&gt; r) -&gt; ((# #) -&gt; r) -&gt; r
 $bBlame :: LocTag -&gt; String -&gt; Blame
-</span><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-var hs-var hs-var">Blame</span></a></span></span></span></span><span> </span><span class="annot"><a href="#local-6989586621679317221"><span class="hs-identifier hs-type">loc</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679317222"><span class="hs-identifier hs-type">why</span></a></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><a href="Telomare.Error.html#BlameIn"><span class="hs-identifier hs-type">BlameIn</span></a></span><span> </span><span id="local-6989586621679317221"><span class="annot"><a href="#local-6989586621679317221"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679317222"><span class="annot"><a href="#local-6989586621679317222"><span class="hs-identifier hs-var">why</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier">_</span></span><span>
-</span><span id="line-30"></span><span>  </span><span class="hs-keyword">where</span><span> </span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-var">Blame</span></a></span><span> </span><span id="local-6989586621679317223"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317223"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679317224"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317224"><span class="hs-identifier hs-var">why</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; String -&gt; Maybe FunctionIndex -&gt; Blame
+</span><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-var hs-var hs-var">Blame</span></a></span></span></span></span><span> </span><span class="annot"><a href="#local-6989586621679319720"><span class="hs-identifier hs-type">loc</span></a></span><span> </span><span class="annot"><a href="#local-6989586621679319721"><span class="hs-identifier hs-type">why</span></a></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><a href="Telomare.Error.html#BlameIn"><span class="hs-identifier hs-type">BlameIn</span></a></span><span> </span><span id="local-6989586621679319720"><span class="annot"><a href="#local-6989586621679319720"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679319721"><span class="annot"><a href="#local-6989586621679319721"><span class="hs-identifier hs-var">why</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier">_</span></span><span>
+</span><span id="line-30"></span><span>  </span><span class="hs-keyword">where</span><span> </span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-var">Blame</span></a></span><span> </span><span id="local-6989586621679319722"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679319722"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679319723"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319723"><span class="hs-identifier hs-var">why</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; String -&gt; Maybe FunctionIndex -&gt; Blame
 </span><a href="Telomare.Error.html#BlameIn"><span class="hs-identifier hs-var">BlameIn</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317223"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317224"><span class="hs-identifier hs-var">why</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe FunctionIndex
+</span><a href="#local-6989586621679319722"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319723"><span class="hs-identifier hs-var">why</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe FunctionIndex
 forall a. Maybe a
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>
 </span><span id="line-31"></span><span class="hs-pragma">{-# COMPLETE</span><span> </span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-pragma hs-type">Blame</span></a></span><span> </span><span class="hs-pragma">#-}</span><span>
 </span><span id="line-32"></span><span>
 </span><span id="line-33"></span><span class="annot"><a href="Telomare.Error.html#renderBlame"><span class="hs-identifier hs-type">renderBlame</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-type">Blame</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-34"></span><span id="renderBlame"><span class="annot"><span class="annottext">renderBlame :: Blame -&gt; String
-</span><a href="Telomare.Error.html#renderBlame"><span class="hs-identifier hs-var hs-var">renderBlame</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-type">Blame</span></a></span><span> </span><span id="local-6989586621679317226"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317226"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679317227"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317227"><span class="hs-identifier hs-var">why</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317227"><span class="hs-identifier hs-var">why</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="Telomare.Error.html#renderBlame"><span class="hs-identifier hs-var hs-var">renderBlame</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="Telomare.Error.html#Blame"><span class="hs-identifier hs-type">Blame</span></a></span><span> </span><span id="local-6989586621679319725"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679319725"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679319726"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319726"><span class="hs-identifier hs-var">why</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319726"><span class="hs-identifier hs-var">why</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe String
 </span><a href="Telomare.IR.Loc.html#renderLocTagCompact"><span class="hs-identifier hs-var">renderLocTagCompact</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317226"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-35"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679317228"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317228"><span class="hs-identifier hs-var">place</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319725"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-35"></span><span>  </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679319727"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319727"><span class="hs-identifier hs-var">place</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; (at &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317228"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679319727"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;)&quot;</span></span><span>
@@ -104,7 +104,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span id="line-57"></span><span>  </span><span class="hs-comment">-- | An analyzer invariant was violated: a bug in the analyzer (or a term</span><span>
 </span><span id="line-58"></span><span>  </span><span class="hs-comment">-- that skipped defer lifting), never a fact about the analyzed program.</span><span>
 </span><span id="line-59"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="EALInternal"><span class="annot"><a href="Telomare.Error.html#EALInternal"><span class="hs-identifier hs-var">EALInternal</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
-</span><span id="line-60"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679317236"><span id="local-6989586621679317251"><span class="annot"><span class="annottext">EALError -&gt; EALError -&gt; Bool
+</span><span id="line-60"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679319735"><span id="local-6989586621679319750"><span class="annot"><span class="annottext">EALError -&gt; EALError -&gt; Bool
 (EALError -&gt; EALError -&gt; Bool)
 -&gt; (EALError -&gt; EALError -&gt; Bool) -&gt; Eq EALError
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -112,7 +112,7 @@ $c== :: EALError -&gt; EALError -&gt; Bool
 == :: EALError -&gt; EALError -&gt; Bool
 $c/= :: EALError -&gt; EALError -&gt; Bool
 /= :: EALError -&gt; EALError -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317255"><span id="local-6989586621679317271"><span id="local-6989586621679317275"><span class="annot"><span class="annottext">Int -&gt; EALError -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679319754"><span id="local-6989586621679319770"><span id="local-6989586621679319774"><span class="annot"><span class="annottext">Int -&gt; EALError -&gt; ShowS
 [EALError] -&gt; ShowS
 EALError -&gt; String
 (Int -&gt; EALError -&gt; ShowS)
@@ -130,33 +130,33 @@ showList :: [EALError] -&gt; ShowS
 </span><span id="line-62"></span><span class="annot"><a href="Telomare.Error.html#renderEALError"><span class="hs-identifier hs-type">renderEALError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Error.html#EALError"><span class="hs-identifier hs-type">EALError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-63"></span><span id="renderEALError"><span class="annot"><span class="annottext">renderEALError :: EALError -&gt; String
 </span><a href="Telomare.Error.html#renderEALError"><span class="hs-identifier hs-var hs-var">renderEALError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-64"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALTypeMismatch"><span class="hs-identifier hs-type">EALTypeMismatch</span></a></span><span> </span><span id="local-6989586621679317278"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317278"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679317279"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317279"><span class="hs-identifier hs-var">msg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-64"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALTypeMismatch"><span class="hs-identifier hs-type">EALTypeMismatch</span></a></span><span> </span><span id="local-6989586621679319777"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679319777"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679319778"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319778"><span class="hs-identifier hs-var">msg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-65"></span><span>    </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;certification failed: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317279"><span class="hs-identifier hs-var">msg</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679319778"><span class="hs-identifier hs-var">msg</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe String
 </span><a href="Telomare.IR.Loc.html#renderLocTagCompact"><span class="hs-identifier hs-var">renderLocTagCompact</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317278"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-66"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679317280"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317280"><span class="hs-identifier hs-var">place</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319777"><span class="hs-identifier hs-var">loc</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-66"></span><span>      </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679319779"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319779"><span class="hs-identifier hs-var">place</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; (at &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317280"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679319779"><span class="hs-identifier hs-var">place</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;)&quot;</span></span><span>
 </span><span id="line-67"></span><span>      </span><span class="annot"><span class="annottext">Maybe String
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;&quot;</span></span><span>
-</span><span id="line-68"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALBoxConflict"><span class="hs-identifier hs-type">EALBoxConflict</span></a></span><span> </span><span id="local-6989586621679317281"><span class="annot"><span class="annottext">Blame
-</span><a href="#local-6989586621679317281"><span class="hs-identifier hs-var">need</span></a></span></span><span> </span><span id="local-6989586621679317282"><span class="annot"><span class="annottext">Blame
-</span><a href="#local-6989586621679317282"><span class="hs-identifier hs-var">forbid</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><span id="line-68"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALBoxConflict"><span class="hs-identifier hs-type">EALBoxConflict</span></a></span><span> </span><span id="local-6989586621679319780"><span class="annot"><span class="annottext">Blame
+</span><a href="#local-6989586621679319780"><span class="hs-identifier hs-var">need</span></a></span></span><span> </span><span id="local-6989586621679319781"><span class="annot"><span class="annottext">Blame
+</span><a href="#local-6989586621679319781"><span class="hs-identifier hs-var">forbid</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-69"></span><span>    </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;certification failed: a duplicated value cannot be boxed:\n&quot;</span></span><span>
 </span><span id="line-70"></span><span>      </span><span class="annot"><span class="annottext">String -&gt; ShowS
@@ -166,7 +166,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Blame -&gt; String
 </span><a href="Telomare.Error.html#renderBlame"><span class="hs-identifier hs-var">renderBlame</span></a></span><span> </span><span class="annot"><span class="annottext">Blame
-</span><a href="#local-6989586621679317281"><span class="hs-identifier hs-var">need</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679319780"><span class="hs-identifier hs-var">need</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n&quot;</span></span><span>
@@ -177,17 +177,17 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Blame -&gt; String
 </span><a href="Telomare.Error.html#renderBlame"><span class="hs-identifier hs-var">renderBlame</span></a></span><span> </span><span class="annot"><span class="annottext">Blame
-</span><a href="#local-6989586621679317282"><span class="hs-identifier hs-var">forbid</span></a></span><span>
-</span><span id="line-72"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALSolverGaveUp"><span class="hs-identifier hs-type">EALSolverGaveUp</span></a></span><span> </span><span id="local-6989586621679317283"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317283"><span class="hs-identifier hs-var">msg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679319781"><span class="hs-identifier hs-var">forbid</span></a></span><span>
+</span><span id="line-72"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALSolverGaveUp"><span class="hs-identifier hs-type">EALSolverGaveUp</span></a></span><span> </span><span id="local-6989586621679319782"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319782"><span class="hs-identifier hs-var">msg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-73"></span><span>    </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;certification gave up (the constraint solver ran out of budget):\n  &quot;</span></span><span>
 </span><span id="line-74"></span><span>      </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317283"><span class="hs-identifier hs-var">msg</span></a></span><span>
-</span><span id="line-75"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALUnsatisfiable"><span class="hs-identifier hs-type">EALUnsatisfiable</span></a></span><span> </span><span id="local-6989586621679317284"><span class="annot"><span class="annottext">[Blame]
-</span><a href="#local-6989586621679317284"><span class="hs-identifier hs-var">blames</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679319782"><span class="hs-identifier hs-var">msg</span></a></span><span>
+</span><span id="line-75"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALUnsatisfiable"><span class="hs-identifier hs-type">EALUnsatisfiable</span></a></span><span> </span><span id="local-6989586621679319783"><span class="annot"><span class="annottext">[Blame]
+</span><a href="#local-6989586621679319783"><span class="hs-identifier hs-var">blames</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-76"></span><span>    </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;certification failed: no box decoration satisfies these constraints together:\n&quot;</span></span><span>
 </span><span id="line-77"></span><span>      </span><span class="annot"><span class="annottext">String -&gt; ShowS
@@ -203,22 +203,22 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 </span><span class="hs-operator hs-var">.</span></span><span> </span><span class="annot"><span class="annottext">Blame -&gt; String
 </span><a href="Telomare.Error.html#renderBlame"><span class="hs-identifier hs-var">renderBlame</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[Blame]
-</span><a href="#local-6989586621679317284"><span class="hs-identifier hs-var">blames</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-78"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALDependencyFailed"><span class="hs-identifier hs-type">EALDependencyFailed</span></a></span><span> </span><span id="local-6989586621679317287"><span class="annot"><span class="annottext">Digest SHA256
-</span><a href="#local-6989586621679317287"><span class="hs-identifier hs-var">h</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679319783"><span class="hs-identifier hs-var">blames</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-78"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALDependencyFailed"><span class="hs-identifier hs-type">EALDependencyFailed</span></a></span><span> </span><span id="local-6989586621679319786"><span class="annot"><span class="annottext">Digest SHA256
+</span><a href="#local-6989586621679319786"><span class="hs-identifier hs-var">h</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-79"></span><span>    </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;a function body this program depends on failed certification: &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Digest SHA256 -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Digest SHA256
-</span><a href="#local-6989586621679317287"><span class="hs-identifier hs-var">h</span></a></span><span>
-</span><span id="line-80"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALInternal"><span class="hs-identifier hs-type">EALInternal</span></a></span><span> </span><span id="local-6989586621679317289"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317289"><span class="hs-identifier hs-var">msg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319786"><span class="hs-identifier hs-var">h</span></a></span><span>
+</span><span id="line-80"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#EALInternal"><span class="hs-identifier hs-type">EALInternal</span></a></span><span> </span><span id="local-6989586621679319788"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319788"><span class="hs-identifier hs-var">msg</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;certification internal error (analyzer bug): &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317289"><span class="hs-identifier hs-var">msg</span></a></span><span>
+</span><a href="#local-6989586621679319788"><span class="hs-identifier hs-var">msg</span></a></span><span>
 </span><span id="line-81"></span><span>
 </span><span id="line-82"></span><span class="hs-keyword">data</span><span> </span><span id="ResolverError"><span class="annot"><a href="Telomare.Error.html#ResolverError"><span class="hs-identifier hs-var">ResolverError</span></a></span></span><span>
 </span><span id="line-83"></span><span>  </span><span class="hs-glyph">=</span><span> </span><span id="NoMainFunction"><span class="annot"><a href="Telomare.Error.html#NoMainFunction"><span class="hs-identifier hs-var">NoMainFunction</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
@@ -228,7 +228,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span id="line-87"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="MissingDefinitions"><span class="annot"><a href="Telomare.Error.html#MissingDefinitions"><span class="hs-identifier hs-var">MissingDefinitions</span></a></span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span class="hs-special">]</span><span>
 </span><span id="line-88"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="MissingDefinitionAt"><span class="annot"><a href="Telomare.Error.html#MissingDefinitionAt"><span class="hs-identifier hs-var">MissingDefinitionAt</span></a></span></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-89"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="ParseError"><span class="annot"><a href="Telomare.Error.html#ParseError"><span class="hs-identifier hs-var">ParseError</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
-</span><span id="line-90"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679317298"><span id="local-6989586621679317311"><span class="annot"><span class="annottext">ResolverError -&gt; ResolverError -&gt; Bool
+</span><span id="line-90"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679319797"><span id="local-6989586621679319810"><span class="annot"><span class="annottext">ResolverError -&gt; ResolverError -&gt; Bool
 (ResolverError -&gt; ResolverError -&gt; Bool)
 -&gt; (ResolverError -&gt; ResolverError -&gt; Bool) -&gt; Eq ResolverError
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -236,7 +236,7 @@ $c== :: ResolverError -&gt; ResolverError -&gt; Bool
 == :: ResolverError -&gt; ResolverError -&gt; Bool
 $c/= :: ResolverError -&gt; ResolverError -&gt; Bool
 /= :: ResolverError -&gt; ResolverError -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317317"><span id="local-6989586621679317333"><span id="local-6989586621679317337"><span id="local-6989586621679317340"><span id="local-6989586621679317343"><span id="local-6989586621679317346"><span id="local-6989586621679317349"><span class="annot"><span class="annottext">Eq ResolverError
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679319816"><span id="local-6989586621679319832"><span id="local-6989586621679319836"><span id="local-6989586621679319839"><span id="local-6989586621679319842"><span id="local-6989586621679319845"><span id="local-6989586621679319848"><span class="annot"><span class="annottext">Eq ResolverError
 Eq ResolverError =&gt;
 (ResolverError -&gt; ResolverError -&gt; Ordering)
 -&gt; (ResolverError -&gt; ResolverError -&gt; Bool)
@@ -276,7 +276,7 @@ min :: ResolverError -&gt; ResolverError -&gt; ResolverError
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-91"></span><span>
 </span><span id="line-92"></span><span class="hs-keyword">instance</span><span> </span><span class="annot"><span class="hs-identifier hs-type">MonadFail</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="hs-identifier hs-type">Either</span></span><span> </span><span class="annot"><a href="Telomare.Error.html#ResolverError"><span class="hs-identifier hs-type">ResolverError</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-93"></span><span>  </span><span id="local-6989586621679317362"><span class="annot"><span class="annottext">fail :: forall a. String -&gt; Either ResolverError a
+</span><span id="line-93"></span><span>  </span><span id="local-6989586621679319861"><span class="annot"><span class="annottext">fail :: forall a. String -&gt; Either ResolverError a
 </span><span class="hs-identifier hs-var hs-var hs-var">fail</span></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">ResolverError -&gt; Either ResolverError a
 forall a b. a -&gt; Either a b
 </span><span class="hs-identifier hs-var">Left</span></span><span> </span><span class="annot"><span class="annottext">(ResolverError -&gt; Either ResolverError a)
@@ -291,13 +291,13 @@ forall a. a -&gt; [a]
 forall (f :: * -&gt; *) a. Applicative f =&gt; a -&gt; f a
 </span><span class="hs-identifier hs-var">pure</span></span><span>
 </span><span id="line-94"></span><span>
-</span><span id="line-95"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679317365"><span id="local-6989586621679317369"><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="Telomare.Error.html#ResolverError"><span class="hs-identifier hs-type">ResolverError</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-96"></span><span>  </span><span id="local-6989586621679317374"><span class="annot"><span class="annottext">showsPrec :: Int -&gt; ResolverError -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var">showsPrec</span></span></span><span> </span><span id="local-6989586621679317375"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317375"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span id="local-6989586621679317376"><span class="annot"><span class="annottext">ResolverError
-</span><a href="#local-6989586621679317376"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
+</span><span id="line-95"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679319864"><span id="local-6989586621679319868"><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="Telomare.Error.html#ResolverError"><span class="hs-identifier hs-type">ResolverError</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-96"></span><span>  </span><span id="local-6989586621679319873"><span class="annot"><span class="annottext">showsPrec :: Int -&gt; ResolverError -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var">showsPrec</span></span></span><span> </span><span id="local-6989586621679319874"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679319874"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span id="local-6989586621679319875"><span class="annot"><span class="annottext">ResolverError
+</span><a href="#local-6989586621679319875"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
 </span><span class="hs-identifier hs-var">showParen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317375"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679319874"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS) -&gt; ShowS -&gt; ShowS
@@ -305,76 +305,76 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">ResolverError -&gt; String
 </span><a href="Telomare.Error.html#renderResolverError"><span class="hs-identifier hs-var">renderResolverError</span></a></span><span> </span><span class="annot"><span class="annottext">ResolverError
-</span><a href="#local-6989586621679317376"><span class="hs-identifier hs-var">err</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679319875"><span class="hs-identifier hs-var">err</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-97"></span><span>
 </span><span id="line-98"></span><span class="annot"><a href="Telomare.Error.html#renderResolverError"><span class="hs-identifier hs-type">renderResolverError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Error.html#ResolverError"><span class="hs-identifier hs-type">ResolverError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-99"></span><span id="renderResolverError"><span class="annot"><span class="annottext">renderResolverError :: ResolverError -&gt; String
 </span><a href="Telomare.Error.html#renderResolverError"><span class="hs-identifier hs-var hs-var">renderResolverError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-100"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#NoMainFunction"><span class="hs-identifier hs-type">NoMainFunction</span></a></span><span> </span><span id="local-6989586621679317381"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317381"><span class="hs-identifier hs-var">moduleName</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><span id="line-100"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#NoMainFunction"><span class="hs-identifier hs-type">NoMainFunction</span></a></span><span> </span><span id="local-6989586621679319880"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319880"><span class="hs-identifier hs-var">moduleName</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;NoMainFunction &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">ShowS
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317381"><span class="hs-identifier hs-var">moduleName</span></a></span><span>
-</span><span id="line-101"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#ModuleNotFound"><span class="hs-identifier hs-type">ModuleNotFound</span></a></span><span> </span><span id="local-6989586621679317382"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317382"><span class="hs-identifier hs-var">moduleName</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319880"><span class="hs-identifier hs-var">moduleName</span></a></span><span>
+</span><span id="line-101"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#ModuleNotFound"><span class="hs-identifier hs-type">ModuleNotFound</span></a></span><span> </span><span id="local-6989586621679319881"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319881"><span class="hs-identifier hs-var">moduleName</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;ModuleNotFound &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">ShowS
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317382"><span class="hs-identifier hs-var">moduleName</span></a></span><span>
-</span><span id="line-102"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#ImportCycle"><span class="hs-identifier hs-type">ImportCycle</span></a></span><span> </span><span id="local-6989586621679317383"><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679317383"><span class="hs-identifier hs-var">names</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319881"><span class="hs-identifier hs-var">moduleName</span></a></span><span>
+</span><span id="line-102"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#ImportCycle"><span class="hs-identifier hs-type">ImportCycle</span></a></span><span> </span><span id="local-6989586621679319882"><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679319882"><span class="hs-identifier hs-var">names</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;ImportCycle &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679317383"><span class="hs-identifier hs-var">names</span></a></span><span>
-</span><span id="line-103"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#DefinitionCycle"><span class="hs-identifier hs-type">DefinitionCycle</span></a></span><span> </span><span id="local-6989586621679317384"><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679317384"><span class="hs-identifier hs-var">names</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319882"><span class="hs-identifier hs-var">names</span></a></span><span>
+</span><span id="line-103"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#DefinitionCycle"><span class="hs-identifier hs-type">DefinitionCycle</span></a></span><span> </span><span id="local-6989586621679319883"><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679319883"><span class="hs-identifier hs-var">names</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;DefinitionCycle &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679317384"><span class="hs-identifier hs-var">names</span></a></span><span>
-</span><span id="line-104"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#MissingDefinitions"><span class="hs-identifier hs-type">MissingDefinitions</span></a></span><span> </span><span id="local-6989586621679317385"><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679317385"><span class="hs-identifier hs-var">names</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319883"><span class="hs-identifier hs-var">names</span></a></span><span>
+</span><span id="line-104"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#MissingDefinitions"><span class="hs-identifier hs-type">MissingDefinitions</span></a></span><span> </span><span id="local-6989586621679319884"><span class="annot"><span class="annottext">[String]
+</span><a href="#local-6989586621679319884"><span class="hs-identifier hs-var">names</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;MissingDefinitions &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">[String]
-</span><a href="#local-6989586621679317385"><span class="hs-identifier hs-var">names</span></a></span><span>
-</span><span id="line-105"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#MissingDefinitionAt"><span class="hs-identifier hs-type">MissingDefinitionAt</span></a></span><span> </span><span id="local-6989586621679317386"><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317386"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679317387"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317387"><span class="hs-identifier hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679319884"><span class="hs-identifier hs-var">names</span></a></span><span>
+</span><span id="line-105"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#MissingDefinitionAt"><span class="hs-identifier hs-type">MissingDefinitionAt</span></a></span><span> </span><span id="local-6989586621679319885"><span class="annot"><span class="annottext">LocTag
+</span><a href="#local-6989586621679319885"><span class="hs-identifier hs-var">loc</span></a></span></span><span> </span><span id="local-6989586621679319886"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319886"><span class="hs-identifier hs-var">name</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-106"></span><span>    </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;missing definition &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">ShowS
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317387"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679319886"><span class="hs-identifier hs-var">name</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; at &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; String
 </span><a href="Telomare.IR.Loc.html#renderLocTagVerbose"><span class="hs-identifier hs-var">renderLocTagVerbose</span></a></span><span> </span><span class="annot"><span class="annottext">LocTag
-</span><a href="#local-6989586621679317386"><span class="hs-identifier hs-var">loc</span></a></span><span>
-</span><span id="line-107"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#ParseError"><span class="hs-identifier hs-type">ParseError</span></a></span><span> </span><span id="local-6989586621679317388"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317388"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319885"><span class="hs-identifier hs-var">loc</span></a></span><span>
+</span><span id="line-107"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#ParseError"><span class="hs-identifier hs-type">ParseError</span></a></span><span> </span><span id="local-6989586621679319887"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679319887"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;ParseError &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">ShowS
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317388"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><a href="#local-6989586621679319887"><span class="hs-identifier hs-var">err</span></a></span><span>
 </span><span id="line-108"></span><span>
 </span><span id="line-109"></span><span class="hs-comment">-- |Why the sizing pass could not pin a finite iteration count on a recursion</span><span>
 </span><span id="line-110"></span><span class="hs-comment">-- site. The two cases need different advice, so they are kept apart.</span><span>
@@ -385,7 +385,7 @@ forall a. Show a =&gt; a -&gt; String
 </span><span id="line-115"></span><span>  </span><span class="hs-glyph">|</span><span> </span><span id="UnboundedInput"><span class="annot"><a href="Telomare.Error.html#UnboundedInput"><span class="hs-identifier hs-var">UnboundedInput</span></a></span></span><span>
 </span><span id="line-116"></span><span>  </span><span class="hs-comment">-- ^The recursion's test reached input that no static refinement bounds, so</span><span>
 </span><span id="line-117"></span><span>  </span><span class="hs-comment">-- no unrolling depth at all can be proven sufficient.</span><span>
-</span><span id="line-118"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679317392"><span id="local-6989586621679317398"><span class="annot"><span class="annottext">SizingFailureKind -&gt; SizingFailureKind -&gt; Bool
+</span><span id="line-118"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679319891"><span id="local-6989586621679319897"><span class="annot"><span class="annottext">SizingFailureKind -&gt; SizingFailureKind -&gt; Bool
 (SizingFailureKind -&gt; SizingFailureKind -&gt; Bool)
 -&gt; (SizingFailureKind -&gt; SizingFailureKind -&gt; Bool)
 -&gt; Eq SizingFailureKind
@@ -394,7 +394,7 @@ $c== :: SizingFailureKind -&gt; SizingFailureKind -&gt; Bool
 == :: SizingFailureKind -&gt; SizingFailureKind -&gt; Bool
 $c/= :: SizingFailureKind -&gt; SizingFailureKind -&gt; Bool
 /= :: SizingFailureKind -&gt; SizingFailureKind -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317404"><span id="local-6989586621679317407"><span id="local-6989586621679317410"><span id="local-6989586621679317414"><span id="local-6989586621679317417"><span id="local-6989586621679317420"><span id="local-6989586621679317423"><span class="annot"><span class="annottext">Eq SizingFailureKind
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679319903"><span id="local-6989586621679319906"><span id="local-6989586621679319909"><span id="local-6989586621679319913"><span id="local-6989586621679319916"><span id="local-6989586621679319919"><span id="local-6989586621679319922"><span class="annot"><span class="annottext">Eq SizingFailureKind
 Eq SizingFailureKind =&gt;
 (SizingFailureKind -&gt; SizingFailureKind -&gt; Ordering)
 -&gt; (SizingFailureKind -&gt; SizingFailureKind -&gt; Bool)
@@ -431,7 +431,7 @@ $cmax :: SizingFailureKind -&gt; SizingFailureKind -&gt; SizingFailureKind
 max :: SizingFailureKind -&gt; SizingFailureKind -&gt; SizingFailureKind
 $cmin :: SizingFailureKind -&gt; SizingFailureKind -&gt; SizingFailureKind
 min :: SizingFailureKind -&gt; SizingFailureKind -&gt; SizingFailureKind
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317428"><span id="local-6989586621679317432"><span id="local-6989586621679317436"><span class="annot"><span class="annottext">Int -&gt; SizingFailureKind -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679319927"><span id="local-6989586621679319931"><span id="local-6989586621679319935"><span class="annot"><span class="annottext">Int -&gt; SizingFailureKind -&gt; ShowS
 [SizingFailureKind] -&gt; ShowS
 SizingFailureKind -&gt; String
 (Int -&gt; SizingFailureKind -&gt; ShowS)
@@ -446,7 +446,7 @@ $cshow :: SizingFailureKind -&gt; String
 show :: SizingFailureKind -&gt; String
 $cshowList :: [SizingFailureKind] -&gt; ShowS
 showList :: [SizingFailureKind] -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317439"><span id="local-6989586621679317441"><span class="annot"><span class="annottext">(forall x. SizingFailureKind -&gt; Rep SizingFailureKind x)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679319938"><span id="local-6989586621679319940"><span class="annot"><span class="annottext">(forall x. SizingFailureKind -&gt; Rep SizingFailureKind x)
 -&gt; (forall x. Rep SizingFailureKind x -&gt; SizingFailureKind)
 -&gt; Generic SizingFailureKind
 forall x. Rep SizingFailureKind x -&gt; SizingFailureKind
@@ -457,14 +457,14 @@ $cfrom :: forall x. SizingFailureKind -&gt; Rep SizingFailureKind x
 from :: forall x. SizingFailureKind -&gt; Rep SizingFailureKind x
 $cto :: forall x. Rep SizingFailureKind x -&gt; SizingFailureKind
 to :: forall x. Rep SizingFailureKind x -&gt; SizingFailureKind
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317447"><span class="annot"><span class="annottext">SizingFailureKind -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679319946"><span class="annot"><span class="annottext">SizingFailureKind -&gt; ()
 (SizingFailureKind -&gt; ()) -&gt; NFData SizingFailureKind
 forall a. (a -&gt; ()) -&gt; NFData a
 $crnf :: SizingFailureKind -&gt; ()
 rnf :: SizingFailureKind -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">NFData</span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-119"></span><span>
-</span><span id="line-120"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679317467"><span class="annot"><a href="file:///nix/store/43yzffqjm73x6wpk7a555s6imaq4awqd-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.Error.html#SizingFailureKind"><span class="hs-identifier hs-type">SizingFailureKind</span></a></span></span><span>
+</span><span id="line-120"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679319966"><span class="annot"><a href="file:///nix/store/43yzffqjm73x6wpk7a555s6imaq4awqd-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.Error.html#SizingFailureKind"><span class="hs-identifier hs-type">SizingFailureKind</span></a></span></span><span>
 </span><span id="line-121"></span><span>
 </span><span id="line-122"></span><span class="hs-comment">-- |A sizing failure, named well enough to act on: which recursion, why, and</span><span>
 </span><span id="line-123"></span><span class="hs-comment">-- where it is in the source.</span><span>
@@ -476,7 +476,7 @@ rnf :: SizingFailureKind -&gt; ()
 </span><span id="line-127"></span><span>  </span><span class="hs-special">,</span><span> </span><span id="sizingFailureLoc"><span class="annot"><span class="annottext">SizingFailure -&gt; Maybe LocTag
 </span><a href="Telomare.Error.html#sizingFailureLoc"><span class="hs-identifier hs-var hs-var">sizingFailureLoc</span></a></span></span><span>   </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Maybe</span></span><span> </span><span class="annot"><a href="Telomare.IR.Loc.html#LocTag"><span class="hs-identifier hs-type">LocTag</span></a></span><span>
 </span><span id="line-128"></span><span>  </span><span class="hs-special">}</span><span>
-</span><span id="line-129"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679317516"><span id="local-6989586621679317523"><span class="annot"><span class="annottext">SizingFailure -&gt; SizingFailure -&gt; Bool
+</span><span id="line-129"></span><span>  </span><span class="hs-keyword">deriving</span><span> </span><span class="hs-special">(</span><span id="local-6989586621679320015"><span id="local-6989586621679320022"><span class="annot"><span class="annottext">SizingFailure -&gt; SizingFailure -&gt; Bool
 (SizingFailure -&gt; SizingFailure -&gt; Bool)
 -&gt; (SizingFailure -&gt; SizingFailure -&gt; Bool) -&gt; Eq SizingFailure
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -484,7 +484,7 @@ $c== :: SizingFailure -&gt; SizingFailure -&gt; Bool
 == :: SizingFailure -&gt; SizingFailure -&gt; Bool
 $c/= :: SizingFailure -&gt; SizingFailure -&gt; Bool
 /= :: SizingFailure -&gt; SizingFailure -&gt; Bool
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317529"><span id="local-6989586621679317537"><span id="local-6989586621679317543"><span id="local-6989586621679317547"><span id="local-6989586621679317550"><span id="local-6989586621679317553"><span id="local-6989586621679317556"><span class="annot"><span class="annottext">Eq SizingFailure
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Eq</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679320028"><span id="local-6989586621679320036"><span id="local-6989586621679320042"><span id="local-6989586621679320046"><span id="local-6989586621679320049"><span id="local-6989586621679320052"><span id="local-6989586621679320055"><span class="annot"><span class="annottext">Eq SizingFailure
 Eq SizingFailure =&gt;
 (SizingFailure -&gt; SizingFailure -&gt; Ordering)
 -&gt; (SizingFailure -&gt; SizingFailure -&gt; Bool)
@@ -521,7 +521,7 @@ $cmax :: SizingFailure -&gt; SizingFailure -&gt; SizingFailure
 max :: SizingFailure -&gt; SizingFailure -&gt; SizingFailure
 $cmin :: SizingFailure -&gt; SizingFailure -&gt; SizingFailure
 min :: SizingFailure -&gt; SizingFailure -&gt; SizingFailure
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317559"><span id="local-6989586621679317567"><span id="local-6989586621679317571"><span class="annot"><span class="annottext">Int -&gt; SizingFailure -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Ord</span></span></span></span></span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679320058"><span id="local-6989586621679320066"><span id="local-6989586621679320070"><span class="annot"><span class="annottext">Int -&gt; SizingFailure -&gt; ShowS
 [SizingFailure] -&gt; ShowS
 SizingFailure -&gt; String
 (Int -&gt; SizingFailure -&gt; ShowS)
@@ -536,7 +536,7 @@ $cshow :: SizingFailure -&gt; String
 show :: SizingFailure -&gt; String
 $cshowList :: [SizingFailure] -&gt; ShowS
 showList :: [SizingFailure] -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317574"><span id="local-6989586621679317576"><span class="annot"><span class="annottext">(forall x. SizingFailure -&gt; Rep SizingFailure x)
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679320073"><span id="local-6989586621679320075"><span class="annot"><span class="annottext">(forall x. SizingFailure -&gt; Rep SizingFailure x)
 -&gt; (forall x. Rep SizingFailure x -&gt; SizingFailure)
 -&gt; Generic SizingFailure
 forall x. Rep SizingFailure x -&gt; SizingFailure
@@ -547,22 +547,22 @@ $cfrom :: forall x. SizingFailure -&gt; Rep SizingFailure x
 from :: forall x. SizingFailure -&gt; Rep SizingFailure x
 $cto :: forall x. Rep SizingFailure x -&gt; SizingFailure
 to :: forall x. Rep SizingFailure x -&gt; SizingFailure
-</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679317579"><span class="annot"><span class="annottext">SizingFailure -&gt; ()
+</span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var">Generic</span></span></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679320078"><span class="annot"><span class="annottext">SizingFailure -&gt; ()
 (SizingFailure -&gt; ()) -&gt; NFData SizingFailure
 forall a. (a -&gt; ()) -&gt; NFData a
 $crnf :: SizingFailure -&gt; ()
 rnf :: SizingFailure -&gt; ()
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var">NFData</span></span></span><span class="hs-special">)</span><span>
 </span><span id="line-130"></span><span>
-</span><span id="line-131"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679317603"><span class="annot"><a href="file:///nix/store/43yzffqjm73x6wpk7a555s6imaq4awqd-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.Error.html#SizingFailure"><span class="hs-identifier hs-type">SizingFailure</span></a></span></span><span>
+</span><span id="line-131"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679320102"><span class="annot"><a href="file:///nix/store/43yzffqjm73x6wpk7a555s6imaq4awqd-validity-0.12.1.0-doc/share/doc/validity-0.12.1.0/html/src/Data.Validity.html#Validity"><span class="hs-identifier hs-type">Validity</span></a></span><span> </span><span class="annot"><a href="Telomare.Error.html#SizingFailure"><span class="hs-identifier hs-type">SizingFailure</span></a></span></span><span>
 </span><span id="line-132"></span><span>
 </span><span id="line-133"></span><span class="annot"><span class="hs-comment">-- |Names the recursion site as precisely as the available information allows.</span></span><span>
 </span><span id="line-134"></span><span class="annot"><a href="Telomare.Error.html#renderSizingSite"><span class="hs-identifier hs-type">renderSizingSite</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Error.html#SizingFailure"><span class="hs-identifier hs-type">SizingFailure</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-135"></span><span id="renderSizingSite"><span class="annot"><span class="annottext">renderSizingSite :: SizingFailure -&gt; String
-</span><a href="Telomare.Error.html#renderSizingSite"><span class="hs-identifier hs-var hs-var">renderSizingSite</span></a></span></span><span> </span><span id="local-6989586621679317653"><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317653"><span class="hs-identifier hs-var">failure</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
-</span><span id="line-136"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679317656"><span class="annot"><span class="annottext">recursion :: String
-</span><a href="#local-6989586621679317656"><span class="hs-identifier hs-var hs-var">recursion</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="Telomare.Error.html#renderSizingSite"><span class="hs-identifier hs-var hs-var">renderSizingSite</span></a></span></span><span> </span><span id="local-6989586621679320152"><span class="annot"><span class="annottext">SizingFailure
+</span><a href="#local-6989586621679320152"><span class="hs-identifier hs-var">failure</span></a></span></span><span> </span><span class="hs-glyph">=</span><span>
+</span><span id="line-136"></span><span>  </span><span class="hs-keyword">let</span><span> </span><span id="local-6989586621679320155"><span class="annot"><span class="annottext">recursion :: String
+</span><a href="#local-6989586621679320155"><span class="hs-identifier hs-var hs-var">recursion</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;recursion #&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
@@ -572,41 +572,41 @@ forall a. Show a =&gt; a -&gt; String
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; UnsizedRecursionToken
 </span><a href="Telomare.Error.html#sizingFailureToken"><span class="hs-identifier hs-var">sizingFailureToken</span></a></span><span> </span><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317653"><span class="hs-identifier hs-var">failure</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679320152"><span class="hs-identifier hs-var">failure</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-137"></span><span>  </span><span class="hs-keyword">in</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; Maybe LocTag
 </span><a href="Telomare.Error.html#sizingFailureLoc"><span class="hs-identifier hs-var">sizingFailureLoc</span></a></span><span> </span><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317653"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe String) -&gt; Maybe String
+</span><a href="#local-6989586621679320152"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="annot"><span class="annottext">Maybe LocTag -&gt; (LocTag -&gt; Maybe String) -&gt; Maybe String
 forall a b. Maybe a -&gt; (a -&gt; Maybe b) -&gt; Maybe b
 forall (m :: * -&gt; *) a b. Monad m =&gt; m a -&gt; (a -&gt; m b) -&gt; m b
 </span><span class="hs-operator hs-var">&gt;&gt;=</span></span><span> </span><span class="annot"><span class="annottext">LocTag -&gt; Maybe String
 </span><a href="Telomare.IR.Loc.html#renderLocTagCompact"><span class="hs-identifier hs-var">renderLocTagCompact</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-138"></span><span>       </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679317658"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317658"><span class="hs-identifier hs-var">place</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317656"><span class="hs-identifier hs-var">recursion</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><span id="line-138"></span><span>       </span><span class="annot"><span class="hs-identifier hs-type">Just</span></span><span> </span><span id="local-6989586621679320157"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679320157"><span class="hs-identifier hs-var">place</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679320155"><span class="hs-identifier hs-var">recursion</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; at &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317658"><span class="hs-identifier hs-var">place</span></a></span><span>
+</span><a href="#local-6989586621679320157"><span class="hs-identifier hs-var">place</span></a></span><span>
 </span><span id="line-139"></span><span>       </span><span class="annot"><span class="annottext">Maybe String
 </span><span class="hs-identifier hs-var">Nothing</span></span><span>    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317656"><span class="hs-identifier hs-var">recursion</span></a></span><span>
+</span><a href="#local-6989586621679320155"><span class="hs-identifier hs-var">recursion</span></a></span><span>
 </span><span id="line-140"></span><span>
 </span><span id="line-141"></span><span class="annot"><a href="Telomare.Error.html#renderSizingFailure"><span class="hs-identifier hs-type">renderSizingFailure</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Error.html#SizingFailure"><span class="hs-identifier hs-type">SizingFailure</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-142"></span><span id="renderSizingFailure"><span class="annot"><span class="annottext">renderSizingFailure :: SizingFailure -&gt; String
-</span><a href="Telomare.Error.html#renderSizingFailure"><span class="hs-identifier hs-var hs-var">renderSizingFailure</span></a></span></span><span> </span><span id="local-6989586621679317660"><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317660"><span class="hs-identifier hs-var">failure</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; SizingFailureKind
+</span><a href="Telomare.Error.html#renderSizingFailure"><span class="hs-identifier hs-var hs-var">renderSizingFailure</span></a></span></span><span> </span><span id="local-6989586621679320159"><span class="annot"><span class="annottext">SizingFailure
+</span><a href="#local-6989586621679320159"><span class="hs-identifier hs-var">failure</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; SizingFailureKind
 </span><a href="Telomare.Error.html#sizingFailureKind"><span class="hs-identifier hs-var">sizingFailureKind</span></a></span><span> </span><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317660"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-143"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#FuelExhausted"><span class="hs-identifier hs-type">FuelExhausted</span></a></span><span> </span><span id="local-6989586621679317661"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317661"><span class="hs-identifier hs-var">depth</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679320159"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-143"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#FuelExhausted"><span class="hs-identifier hs-type">FuelExhausted</span></a></span><span> </span><span id="local-6989586621679320160"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679320160"><span class="hs-identifier hs-var">depth</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-144"></span><span>    </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;could not size &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; String
 </span><a href="Telomare.Error.html#renderSizingSite"><span class="hs-identifier hs-var">renderSizingSite</span></a></span><span> </span><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317660"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679320159"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;:\n&quot;</span></span><span>
@@ -618,7 +618,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317661"><span class="hs-identifier hs-var">depth</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679320160"><span class="hs-identifier hs-var">depth</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; unrollings.\n&quot;</span></span><span>
@@ -637,7 +637,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; String
 </span><a href="Telomare.Error.html#renderSizingSite"><span class="hs-identifier hs-var">renderSizingSite</span></a></span><span> </span><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317660"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
+</span><a href="#local-6989586621679320159"><span class="hs-identifier hs-var">failure</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-operator hs-var">&lt;&gt;</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;:\n&quot;</span></span><span>
@@ -660,7 +660,7 @@ forall a. Semigroup a =&gt; a -&gt; a -&gt; a
 </span><span id="line-157"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="StaticCheckError"><span class="annot"><a href="Telomare.Error.html#StaticCheckError"><span class="hs-identifier hs-var">StaticCheckError</span></a></span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-158"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="CompileConversionError"><span class="annot"><a href="Telomare.Error.html#CompileConversionError"><span class="hs-identifier hs-var">CompileConversionError</span></a></span></span><span>
 </span><span id="line-159"></span><span>    </span><span class="hs-glyph">|</span><span> </span><span id="RecursionLimitError"><span class="annot"><a href="Telomare.Error.html#RecursionLimitError"><span class="hs-identifier hs-var">RecursionLimitError</span></a></span></span><span> </span><span class="annot"><a href="Telomare.Error.html#SizingFailure"><span class="hs-identifier hs-type">SizingFailure</span></a></span><span>
-</span><span id="line-160"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679317669"><span id="local-6989586621679317680"><span class="annot"><span class="annottext">EvalError -&gt; EvalError -&gt; Bool
+</span><span id="line-160"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679320168"><span id="local-6989586621679320179"><span class="annot"><span class="annottext">EvalError -&gt; EvalError -&gt; Bool
 (EvalError -&gt; EvalError -&gt; Bool)
 -&gt; (EvalError -&gt; EvalError -&gt; Bool) -&gt; Eq EvalError
 forall a. (a -&gt; a -&gt; Bool) -&gt; (a -&gt; a -&gt; Bool) -&gt; Eq a
@@ -672,14 +672,14 @@ $c/= :: EvalError -&gt; EvalError -&gt; Bool
 </span><span id="line-161"></span><span>
 </span><span id="line-162"></span><span class="hs-comment">-- |As derived, except that a sizing failure shows the explanation rather than</span><span>
 </span><span id="line-163"></span><span class="hs-comment">-- its fields. Everything else keeps the shape callers already match on.</span><span>
-</span><span id="line-164"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679317685"><span id="local-6989586621679317688"><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="Telomare.Error.html#EvalError"><span class="hs-identifier hs-type">EvalError</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-165"></span><span>  </span><span id="local-6989586621679317705"><span class="annot"><span class="annottext">showsPrec :: Int -&gt; EvalError -&gt; ShowS
-</span><span class="hs-identifier hs-var hs-var hs-var">showsPrec</span></span></span><span> </span><span id="local-6989586621679317706"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317706"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-166"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#RTE"><span class="hs-identifier hs-type">RTE</span></a></span><span> </span><span id="local-6989586621679317707"><span class="annot"><span class="annottext">RunTimeError
-</span><a href="#local-6989586621679317707"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
+</span><span id="line-164"></span><span class="hs-keyword">instance</span><span> </span><span id="local-6989586621679320184"><span id="local-6989586621679320187"><span class="annot"><span class="hs-identifier hs-type">Show</span></span><span> </span><span class="annot"><a href="Telomare.Error.html#EvalError"><span class="hs-identifier hs-type">EvalError</span></a></span></span></span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-165"></span><span>  </span><span id="local-6989586621679320204"><span class="annot"><span class="annottext">showsPrec :: Int -&gt; EvalError -&gt; ShowS
+</span><span class="hs-identifier hs-var hs-var hs-var">showsPrec</span></span></span><span> </span><span id="local-6989586621679320205"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">d</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
+</span><span id="line-166"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#RTE"><span class="hs-identifier hs-type">RTE</span></a></span><span> </span><span id="local-6989586621679320206"><span class="annot"><span class="annottext">RunTimeError
+</span><a href="#local-6989586621679320206"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
 </span><span class="hs-identifier hs-var">showParen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317706"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS) -&gt; ShowS -&gt; ShowS
@@ -692,12 +692,12 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 forall a. Show a =&gt; Int -&gt; a -&gt; ShowS
 </span><span class="hs-identifier hs-var">showsPrec</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">RunTimeError
-</span><a href="#local-6989586621679317707"><span class="hs-identifier hs-var">err</span></a></span><span>
-</span><span id="line-167"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#CertificationError"><span class="hs-identifier hs-type">CertificationError</span></a></span><span> </span><span id="local-6989586621679317708"><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679317708"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
+</span><a href="#local-6989586621679320206"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-167"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#CertificationError"><span class="hs-identifier hs-type">CertificationError</span></a></span><span> </span><span id="local-6989586621679320207"><span class="annot"><span class="annottext">EALError
+</span><a href="#local-6989586621679320207"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span>
 </span><span id="line-168"></span><span>      </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
 </span><span class="hs-identifier hs-var">showParen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317706"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS) -&gt; ShowS -&gt; ShowS
@@ -710,11 +710,11 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 forall a. Show a =&gt; Int -&gt; a -&gt; ShowS
 </span><span class="hs-identifier hs-var">showsPrec</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679317708"><span class="hs-identifier hs-var">err</span></a></span><span>
-</span><span id="line-169"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#RE"><span class="hs-identifier hs-type">RE</span></a></span><span> </span><span id="local-6989586621679317709"><span class="annot"><span class="annottext">ResolverError
-</span><a href="#local-6989586621679317709"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
+</span><a href="#local-6989586621679320207"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-169"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#RE"><span class="hs-identifier hs-type">RE</span></a></span><span> </span><span id="local-6989586621679320208"><span class="annot"><span class="annottext">ResolverError
+</span><a href="#local-6989586621679320208"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
 </span><span class="hs-identifier hs-var">showParen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317706"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS) -&gt; ShowS -&gt; ShowS
@@ -727,11 +727,11 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 forall a. Show a =&gt; Int -&gt; a -&gt; ShowS
 </span><span class="hs-identifier hs-var">showsPrec</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">ResolverError
-</span><a href="#local-6989586621679317709"><span class="hs-identifier hs-var">err</span></a></span><span>
-</span><span id="line-170"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#StaticCheckError"><span class="hs-identifier hs-type">StaticCheckError</span></a></span><span> </span><span id="local-6989586621679317710"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317710"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
+</span><a href="#local-6989586621679320208"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-170"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#StaticCheckError"><span class="hs-identifier hs-type">StaticCheckError</span></a></span><span> </span><span id="local-6989586621679320209"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679320209"><span class="hs-identifier hs-var">s</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
 </span><span class="hs-identifier hs-var">showParen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317706"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS) -&gt; ShowS -&gt; ShowS
@@ -744,15 +744,15 @@ forall b c a. (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c
 forall a. Show a =&gt; Int -&gt; a -&gt; ShowS
 </span><span class="hs-identifier hs-var">showsPrec</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">11</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679317710"><span class="hs-identifier hs-var">s</span></a></span><span>
+</span><a href="#local-6989586621679320209"><span class="hs-identifier hs-var">s</span></a></span><span>
 </span><span id="line-171"></span><span>    </span><span class="annot"><span class="annottext">EvalError
 </span><a href="Telomare.Error.html#CompileConversionError"><span class="hs-identifier hs-var">CompileConversionError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;CompileConversionError&quot;</span></span><span>
-</span><span id="line-172"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#RecursionLimitError"><span class="hs-identifier hs-type">RecursionLimitError</span></a></span><span> </span><span id="local-6989586621679317711"><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317711"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
+</span><span id="line-172"></span><span>    </span><span class="annot"><a href="Telomare.Error.html#RecursionLimitError"><span class="hs-identifier hs-type">RecursionLimitError</span></a></span><span> </span><span id="local-6989586621679320210"><span class="annot"><span class="annottext">SizingFailure
+</span><a href="#local-6989586621679320210"><span class="hs-identifier hs-var">f</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; ShowS -&gt; ShowS
 </span><span class="hs-identifier hs-var">showParen</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679317706"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679320205"><span class="hs-identifier hs-var">d</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Ord a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">&gt;</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">10</span></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">(ShowS -&gt; ShowS) -&gt; ShowS -&gt; ShowS
@@ -760,24 +760,24 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; ShowS
 </span><span class="hs-identifier hs-var">showString</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">SizingFailure -&gt; String
 </span><a href="Telomare.Error.html#renderSizingFailure"><span class="hs-identifier hs-var">renderSizingFailure</span></a></span><span> </span><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317711"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
+</span><a href="#local-6989586621679320210"><span class="hs-identifier hs-var">f</span></a></span><span class="hs-special">)</span><span>
 </span><span id="line-173"></span><span>
 </span><span id="line-174"></span><span class="hs-comment">-- |What to show a user. Only a sizing failure reads differently from `show`:</span><span>
 </span><span id="line-175"></span><span class="hs-comment">-- it has advice worth giving unadorned.</span><span>
 </span><span id="line-176"></span><span class="annot"><a href="Telomare.Error.html#renderEvalError"><span class="hs-identifier hs-type">renderEvalError</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="Telomare.Error.html#EvalError"><span class="hs-identifier hs-type">EvalError</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">String</span></span><span>
 </span><span id="line-177"></span><span id="renderEvalError"><span class="annot"><span class="annottext">renderEvalError :: EvalError -&gt; String
 </span><a href="Telomare.Error.html#renderEvalError"><span class="hs-identifier hs-var hs-var">renderEvalError</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-glyph">\</span><span class="hs-glyph">case</span><span>
-</span><span id="line-178"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#RecursionLimitError"><span class="hs-identifier hs-type">RecursionLimitError</span></a></span><span> </span><span id="local-6989586621679317713"><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317713"><span class="hs-identifier hs-var">f</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; String
+</span><span id="line-178"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#RecursionLimitError"><span class="hs-identifier hs-type">RecursionLimitError</span></a></span><span> </span><span id="local-6989586621679320212"><span class="annot"><span class="annottext">SizingFailure
+</span><a href="#local-6989586621679320212"><span class="hs-identifier hs-var">f</span></a></span></span><span>  </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">SizingFailure -&gt; String
 </span><a href="Telomare.Error.html#renderSizingFailure"><span class="hs-identifier hs-var">renderSizingFailure</span></a></span><span> </span><span class="annot"><span class="annottext">SizingFailure
-</span><a href="#local-6989586621679317713"><span class="hs-identifier hs-var">f</span></a></span><span>
-</span><span id="line-179"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#CertificationError"><span class="hs-identifier hs-type">CertificationError</span></a></span><span> </span><span id="local-6989586621679317714"><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679317714"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EALError -&gt; String
+</span><a href="#local-6989586621679320212"><span class="hs-identifier hs-var">f</span></a></span><span>
+</span><span id="line-179"></span><span>  </span><span class="annot"><a href="Telomare.Error.html#CertificationError"><span class="hs-identifier hs-type">CertificationError</span></a></span><span> </span><span id="local-6989586621679320213"><span class="annot"><span class="annottext">EALError
+</span><a href="#local-6989586621679320213"><span class="hs-identifier hs-var">err</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EALError -&gt; String
 </span><a href="Telomare.Error.html#renderEALError"><span class="hs-identifier hs-var">renderEALError</span></a></span><span> </span><span class="annot"><span class="annottext">EALError
-</span><a href="#local-6989586621679317714"><span class="hs-identifier hs-var">err</span></a></span><span>
-</span><span id="line-180"></span><span>  </span><span id="local-6989586621679317715"><span class="annot"><span class="annottext">EvalError
-</span><a href="#local-6989586621679317715"><span class="hs-identifier hs-var">err</span></a></span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EvalError -&gt; String
+</span><a href="#local-6989586621679320213"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><span id="line-180"></span><span>  </span><span id="local-6989586621679320214"><span class="annot"><span class="annottext">EvalError
+</span><a href="#local-6989586621679320214"><span class="hs-identifier hs-var">err</span></a></span></span><span>                    </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">EvalError -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">EvalError
-</span><a href="#local-6989586621679317715"><span class="hs-identifier hs-var">err</span></a></span><span>
+</span><a href="#local-6989586621679320214"><span class="hs-identifier hs-var">err</span></a></span><span>
 </span><span id="line-181"></span></pre></body></html>
