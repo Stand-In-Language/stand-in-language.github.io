@@ -6,7 +6,7 @@
      milliseconds.</li></ul><p>They are reported together, in one command, but <em>not</em> merged into one table,
  because they do not index the same thing. Sizing allocates a count per
  <strong>instantiation</strong>: a <code>d2c</code> called from two places is sized separately at
- each, so <code>simpleplus.tel</code> line 12 holds two sized sites. The structural pass
+ each, so <code>simpleplus.tel</code> line 13 holds two sized sites. The structural pass
  indexes the <strong>triple as written</strong>, so it sees <code>d2c</code>'s one `{t, r, b}` where
  it is defined. Lining the two lists up row by row would be a fiction; the
  report says so rather than inventing a correspondence.</p><p>The iteration counts are not a new claim. They are the numbers the compiler

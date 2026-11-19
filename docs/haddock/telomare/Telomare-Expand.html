@@ -29,8 +29,9 @@
                            (applyDestructure p3 v3 body))</pre><p>where <code>applyDestructure p v body</code> is <code>body</code> when <code>p</code> is a <code>PatternVar</code>
  (no destructure needed) and a <code>case v of p -&gt; body</code> otherwise. Earlier
  parameters' bindings are in scope in later parameters' annotations.</p><p>A refinement annotation <code>(p : T)</code> binds the checked value, so
- <code>\(x : T) -&gt; body</code> becomes <code>\v -&gt; let x = CheckF T v in body</code>, the same
- as writing <code>let x : T = v in body</code>. Annotations further in are guards of
+ <code>\(x : T) -&gt; body</code> becomes <code>\v -&gt; (\x -&gt; body) (CheckF T v)</code>: checked
+ like <code>let x : T = v in body</code>, but bound as a variable, so it cannot
+ supply a requirement (<code><a href="Telomare.html#v:Bind" title="Telomare">Bind</a></code>). Annotations further in are guards of
  the parameter's destructuring case, whose fallback aborts, so a lambda
  parameter's guard that fails aborts as a refinement does.</p><p>This avoids putting a function-valued lambda inside a case body, which
  would cause the case-rewrite to type-mismatch against the (Pair-typed)
